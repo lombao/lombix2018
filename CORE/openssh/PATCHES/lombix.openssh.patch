@@ -1,0 +1,111 @@
+diff -Naur openssh-7.5p1.orig/defines.h openssh-7.5p1/defines.h
+--- openssh-7.5p1.orig/defines.h	2017-03-20 02:39:27.000000000 +0000
++++ openssh-7.5p1/defines.h	2018-02-01 22:00:05.693179527 +0000
+@@ -402,7 +402,7 @@
+ /* Paths */
+ 
+ #ifndef _PATH_BSHELL
+-# define _PATH_BSHELL "/bin/sh"
++# define _PATH_BSHELL "/usr/pkgs/bash/bin/bash"
+ #endif
+ 
+ #ifdef USER_PATH
+@@ -413,7 +413,7 @@
+ #endif
+ 
+ #ifndef _PATH_STDPATH
+-# define _PATH_STDPATH "/usr/bin:/bin:/usr/sbin:/sbin"
++# define _PATH_STDPATH "/usr/pkgs/coreutils/bin:/usr/pkgs/util-linux/bin:/usr/pkgs/shadow/bin:/usr/bin"
+ #endif
+ 
+ #ifndef SUPERUSER_PATH
+diff -Naur openssh-7.5p1.orig/pathnames.h openssh-7.5p1/pathnames.h
+--- openssh-7.5p1.orig/pathnames.h	2017-03-20 02:39:27.000000000 +0000
++++ openssh-7.5p1/pathnames.h	2018-02-01 21:58:39.558174301 +0000
+@@ -12,14 +12,14 @@
+  * called by a name other than "ssh" or "Secure Shell".
+  */
+ 
+-#define ETCDIR				"/etc"
++#define ETCDIR				"/usr/etc"
+ 
+ #ifndef SSHDIR
+ #define SSHDIR				ETCDIR "/ssh"
+ #endif
+ 
+ #ifndef _PATH_SSH_PIDDIR
+-#define _PATH_SSH_PIDDIR		"/var/run"
++#define _PATH_SSH_PIDDIR		"/run"
+ #endif
+ 
+ /*
+@@ -44,7 +44,7 @@
+ #define _PATH_DH_MODULI			SSHDIR "/moduli"
+ 
+ #ifndef _PATH_SSH_PROGRAM
+-#define _PATH_SSH_PROGRAM		"/usr/bin/ssh"
++#define _PATH_SSH_PROGRAM		"/usr/pkgs/openssh/bin/ssh"
+ #endif
+ 
+ /*
+@@ -113,28 +113,28 @@
+  * ~/.rhosts and /etc/hosts.equiv if rhosts authentication is enabled.
+  */
+ #define _PATH_SSH_HOSTS_EQUIV		SSHDIR "/shosts.equiv"
+-#define _PATH_RHOSTS_EQUIV		"/etc/hosts.equiv"
++#define _PATH_RHOSTS_EQUIV		"/usr/etc/hosts.equiv"
+ 
+ /*
+  * Default location of askpass
+  */
+ #ifndef _PATH_SSH_ASKPASS_DEFAULT
+-#define _PATH_SSH_ASKPASS_DEFAULT	"/usr/X11R6/bin/ssh-askpass"
++#define _PATH_SSH_ASKPASS_DEFAULT	"/opt/pkgs/X11/bin/ssh-askpass"
+ #endif
+ 
+ /* Location of ssh-keysign for hostbased authentication */
+ #ifndef _PATH_SSH_KEY_SIGN
+-#define _PATH_SSH_KEY_SIGN		"/usr/libexec/ssh-keysign"
++#define _PATH_SSH_KEY_SIGN		"/usr/pkgs/openssh/libexec/ssh-keysign"
+ #endif
+ 
+ /* Location of ssh-pkcs11-helper to support keys in tokens */
+ #ifndef _PATH_SSH_PKCS11_HELPER
+-#define _PATH_SSH_PKCS11_HELPER		"/usr/libexec/ssh-pkcs11-helper"
++#define _PATH_SSH_PKCS11_HELPER		"/usr/pkgs/openssh/libexec/ssh-pkcs11-helper"
+ #endif
+ 
+ /* xauth for X11 forwarding */
+ #ifndef _PATH_XAUTH
+-#define _PATH_XAUTH			"/usr/X11R6/bin/xauth"
++#define _PATH_XAUTH			"/opt/pkgs/X11/bin/xauth"
+ #endif
+ 
+ /* UNIX domain socket for X11 server; displaynum will replace %u */
+@@ -149,7 +149,7 @@
+ 
+ /* for sftp */
+ #ifndef _PATH_SFTP_SERVER
+-#define _PATH_SFTP_SERVER		"/usr/libexec/sftp-server"
++#define _PATH_SFTP_SERVER		"/usr/pkgs/openssh/libexec/sftp-server"
+ #endif
+ 
+ /* chroot directory for unprivileged user when UsePrivilegeSeparation=yes */
+@@ -159,14 +159,14 @@
+ 
+ /* for passwd change */
+ #ifndef _PATH_PASSWD_PROG
+-#define _PATH_PASSWD_PROG             "/usr/bin/passwd"
++#define _PATH_PASSWD_PROG             "/usr/pkgs/shadow/bin/passwd"
+ #endif
+ 
+ #ifndef _PATH_LS
+-#define _PATH_LS			"ls"
++#define _PATH_LS			"/usr/pkgs/coreutils/bin/ls"
+ #endif
+ 
+ /* Askpass program define */
+ #ifndef ASKPASS_PROGRAM
+-#define ASKPASS_PROGRAM         "/usr/lib/ssh/ssh-askpass"
++#define ASKPASS_PROGRAM         "/usr/pkgs/openssh/bin/ssh-askpass"
+ #endif /* ASKPASS_PROGRAM */

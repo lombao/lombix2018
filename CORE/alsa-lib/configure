@@ -1,0 +1,14 @@
+#export LDFLAGS="-L/usr/pkgs/python3/lib"
+./configure --prefix=$PREFIX 			\
+	    --sysconfdir=$PREFIX/etc 		\
+            --mandir=$DATAROOTDIR/man   	\
+            --datarootdir=$DATAROOTDIR	 	\
+	    --build=$LMBX_BUILD			\
+ 	    --with-configdir=$PREFIX/etc 	\
+	    --with-plugindir=$PREFIX/lib	\
+	    --with-tmpdir=/run			\
+	    --with-tmpdir=directory=/run	
+
+
+
+

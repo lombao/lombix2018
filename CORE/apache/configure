@@ -1,0 +1,20 @@
+sed '/dir.*CFG_PREFIX/s@^@#@' -i support/apxs.in
+
+export PYTHON=$PYTHON3
+
+./configure --prefix=$PREFIX       				\
+	    --build=$LMBX_BUILD					\
+	    --datarootdir=$DATAROOTDIR				\
+	    --enable-authnz-fcgi				\
+	    --enable-mods-shared="all cgi"			\
+	    --enable-mpms-shared=all				\
+	    --enable-suexec=shared				\
+            --with-apr=/usr/pkgs/apr/bin/apr-1-config 		\
+	    --with-apr-util=/usr/pkgs/apr/bin/apu-1-config	\
+	    --with-suexec-caller=apache				\
+	    --with-suexec-docroot=/var/www			\
+	    --with-suexec-logfile=/var/log/apache/suexec.log	\
+	    --with-suexec-uidmin=100				\
+	    --with-suexec-userdir=public_html
+
+

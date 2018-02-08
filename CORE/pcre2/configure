@@ -1,0 +1,10 @@
+./configure --prefix=$PREFIX         	\
+            --disable-static         	\
+            --datarootdir=$DATAROOTDIR 	\
+            --enable-pcre2-16          	\
+            --enable-unicode	 	\
+            --enable-pcre2-32 	        \
+            --enable-pcre2grep-libz   	\
+            --enable-pcre2grep-libbz2 	\
+            --enable-pcretest-libreadline 
+

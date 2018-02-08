@@ -1,0 +1,17 @@
+sed -i '/keyboard_lookup_key/d' src/udev/udev-builtin-keyboard.c || exit 1
+
+find ./ -type f -exec sed -i 's@/usr/bin/sed@/usr/pkgs/sed/bin/sed@' {} \; || exit
+find ./ -type f -exec sed -i 's@/usr/bin/file@/usr/pkgs/file/bin/file@' {} \; || exit 1
+
+./configure --prefix=$PREFIX           		\
+            --bindir=$PREFIX/bin       		\
+            --sbindir=$PREFIX/bin		\
+            --libdir=$PREFIX/lib       		\
+            --datarootdir=$DATAROOTDIR 		\
+            --with-rootrundir=/run     		\
+            --with-rootlibdir=$PREFIX/lib  	\
+            --enable-manpages       		\
+            --disable-static        		\
+            --disable-selinux       		\
+            --config-cache
+

@@ -1,0 +1,65 @@
+#!/usr/pkgs/bash/bin/bash
+########################################################################
+# Begin /etc/init.d/postgresql
+#
+# Description : Start PostgreSQL Server
+#
+# Author      : Ken Moffat - ken@linuxfromscratch.org
+#
+# Version     : LFS 7.0
+#
+# Notes       : Based on the earlier version by Gerard Beekmans
+#
+########################################################################
+
+### BEGIN INIT INFO
+# Provides:            PostgreSQL
+# Required-Start:      $network
+# Should-Start:        $remote_fs
+# Required-Stop:       $network
+# Should-Stop:         $remote_fs
+# Default-Start:       3 4 5
+# Default-Stop:        0 1 2 6
+# Short-Description:   Starts PostgreSQL server.
+# Description:         Starts PostgreSQL server.
+# X-LFS-Provided-By:   BLFS / LFS 7.0
+### END INIT INFO
+
+. /usr/pkgs/lombix-base/lib/services/init-functions
+
+#$LastChangedBy: krejzi $
+#$Date: 2013-05-12 11:47:06 -0500 (Sun, 12 May 2013) $
+
+case "$1" in
+   start)
+      log_info_msg "Starting PostgreSQL daemon..."
+
+      /usr/pkgs/coreutils/bin/install -dm755 -o postgres -g postgres /run/postgresql
+      /usr/pkgs/shadow/bin/su - postgres -c '/usr/services/postgres/bin/pg_ctl start -W -D /var/db/pgsql/data \
+                         -l /var/db/pgsql/data/logfile -o "-i" '
+      evaluate_retval
+      ;;
+
+   stop)
+      log_info_msg "Stopping PostgreSQL daemon..."
+      /usr/pkgs/shadow/bin/su - postgres -c "/usr/services/postgres/bin/pg_ctl stop -m smart -D /var/db/pgsql/data"
+      evaluate_retval
+      ;;
+
+   restart)
+      $0 stop
+      sleep 1
+      $0 start
+      ;;
+
+   status)
+      /usr/pkgs/shadow/bin/su - postgres -c "/usr/services/postgres/bin/pg_ctl status -D /var/db/pgsql/data"
+      ;;
+
+   *)
+      echo "Usage: $0 {start|stop|restart|status}"
+      exit 1
+      ;;
+esac
+
+# End /etc/init.d/postgresql

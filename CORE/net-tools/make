@@ -1,0 +1,4 @@
+
+sed -i '/#include <netinet\/ip.h>/d' iptunnel.c || exit 1
+yes "" | make DESTDIR=$PREFIX config 
+make DESTDIR=$PREFIX

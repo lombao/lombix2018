@@ -1,0 +1,15 @@
+
+sed 's@"/bin/sh"@"/usr/pkgs/bash/bin/bash"@g' -i joe/ushell.c || exit 1
+sed 's@"/bin/bash"@"/usr/pkgs/bash/bin/bash"@g' -i joe/ushell.c || exit 1
+sed 's@"/bin/sh"@"/usr/pkgs/bash/bin/bash"@g' -i joe/ublock.c || exit 1
+sed 's@"/bin/sh"@"/usr/pkgs/bash/bin/bash"@g' -i joe/tty.c || exit 1
+sed 's@"/bin/sh"@"/usr/pkgs/bash/bin/bash"@g' -i joe/main.c || exit 1
+sed 's@"/bin/cat"@"/usr/pkgs/coreutils/bin/cat"@g' -i joe/main.c || exit 1
+sed 's@;/bin/rm@;/usr/pkgs/coreutils/bin/rm@g' -i joe/builtins.c || exit 1
+autoreconf -i
+./configure --prefix=$PREFIX 			\
+	    --datarootdir=$DATAROOTDIR		\
+            --mandir=$DATAROOTDIR/man		\
+	    --docdir=$DATAROOTDIR/doc		\
+	    --infodir=$DATAROOTDIR/info
+

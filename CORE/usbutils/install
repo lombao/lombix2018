@@ -1,0 +1,4 @@
+make install
+mkdir -pv $DATAROOTDIR/hwdata
+wget http://www.linux-usb.org/usb.ids -O $DATAROOTDIR/hwdata/usb.ids || exit 1
+

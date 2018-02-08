@@ -1,0 +1,8 @@
+make INSTALL_HDR_PATH=$PREFIX headers_install
+find $PREFIX/include \( -name .install -o -name ..install.cmd \) -delete
+
+# Yep, once it is cleaned we copy it over the glibc include 
+cp -Rp $PREFIX/include/* /usr/pkgs/glibc/include
+
+# And now we remove the kernel-headers
+rm -fr $PREFIX

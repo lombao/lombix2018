@@ -1,0 +1,2 @@
+# This package only creates the folder 
+mkdir -pv $PREFIX/bin

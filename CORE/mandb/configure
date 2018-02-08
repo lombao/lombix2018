@@ -1,0 +1,19 @@
+#export LDFLAGS="-L/usr/pkgs/gdbm/lib"
+#export CFLAGS="-I/usr/pkgs/gdbm/include"
+
+
+sed -i 's@/usr/bin/gzip@/usr/pkgs/gzip/bin/gzip@' src/compression.c || exit 1
+sed -i 's@/usr/bin/man@/usr/pkgs/mandb/bin/man@'  src/man.c	|| exit 1
+sed -i 's@/bin/sh@/usr/pkgs/bash/bin/bash@'       src/man.c	|| exit 1
+
+./configure --prefix=$PREFIX                     	\
+	    --build=$LMBX_BUILD				\
+	    --datarootdir=$DATAROOTDIR           	\
+            --docdir=$DATAROOTDIR/doc		 	\
+            --sysconfdir=$PREFIX/etc             	\
+	    --sbindir=$PREFIX/bin		 	\
+	    --with-db=gdbm			 	\
+            --libdir=$PREFIX/lib                 	\
+            --disable-setuid                     	\
+            --disable-nls                        
+

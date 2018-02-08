@@ -1,0 +1,2 @@
+
+LDFLAGS="-L/usr/pkgs/glibc/lib -lcrypt" make -C src

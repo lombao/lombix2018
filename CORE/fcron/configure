@@ -1,0 +1,7 @@
+./configure --prefix=$PREFIX 		\
+            --disable-nls    		\
+            --datarootdir=$DATAROOTDIR 	\
+            --localstatedir=/var 	\
+            --without-sendmail         	\
+            --with-boot-install=no     	\
+            --with-systemdsystemunitdir=no

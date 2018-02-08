@@ -1,0 +1,7 @@
+sed 's@/usr/bin/ld@/usr/pkgs/binutils/bin/ld@' Make.Rules || exit 1
+
+sed 's@/bin/bash@/usr/pkgs/bash/bin/bash@g' progs/*.c	|| exit 1
+sed 's@/bin/bash@/usr/pkgs/bash/bin/bash@g' progs/*.sh	|| exit 1
+sed 's@/bin/pwd@/usr/pkgs/coreutils/bin/pwd@g' progs/*.sh || exit 1
+
+sed -i '/install.*STALIBNAME/d' libcap/Makefile || exit 1

@@ -1,0 +1,5 @@
+./configure --prefix=$PREFIX 		\
+            --datadir=$DATAROOTDIR 	\
+            --with-readline         	\
+            --mandir=$DATAROOTDIR/man 	\
+            --infodir=$DATAROOTDIR/info

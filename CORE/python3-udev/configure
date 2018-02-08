@@ -1,0 +1,5 @@
+cd pyudev-master-0.19
+mv * ..
+cd ..
+
+python3 setup.py build

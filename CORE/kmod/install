@@ -1,0 +1,7 @@
+make install
+
+for target in depmod insmod lsmod modinfo modprobe rmmod; do
+  ln -sfv kmod $PREFIX/bin/$target
+done
+
+ln -sfv kmod $PREFIX/bin/lsmod

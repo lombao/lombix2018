@@ -1,0 +1,8 @@
+make install
+
+
+# Clean out the /var created
+rm -fr $PREFIX/var
+
+# Link to keep compatibility
+ln -sfv $PREFIX/bin/find /usr/bin/find

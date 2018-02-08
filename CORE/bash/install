@@ -1,0 +1,1 @@
+make install && ln -sfv $PREFIX/bin/bash /usr/bin/sh && ln -sfv $PREFIX/bin/bash /usr/bin/bash  

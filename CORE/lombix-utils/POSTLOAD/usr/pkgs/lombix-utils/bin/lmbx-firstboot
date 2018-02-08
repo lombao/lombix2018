@@ -1,0 +1,212 @@
+#!/usr/pkgs/bash/bin/bash
+
+
+PATH=$PATH:/usr/pkgs/dialog/bin:/usr/pkgs/coreutils/bin:/usr/pkgs/shadow/bin:/usr/pkgs/inetutils/bin:/usr/pkgs/diffutils/bin
+
+
+#
+# Whre to store answers
+TMPF=/tmp/firstboot.$$
+/usr/pkgs/coreutils/bin/mkdir -pv $TMPF
+
+TMP_HOSTNAME=$TMPF/tmphost
+TMP_ROOTPAS1=$TMPF/tmproot1
+TMP_ROOTPAS2=$TMPF/tmproot2
+TMP_USERNAME=$TMPF/tmpusern
+TMP_USERPASS=$TMPF/tmpuserp
+
+
+# Trap. We do not want to leave 
+# tmp files 
+trap "/usr/pkgs/coreutils/bin/rm -fr $TMPF ; exit" 0 1 2 5 15
+
+
+
+
+
+
+###############################
+## MAIN	
+###############################
+
+
+##
+## Presentation
+## 
+msg="Welcome To Lombix FirstBoot. 
+
+We need to configure a few things so I will ask you 
+some questions like the root password, the first 
+user you want to create, and the kyeboard layout.
+
+Your answers will be applied inmediately after each 
+question, but remember that you can change anything
+you set up here on a later stage. 
+
+The most important thing is DO NOT FORGET the root password
+"
+/usr/pkgs/dialog/bin/dialog --title "Welcome to Lombix" --msgbox "$msg" 20 70
+
+
+
+##
+## Hostname
+##
+msg="The Hostname: 
+
+The name you want to give to this sytem, a short name.
+For instance you might call it: frodo , or carlos or
+your pet name, wathever. Only lowercase from a to z
+and numbers 0..9
+
+FYI: the name you provide will be stored in file
+      /usr/etc/sysconfig/hostname 
+
+You can edit that file at any time if you decide to 
+change the name later
+"
+repeat=1
+while [ $repeat ]; do
+	repeat=""
+	CHOICE=$(/usr/pkgs/dialog/bin/dialog --inputbox "$msg" 20 70 2>&1 >/dev/tty)
+	if [ $? != 0 ]; then
+	 	repeat=""
+	 	continue
+	fi
+	if [ -z "$CHOICE" ]; then
+		repeat=1
+		/usr/pkgs/dialog/bin/dialog --title "Error" --msgbox "ERROR:: Hostname cannot be blank" 5 60 	
+	else
+		if [[ ! "$CHOICE" =~ ^[[:alnum:]]+$ ]]; then
+			repeat=1
+			/usr/pkgs/dialog/bin/dialog --title "Error" --msgbox "ERROR:: Hostname can only be made of a-z and 0-9 chars" 5 70 	
+		fi
+	fi
+		
+done
+
+if [ ! -z "$CHOICE"  ]; then
+	echo "$CHOICE" > /usr/etc/sysconfig/hostname
+	/usr/pkgs/inetutils/bin/hostname "$CHOICE"
+	/usr/pkgs/dialog/bin/dialog --title "Hostname" --msgbox "SUCCESS:: Hostname has been set !!! " 5 60
+fi
+
+####
+#### The root password
+####
+repeat=1
+while [ $repeat ];do
+ 	repeat=""
+ 	
+	msg="Root Password :
+We need to set the password of the root user. 
+I will ask this password twice, in case the passwords don't
+match I will ask you again. 
+
+"
+	PASS1=$(/usr/pkgs/dialog/bin/dialog --title "Set Root Password" --clear --insecure --passwordbox "$msg" 20 70 "" 2>&1 > /dev/tty)
+	[ $? != 0 ] && continue
+	
+	msg="Please repeat the password:"
+	PASS2=$(/usr/pkgs/dialog/bin/dialog --title "Repeat Root Password" --clear --insecure --passwordbox "$msg" 20 70 "" 2>&1 >/dev/tty)
+	[ $? != 0 ] && continue
+			
+	if [ "$PASS1" != "$PASS2" ]; then 
+		/usr/pkgs/dialog/bin/dialog --title "Error" --msgbox "ERROR:: Passwords do not match" 5 60
+		repeat=1
+	fi
+	
+done
+if [ ! -z "$PASS1" ] && [ ! -z "$PASS2" ]; then
+	echo "root:$PASS1" | /usr/pkgs/shadow/bin/chpasswd 
+	/usr/pkgs/dialog/bin/dialog --title "Root Password" --msgbox "SUCCESS:: Root password has been changed !!! " 5 60	
+fi
+
+
+
+
+###
+### The user
+###
+
+msg="The User:
+This will be your normal user account. The home file system will
+be /home/<username>. The user ID and group ID will be 1000, 
+and please, only characters 0-9 a-z.
+
+"
+
+repeat=1
+while [ $repeat ]; do
+	repeat=""
+	USERACCT=$(/usr/pkgs/dialog/bin/dialog --inputbox "$msg" 20 70 2>&1 >/dev/tty)
+	[ $? != 0 ] && continue
+	
+	if [ -z "$USERACCT" ]; then
+		repeat=1
+		/usr/pkgs/dialog/bin/dialog --title "Error" --msgbox "ERROR:: Username cannot be blank" 5 60 	
+	else
+		if [[ ! "$USERACCT" =~ ^[[:alnum:]]+$ ]]; then
+			repeat=1
+			/usr/pkgs/dialog/bin/dialog --title "Error" --msgbox "ERROR:: Username can only be made of a-z and 0-9 chars" 5 70 	
+		fi
+	fi
+		
+done
+
+if [ ! -z "$USERACCT" ]; then
+	/usr/pkgs/shadow/bin/groupadd -g 1000 "$USERACCT"
+	/usr/pkgs/shadow/bin/useradd -m -d "/home/$USERACCT" -c "$USERACCT" -g "$USERACCT" -G video,audio -s /usr/bin/bash -u 1000 "$USERACCT"
+	/usr/pkgs/dialog/bin/dialog --title "Hostname" --msgbox "SUCCESS:: User Account $USERACCT has been created !!! " 5 60
+fi
+
+
+msg="The password for your account $USERACCT:
+We will ask this password only once. This is not as critical
+as the root password. 
+
+"
+if [ ! -z "$USERACCT" ]; then
+	repeat=1
+	while [ $repeat ];do
+ 		repeat=""
+ 	
+		PASSU=$(/usr/pkgs/dialog/bin/dialog --title "$USERACCT Password" --clear --insecure --passwordbox "$msg" 20 70 "" 2>&1 > /dev/tty)
+		[ $? != 0 ] && continue
+	
+		echo "$USERACCT:$PASSU" | /usr/pkgs/shadow/bin/chpasswd 
+		/usr/pkgs/dialog/bin/dialog --title "$USERACCT Password" --msgbox "SUCCESS:: $USERACCT password has been changed !!! " 5 60
+	done
+fi
+
+### 
+### Keyboard layout
+###
+msg="The Keyboard Layout:
+Please, select which keyboard you have. Probably it is the same
+as the country you are in.
+"
+OPTIONS=(uk "United Kingdom" es "Spain" us "United States" it "Italy")
+CHOICE=$(/usr/pkgs/dialog/bin/dialog --clear \
+	--title "Keyboard" 	\
+	--menu "$msg"		\
+	20 70 10 "${OPTIONS[@]}" 2>&1 >/dev/tty)
+if [ $? == 0 ]; then	
+	/usr/pkgs/kbd/bin/loadkeys $CHOICE
+	echo "UNICODE=\"1\"" > /usr/etc/sysconfig/console
+	echo "KEYMAP=$CHOICE" >> /usr/etc/sysconfig/console
+	/usr/pkgs/dialog/bin/dialog --title "Keyboard Layout" --msgbox "SUCCESS:: Keyboard layout has been set to $CHOICE !!! " 5 60
+fi
+
+##
+##
+##
+
+msg="Job Done!!!
+Now you can start using Lombix. Enjoy!!!
+"
+/usr/pkgs/dialog/bin/dialog --title "Setup Complete" --msgbox "$msg" 8 60
+
+
+
+

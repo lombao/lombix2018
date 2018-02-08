@@ -1,0 +1,5 @@
+make PREFIX=$PREFIX 		\
+     ETCDIR=$PREFIX/etc		\
+     BUILD_STATIC_LIB=0 	\
+     SBINDIR=$PREFIX/bin  	\
+     MANDIR=$DATAROOTDIR/man

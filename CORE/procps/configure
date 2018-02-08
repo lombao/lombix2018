@@ -1,0 +1,11 @@
+./configure --prefix=$PREFIX  				\
+            --disable-nls                               \
+            --datarootdir=$DATAROOTDIR                  \
+            --exec-prefix=                              \
+            --libdir=$PREFIX/lib                        \
+            --bindir=$PREFIX/bin                        \
+            --sbindir=$PREFIX/bin                       \
+            --docdir=$DATAROOTDIR/doc/procps-ng-3.3.12 	\
+            --disable-static                         	\
+            --disable-kill
+

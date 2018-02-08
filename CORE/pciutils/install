@@ -1,0 +1,8 @@
+make PREFIX=$PREFIX 			\
+     SBINDIR=$PREFIX/bin 		\
+     MANDIR=$DATAROOTDIR/man      	\
+     SHAREDIR=$DATAROOTDIR/hwdata 	\
+     SHARED=yes     			\
+     install installll-lib
+
+chmod 755 $PREFIX/lib/lib*

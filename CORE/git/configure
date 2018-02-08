@@ -1,0 +1,17 @@
+export LDFLAGS="-L/usr/pkgs/openssl/lib"
+export CFLAGS="-I/usr/pkgs/openssl/include"
+export CXXFLAGS=$CFLAGS
+./configure 	--prefix=$PREFIX 			\
+		--datarootdir=$DATAROOTDIR		\
+		--with-gitconfig=$PREFIX/etc		\
+		--with-perl=$PERL			\
+		--with-python=$PYTHON3			\
+		--with-zlib=/usr/pkgs/zlib		\
+		--with-curl=/usr/pkgs/curl		\
+		--with-expat=/usr/pkgs/expat		\
+		--with-openssl=/usr/pkgs/openssl		\
+                --with-libpcre2=/usr/pkgs/pcre		\
+                --with-pager=/usr/pkgs/less/bin/less	\
+		--with-editor=/usr/pkgs/joe/bin/joe	\
+		--with-shell=/usr/pkgs/bash/bin/bash
+

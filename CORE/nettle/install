@@ -1,0 +1,5 @@
+make install
+
+chmod 755 $PREFIX/lib/lib*
+ldconfig
+

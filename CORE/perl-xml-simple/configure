@@ -1,0 +1,2 @@
+
+perl Makefile.PL EXPATLIBPATH=/usr/pkgs/expat/lib EXPATINCPATH=/usr/pkgs/expat/include

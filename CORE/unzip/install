@@ -1,0 +1,2 @@
+make prefix=$PREFIX MANDIR=$DATAROOTDIR/man/man1 -f unix/Makefile install
+

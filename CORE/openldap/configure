@@ -1,0 +1,33 @@
+
+
+autoconf || exit 1
+
+export LDFLAGS="-L/usr/pkgs/openssl/lib -L/usr/pkgs/gnutls/lib -L/usr/pkgs/postgres/lib -L/usr/pkgs/icu/lib -L/usr/pkgs/cyrus-sasl/lib" 
+export CFLAGS="-I/usr/pkgs/openssl/include -I/usr/pkgs/gnutls/include -I/usr/pkgs/postgres/include -I/usr/pkgs/icu/include -I/usr/pkgs/cyrus-sasl/include "
+
+./configure --prefix=$PREFIX      	\
+	    --datarootdir=$DATAROOTDIR	\
+	    --build=$LMBX_BUILD		\
+            --mandir=$DATAROOTDIR/man	\
+	    --sbindir=$PREFIX/bin	\
+            --sysconfdir=$PREFIX/etc    \
+            --localstatedir=/var  	\
+            --libexecdir=$PREFIX/lib 	\
+            --disable-static      	\
+            --disable-debug       	\
+            --with-tls=openssl    	\
+	    --with-cyrus-sasl		\
+            --enable-dynamic      	\
+            --enable-crypt        	\
+            --enable-spasswd      	\
+            --enable-slapd        	\
+            --enable-modules      	\
+            --enable-rlookups     	\
+	    --enable-memberof		\
+            --enable-backends=mod 	\
+            --disable-ndb         	\
+            --disable-shell       	\
+	    --disable-sql 		\
+            --disable-bdb         	\
+            --disable-hdb         	\
+            --enable-overlays=mod 

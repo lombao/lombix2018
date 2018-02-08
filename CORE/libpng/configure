@@ -1,0 +1,6 @@
+
+LIBS=-lpthread ./configure --prefix=$PREFIX 	\
+            --disable-static 			\
+            --datarootdir=$DATAROOTDIR
+
+

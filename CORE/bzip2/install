@@ -1,0 +1,11 @@
+make PREFIX=$PREFIX install
+rm -v $PREFIX/bin/{bunzip2,bzcat,bzip2}
+cp -v bzip2-shared $PREFIX/bin/bzip2
+chown root:root libbz*
+cp -av libbz2.so* $PREFIX/lib
+ln -sfv $PREFIX/lib/libbz2.so.1.0 $PREFIX/lib/libbz2.so
+ln -sv bzip2 $PREFIX/bin/bunzip2
+ln -sv bzip2 $PREFIX/bin/bzcat
+
+chown root:root $PREFIX/lib/libbz*
+ldconfig

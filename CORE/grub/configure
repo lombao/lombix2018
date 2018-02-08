@@ -1,0 +1,12 @@
+unset CPP
+./configure --prefix=$PREFIX 		\
+	    --build=$LMBX_BUILD		\
+            --libdir=$PREFIX/lib     	\
+            --bindir=$PREFIX/bin     	\
+            --sbindir=$PREFIX/bin	\
+            --datarootdir=$DATAROOTDIR	\
+	    --with-bootdir=/usr/boot    \
+            --disable-nls            	\
+            --sysconfdir=$PREFIX/etc 	\
+            --disable-efiemu        	\
+	    --disable-werror    

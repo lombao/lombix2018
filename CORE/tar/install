@@ -1,0 +1,5 @@
+make install
+
+#rm -fr $PREFIX/share/info
+#rm -fr $PREFIX/bin/gawk-4.1.3
+

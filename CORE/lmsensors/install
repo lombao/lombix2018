@@ -1,0 +1,12 @@
+make PREFIX=$PREFIX 		\
+     ETCDIR=$PREFIX/etc		\
+     BUILD_STATIC_LIB=0 	\
+     SBINDIR=$PREFIX/bin    	\
+     MANDIR=$DATAROOTDIR/man 	\
+     install
+
+
+rm -fr $DATAROOTDIR/man/man5/sensors3.conf.5
+ln -svf sensors.conf.5.gz $DATAROOTDIR/man/man5/sensors3.conf.5.gz
+
+ldconfig

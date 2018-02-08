@@ -1,0 +1,4 @@
+./configure --prefix=$PREFIX 		\
+            --sysconfdir=$PREFIX/etc 	\
+            --datarootdir=$DATAROOTDIR 	\
+	    --program-prefix="eu-"	

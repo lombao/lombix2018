@@ -1,0 +1,24 @@
+sed 's@"/sbin/shutdown@"/usr/pkgs/sysvinit/bin/shutdown@' -i src/*.c
+sed 's@"/bin/shutdown@"/usr/pkgs/sysvinit/bin/shutdown@' -i src/*.c
+
+sed 's@"/bin/sh@"/usr/pkgs/bash/bin/bash@g' -i src/*.c
+sed 's@"/bin/sh@"/usr/pkgs/bash/bin/bash@g' -i src/*.h
+
+
+sed 's@SHELL=/bin/sh@SHELL=/usr/pkgs/bash/bin/bash@' -i src/*.c
+
+sed 's@"/sbin/mount@"/usr/pkgs/util-linux/bin/mount@g' -i src/*.c
+sed 's@"/bin/mount@"/usr/pkgs/util-linux/bin/mount@g' -i src/*.c
+
+sed 's@"/sbin/init@"/usr/pkgs/sysvinit/bin/init@g' -i src/*.c
+sed 's@"/sbin/init@"/usr/pkgs/sysvinit/bin/init@g' -i src/*.h
+sed 's@"/sbin/sulogin@"/usr/pkgs/sysvinit/bin/sulogin@g' -i src/*.c
+sed 's@"/sbin/sulogin@"/usr/pkgs/sysvinit/bin/sulogin@g' -i src/*.h
+
+
+sed 's@PATH=/bin:/usr/bin:/sbin:/usr/sbin@PATH=/usr/pkgs/coreutils/bin:/usr/pkgs/util-linux/bin:/usr/pkgs/sysvinit/bin:/usr/pkgs/shadow/bin@' -i src/shutdown.c
+sed 's@/sbin:/usr/sbin:/bin:/usr/bin@/usr/pkgs/coreutils/bin:/usr/pkgs/util-linux/bin:/usr/pkgs/sysvinit/bin:/usr/pkgs/shadow/bin@' -i src/init.h
+
+
+
+

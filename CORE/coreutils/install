@@ -1,0 +1,16 @@
+make install
+
+ln -fsv $PREFIX/bin/env 	/usr/bin/env
+ln -fsv $PREFIX/bin/install 	/usr/bin/install
+ln -fsv $PREFIX/bin/mkdir   	/usr/bin/mkdir
+ln -fsv $PREFIX/bin/mktemp  	/usr/bin/mktemp
+ln -fsv $PREFIX/bin/touch   	/usr/bin/touch
+ln -fsv $PREFIX/bin/rm      	/usr/bin/rm
+ln -fsv $PREFIX/bin/mv      	/usr/bin/mv
+ln -fsv $PREFIX/bin/head    	/usr/bin/head
+ln -fsv $PREFIX/bin/false   	/usr/bin/false
+ln -fsv $PREFIX/bin/expr    	/usr/bin/expr
+ln -fsv $PREFIX/bin/basename 	/usr/bin/basename
+ln -fsv $PREFIX/bin/pwd     	/usr/bin/pwd
+ln -fsv $PREFIX/bin/uname   	/usr/bin/uname
+

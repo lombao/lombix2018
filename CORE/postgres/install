@@ -1,0 +1,10 @@
+make install
+
+install -v -dm700 /var/db/pgsql
+install -v -dm755 /run/postgresql || exit 1
+chown -Rv postgres:postgres /var/db/pgsql /run/postgresql || exit 1
+
+# This is commented out because I do not want to wipe out 
+# any already existent database just by compiling
+#su - postgres -c '$PREFIX/bin/initdb -D /var/db/pgsql/data'
+#

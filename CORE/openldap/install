@@ -1,0 +1,10 @@
+make install 
+
+install -v -dm700 -o ldap -g ldap /var/lib/openldap    || exit 1
+install -v -dm700 -o ldap -g ldap $PREFIX/etc/openldap/slapd.d || exit 1
+
+chmod   -v    640     $PREFIX/etc/openldap/slapd.{conf,ldif}   || exit 1
+chown   -v  root:ldap $PREFIX/etc/openldap/slapd.{conf,ldif}   || exit 1
+
+ldconfig
+

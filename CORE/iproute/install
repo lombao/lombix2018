@@ -1,0 +1,7 @@
+make BINDIR=$PREFIX/bin  		\
+     SBINDIR=$PREFIX/bin 		\
+     LIBDIR=$PREFIX/lib 		\
+     PREFIX=$PREFIX     		\
+     CONFDIR=$PREFIX/etc	   	\
+     DATADIR=$DATAROOTDIR 		\
+     install

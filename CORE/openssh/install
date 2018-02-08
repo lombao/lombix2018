@@ -1,0 +1,13 @@
+make install
+
+
+# Install in runlevel 3 
+        ln -sf  ../init.d/sshd /usr/etc/rc.d/rc0.d/K30sshd
+        ln -sf  ../init.d/sshd /usr/etc/rc.d/rc1.d/K30sshd
+        ln -sf  ../init.d/sshd /usr/etc/rc.d/rc2.d/K30sshd
+        ln -sf  ../init.d/sshd /usr/etc/rc.d/rc3.d/S30sshd
+        ln -sf  ../init.d/sshd /usr/etc/rc.d/rc4.d/S30sshd
+        ln -sf  ../init.d/sshd /usr/etc/rc.d/rc5.d/S30sshd
+        ln -sf  ../init.d/sshd /usr/etc/rc.d/rc6.d/K30sshd
+
+

@@ -1,0 +1,30 @@
+#!/usr/pkgs/bash/bin/bash
+
+###################################
+# Script for Lombix Deployment
+# This script is intended to help
+# to prepare the Lombix releases
+# by cleaning leftovers and tmp stuff
+# that should not go into the final 
+# release. It is not of much use 
+# for anyone else than me
+# ###################################
+
+
+rm -fr /var/tmp/*
+rm -fr /root/.ssh
+rm -fr /root/.bash_history
+rm -fr /root/.joe_state
+rm -fr /root/.viminfo
+rm -fr /root/.wget-hsts
+
+rm -fr /var/log/*
+rm -fr /var/mail/*
+
+find /usr -type f -name "*~" -exec rm {} \;
+find /var -type f -name "*~" -exec rm {} \;
+find /usr -type f -name "*.la" -exec rm {} \;
+
+rm -fr /var/cache/lmbx/*
+
+rm -fr /var/spool/fcron/*

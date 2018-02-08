@@ -1,0 +1,17 @@
+mkdir build
+cd    build
+
+../configure                               \
+      --build=$LMBX_BUILD		   \
+      --prefix=$PREFIX                     \
+      --datarootdir=$DATAROOTDIR           \
+      --with-mpc=/usr/pkgs/mpc		   \
+      --with-isl=/usr/pkgs/isl		   \
+      --with-mpfr=/usr/pkgs/mpfr	 	   \
+      --with-gmp=/usr/pkgs/gmp		   \
+      --with-lib-path=/usr/pkgs/glibc/lib   \
+      --with-system-zlib		   \
+      --enable-shared                      \
+      --disable-werror                     \
+      --disable-nls                        
+

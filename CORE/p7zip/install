@@ -1,0 +1,4 @@
+make 	DEST_HOME=$PREFIX 		\
+	DEST_MAN=$DATAROOTDIR/man 	\
+	DEST_SHARE_DOC=$DATAROOTDIR/doc install
+

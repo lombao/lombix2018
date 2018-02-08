@@ -1,0 +1,5 @@
+make PREFIX=$PREFIX 			\
+     SBINDIR=$PREFIX/bin 		\
+     MANDIR=$DATAROOTDIR/man     	\
+     SHAREDIR=$DATAROOTDIR/hwdata 	\
+     SHARED=yes

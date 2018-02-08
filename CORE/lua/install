@@ -1,0 +1,9 @@
+make INSTALL_TOP=$PREFIX \
+     INSTALL_DATA="cp -d" \
+     INSTALL_LMOD=/usr/share/lua/5.3	\
+     INSTALL_MAN=/usr/share/man/man1 \
+     TO_LIB="liblua.so liblua.so.5.3 liblua.so.5.3.4" \
+     install
+
+
+install -v -m644 -D lua.pc $DATAROOTDIR/pkgconfig/lua.pc

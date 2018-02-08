@@ -1,0 +1,11 @@
+diff -Naur traceroute-2.1.0.orig/Make.rules traceroute-2.1.0/Make.rules
+--- traceroute-2.1.0.orig/Make.rules	2016-02-20 20:39:46.000000000 +0000
++++ traceroute-2.1.0/Make.rules	2018-02-02 19:48:59.339944797 +0000
+@@ -129,6 +129,7 @@
+ endif
+ 
+ libraries = $(foreach dir, $(filter lib%,$(LIBDIRS)), $(srcdir)/$(dir))
++libraries += /usr/pkgs/glibc/lib
+ 
+ vpath lib%.so $(libraries)
+ vpath lib%.a $(libraries)

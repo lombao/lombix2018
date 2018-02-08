@@ -1,0 +1,2 @@
+rm -fr $PREFIX/lib/lib*
+make install

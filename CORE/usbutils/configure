@@ -1,0 +1,8 @@
+sed -i '/^usbids/ s:usb.ids:hwdata/&:' lsusb.py 		|| exit 1
+sed 's@/usr/bin/env@/usr/pkgs/coreutils/bin/env@' -i *.py	|| exit 1
+
+./configure --prefix=$PREFIX 			\
+            --datarootdir=$DATAROOTDIR 		\
+            --datadir=$DATAROOTDIR/hwdata || exit 1
+
+

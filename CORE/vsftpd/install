@@ -1,0 +1,11 @@
+
+install -v -d -m 0755 /usr/share/vsftpd/empty 	|| exit 1
+install -v -d -m 0755 /home/ftp			|| exit 1
+
+mkdir -pv $PREFIX/bin	|| exit 1
+mkdir -pv $PREFIX/etc	|| exit 1
+
+install -v -m 755 vsftpd	$PREFIX/bin	|| exit 1
+install -v -m 644 vsftpd.8	$DATAROOTDIR/man/man8 || exit 1
+install -v -m 644 vsftpd.conf.5 $DATAROOTDIR/man/man5 || exit 1
+install -v -m 644 vsftpd.conf 	$PREFIX/etc/	|| exit 1

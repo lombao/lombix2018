@@ -1,0 +1,5 @@
+
+./configure 	--prefix=$PREFIX		\
+		--build=$LMBX_BUILD		\
+	        --sbindir=$PREFIX/bin		\
+		--datarootdir=$DATAROOTDIR

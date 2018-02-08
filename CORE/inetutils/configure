@@ -1,0 +1,12 @@
+./configure --prefix=$PREFIX 		\
+            --localstatedir=/var 	\
+            --datarootdir=$DATAROOTDIR 	\
+            --disable-logger     	\
+            --disable-whois      	\
+            --disable-nls        	\
+            --disable-traceroute 	\
+            --disable-rcp        	\
+            --disable-rexec      	\
+            --disable-rlogin     	\
+            --disable-rsh        	\
+            --disable-servers

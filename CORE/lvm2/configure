@@ -1,0 +1,16 @@
+
+./configure 						\
+	--prefix=$PREFIX 				\
+        --sysconfdir=$PREFIX/etc			\
+	--datarootdir=$DATAROOTDIR			\
+	--with-confdir=$PREFIX/etc			\
+	--enable-python3_bindings			\
+        --sbindir=$PREFIX/bin				\
+	--with-udevdir=/usr/pkgs/eudev/lib/udev/rules.d	\
+        --enable-udev_rules				\
+        --enable-applib     				\
+        --enable-cmdlib     				\
+        --enable-pkgconfig  				\
+	--disable-selinux 				\
+        --enable-udev_sync  
+

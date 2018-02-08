@@ -1,0 +1,1 @@
+make prefix=$PREFIX mandir=$DATAROOTDIR/man install

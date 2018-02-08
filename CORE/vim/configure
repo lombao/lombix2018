@@ -1,0 +1,10 @@
+unset STRIP
+echo '#define SYS_VIMRC_FILE "/usr/pkgs/vim/etc/vimrc"' >> src/feature.h || exit 1
+echo '#define SYS_GVIMRC_FILE "/usr/pkgs/vim/etc/gvimrc"' >> src/feature.h || exit 1
+./configure --prefix=$PREFIX 		\
+	    --datarootdir=$DATAROOTDIR  \
+            --mandir=$DATAROOTDIR/man 	\
+            --disable-nls 		\
+            --with-features=huge 	\
+            --with-tlib=ncursesw 
+

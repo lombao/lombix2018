@@ -1,0 +1,469 @@
+#!/usr/pkgs/bash/bin/bash
+
+# Lombix OS 2018
+# License: GPLv2
+# Author: Cesar Lombao
+
+
+## ##########################################
+## Lombix Package Installation tool
+## This tool it used to compile and install
+## the "LMBX" packages in the Lombix distro.
+## 
+
+
+# #####################################################################
+# Key areas. There are three: the pkgs, the tmp and the cache
+# The cache contains the source tar balls
+# The tmp is where the compilation is done
+# The pkgs area is the recipes for compilation are stored 
+
+export LMBX_AREA_CACHE=/var/cache/lmbx
+export LMBX_AREA_STAGE=/var/tmp/lmbx
+export LMBX_AREA_PKGS=/usr/share/lmbx
+
+# There is a 4th area, and it is where the credits and licenses for each
+# pkg installed go. The aim is to have all packages properly credited and
+# licenses/copyright located.
+export LMBX_AREA_CREDITS=/usr/share/credits
+
+# Now, the shell that will be used when a shell is needed
+export LMBX_SHELL=/usr/pkgs/bash/bin/bash
+
+# The version of the installed
+export LMBX_INSTALLER_VERSION=2018.9
+
+# Commands used. This purpose is more an inventory of the
+# tools used. 
+export CP=/usr/pkgs/coreutils/bin/cp
+export LS=/usr/pkgs/coreutils/bin/ls
+export MRM=/usr/pkgs/coreutils/bin/rm
+export MKDIR=/usr/pkgs/coreutils/bin/mkdir
+export BASENAME=/usr/pkgs/coreutils/bin/basename
+export TOUCH=/usr/pkgs/coreutils/bin/touch
+export FIND=/usr/pkgs/findutils/bin/find
+export HEAD=/usr/pkgs/coreutils/bin/head
+export CHMOD=/usr/pkgs/coreutils/bin/chmod
+export CHOWN=/usr/pkgs/coreutils/bin/chown
+export TAIL=/usr/pkgs/coreutils/bin/tail
+export SU=/usr/pkgs/shadow/bin/su
+export MSTRIP=/usr/pkgs/binutils/bin/strip
+export MGZIP=/usr/pkgs/gzip/bin/gzip
+export PATCH=/usr/pkgs/patch/bin/patch
+export TAR=/usr/pkgs/tar/bin/tar
+export MUNZIP=/usr/pkgs/unzip/bin/unzip
+export WGET=/usr/pkgs/wget/bin/wget
+export MSTAT=/usr/pkgs/coreutils/bin/stat
+export MGETOPT=/usr/pkgs/util-linux/bin/getopt
+
+
+# A very rubbish way of error control
+# This has 
+set +e
+function error_exit
+{
+        set -e
+	echo "$1" 1>&2
+        exit 1
+}
+ 
+
+
+
+#########################
+# Help / Usage
+
+function showHelp {
+	USAGE="
+Usage: lmbx-install [--help] [--version] [-p <package>] [-a <AREA>]
+Install ( by compiling ) one of the lmbx packages. 
+
+Options:
+     -p PACKAGE: 
+     Choose one of the packages to be recompiled and installed.
+     For instance, this like will rebuild completely glib
+        lmbx-install -p glib
+        
+     -a AREA:
+     This option will recompile ALL the packages, one after
+     the other for a given AREA. The AREAS are the folders
+     under /usr/share/lmbx , for instance:
+        lmbx-install -a MEDIA
+     will recompile all the video/audio libraries
+"
+echo "$USAGE"
+exit 0
+}
+
+
+function showVersion {
+	echo "Version: $LMBX_INSTALL_VERSION"
+	exit 0
+}
+
+# #########################################
+# to build an entire area
+# 
+# #########################################
+function buildArea {
+	local AREA
+	local CLEAN
+	
+	AREA="$1"
+	CLEAN="$2"
+	find_area_folder "${AREA}"   # This setups AREAFOLDER
+	[ -z "$AREAFOLDER" ] && error_exit "ERROR: I do not know that area: Typo ?"
+	
+	
+		
+	for p in $(find "${AREAFOLDER}" -maxdepth 1 -mindepth 1 -exec basename {} \;)
+	do
+		buildPackage "$p" "$CLEAN"
+	done
+	
+}
+
+
+# #########################################
+# to build an specific package
+#
+# #########################################
+function buildPackage {
+	local PACKAGE
+	local LMBX_TMP
+	local CLEAN
+	local PKGFOLDER
+
+	PACKAGE="$1"
+	CLEAN="$2"
+	
+	# Verify we know about that requested pkg
+	PKGFOLDER=$($FIND $LMBX_AREA_PKGS -maxdepth 3 -type d -name $PACKAGE | $HEAD -n 1)
+	[ -z "$PKGFOLDER" ] && error_exit "ERROR: That package does not seem to exist. Was it a typo ?"
+
+	LMBX_TMP=$LMBX_AREA_STAGE/"${PACKAGE}".$$	# Where the package is going to be compiled
+	LMBX_LOG=$LMBX_AREA_STAGE/"${PACKAGE}".log.$$   # The log about the compilation
+	
+	$MKDIR -p 	$LMBX_TMP
+	$CHOWN nobody   $LMBX_TMP
+	$CHMOD 775      $LMBX_TMP
+	$TOUCH 		$LMBX_LOG
+	$CHOWN nobody	$LMBX_LOG	
+
+        [ -r $PKGFOLDER/MANIFEST ] || error_exit "ERROR: This package does not contain a MANIFEST"
+        [ "$($MSTAT --format '%U' $PKGFOLDER/MANIFEST)" != "root" ] && error_exit "ERROR: The file MANIFEST is not owned by root. Cannot proceed"
+        
+    	source $PKGFOLDER/MANIFEST
+    	export URL
+    	export PREFIX
+    	[ -z "$STRIP" ] && STRIP="yes"
+    	export STRIP
+    	export CREDITS
+    	[ -z "$PREFIX" ] && error_exit "ERROR: PREFIX is not defined in the MANIFEST"
+    
+
+
+	echo    "Building ${PACKAGE}:::  "
+	echo    "-------------------------------------------------------------------"
+	echo	"  Compilation Logfile	=> $LMBX_LOG"
+	echo    "  Package location	=> $PKGFOLDER"
+	echo    "  Source URL		=> $URL"
+	echo    "  Installation Prefix	=> $PREFIX"
+	echo    "  Working area		=> $LMBX_TMP"
+	echo    "  Stripping		=> $STRIP"
+	echo 	"-------------------------------------------------------------------"
+        echo    " "
+
+   	# If the tarfile is included in the package then we copy this into the cache
+   	[ ! -z "$URL" ] && TARFILE=$($BASENAME "$URL")
+	    
+   	# Download package IF it is not already downloaded ( option -nc of wget )
+   	cd $LMBX_AREA_CACHE
+   	if [ ! -z "$TARFILE" ] && [ ! -r "$TARFILE" ] 
+   	then
+    		echo "Downloading from URL: $URL............"
+    		$WGET --no-check-certificate -q -nc $URL 
+    		[ $? != 0 ] && error_exit "Download of $URL: ERROR"
+    		$CHMOD -R 644 $LMBX_AREA_CACHE/*
+   	fi
+
+
+   	# Uncompress package stripping first component of the path
+   	cd $LMBX_TMP
+   	if [ ! -z "$TARFILE" ] 
+   	then  
+   		if [[ "$TARFILE" == *zip ]]
+   		then
+     			$MUNZIP $LMBX_AREA_CACHE/$TARFILE
+   		else
+     			$TAR -xf $LMBX_AREA_CACHE/$TARFILE  --strip-components=1         
+     			[[ $($LS -A .) ]] || $TAR -xf $LMBX_AREA_CACHE/$TARFILE
+   		fi
+   		[ $? != 0 ] && error_exit "ERROR: Uncompressing package: $TARFILE failed. Perhaps is it corrupted. Please check it manually"
+   	fi
+
+
+	# Apply patches, the name of the patches matter as indicate the order. 01-patch 02-patch
+	if [ -d "$PKGFOLDER/PATCHES" ]; then
+ 		echo "Patching..............."
+ 		for patch in $($LS "$PKGFOLDER/PATCHES")
+ 		do
+     			$PATCH -p1  -i "$PKGFOLDER/PATCHES/$patch" 
+     			[ $? != 0 ] &&  error_exit "Error aplying patch $patch"
+     		
+		done 
+	fi
+	
+	
+	# Configuring stage
+	echo
+	echo "Configuring..............."
+	CONFIGURE="$PKGFOLDER/configure"
+	if [ -r "$CONFIGURE" ]; then
+  		$CHOWN nobody:nogroup "$CONFIGURE"
+  		$CHOWN -R nobody:nogroup $LMBX_TMP
+ 		$CHMOD u+x "$CONFIGURE"
+		$SU -s $LMBX_SHELL -c "source /usr/etc/profile; \
+                	export PREFIX=$PREFIX;        		\
+                	cd $LMBX_TMP; 				\
+                	$CONFIGURE &>> $LMBX_LOG" nobody
+	fi
+
+	if [ $? != 0 ]; then
+		echo
+ 		echo "FAILURE: Problems in configuration stage"
+ 		echo "======================================"
+ 		$TAIL -n 10 $LMBX_LOG
+ 		error_exit " Please check log $LMBX_LOG for details"
+	fi
+
+	
+	
+	# Make stage
+	echo "Compiling................"
+	MAKECMD="$PKGFOLDER/make"
+	if [ -r "$MAKECMD" ]; then
+  		$CHOWN nobody "$MAKECMD"
+		$CHMOD u+x "$MAKECMD"
+		$CHOWN -R nobody $LMBX_TMP
+  		$SU -s $LMBX_SHELL -c "source /usr/etc/profile;  \
+                          export PREFIX=$PREFIX;         	\
+                          cd $LMBX_TMP; 			\
+                          $MAKECMD &>> $LMBX_LOG" nobody
+	fi
+
+	if [ "$?" != 0 ]; then
+		echo
+ 		echo "FAILURE: Problems in compilation stage"
+ 		echo "======================================"
+ 		$TAIL -n 10 $LMBX_LOG
+ 		error_exit " Please check log $LMBX_LOG for details"
+	fi
+
+	# Install stage
+	echo "Installing................"
+	INSTALLCMD="$PKGFOLDER/install"
+	if [ -r "$INSTALLCMD" ]; then
+  		$CHMOD u+x "$INSTALLCMD"
+  		$CHOWN root "$INSTALLCMD"
+  	        $INSTALLCMD &>> $LMBX_LOG  
+	fi
+
+	if [ $? != 0 ]; then
+		echo
+		echo "FAILURE: Problems in installation stage"
+ 		echo "======================================"
+ 		$TAIL -n 10 $LMBX_LOG
+ 		error_exit " Please check log $LMBX_LOG for details"
+	fi
+
+
+	## Cp any etc file ( most likely ld.conf.f and profile.d
+	
+	[ -d $PKGFOLDER/POSTLOAD/usr    ]	&& $CP -Rp  $PKGFOLDER/POSTLOAD/usr/* /usr  
+        find /usr/etc/profile.d -type f -exec sed -i "s@%PREFIX@$PREFIX@g" {} \;
+        find /usr/etc/ld.so.conf.d -type f -exec sed -i "s@%PREFIX@$PREFIX@g" {} \;	
+
+	#####
+	### We copy all the credits or any other file specified by the package
+	### Credits
+	$MKDIR -p $LMBX_AREA_CREDITS/"${PACKAGE}"
+	for file in $CREDITS 
+	do
+		$CP "${LMBX_TMP}/$file" $LMBX_AREA_CREDITS/"${PACKAGE}"
+	done
+
+	# Sort of "standard" credit files
+	[ -r "${LMBX_TMP}/THANKS" ] &&   	$CP "${LMBX_TMP}/THANKS" $LMBX_AREA_CREDITS/"${PACKAGE}"
+	[ -r "${LMBX_TMP}/COPYING" ] &&  	$CP "${LMBX_TMP}/COPYING" $LMBX_AREA_CREDITS/"${PACKAGE}"
+	[ -r "${LMBX_TMP}/COPYING.txt" ] &&  	$CP "${LMBX_TMP}/COPYING.txt" $LMBX_AREA_CREDITS/"${PACKAGE}"
+	[ -r "${LMBX_TMP}/COPYRIGHT" ] &&  	$CP "${LMBX_TMP}/COPYRIGHT" $LMBX_AREA_CREDITS/"${PACKAGE}"
+	[ -r "${LMBX_TMP}/COPYING.LIB" ] &&   	$CP "${LMBX_TMP}/COPYING.LIB" $LMBX_AREA_CREDITS/"${PACKAGE}"
+	[ -r "${LMBX_TMP}/AUTHORS" ] &&   	$CP "${LMBX_TMP}/AUTHORS" $LMBX_AREA_CREDITS/"${PACKAGE}"
+	[ -r "${LMBX_TMP}/README" ] &&   	$CP "${LMBX_TMP}/README" $LMBX_AREA_CREDITS/"${PACKAGE}"
+	[ -r "${LMBX_TMP}/README.md" ] &&   	$CP "${LMBX_TMP}/README.md" $LMBX_AREA_CREDITS/"${PACKAGE}"
+	[ -r "${LMBX_TMP}/README.rst" ] &&   	$CP "${LMBX_TMP}/README.rst" $LMBX_AREA_CREDITS/"${PACKAGE}"
+	[ -r "${LMBX_TMP}/README.txt" ] &&   	$CP "${LMBX_TMP}/README.txt" $LMBX_AREA_CREDITS/"${PACKAGE}"
+	[ -r "${LMBX_TMP}/PKG-INFO" ] &&   	$CP "${LMBX_TMP}/PKG-INFO" $LMBX_AREA_CREDITS/"${PACKAGE}"
+	[ -r "${LMBX_TMP}/COPYRIGHT" ] &&   	$CP "${LMBX_TMP}/COPYRIGHT" $LMBX_AREA_CREDITS/"${PACKAGE}"
+	[ -r "${LMBX_TMP}/LICENSE" ] &&   	$CP "${LMBX_TMP}/LICENSE" $LMBX_AREA_CREDITS/"${PACKAGE}"
+	[ -r "${LMBX_TMP}/LICENSE.md" ] &&   	$CP "${LMBX_TMP}/LICENSE.md" $LMBX_AREA_CREDITS/"${PACKAGE}"
+	[ -r "${LMBX_TMP}/LICENCE" ] &&   	$CP "${LMBX_TMP}/LICENCE" $LMBX_AREA_CREDITS/"${PACKAGE}"
+	[ -r "${LMBX_TMP}/NOTICE" ] &&   	$CP "${LMBX_TMP}/NOTICE" $LMBX_AREA_CREDITS/"${PACKAGE}"
+	[ -r "${LMBX_TMP}/MANIFEST" ] &&   	$CP "${LMBX_TMP}/MANIFEST" $LMBX_AREA_CREDITS/"${PACKAGE}"
+	[ -r "${LMBX_TMP}/CREDITS" ] &&   	$CP "${LMBX_TMP}/CREDITS" $LMBX_AREA_CREDITS/"${PACKAGE}"
+	[ -r "${LMBX_TMP}/LGPL" ] &&   		$CP "${LMBX_TMP}/LGPL" $LMBX_AREA_CREDITS/"${PACKAGE}"
+	[ -r "${LMBX_TMP}/CONTRIBUTORS" ] &&   	$CP "${LMBX_TMP}/CONTRIBUTORS" $LMBX_AREA_CREDITS/"${PACKAGE}"
+	[ -r "${LMBX_TMP}/CONTRIBUTING" ] &&   	$CP "${LMBX_TMP}/CONTRIBUTING" $LMBX_AREA_CREDITS/"${PACKAGE}"
+	[ -r "${LMBX_TMP}/CONTRIBUTING.md" ] && $CP "${LMBX_TMP}/CONTRIBUTING.md" $LMBX_AREA_CREDITS/"${PACKAGE}"
+	[ -r "${LMBX_TMP}/MANIFEST" ] &&   	$CP "${LMBX_TMP}/MANIFEST" $LMBX_AREA_CREDITS/"${PACKAGE}"
+	[ -r "${LMBX_TMP}/Artistic-2.0" ] && 	$CP "${LMBX_TMP}/Artistic-2.0" $LMBX_AREA_CREDITS/"${PACKAGE}"
+
+	# Now, we strip if requested
+	if [ "$STRIP" == "yes" ]; then
+		$FIND "$PREFIX" -type f -exec $MSTRIP --strip-unneeded {} \; &> /dev/null
+	fi
+
+        if [ "$PREFIX" != "/usr" ]; then
+        
+		# Now, move the .desktops files
+		if [ -d "$PREFIX/share/applications" ]; then
+			$CP -Rp $PREFIX/share/applications/* /usr/share/applications
+			$MRM -fr $PREFIX/share/applications
+		fi
+
+		# Now , the pkgconfig
+		if [ -d "$PREFIX/lib/pkgconfig" ]; then
+			$CP -Rp $PREFIX/lib/pkgconfig/* /usr/share/pkgconfig
+			$MRM -fr $PREFIX/lib/pkgconfig
+		fi
+	
+		# Now, the man
+		if [ -d "$PREFIX/share/man" ]; then
+			$CP -Rp $PREFIX/share/man/* /usr/share/man
+			$MRM -fr $PREFIX/share/man
+		fi
+	
+		# Now, the icons
+		if [ -d "$PREFIX/share/icons" ]; then
+			$CP -Rp $PREFIX/share/icons/* /usr/share/icons
+			$MRM -fr $PREFIX/share/icons
+		fi
+	
+		# Now, the pixmaps
+		if [ -d "$PREFIX/share/pixmaps" ]; then
+			$CP -Rp $PREFIX/share/pixmaps/* /usr/share/pixmaps
+			$MRM -fr $PREFIX/share/pixmaps
+		fi
+
+		# Now, the aclocal
+		if [ -d "$PREFIX/share/aclocal" ]; then
+			$CP -Rp $PREFIX/share/aclocal/* /usr/share/aclocal
+			$MRM -fr $PREFIX/share/aclocal
+		fi
+
+		# Now, the aclocal
+		if [ -d "$PREFIX/share/mime" ]; then
+			$CP -Rp $PREFIX/share/mime/* /usr/share/mime
+			$MRM -fr $PREFIX/share/mime
+		fi
+		
+		# Now, the doc
+		if [ -d "$PREFIX/share/doc" ]; then
+			$MRM -fr $PREFIX/share/doc
+		fi
+
+		# Now, the info
+		if [ -d "$PREFIX/share/info" ]; then
+			$MRM -fr $PREFIX/share/info
+		fi
+
+	fi
+	
+	
+	
+
+	# Now, message success
+	echo
+	echo "Complete build of $PACKAGE !!!!"
+	echo
+	
+	# If it was requested to clean up after
+	if [ ! -z "$CLEAN" ]; then
+		echo "Cleaning...."
+		$MRM -fr "$LMBX_TMP" "$LMBX_LOG"
+	fi
+
+}
+
+
+
+
+##################################################
+# ################################################
+# 			MAIN
+#
+# ################################################
+##################################################
+
+# ##########################################
+# Be sure everything is in place and ready
+
+$MKDIR -p $LMBX_AREA_CACHE
+	
+
+# ##################
+# read the options
+PARAMS=$($MGETOPT -o hcva:p: --long help,clean,version,area:,package: --  "$@")
+if [ $? != 0 ] ; then echo "ERROR: Failed parsing options." >&2 ; exit 1 ; fi
+eval set -- "$PARAMS"
+
+# extract options and their arguments into variables.
+while true ; do
+    case "$1" in
+        -h|--help)		ARG_H=1;		shift	;;
+        -v|--version) 	ARG_V=1;		shift 	;;
+        -c|--clean) 	ARG_C=1;		shift 	;;
+        -a|--area)    	AREA="$2"; 		shift 2 ;;
+        -p|--package) 	PACKAGE="$2"; 	shift 2 ;;
+		--) shift; 	    break;;
+        *) echo "IMPOSIBLE: Internal error!" ; exit 1 ;;
+        
+    esac
+done
+
+
+# #########################
+# Execute
+
+# If there is an additional parameter which is not recognized , then abort
+[ -z "${1}" ] || error_exit "ERROR: I do not recognize option:: $1"
+
+# If there is none of the mandatory parameters/combinations, abort
+[ -z "${ARG_H}" ] && \
+[ -z "${ARG_V}" ] && \
+[ -z "${AREA}" ] &&  \
+[ -z "${PACKAGE}" ]  && error_exit "ERROR: There are no parameters" 
+
+[ -z "${ARG_H}" ] 	|| showHelp
+[ -z "${ARG_V}" ] 	|| showVersion
+[ -z "${PACKAGE}" ] 	|| buildPackage "${PACKAGE}" "${ARG_C}"
+#[ -z "${AREA}" ] 	|| buildArea "${AREA}" "${ARG_C}"
+
+
+
+###
+# We do not want these
+$MRM -fr $DATAROOTDIR/info
+$MRM -fr $DATAROOTDIR/doc
+$MRM -fr $DATAROOTDIR/devhelp
+$MRM -fr $DATAROOTDIR/gtk-doc
+$MRM -fr $DATAROOTDIR/man/man3
+
+##
+# Compress the man pages to save a bit of space
+$MGZIP -f /usr/share/man/man1/*.1 2> /dev/null
+$MGZIP -f /usr/share/man/man4/*.4 2> /dev/null
+$MGZIP -f /usr/share/man/man5/*.5 2> /dev/null
+$MGZIP -f /usr/share/man/man7/*.7 2> /dev/null
+$MGZIP -f /usr/share/man/man8/*.8 2> /dev/null

@@ -1,0 +1,18 @@
+export LDFLAGS="-L/usr/pkg/openldap/lib"
+export CFLAGS="-I/usr/pkg/openldap/include"
+./configure 				\
+	--prefix=$PREFIX		\
+	--sysconfdir=$PREFIX/etc	\
+	--sbindir=$PREFIX/bin		\
+	--datarootdir=$DATAROOTDIR	\
+	--libexecdir=$PREFIX/lib	\
+ 	--with-all-insults  		\
+	--with-ldap=/usr/pkg/ldap	\
+	--disable-nls			\
+	--enable-zlib			\
+	--enable-shell-sets-home	\
+	--with-nsswitch=/usr/etc/nsswitch.conf	\
+	--with-sendmail=/usr/pkg/postfix/bin/sendmail \
+	--with-env-editor    		\
+	--with-passprompt="[sudo] password for %p: " 
+

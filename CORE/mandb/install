@@ -1,0 +1,5 @@
+make install
+ldconfig
+
+# We remove the systemd tmp file
+rm -fr /usr/lib/tmpfiles.d

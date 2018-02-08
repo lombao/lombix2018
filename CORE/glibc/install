@@ -1,0 +1,43 @@
+rm -f $PREFIX/include/limits.h
+
+# glibc needs root to do the compilation as during the make it seems already touches the glibc area
+# which believe is really inconvenient ( if truth )
+cd build
+make
+
+
+#
+#
+sed '/test-installation/s@$(PERL)@echo not running@' -i ../Makefile
+make install
+
+cp -v ../nscd/nscd.conf /usr/etc/nscd.conf
+mkdir -pv /var/cache/nscd
+
+ln -svf /usr/etc/passwd $PREFIX/etc/passwd
+ln -svf /usr/etc/group $PREFIX/etc/group
+ln -svf /usr/etc/hosts $PREFIX/etc/hosts
+ln -svf /usr/etc/nscd.conf $PREFIX/etc/nscd.conf
+
+
+mv $PREFIX/sbin/* $PREFIX/bin
+rmdir $PREFIX/sbin
+
+
+mkdir -pv $PREFIX/lib/locale
+localedef -i de_DE -f ISO-8859-1 de_DE
+
+#localedef -i de_DE@euro -f ISO-8859-15 de_DE@euro
+#localedef -i de_DE -f UTF-8 de_DE.UTF-8
+#localedef -i fr_FR -f ISO-8859-1 fr_FR
+#localedef -i fr_FR@euro -f ISO-8859-15 fr_FR@euro
+#localedef -i fr_FR -f UTF-8 fr_FR.UTF-8
+#localedef -i it_IT -f ISO-8859-1 it_IT
+#localedef -i it_IT -f UTF-8 it_IT.UTF-8
+#localedef -i it_IT@euro -f ISO-8859-15 it_IT@euro
+#localedef -i es_ES -f ISO-8859-1 es_ES
+#localedef -i es_ES -f UTF-8 es_ES.UTF-8
+#localedef -i es_ES@euro -f ISO-8859-15 es_ES@euro
+#localedef -i en_GB -f UTF-8 en_GB.UTF-8
+#localedef -i en_US -f ISO-8859-1 en_US
+#localedef -i en_US -f UTF-8 en_US.UTF-8

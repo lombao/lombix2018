@@ -1,0 +1,35 @@
+
+
+
+export BUILD_ZLIB=False
+export BUILD_BZIP2=0
+export SYSTEM=linux
+export LC_ALL=C
+
+find ./ -type f -exec sed 's@/usr/include@/usr/pkgs/glibc/include@' -i {} \;
+find ./ -type f -exec sed 's@/bin/pwd@/usr/pkgs/coreutils/bin/pwd@' -i {} \;
+find ./ -type f -exec sed 's@/usr/bin/env@/usr/pkgs/coreutils/bin/env@' -i {} \;
+find ./ -type f -exec sed 's@/usr/bin/diff@/usr/pkgs/diffutils/bin/diff@' -i {} \;
+find ./ -type f -exec sed 's@/usr/bin/locale@/usr/pkgs/glibc/bin/locale@' -i {} \;
+find ./ -type f -exec sed 's@/usr/bin/sed@/usr/pkgs/sed/bin/sed@' -i {} \;
+find ./ -type f -exec sed 's@/usr/bin/mount@/usr/pkgs/util-linux/bin/mount@' -i {} \;
+find ./ -type f -exec sed 's@/usr/bin/nm@/usr/pkgs/binutils/bin/nm@' -i {} \;
+find ./ -type f -exec sed 's@/usr/bin/true@/usr/pkgs/coreutils/bin/true@' -i {} \;
+find ./ -type f -exec sed 's@/usr/bin/bash@/usr/pkgs/bash/bin/bash@' -i {} \;
+find ./ -type f -exec sed 's@/usr/bin/less@/usr/pkgs/less/bin/less@' -i {} \;
+find ./ -type f -exec sed 's@/usr/bin/yacc@/usr/pkgs/bison/bin/yacc@' -i {} \;
+find ./ -type f -exec sed 's@/usr/bin/wc@/usr/pkgs/coreutils/bin/wc@' -i {} \;
+find ./ -type f -exec sed 's@/usr/bin/file@/usr/pkgs/fileutils/bin/file@' -i {} \;
+find ./ -type f -exec sed 's@/usr/bin/wget@/usr/pkgs/wget/bin/wget@' -i {} \;
+
+sh Configure -des -Dprefix=$PREFIX                 	\
+                  -Dvendorprefix=$PREFIX           	\
+                  -Dcc="/usr/pkgs/gcc/bin/gcc"       	\
+                  -Dman1dir=$DATAROOTDIR/man/man1 	\
+                  -Dman3dir=$DATAROOTDIR/man/man3 	\
+                  -Dpager="/usr/pksg/less/bin/less -isR" \
+                  -Dosname=linux                   	\
+		  -Dlocincpath="/usr/pkgs/pcre/include /usr/pkgs/glibc/include /usr/pkgs/gbdm/include /usr/pkgs/openssl/include /usr/pkgs/expat/include /usr/pkgs/zlib/include /usr/pkgs/bzip2/include" \
+		  -Dloclibpath="/usr/pkgs/pcre/lib /usr/pkgs/glibc/lib /usr/pkgs/gdbm/lib /usr/pkgs/openssl/lib /usr/pkgs/expat/lib /usr/pkgs/zlib/lib /usr/pkgs/bzip2/lib" \
+                  -Dusethreads                     	\
+                  -Duseshrplib                     	

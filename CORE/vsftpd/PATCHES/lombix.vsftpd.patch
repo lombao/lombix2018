@@ -1,0 +1,353 @@
+diff -Naur vsftpd-3.0.3.orig/Makefile vsftpd-3.0.3/Makefile
+--- vsftpd-3.0.3.orig/Makefile	2012-09-16 07:27:35.000000000 +0000
++++ vsftpd-3.0.3/Makefile	2018-02-07 20:44:02.115000000 +0000
+@@ -4,13 +4,13 @@
+ IFLAGS  = -idirafter dummyinc
+ #CFLAGS = -g
+ CFLAGS	=	-O2 -fPIE -fstack-protector --param=ssp-buffer-size=4 \
+-	-Wall -W -Wshadow -Werror -Wformat-security \
++	-Wall -W -Wshadow -Werror -Wformat-security -I/usr/pkgs/popt/include \
+ 	-D_FORTIFY_SOURCE=2 \
+ 	#-pedantic -Wconversion
+ 
+ LIBS	=	`./vsf_findlibs.sh`
+ LINK	=	-Wl,-s
+-LDFLAGS	=	-fPIE -pie -Wl,-z,relro -Wl,-z,now
++LDFLAGS	=	-L/usr/pkgs/popt/lib -fPIE -pie -Wl,-z,relro -Wl,-z,now
+ 
+ OBJS	=	main.o utility.o prelogin.o ftpcmdio.o postlogin.o privsock.o \
+ 		tunables.o ftpdataio.o secbuf.o ls.o \
+diff -Naur vsftpd-3.0.3.orig/defs.h vsftpd-3.0.3/defs.h
+--- vsftpd-3.0.3.orig/defs.h	2015-07-20 23:03:17.000000000 +0000
++++ vsftpd-3.0.3/defs.h	2018-02-07 20:55:13.862000000 +0000
+@@ -1,7 +1,7 @@
+ #ifndef VSF_DEFS_H
+ #define VSF_DEFS_H
+ 
+-#define VSFTP_DEFAULT_CONFIG    "/etc/vsftpd.conf"
++#define VSFTP_DEFAULT_CONFIG    "/usr/services/vsftpd/etc/vsftpd.conf"
+ 
+ #define VSFTP_COMMAND_FD        0
+ 
+diff -Naur vsftpd-3.0.3.orig/tunables.c vsftpd-3.0.3/tunables.c
+--- vsftpd-3.0.3.orig/tunables.c	2015-07-23 04:13:07.000000000 +0000
++++ vsftpd-3.0.3/tunables.c	2018-02-07 21:01:44.843000000 +0000
+@@ -262,11 +262,11 @@
+   install_str_setting(".message", &tunable_message_file);
+   install_str_setting("nobody", &tunable_nopriv_user);
+   install_str_setting(0, &tunable_ftpd_banner);
+-  install_str_setting("/etc/vsftpd.banned_emails", &tunable_banned_email_file);
+-  install_str_setting("/etc/vsftpd.chroot_list", &tunable_chroot_list_file);
++  install_str_setting("/usr/services/vsftpd/etc/vsftpd.banned_emails", &tunable_banned_email_file);
++  install_str_setting("/usr/services/vsftpd/etc/vsftpd.chroot_list", &tunable_chroot_list_file);
+   install_str_setting("ftp", &tunable_pam_service_name);
+   install_str_setting("ftp", &tunable_guest_username);
+-  install_str_setting("/etc/vsftpd.user_list", &tunable_userlist_file);
++  install_str_setting("/usr/services/vsftpd/etc/vsftpd.user_list", &tunable_userlist_file);
+   install_str_setting(0, &tunable_anon_root);
+   install_str_setting(0, &tunable_local_root);
+   install_str_setting(0, &tunable_banner_file);
+@@ -279,7 +279,7 @@
+   install_str_setting(0, &tunable_hide_file);
+   install_str_setting(0, &tunable_deny_file);
+   install_str_setting(0, &tunable_user_sub_token);
+-  install_str_setting("/etc/vsftpd.email_passwords",
++  install_str_setting("/usr/services/vsftpd/etc/vsftpd.email_passwords",
+                       &tunable_email_password_file);
+   install_str_setting("/usr/share/ssl/certs/vsftpd.pem",
+                       &tunable_rsa_cert_file);
+diff -Naur vsftpd-3.0.3.orig/vsf_findlibs.sh vsftpd-3.0.3/vsf_findlibs.sh
+--- vsftpd-3.0.3.orig/vsf_findlibs.sh	2012-03-28 02:17:41.000000000 +0000
++++ vsftpd-3.0.3/vsf_findlibs.sh	2018-02-07 20:43:12.283000000 +0000
+@@ -1,12 +1,14 @@
+-#!/bin/sh
++#!/usr/pkgs/bash/bin/bash
+ # Cheesy hacky location of additional link libraries.
+ 
++# LOMBIX: Even more cheesy alterations done to adapt it to Lombix 2018
++
+ locate_library() { [ ! "$1*" = "`echo $1*`" ]; }
+-find_func() { egrep $1 $2 >/dev/null; }
++find_func() { /usr/pkgs/grep/bin/egrep $1 $2 >/dev/null; }
+ 
+ if find_func hosts_access tcpwrap.o; then
+   echo "-lwrap";
+-  locate_library /lib/libnsl.so && echo "-lnsl";
++  locate_library /usr/pkgs/glibc/lib/libnsl.so && echo "-lnsl";
+   locate_library /lib64/libnsl.so && echo "-lnsl";
+ fi
+ 
+@@ -22,38 +24,38 @@
+   # AIX ends shared libraries with .a
+   locate_library /usr/lib/libpam.a && echo "-lpam";
+ else
+-  locate_library /lib/libcrypt.so && echo "-lcrypt";
+-  locate_library /usr/lib/libcrypt.so && echo "-lcrypt";
++  locate_library /usr/pkgs/glibc/lib/libcrypt.so && echo "-lcrypt";
++  locate_library /usr/pkgs/glibc/lib/libcrypt.so && echo "-lcrypt";
+   locate_library /usr/lib64/libcrypt.so && echo "-lcrypt";
+   locate_library /lib/x86_64-linux-gnu/libcrypt.so && echo "-lcrypt";
+ fi
+ 
+ # Look for the dynamic linker library. Needed by older RedHat when
+ # you link in PAM
+-locate_library /lib/libdl.so && echo "-ldl";
++locate_library /usr/pkgs/glibc/lib/libdl.so && echo "-ldl";
+ 
+ # Look for libsocket. Solaris needs this.
+-locate_library /lib/libsocket.so && echo "-lsocket";
++locate_library /usr/pkgs/libsocket/lib/libsocket.so && echo "-lsocket";
+ 
+ # Look for libnsl. Solaris needs this.
+ locate_library /lib/libnsl.so && echo "-lnsl";
+ 
+ # Look for libresolv. Solaris needs this.
+-locate_library /lib/libresolv.so && echo "-lresolv";
++locate_library /usr/pkgs/glibc/lib/libresolv.so && echo "-lresolv";
+ 
+ # Look for libutil. Older FreeBSD need this for setproctitle().
+-locate_library /usr/lib/libutil.so && echo "-lutil";
++locate_library /usr/pkgs/glibc/lib/libutil.so && echo "-lutil";
+ 
+ # For older HP-UX...
+ locate_library /usr/lib/libsec.sl && echo "-lsec";
+ 
+ # Look for libcap (capabilities)
+-if locate_library /lib/libcap.so.1; then
+-  echo "/lib/libcap.so.1";
+-elif locate_library /lib/libcap.so.2; then
+-  echo "/lib/libcap.so.2";
++if locate_library /usr/pkgs/libcap/lib/libcap.so.1; then
++  echo "/usr/pkgs/libcap/lib/libcap.so.1";
++elif locate_library /usr/pkgs/libcap/lib/libcap.so.2; then
++  echo "/usr/pkgs/libcap/lib/libcap.so.2";
+ else
+-  locate_library /usr/lib/libcap.so && echo "-lcap";
++  locate_library /usr/pkgs/libcap/lib/libcap.so && echo "-lcap";
+   locate_library /lib/libcap.so && echo "-lcap";
+   locate_library /lib64/libcap.so && echo "-lcap";
+ fi
+diff -Naur vsftpd-3.0.3.orig/vsftpd.8 vsftpd-3.0.3/vsftpd.8
+--- vsftpd-3.0.3.orig/vsftpd.8	2009-07-17 20:56:23.000000000 +0000
++++ vsftpd-3.0.3/vsftpd.8	2018-02-07 20:56:36.037000000 +0000
+@@ -21,7 +21,7 @@
+ recommended. It is activated by setting
+ .Pa listen=YES
+ in
+-.Pa /etc/vsftpd.conf .
++.Pa /usr/services/vsftpd/etc/vsftpd.conf .
+ Direct execution of the
+ .Nm vsftpd
+ binary will then launch the FTP service ready for immediate client connections.
+@@ -33,7 +33,7 @@
+ as a config file that will be loaded. Note that config files are loaded in the
+ strict order that they are encountered on the command line.
+ If no config files are specified, the default configuration file of
+-.Pa /etc/vsftpd.conf
++.Pa /usr/services/vsftpd/etc/vsftpd.conf
+ will be loaded, after all other command line options are processed.
+ .Pp
+ Supported options are:
+@@ -47,14 +47,14 @@
+ config files.
+ .El
+ .Sh EXAMPLES
+-vsftpd -olisten=NO /etc/vsftpd.conf -oftpd_banner=blah
++vsftpd -olisten=NO /usr/services/vsftpd/etc/vsftpd.conf -oftpd_banner=blah
+ .Pp
+ That example overrides vsftpd's built-in default for the "listen" option to be
+ NO, but then loads /etc/vsftpd.conf which may override that setting. Finally,
+ the "ftpd_banner" setting is set to "blah", which overrides any default vsftpd
+ setting and any identical setting that was in the config file.
+ .Sh FILES
+-.Pa /etc/vsftpd.conf
++.Pa /usr/services/vsftpd/etc/vsftpd.conf
+ .Sh SEE ALSO
+ .Xr vsftpd.conf 5
+ .end
+diff -Naur vsftpd-3.0.3.orig/vsftpd.conf vsftpd-3.0.3/vsftpd.conf
+--- vsftpd-3.0.3.orig/vsftpd.conf	2018-02-07 21:05:35.773000000 +0000
++++ vsftpd-3.0.3/vsftpd.conf	2018-02-07 21:13:33.890000000 +0000
+@@ -1,4 +1,4 @@
+-# Example config file /etc/vsftpd.conf
++# Example config file /usr/services/vsftpd/etc/vsftpd.conf
+ #
+ # The default compiled in settings are fairly paranoid. This sample file
+ # loosens things up a bit, to make the ftp daemon more usable.
+@@ -10,9 +10,16 @@
+ #
+ # Allow anonymous FTP? (Beware - allowed by default if you comment this out).
+ anonymous_enable=YES
++
++
++#
++# Run as a daemon. Do not depend on xinet.d
++background=YES
++
+ #
+ # Uncomment this to allow local users to log in.
+-#local_enable=YES
++local_enable=YES
++
+ #
+ # Uncomment this to enable any form of FTP write command.
+ #write_enable=YES
+@@ -62,7 +69,8 @@
+ #
+ # It is recommended that you define on your system a unique user which the
+ # ftp server can use as a totally isolated and unprivileged user.
+-#nopriv_user=ftpsecure
++nopriv_user=vsftpd
++
+ #
+ # Enable this and the server will recognise asynchronous ABOR requests. Not
+ # recommended for security (the code is non-trivial). Not enabling it,
+@@ -87,7 +95,7 @@
+ # useful for combatting certain DoS attacks.
+ #deny_email_enable=YES
+ # (default follows)
+-#banned_email_file=/etc/vsftpd.banned_emails
++#banned_email_file=/usr/services/vsftpd/etc/vsftpd.banned_emails
+ #
+ # You may specify an explicit list of local users to chroot() to their home
+ # directory. If chroot_local_user is YES, then this list becomes a list of
+@@ -98,8 +106,14 @@
+ #chroot_local_user=YES
+ #chroot_list_enable=YES
+ # (default follows)
+-#chroot_list_file=/etc/vsftpd.chroot_list
++#chroot_list_file=/usr/services/vsftpd/etc/vsftpd.chroot_list
++#
++#
++
+ #
++# Chroot area
++secure_chroot_dir=/usr/share/vsftpd/empty
++
+ # You may activate the "-R" option to the builtin ls. This is disabled by
+ # default to avoid remote users being able to cause excessive I/O on large
+ # sites. However, some broken FTP clients such as "ncftp" and "mirror" assume
+diff -Naur vsftpd-3.0.3.orig/vsftpd.conf.5 vsftpd-3.0.3/vsftpd.conf.5
+--- vsftpd-3.0.3.orig/vsftpd.conf.5	2009-10-19 02:46:30.000000000 +0000
++++ vsftpd-3.0.3/vsftpd.conf.5	2018-02-07 20:59:22.629000000 +0000
+@@ -4,7 +4,7 @@
+ .SH DESCRIPTION
+ vsftpd.conf may be used to control various aspects of vsftpd's behaviour. By
+ default, vsftpd looks for this file at the location
+-.BR /etc/vsftpd.conf .
++.BR /usr/services/vsftpd/etc/vsftpd.conf .
+ However, you may override this by specifying a command line argument to
+ vsftpd. The command line argument is the pathname of the configuration file
+ for vsftpd. This behaviour is useful because you may wish to use an advanced
+@@ -114,7 +114,7 @@
+ .TP
+ .B check_shell
+ Note! This option only has an effect for non-PAM builds of vsftpd. If disabled,
+-vsftpd will not check /etc/shells for a valid user shell for local logins.
++vsftpd will not check /usr/etc/shells for a valid user shell for local logins.
+ 
+ Default: YES
+ .TP
+@@ -138,7 +138,7 @@
+ different if chroot_local_user is set to YES. In this case, the list becomes
+ a list of users which are NOT to be placed in a chroot() jail.
+ By default, the file containing this list is
+-/etc/vsftpd.chroot_list, but you may override this with the
++/usr/services/vsftpd/etc/vsftpd.chroot_list, but you may override this with the
+ .BR chroot_list_file
+ setting.
+ 
+@@ -177,7 +177,7 @@
+ .B deny_email_enable
+ If activated, you may provide a list of anonymous password e-mail responses
+ which cause login to be denied. By default, the file containing this list is
+-/etc/vsftpd.banned_emails, but you may override this with the
++/usr/services/vsftpd/etc/vsftpd.banned_emails, but you may override this with the
+ .BR banned_email_file
+ setting.
+ 
+@@ -288,7 +288,7 @@
+ .TP
+ .B local_enable
+ Controls whether local logins are permitted or not. If enabled, normal
+-user accounts in /etc/passwd (or wherever your PAM config references) may be
++user accounts in /usr/etc/passwd (or wherever your PAM config references) may be
+ used to log in. This must be enable for any non-anonymous login to work,
+ including virtual users.
+ 
+@@ -348,7 +348,7 @@
+ If enabled, along with
+ .BR chroot_local_user
+ , then a chroot() jail location may be specified on a per-user basis. Each
+-user's jail is derived from their home directory string in /etc/passwd. The
++user's jail is derived from their home directory string in /usr/etc/passwd. The
+ occurrence of /./ in the home directory string denotes that the jail is at that
+ particular location in the path.
+ 
+@@ -433,7 +433,7 @@
+ file specified by the
+ .BR email_password_file
+ setting. The file format is one password per line, no extra whitespace. The
+-default filename is /etc/vsftpd.email_passwords.
++default filename is /usr/services/vsftpd/etc/vsftpd.email_passwords.
+ 
+ Default: NO
+ .TP
+@@ -543,7 +543,7 @@
+ tilde followed by a username. Note that vsftpd will always resolve the
+ pathnames ~ and ~/something (in this case the ~ resolves to the initial
+ login directory). Note that ~user paths will only resolve if the file
+-.BR /etc/passwd
++.BR /usr/etc/passwd
+ may be found within the _current_ chroot() jail.
+ 
+ Default: NO
+@@ -764,7 +764,7 @@
+ .BR deny_email_enable
+ is enabled.
+ 
+-Default: /etc/vsftpd.banned_emails
++Default: /usr/services/vsftpd/etc/vsftpd.banned_emails
+ .TP
+ .B banner_file
+ This option is the name of a file containing text to display when someone
+@@ -803,7 +803,7 @@
+ is enabled, then the list file becomes a list of users to NOT place in a
+ chroot() jail.
+ 
+-Default: /etc/vsftpd.chroot_list
++Default: /usr/services/vsftpd/etc/vsftpd.chroot_list
+ .TP
+ .B cmds_allowed
+ This options specifies a comma separated list of allowed FTP commands (post
+@@ -864,7 +864,7 @@
+ .BR secure_email_list_enable
+ setting.
+ 
+-Default: /etc/vsftpd.email_passwords
++Default: /usr/services/vsftpd/etc/vsftpd.email_passwords
+ .TP
+ .B ftp_username
+ This is the name of the user we use for handling anonymous FTP. The home
+@@ -987,10 +987,10 @@
+ with an example. If you set
+ .BR user_config_dir
+ to be
+-.BR /etc/vsftpd_user_conf
++.BR /usr/services/vsftpd/etc/vsftpd_user_conf
+ and then log on as the user "chris", then vsftpd will apply the settings in
+ the file
+-.BR /etc/vsftpd_user_conf/chris
++.BR /usr/services/vsftpd/etc/vsftpd_user_conf/chris
+ for the duration of the session. The format of this file is as detailed in
+ this manual page! PLEASE NOTE that not all settings are effective on a
+ per-user basis. For example, many settings only prior to the user's session
+@@ -1026,7 +1026,7 @@
+ .BR userlist_enable
+ option is active.
+ 
+-Default: /etc/vsftpd.user_list
++Default: /usr/services/vsftpd/etc/vsftpd.user_list
+ .TP
+ .B vsftpd_log_file
+ This option is the name of the file to which we write the vsftpd style

@@ -1,0 +1,17 @@
+sed -i '/exit 5/s/^/echo uncompress failed -- skipping #/' test/test || exit 1
+
+sed -i 's@"/bin/mailx"@"/usr/pkgs/mailx/bin/mailx"@' config.h || exit 1
+sed -i 's@"/bin/mail"@"/usr/pkgs/mailx/bin/mail"@' config.h || exit 1
+sed -i 's@"/bin/gzip"@"/usr/pkgs/gzip/bin/gzip"@' config.h  || exit 1
+sed -i 's@"/bin/gunzip"@"/usr/pkgs/gzip/bin/gunzip"@' config.h || exit 1
+
+sed -i 's@/bin/sh@/usr/pkgs/bash/bin/bash@' logrotate.c || exit 1
+
+
+export LDFLAGS="-L/usr/pkgs/popt/lib"
+export CFLAGS="-I/usr/pkgs/popt/include"
+
+
+
+./configure --prefix=$PREFIX 		\
+            --datarootdir=$DATAROOTDIR 	

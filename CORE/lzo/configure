@@ -1,0 +1,4 @@
+./configure --prefix=$PREFIX 		\
+            --datarootdir=$DATAROOTDIR 	\
+            --enable-shared  		\
+            --disable-static 

@@ -1,0 +1,5 @@
+make install
+ldconfig
+
+# The share folder is created empty, AFAIK it is simply useless
+rm -fr $PREFIX/share

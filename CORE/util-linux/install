@@ -1,0 +1,10 @@
+make install || exit 1
+
+
+cp -Rp $PREFIX/sbin/* $PREFIX/bin
+rm -fr $PREFIX/sbin
+
+
+rm -fr $PREFIX/share
+
+ln -svf $PREFIX/bin/agetty /usr/bin/agetty

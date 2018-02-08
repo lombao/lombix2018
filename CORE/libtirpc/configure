@@ -1,0 +1,8 @@
+sed '/stdlib.h/a#include <stdint.h>' -i src/xdr_sizeof.c  || exit 1
+sed '/key_secret_is/s/secret/secretkey/' -i src/libtirpc.map || exit 1
+
+./configure 	--prefix=$PREFIX		\
+		--disable-static		\
+		--disable-gssapi		\
+		--build=$LMBX_BUILD		\
+		--datarootdir=$DATAROOTDIR

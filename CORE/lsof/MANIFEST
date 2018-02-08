@@ -1,0 +1,24 @@
+##
+# URL: The place where the source code has been downloaded.
+# If you remove the package the installation tool will try to 
+# download it again from this place.
+URL=ftp://lsof.itap.purdue.edu/pub/tools/unix/lsof/lsof_4.89.tar.gz
+
+##
+# PREFIX: Where the package is going to be installed. 
+# If you are familiar with autotools you know what prefix usually means
+PREFIX=/usr/pkgs/lsof
+
+##
+# CREDITS: Files that specifically you want to be copied over from 
+# the source code into the credits area. The installer will automatically
+# try to copy a wide range of files but if you want any particular file to 
+# added , just write it here
+CREDITS="lsof_4.89_src/00CREDITS lsof_4.89_src/00.README.FIRST lsof_4.89_src/00FAQ"
+
+##
+# STRIP: Afer the installation the installer will try to execute a
+# strip --strip-unneeded over all the files from the PREFIX. This eliminates
+# debug symbols and reduce the size of binaries ( execs and libs ). 
+STRIP=yes
+

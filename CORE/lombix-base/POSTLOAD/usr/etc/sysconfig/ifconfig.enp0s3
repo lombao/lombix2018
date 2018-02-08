@@ -1,0 +1,5 @@
+ONBOOT=yes
+IFACE=enp0s3
+SERVICE="dhcpcd"
+DHCP_START=""
+DHCP_STOP="-k"

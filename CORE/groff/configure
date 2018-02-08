@@ -1,0 +1,8 @@
+PAGE=A4 ./configure 			\
+	--datarootdir=$DATAROOTDIR	\
+	--prefix=$PREFIX  		\
+	--with-doc=no 			\
+	--docdir=$DATAROOTDIR/doc	\
+	--mandir=$DATAROOTDIR/man	
+
+

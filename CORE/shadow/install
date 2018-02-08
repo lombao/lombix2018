@@ -1,0 +1,7 @@
+make install
+
+ln -svf $PREFIX/bin/passwd /usr/bin/passwd
+ln -svf $PREFIX/bin/login  /usr/bin/login
+
+mv $PREFIX/sbin/* $PREFIX/bin
+rm -fr $PREFIX/sbin

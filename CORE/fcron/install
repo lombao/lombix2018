@@ -1,0 +1,6 @@
+make install
+
+rm -fr $DATAROOTDIR/man/fr
+
+#
+ln -svf $PREFIX/bin/fcrontab $PREFIX/bin/crontab

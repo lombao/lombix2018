@@ -1,0 +1,5 @@
+./configure --prefix=$PREFIX 		\
+            --sysconfdir=$PREFIX/etc 	\
+            --datarootdir=$DATAROOTDIR 	\
+            --disable-static 		\
+            --disable-nls

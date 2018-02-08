@@ -1,0 +1,11 @@
+make install
+
+rm $DATAROOTDIR/man/man8/fsck.msdos.8
+rm $DATAROOTDIR/man/man8/fsck.vfat.8
+rm $DATAROOTDIR/man/man8/mkfs.msdos.8
+rm $DATAROOTDIR/man/man8/mkfs.vfat.8
+
+ln -svf fsck.fat.8.gz $DATAROOTDIR/man/man8/fsck.msdos.8.gz
+ln -svf fsck.fat.8.gz $DATAROOTDIR/man/man8/fsck.vfat.8.gz
+ln -svf mkfs.fat.8.gz $DATAROOTDIR/man/man8/mkfs.msdos.8.gz
+ln -svf mkfs.fat.8.gz $DATAROOTDIR/man/man8/mkfs.vfat.8.gz

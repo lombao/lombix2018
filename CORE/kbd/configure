@@ -1,0 +1,12 @@
+
+sed -i 's/\(RESIZECONS_PROGS=\)yes/\1no/g' configure
+sed -i 's/resizecons.8 //' docs/man/man8/Makefile.in
+
+./configure --prefix=$PREFIX 			\
+	    --build=$LMBX_BUILD			\
+            --bindir=$PREFIX/bin          	\
+            --sbindir=$PREFIX/bin         	\
+            --datarootdir=$DATAROOTDIR    	\
+            --sysconfdir=$PREFIX/etc      	\
+            --disable-nls                 	\
+            --disable-vlock

@@ -1,0 +1,5 @@
+#rm -fr $DATAROOTDIR/locale
+rm -fr $DATAROOTDIR/xml/iso-codes
+make install
+
+#rm -fr $DATAROOTDIR/locale

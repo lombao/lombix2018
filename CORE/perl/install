@@ -1,0 +1,4 @@
+make install
+
+
+ln -svf $PREFIX/bin/perl /usr/bin/perl

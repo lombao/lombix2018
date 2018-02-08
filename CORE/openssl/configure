@@ -1,0 +1,6 @@
+
+
+./config   --prefix=$PREFIX 		\
+           --openssldir=$PREFIX/etc 	\
+            shared zlib-dynamic  
+#make depend

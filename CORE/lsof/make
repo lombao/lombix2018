@@ -1,0 +1,3 @@
+cd lsof_4.89_src
+./Configure -n linux
+make CFGL="-L./lib -L/usr/pkgs/glibc/lib -L/usr/pkgs/libtirpc/lib -ltirpc"

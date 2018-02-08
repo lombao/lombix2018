@@ -1,0 +1,8 @@
+./configure --prefix=$PREFIX 		\
+	    --datarootdir=$DATAROOTDIR	\
+            --disable-nls    		\
+            --disable-static 		\
+            --docdir=$DATAROOTDIR/doc 	\
+	    --infodir=$DATAROOTDIR/info	\
+	    --mandir=$DATAROOTDIR/man	
+

@@ -1,0 +1,4 @@
+make install
+
+ln -svf $PREFIX/bin/gawk /usr/bin/awk
+ln -svf $PREFIX/bin/gawk /usr/bin/gawk

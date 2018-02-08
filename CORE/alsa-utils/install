@@ -1,0 +1,6 @@
+make install
+
+rm -fr $DATAROOTDIR/man/man1/arecord.1
+ln -svf aplay.1.gz $DATAROOTDIR/man/man1/arecord.1.gz
+
+ldconfig

@@ -1,0 +1,116 @@
+#!/usr/pkgs/bash/bin/bash
+########################################################################
+# Begin cleanfs
+#
+# Description : Clean file system
+#
+# Authors     : Gerard Beekmans - gerard@linuxfromscratch.org
+#               DJ Lucas - dj@linuxfromscratch.org
+# Update      : Bruce Dubbs - bdubbs@linuxfromscratch.org
+#
+# Version     : LFS 7.0
+#
+########################################################################
+
+### BEGIN INIT INFO
+# Provides:            cleanfs
+# Required-Start:      $local_fs
+# Should-Start:
+# Required-Stop:
+# Should-Stop:
+# Default-Start:       S
+# Default-Stop:
+# Short-Description:   Cleans temporary directories early in the boot process.
+# Description:         Cleans temporary directories /var/run, /var/lock, and
+#                      optionally, /tmp.  cleanfs also creates /var/run/utmp 
+#                      and any files defined in /etc/sysconfig/createfiles.
+# X-LFS-Provided-By:   LFS
+### END INIT INFO
+
+. /usr/pkgs/lombix-base/lib/services/init-functions
+
+# Function to create files/directory on boot.
+create_files() 
+{
+   # Input to file descriptor 9 and output to stdin (redirection)
+   exec 9>&0 < /usr/etc/sysconfig/createfiles
+
+   while read name type perm usr grp dtype maj min junk
+   do
+      # Ignore comments and blank lines.
+      case "${name}" in
+         ""|\#*) continue ;;
+      esac
+
+      # Ignore existing files.
+      if [ ! -e "${name}" ]; then
+         # Create stuff based on its type.
+         case "${type}" in
+            dir)
+               /usr/pkgs/coreutils/bin/mkdir "${name}"
+               ;;
+            file)
+               :> "${name}"
+               ;;
+            dev)
+               case "${dtype}" in
+                  char)
+                     /usr/pkgs/coreutils/bin/mknod "${name}" c ${maj} ${min}
+                     ;;
+                  block)
+                     /usr/pkgs/coreutils/bin/mknod "${name}" b ${maj} ${min}
+                     ;;
+                  pipe)
+                     /usr/pkgs/coreutils/bin/mknod "${name}" p
+                     ;;
+                  *) 
+                     log_warning_msg "\nUnknown device type: ${dtype}" 
+                     ;;
+               esac
+               ;;
+            *)
+               log_warning_msg "\nUnknown type: ${type}" 
+               continue
+               ;;
+         esac
+
+         # Set up the permissions, too.
+         /usr/pkgs/coreutils/bin/chown ${usr}:${grp} "${name}"
+         /usr/pkgs/coreutils/bin/chmod ${perm} "${name}"
+      fi
+   done
+
+   # Close file descriptor 9 (end redirection)
+   exec 0>&9 9>&-
+   return 0
+}
+
+case "${1}" in
+   start)
+      log_info_msg "Cleaning file systems:" 
+
+      > /var/run/utmp
+
+      if /usr/pkgs/grep/bin/grep -q '^utmp:' /usr/etc/group ; then
+         /usr/pkgs/coreutils/bin/chmod 664 /var/run/utmp
+         /usr/pkgs/coreutils/bin/chgrp utmp /var/run/utmp
+      fi
+
+      (exit ${failed})
+      evaluate_retval
+
+      if /usr/pkgs/grep/bin/egrep -qv '^(#|$)' /usr/etc/sysconfig/createfiles 2>/dev/null; then
+         log_info_msg "Creating files and directories... "
+         create_files      # Always returns 0
+         evaluate_retval
+      fi
+
+      exit $failed
+      ;;
+   *)
+      echo "Usage: ${0} {start}"
+      exit 1
+      ;;
+esac
+
+# End cleanfs

@@ -1,0 +1,45 @@
+#!/usr/pkgs/bash/bin/bash
+########################################################################
+# Begin firstboot
+#
+# Description : Trigger configuration wizard if detected the firstboot
+#
+# Authors     :
+#
+# Version     : Lombix 2018
+#
+########################################################################
+
+### BEGIN INIT INFO
+# Provides:            firstboot
+# Required-Start:      $local_fs
+# Should-Start:
+# Required-Stop:
+# Should-Stop:
+# Default-Start:       S
+# Default-Stop:
+# Short-Description:   Trigger configuration on detected the firstboot.
+# Description:         If detects /firstboot assumes it is the first time 
+#                      thye system is used and open an configuration tool
+# X-LFS-Provided-By:   LFS
+### END INIT INFO
+
+. /usr/pkgs/lombix-base/lib/services/init-functions
+
+case "${1}" in
+   start)
+      # Not only must exist the file firstboot, also must be own by root
+      if [ -r "/firstboot" ]; then
+      	if [ "$(/usr/pkgs/coreutils/bin/stat --format '%U' /firstboot)" == "root" ]; then
+      		/usr/pkgs/lombix-utils/bin/lmbx-firstboot	 
+      		/usr/pkgs/coreutils/bin/rm -fr /firstboot
+      	fi
+      fi
+      ;;
+   *)
+      echo "Usage: ${0} {start}"
+      exit 1
+      ;;
+esac
+
+# End firstboot

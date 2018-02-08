@@ -1,0 +1,28 @@
+
+mkdir build
+cd    build
+
+#rm -f /usr/pkgs/glibc/include/limits.h
+
+export GCC="gcc -isystem /usr/pkgs/gcc/lib/gcc/x86_64-lombix-linux-gnu/7.2.0/include -isystem /usr/pkgs/glibc/include"
+export CC=$GCC
+../configure                               \
+     --enable-kernel=3.2                   \
+     --enable-shared			   \
+     --disable-nls			   \
+     --build=$LMBX_BUILD                   \
+      --prefix=$PREFIX                     \
+      --datarootdir=$DATAROOTDIR	   \
+      --libexecdir=$PREFIX/lib		   \
+      --sysconfdir=$PREFIX/etc             \
+      --localstatedir=/var                 \
+      --sbindir=$PREFIX/bin                \
+      --libdir=$PREFIX/lib                 \
+      --includedir=$PREFIX/include         \
+      --infodir=$DATAROOTDIR/info	   \
+      --mandir=$DATAROOTDIR/man	 	   \
+      --without-selinux                    \
+      --enable-stack-protector=strong      \
+      --with-binutils=/usr/pkgs/binutils    \
+      libc_cv_slibdir=$PREFIX/lib   libc_cv_rootsbindir=$PREFIX/bin    
+   

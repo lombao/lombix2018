@@ -1,0 +1,4 @@
+sed 's@/bin/sh@/usr/pkgs/bash/bin/bash@' -i configure
+sed 's@/bin/sh@/usr/pkgs/bash/bin/bash@' -i Makefile.in
+
+./configure --prefix=$PREFIX 

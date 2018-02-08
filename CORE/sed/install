@@ -1,0 +1,5 @@
+make install
+
+rm -f /usr/bin/sed
+ln -svf $PREFIX/bin/sed /usr/bin/sed
+

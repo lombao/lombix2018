@@ -1,0 +1,13 @@
+
+export LDFLAGS="-L/usr/pkgs/openssl/lib -L/usr/pkgs/xz/lib -L/usr/pkgs/readline/lib -L/usr/pkgs/bzip2/lib -L/usr/pkgs/sqlite/lib -L/usr/pkgs/gdbm/lib -L/usr/pkgs/libffi/lib -L/usr/pkgs/zlib/lib -L/usr/pkgs/expat/lib -L/usr/pkgs/ncurses/lib"
+export CFLAGS="-I/usr/pkgs/openssl/include -I/usr/pkgs/xz/include -I/usr/pkgs/readline/include -I/usr/pkgs/bzip2/include -I/usr/pkgs/sqlite/include -I/usr/pkgs/gdbm/include -I/usr/pkgs/libffi/include -I/usr/pkgs/zlib/include -I/usr/pkgs/expat/include -I/usr/pkgs/ncurses/include"
+export CXXFLAGS=$CFLAGS
+export CPPFLAGS=$CFLAGS
+
+./configure --prefix=$PREFIX    	\
+            --datarootdir=$DATAROOTDIR 	\
+            --enable-shared     	\
+            --with-system-expat 	\
+            --with-system-ffi   	\
+            --with-ensurepip=yes
+
