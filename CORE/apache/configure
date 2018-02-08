@@ -5,12 +5,19 @@ export PYTHON=$PYTHON3
 ./configure --prefix=$PREFIX       				\
 	    --build=$LMBX_BUILD					\
 	    --datarootdir=$DATAROOTDIR				\
+	    --enable-modules=all				\
 	    --enable-authnz-fcgi				\
+	    --enable-authn-dbm					\
+	    --enable-lua					\
+	    --enable-ssl					\
 	    --enable-mods-shared="all cgi"			\
 	    --enable-mpms-shared=all				\
 	    --enable-suexec=shared				\
             --with-apr=/usr/pkgs/apr/bin/apr-1-config 		\
 	    --with-apr-util=/usr/pkgs/apr/bin/apu-1-config	\
+	    --with-z=/usr/pkgs/zlib				\
+	    --with-lua=/usr/pkgs/lua				\
+	    --with-ssl=/usr/pkgs/openssl			\
 	    --with-suexec-caller=apache				\
 	    --with-suexec-docroot=/var/www			\
 	    --with-suexec-logfile=/var/log/apache/suexec.log	\
