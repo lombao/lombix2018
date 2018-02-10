@@ -1,0 +1,12 @@
+export LDFLAGS="-L/usr/pkgs/python3/lib -L/usr/pkgs/icu/lib"
+export CFLAGS="-I/usr/pkgs/icu/include"
+
+./configure --prefix=$PREFIX 			\
+            --disable-static 			\
+            --datarootdir=$DATAROOTDIR 		\
+            --with-icu				\
+	    --with-readline=/usr/pkgs/readline 	\
+	    --with-threads			\
+	    --with-zlib=/usr/pkgs/zlib		\
+	    --with-lzma=/usr/pkgs/xz   		\
+            --with-history   

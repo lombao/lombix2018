@@ -1,0 +1,6 @@
+./configure --prefix=$PREFIX 				\
+	    --datarootdir=$DATAROOTDIR			\
+            --disable-nls    				\
+            --with-xsltproc=no 				\
+            --with-xkb-base=$DATAROOTDIR/X11/xkb	\
+            --with-xkb-rules-symlink=xorg

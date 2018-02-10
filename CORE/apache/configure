@@ -3,8 +3,10 @@ sed '/dir.*CFG_PREFIX/s@^@#@' -i support/apxs.in
 export PYTHON=$PYTHON3
 
 ./configure --prefix=$PREFIX       				\
+	    --enable-layout=Lombix				\
 	    --build=$LMBX_BUILD					\
 	    --datarootdir=$DATAROOTDIR				\
+	    --localstatedir=/var/www				\
 	    --enable-modules=all				\
 	    --enable-authnz-fcgi				\
 	    --enable-authn-dbm					\
@@ -16,6 +18,7 @@ export PYTHON=$PYTHON3
             --with-apr=/usr/pkgs/apr/bin/apr-1-config 		\
 	    --with-apr-util=/usr/pkgs/apr/bin/apu-1-config	\
 	    --with-z=/usr/pkgs/zlib				\
+	    --with-libxml2=/usr/pkgs/libxml2			\
 	    --with-lua=/usr/pkgs/lua				\
 	    --with-ssl=/usr/pkgs/openssl			\
 	    --with-suexec-caller=apache				\

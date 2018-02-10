@@ -1,0 +1,11 @@
+
+
+sed -i "s/pthread-stubs//" configure || exit 1
+
+
+./configure --prefix=$PREFIX 		\
+	    --datarootdir=$DATAROOTDIR	\
+	    --disable-static		\
+            --enable-xinput  		\
+            --without-doxygen 
+

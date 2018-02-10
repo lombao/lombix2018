@@ -1,0 +1,10 @@
+
+
+TERMINFO=/usr/share/terminfo 		\
+  ./configure --prefix=$PREFIX 		\
+	--datarootdir=$DATAROOTDIR	\
+	--with-pcre			\
+	--enable-256-color		\
+	--with-app-defaults=$PREFIX/etc/app-defaults
+
+

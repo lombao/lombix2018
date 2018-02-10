@@ -1,0 +1,2 @@
+./configure --prefix=$PREFIX \
+            --with-configdir=$DATAROOTDIR/fontconfig/conf.avail

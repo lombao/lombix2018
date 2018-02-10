@@ -1,0 +1,2 @@
+make install
+find $PREFIX/bin -type f -name startx -exec sed -i 's/util-1/util-linux/' {} \;

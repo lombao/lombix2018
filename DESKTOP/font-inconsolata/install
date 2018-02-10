@@ -1,0 +1,3 @@
+mkdir -pv $DATAROOTDIR/fonts/inconsolata
+cp *ttf   $DATAROOTDIR/fonts/inconsolata
+fc-cache

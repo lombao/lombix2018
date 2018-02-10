@@ -1,0 +1,16 @@
+./configure --prefix=$PREFIX --disable-nls 		\
+	    --datarootdir=$DATAROOTDIR			\
+            --localstatedir=/var   			\
+            --with-os-vendor=Lombix 			\
+            --with-os-name=Lombix   			\
+            --disable-static       			\
+	    --enable-libdrm				\
+            --enable-glamor 				\
+            --enable-install-setuid 			\
+	    --enable-Xnest				\
+            --enable-suid-wrapper   			\
+            --disable-systemd-logind 			\
+            --with-default-font-path=$FONTS_PATH 	\
+            --with-xkb-path=$DATAROOTDIR/X11/xkb 	\
+            --with-xkb-output=$DATAROOTDIR/xkb/compiled 
+

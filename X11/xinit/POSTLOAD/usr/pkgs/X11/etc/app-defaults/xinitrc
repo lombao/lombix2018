@@ -1,0 +1,25 @@
+#!/usr/pkgs/bash/bin/bash
+
+userresources=$HOME/.Xresources
+usermodmap=$HOME/.Xmodmap
+sysresources=/usr/pkgs/X11/etc/app-defaults/.Xresources
+sysmodmap=/usr/pkgs/X11/etc/app-defaults/.Xmodmap
+
+# merge in defaults and keymaps
+
+[ -f $sysresources ] 	&& 	xrdb -merge $sysresources
+[ -f $sysmodmap ] 		&&  xmodmap 	$sysmodmap
+[ -f $userresources ]	&&  xrdb -merge $userresources
+[ -f $usermodmap ]		&&	xmodmap 	$usermodmap
+
+# start some nice programs
+
+if [ -d /usr/pkgs/X11/etc/app-defaults/xinitrc.d ] ; then
+ for f in /usr/pkgs/X11/etc/app-defaults/xinitrc.d/?*.sh ; do
+  [ -x "$f" ] && . "$f"
+ done
+ unset f
+fi
+
+# Start FLUXBOX
+dbus-launch --exit-with-session /usr/pkgs/fluxbox/bin/startfluxbox

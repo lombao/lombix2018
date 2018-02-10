@@ -1,0 +1,14 @@
+make install
+
+chown -v root:messagebus $PREFIX/libexec/dbus*
+chmod -v 4750            $PREFIX/libexec/dbus-daemon-launch-helper
+
+$PREFIX/bin/dbus-uuidgen --ensure
+
+        ln -sf  ../init.d/dbus /usr/etc/rc.d/rc0.d/K30dbus
+        ln -sf  ../init.d/dbus /usr/etc/rc.d/rc1.d/K30dbus
+        ln -sf  ../init.d/dbus /usr/etc/rc.d/rc2.d/S29dbus
+        ln -sf  ../init.d/dbus /usr/etc/rc.d/rc3.d/S29dbus
+        ln -sf  ../init.d/dbus /usr/etc/rc.d/rc4.d/S29dbus
+        ln -sf  ../init.d/dbus /usr/etc/rc.d/rc5.d/S29dbus
+        ln -sf  ../init.d/dbus /usr/etc/rc.d/rc6.d/K30dbus

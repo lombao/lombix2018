@@ -1,0 +1,2 @@
+mkdir -pv $PREFIX/share/fonts/liberation
+cp -Rp *.ttf $PREFIX/share/fonts/liberation

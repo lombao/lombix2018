@@ -1,0 +1,5 @@
+./configure --prefix=$PREFIX 		\
+	    --datarootdir=$DATAROOTDIR	\
+            --disable-nls    		\
+            --with-bzip2     		\
+            --disable-devel-docs

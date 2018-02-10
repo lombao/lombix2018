@@ -1,0 +1,12 @@
+export PYTHON=$PYTHON3
+export LDFLAGS="-L/usr/pkgs/eudev/lib"
+export CFLAGS="-I/usr/pkgs/eudev/include"
+
+./configure --prefix=$PREFIX 			\
+	    --datarootdir=$DATAROOTDIR		\
+            --disable-static 			\
+            --disable-debug-gui 		\
+            --disable-tests   			\
+            --disable-documentation 		\
+            --disable-libwacom 			\
+            --with-udev-dir=/usr/pkgs/eudev/lib/udev 

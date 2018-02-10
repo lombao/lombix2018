@@ -1,0 +1,8 @@
+export LDFLAGS="-L/usr/pkg/eudev/lib"
+export CFLAGS="-I/usr/pkg/eudev/include"
+
+./configure --prefix=$PREFIX 					\
+	--datarootdir=$DATAROOTDIR				\
+	--with-xorg-conf-dir=$DATAROOTDIR/X11/xorg.conf.d	\
+	--disable-nls 						\
+	--disable-static

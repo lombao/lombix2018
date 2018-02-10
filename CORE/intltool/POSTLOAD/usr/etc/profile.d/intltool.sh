@@ -1,0 +1,2 @@
+pathappend	%PATH/bin	PATH
+

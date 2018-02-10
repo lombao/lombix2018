@@ -1,0 +1,6 @@
+export LDFLAGS="-L/usr/pkg/icu/lib"
+export CFLAGS="-I/usr/pkg/icu/include"
+
+./configure --prefix=$PREFIX 		\
+            --datarootdir=$DATAROOTDIR 	\
+            --disable-static

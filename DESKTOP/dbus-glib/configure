@@ -1,0 +1,8 @@
+
+export LDFLAGS="-L/usr/pkgs/expat/lib"
+export CFLAGS="-I/usr/pkgs/expat/include"
+
+./configure --prefix=$PREFIX 		\
+	    --datarootdir=$DATAROOTDIR 	\
+            --sysconfdir=$PREFIX/etc 	\
+            --disable-static         

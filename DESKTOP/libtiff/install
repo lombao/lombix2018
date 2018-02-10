@@ -1,0 +1,4 @@
+make install
+
+# we do not need this
+rm -fr $PREFIX/share

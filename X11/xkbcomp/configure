@@ -1,0 +1,4 @@
+./configure --prefix=$PREFIX 				\
+	    --datarootdir=$DATAROOTDIR			\
+            --with-xkb-config-root=$DATAROOTDIR/X11/xkb \
+            --disable-nls

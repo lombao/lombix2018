@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Xterm
+Name[en_US]=Xterm
+GenericName=Terminal
+GenericName[en_US]=Terminal
+Comment=X Terminal
+Exec=/usr/pkgs/X11/bin/xterm
+Terminal=false
+Type=Application
+Icon=xterm

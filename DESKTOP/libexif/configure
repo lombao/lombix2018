@@ -1,0 +1,6 @@
+./configure --prefix=$PREFIX 				\
+            --disable-static 				\
+            --datarootdir=$DATAROOTDIR 			\
+            --with-doc-dir=$DATAROOTDIR/doc/libexif
+
+

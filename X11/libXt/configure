@@ -1,0 +1,5 @@
+./configure --prefix=$PREFIX 				\
+	    --disable-static				\
+            --disable-nls    				\
+            --sysconfdir=$PREFIX/etc \
+            --with-appdefaultdir=$PREFIX/etc/app-defaults

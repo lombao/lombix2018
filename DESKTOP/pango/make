@@ -1,0 +1,2 @@
+#export LDFLAGS="-L/usr/pkg/cairo/lib"
+make

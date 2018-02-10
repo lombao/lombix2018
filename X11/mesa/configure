@@ -1,0 +1,12 @@
+sed -i "/pthread_stubs_possible=/s/yes/no/"  configure.ac || exit 1
+
+GLL_DRV="i915,r600,nouveau,svga,swrast"
+./autogen.sh CFLAGS="-O2" CXXFLAGS="-O2" 	\
+            --prefix=$PREFIX 			\
+            --sysconfdir=$PREFIX/etc 		\
+            --enable-texture-float   		\
+            --enable-osmesa          		\
+            --enable-glx-tls         		\
+            --with-egl-platforms="drm,x11" 	\
+            --with-gallium-drivers=$GLL_DRV
+

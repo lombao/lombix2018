@@ -1,0 +1,32 @@
+diff -Naur httpd-2.4.27.orig/config.layout httpd-2.4.27/config.layout
+--- httpd-2.4.27.orig/config.layout	2012-04-17 14:01:41.000000000 +0000
++++ httpd-2.4.27/config.layout	2018-02-10 11:35:08.583000000 +0000
+@@ -370,3 +370,28 @@
+     logfiledir:      ${localstatedir}/log/httpd
+     proxycachedir:   ${localstatedir}/cache/httpd
+ </Layout>
++
++# Lombix Layout
++<Layout Lombix>
++    prefix:          /usr/services/apache
++    exec_prefix:     ${prefix}
++    bindir:          ${prefix}/bin
++    sbindir:         ${prefix}/sbin
++    libdir:          ${prefix}/lib
++    libexecdir:      ${prefix}/lib/modules
++    installbuilddir: ${prefix}/lib/build
++    mandir:          /usr/share/man
++    sysconfdir:      ${prefix}/etc
++    datadir:         /var/www
++    iconsdir:        /usr/share/icons
++    htdocsdir:       ${datadir}/htdocs
++    manualdir:       ${htdocsdir}/manual
++    cgidir:          ${datadir}/cgi-bin
++    errordir:        ${datadir}/error
++    includedir:      ${prefix}/include/
++    localstatedir:   /var
++    runtimedir:      $/run/httpd
++    logfiledir:      ${localstatedir}/log/httpd
++    proxycachedir:   ${localstatedir}/cache/httpd
++</Layout>
++
