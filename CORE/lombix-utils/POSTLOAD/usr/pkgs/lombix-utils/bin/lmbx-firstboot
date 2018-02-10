@@ -1,13 +1,13 @@
 #!/usr/pkgs/bash/bin/bash
 
 
-PATH=$PATH:/usr/pkgs/dialog/bin:/usr/pkgs/coreutils/bin:/usr/pkgs/shadow/bin:/usr/pkgs/inetutils/bin:/usr/pkgs/diffutils/bin
+PATH=/usr/pkgs/dialog/bin:/usr/pkgs/coreutils/bin:/usr/pkgs/shadow/bin:/usr/pkgs/inetutils/bin:/usr/pkgs/diffutils/bin:/usr/pkgs/util-linux/bin:/usr/pkgs/gawk/bin:/usr/pkgs/sed/bin:/usr/pkgs/findutils/bin
 
 
 #
 # Whre to store answers
 TMPF=/tmp/firstboot.$$
-/usr/pkgs/coreutils/bin/mkdir -pv $TMPF
+mkdir -pv $TMPF
 
 TMP_HOSTNAME=$TMPF/tmphost
 TMP_ROOTPAS1=$TMPF/tmproot1
@@ -45,7 +45,7 @@ you set up here on a later stage.
 
 The most important thing is DO NOT FORGET the root password
 "
-/usr/pkgs/dialog/bin/dialog --title "Welcome to Lombix" --msgbox "$msg" 20 70
+dialog --title "Welcome to Lombix" --msgbox "$msg" 20 70
 
 
 
@@ -75,11 +75,11 @@ while [ $repeat ]; do
 	fi
 	if [ -z "$CHOICE" ]; then
 		repeat=1
-		/usr/pkgs/dialog/bin/dialog --title "Error" --msgbox "ERROR:: Hostname cannot be blank" 5 60 	
+		dialog --title "Error" --msgbox "ERROR:: Hostname cannot be blank" 5 60 	
 	else
 		if [[ ! "$CHOICE" =~ ^[[:alnum:]]+$ ]]; then
 			repeat=1
-			/usr/pkgs/dialog/bin/dialog --title "Error" --msgbox "ERROR:: Hostname can only be made of a-z and 0-9 chars" 5 70 	
+			dialog --title "Error" --msgbox "ERROR:: Hostname can only be made of a-z and 0-9 chars" 5 70 	
 		fi
 	fi
 		
@@ -88,7 +88,7 @@ done
 if [ ! -z "$CHOICE"  ]; then
 	echo "$CHOICE" > /usr/etc/sysconfig/hostname
 	/usr/pkgs/inetutils/bin/hostname "$CHOICE"
-	/usr/pkgs/dialog/bin/dialog --title "Hostname" --msgbox "SUCCESS:: Hostname has been set !!! " 5 60
+	dialog --title "Hostname" --msgbox "SUCCESS:: Hostname has been set !!! " 5 60
 fi
 
 ####
@@ -195,7 +195,7 @@ if [ $? == 0 ]; then
 	/usr/pkgs/kbd/bin/loadkeys $CHOICE
 	echo "UNICODE=\"1\"" > /usr/etc/sysconfig/console
 	echo "KEYMAP=$CHOICE" >> /usr/etc/sysconfig/console
-	/usr/pkgs/dialog/bin/dialog --title "Keyboard Layout" --msgbox "SUCCESS:: Keyboard layout has been set to $CHOICE !!! " 5 60
+	dialog --title "Keyboard Layout" --msgbox "SUCCESS:: Keyboard layout has been set to $CHOICE !!! " 5 60
 fi
 
 ##
@@ -204,8 +204,28 @@ fi
 
 msg="Job Done!!!
 Now you can start using Lombix. Enjoy!!!
+
+SOME DETAILS YOU SHOULD KNOW
+* You should expect failures/bugs/wrong things. This is an unfinished job.
+  I would appreciate if you let me know of these problems: 
+  http::/lombix.org
+  
+* The system is 'harcoded' to boot up with dhcpd , and it assume the 
+  ethernet device is called enp3s0. See /usr/etc/sysconfig
+  
+* The system will startup in text mode, if you want to start the X ,
+  use the command startx
+
+* Some packages when recompiled will overwrite all configuration files. 
+  This is a well known issue that must be corrected.
+  
+* The tool to recompile the packages you see in /usr/share/lmbx is 
+  lmbx , please lmbx --help for details or check the wiki 
+  at http://lombix.org
+    
 "
-/usr/pkgs/dialog/bin/dialog --title "Setup Complete" --msgbox "$msg" 8 60
+dialog --title "Setup Complete" --msgbox "$msg" 35 80
+/usr/pkgs/ncurses/bin/clear
 
 
 

@@ -1,0 +1,10 @@
+
+./configure --prefix=$PREFIX 		\
+            --datarootdir=$DATAROOTDIR 	\
+            --disable-nls     		\
+            --enable-html     		\
+            --enable-icon-browser 	\
+            --with-gtk=gtk3
+
+
+

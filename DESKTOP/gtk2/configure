@@ -1,0 +1,14 @@
+export LDFLAGS="-L/usr/pkgs/X11/lib -L/usr/pkgs/cups/lib"
+export CFLAGS="-I/usr/pkgs/X11/include -I/usr/pkgs/cups/include"
+export CXXFLAGS=$CFLAGS
+export PYTHON=$PYTHON2
+
+./configure --prefix=$PREFIX           		\
+	    --build=$LMBX_BUILD			\
+            --sysconfdir=$PREFIX/etc   		\
+	    --datarootdir=$DATAROOTDIR		\
+            --with-x                   		\
+            --enable-debug=no         		\
+            --enable-xkb              		\
+            --enable-xinerama         		\
+            --disable-gtk-doc         

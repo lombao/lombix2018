@@ -1,0 +1,17 @@
+sed -i '/gegl/s/2/3/' configure || exit 1
+sed -i '70,75 d' app/core/gimpparamspecs-duplicate.c || exit 1
+
+export LDFLAGS="-L/usr/pkgs/libtiff/lib -L/usr/pkgs/libjpeg/lib  -L/usr/pkgs/libmng/lib -L/usr/pkgs/lcms2/lib"
+export CFLAGS="-I/usr/pkgs/libtiff/include -I/usr/pkgs/libjpeg/include  -I/usr/pkgs/libmng/include -I/usr/pkgs/lcms2/include"
+export CPPFLAGS=$CFLAGS
+
+./configure --prefix=$PREFIX 					\
+            --datarootdir=$DATAROOTDIR 				\
+            --sysconfdir=$PREFIX/etc    			\
+            --without-gvfs   					\
+	    --disable-glibtest					\
+	    --disable-gtktest					\
+	    --with-alsa-prefix=/usr/pkgs/alsa/lib 		\
+            --with-alsa-inc-prefix=/usr/pkg/alsa/include 	\
+	    --with-desktop-dir=$DATAROOTDIR      		\
+            --disable-nls

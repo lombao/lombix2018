@@ -1,0 +1,4 @@
+make install
+
+chmod -v 755 $PREFIX/lib/libpython*
+ldconfig

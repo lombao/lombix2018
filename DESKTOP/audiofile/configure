@@ -1,0 +1,9 @@
+
+
+CXXFLAGS="-I/usr/pkgs/flac/include -I/usr/pkgs/alsa/include -std=c++98" \
+./configure --prefix=$PREFIX 		\
+            --disable-static 		\
+            --disable-docs    		\
+            --disable-examples 		\
+            --datarootdir=$DATAROOTDIR
+

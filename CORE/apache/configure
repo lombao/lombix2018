@@ -5,8 +5,6 @@ export PYTHON=$PYTHON3
 ./configure --prefix=$PREFIX       				\
 	    --enable-layout=Lombix				\
 	    --build=$LMBX_BUILD					\
-	    --datarootdir=$DATAROOTDIR				\
-	    --localstatedir=/var/www				\
 	    --enable-modules=all				\
 	    --enable-authnz-fcgi				\
 	    --enable-authn-dbm					\

@@ -1,0 +1,7 @@
+mkdir bld &&
+cd    bld &&
+
+cmake -DCMAKE_INSTALL_PREFIX=$PREFIX 	\
+      -DENABLE_STATIC=OFF         	\
+      ../source                   || exit 1
+

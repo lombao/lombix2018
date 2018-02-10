@@ -1,0 +1,16 @@
+make install
+gtk-update-icon-cache
+update-desktop-database
+
+#rm -fr $PREFIX/share
+
+rm $DATAROOTDIR/man/man1/gimp-console-2.8.1
+rm $DATAROOTDIR/man/man1/gimp-console.1
+rm $DATAROOTDIR/man/man1/gimp.1
+rm $DATAROOTDIR/man/man5/gimprc.5
+
+ln -fsv gimp-2.8.1.gz $DATAROOTDIR/man/man1/gimp.1.gz
+ln -fsv gimp-2.8.1.gz $DATAROOTDIR/man/man1/gimp-console.1.gz
+ln -fsv gimp-2.8.1.gz $DATAROOTDIR/man/man1/gimp-console-2.8.1.gz
+ln -fsv gimprc-2.8.5.gz $DATAROOTDIR/man/man5/gimprc.5.gz
+

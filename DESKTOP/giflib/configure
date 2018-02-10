@@ -1,0 +1,11 @@
+
+
+sed -r  -i 's/\[xmlto\], \["yes"\],\["no"\]\)/\[xmlto\], \["no"\],\["no"\]\)/'  configure.ac || exit 1
+
+autoconf -fi
+./configure --prefix=$PREFIX 		\
+	    --build=$LOMBX_BUILD	\
+	    --datarootdir=$DATAROOTDIR	\
+            --disable-static 
+
+

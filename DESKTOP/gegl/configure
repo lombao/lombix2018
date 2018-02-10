@@ -1,0 +1,11 @@
+export LDFLAGS="-L/usr/pkgs/librsvg/lib -L/usr/pkgs/libjpeg/lib -L/usr/pkgs/libraw/lib -L/usr/pkgs/jasper/lib"
+export CFLAGS="-I/usr/pkgs/librsvg/include -I/usr/pkgs/libjpeg/include -I/usr/pkgs/libraw/include -I/usr/pkgs/jasper/include"
+export CXXFLAGS=$CFLAGS
+export CPPFLAGS=$CFLAGS
+
+./configure 	--prefix=$PREFIX 		\
+		--without-vala			\
+		--disable-nls			\
+		--disable-docs			\
+	        --datadir=$DATAROOTDIR		\
+		--datarootdir=$DATAROOTDIR

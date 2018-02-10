@@ -1,0 +1,5 @@
+cd build/generic
+sed -i '/libdir.*STATIC_LIB/ s/^/#/' Makefile || exit 1
+make install
+
+chmod -v 755 $PREFIX/lib/l* 

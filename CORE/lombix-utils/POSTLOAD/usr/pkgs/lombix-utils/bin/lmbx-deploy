@@ -17,6 +17,8 @@ rm -fr /root/.bash_history
 rm -fr /root/.joe_state
 rm -fr /root/.viminfo
 rm -fr /root/.wget-hsts
+rm -fr /root/.Xauth*
+rm -fr /root/.config
 
 rm -fr /var/log/*
 rm -fr /var/mail/*

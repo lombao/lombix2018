@@ -30,21 +30,21 @@ export CFLAGS="-I/usr/pkgs/zlib/include -I/usr/pkgs/isl/include -I/usr/pkgs/libf
 export CXXFLAGS=$CFLAGS
 export CPPFLAGS=$CFLAGS
 
-../configure --prefix=$PREFIX         				\
-             --build=$LMBX_BUILD      				\
-	     --datadir=$DATAROOTDIR				\
-	     --infodir=$DATAROOTDIR/info 			\
-	     --docdir=$DATAROOTDIR/doc				\
-             --enable-shared					\
-             --disable-bootstrap      				\
-	     --enable-host-shared				\
-	     --with-system-zlib					\
-	     --with-native-system-header=/usr/pkgs/glibc/include \
-             --enable-languages=c,c++		 		\
-             --with-mpc=/usr/pkgs/mpc  				\
+../configure --prefix=$PREFIX         					\
+             --build=$LMBX_BUILD      					\
+	     --datadir=$DATAROOTDIR					\
+	     --infodir=$DATAROOTDIR/info 				\
+	     --docdir=$DATAROOTDIR/doc					\
+             --enable-shared						\
+             --disable-bootstrap      					\
+	     --enable-host-shared					\
+	     --with-system-zlib						\
+	     --with-native-system-header=/usr/pkgs/glibc/include 	\
+             --enable-languages=c,c++,fortran	 			\
+             --with-mpc=/usr/pkgs/mpc  					\
              --with-mpfr=/usr/pkgs/mpfr 				\
-             --with-isl=/usr/pkgs/isl				\
+             --with-isl=/usr/pkgs/isl					\
              --with-gmp=/usr/pkgs/gmp   				\
-             --disable-multilib       				\
+             --disable-multilib       					\
              --disable-nls            
 

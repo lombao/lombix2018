@@ -1,0 +1,3 @@
+cd bld
+make install
+rm $PREFIX/lib/libx265.a

@@ -1,0 +1,4 @@
+./configure --prefix=$PREFIX \
+            --enable-shared  \
+            --disable-cli
+

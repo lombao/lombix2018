@@ -25,7 +25,7 @@ diff -Naur httpd-2.4.27.orig/config.layout httpd-2.4.27/config.layout
 +    errordir:        ${datadir}/error
 +    includedir:      ${prefix}/include/
 +    localstatedir:   /var
-+    runtimedir:      $/run/httpd
++    runtimedir:      /run/httpd
 +    logfiledir:      ${localstatedir}/log/httpd
 +    proxycachedir:   ${localstatedir}/cache/httpd
 +</Layout>

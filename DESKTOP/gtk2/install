@@ -1,0 +1,4 @@
+make install
+
+#rm -fr $PREFIX/share
+#ln -fsv $DATAROOTDIR $PREFIX/share
