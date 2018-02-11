@@ -1,0 +1,3 @@
+./configure --prefix=$PREFIX 				\
+            --datarootdir=$DATAROOTDIR 			\
+            --with-package-name="Gstreamer 1.12.2 LOMBIX" 

@@ -1,0 +1,20 @@
+
+export LDFLAGS="-L/usr/pkgs/libvpx/lib -L/usr/pkgs/opus/lib -L/usr/pkgs/X11/lib -L/usr/pkgs/alsa/lib -L/usr/pkgs/giflib/lib -L/usr/pkgs/libpng/lib -L/usr/pkgs/faad2/lib -L/usr/pkgs/x264/lib -L/usr/pkgs/xvid/lib -L/usr/pkgs/liba52/lib -L/usr/pkgs/mpg123/lib -L/usr/pkgs/libtheora/lib -L/usr/pkgs/libogg/lib -L/usr/pkgs/zlib/lib -L/usr/pkgs/libjpeg/lib  -L/usr/pkgs/libmng/lib -L/usr/pkgs/faac/lib -L/usr/pkgs/lame/lib"
+export CFLAGS="-I/usr/pkgs/libvpx/include -I/usr/pkgs/opus/include -I/usr/pkgs/X11/include -I/usr/pkgs/alsa/include -I/usr/pkgs/giflib/include -I/usr/pkgs/libpng/include -I/usr/pkgs/faad2/include -I/usr/pkgs/x264/include -I/usr/pkgs/xvid/include -I/usr/pkgs/liba52/include -I/usr/pkgs/mpg123/include -I/usr/pkgs/libtheora/include -I/usr/pkgs/libogg/include -I/usr/pkgs/zlib/include  -I/usr/pkgs/libjpeg/include  -I/usr/pkgs/libmng/include -I/usr/pkgs/faac/include -I/usr/pkgs/lame/include"
+export CPPFLAGS=$CFLAGS
+
+sed -i "s@/.mplayer@/.config/mplayer@" path.c || exit 1
+
+./configure --prefix=$PREFIX 			\
+	    --datadir=$DATAROOTDIR/mplayer	\
+            --mandir=$DATAROOTDIR/man 		\
+ 	    --enable-dynamic-plugins 		\
+            --enable-menu            		\
+	    --enable-png			\
+	    --enable-mng			\
+	    --enable-theora			\
+ 	    --enable-faad			\
+            --enable-gui             		\
+            --extra-cflags="$CFLAGS"		\
+	    --extra-ldflags="$LDFLAGS"  	\
+            --extra-libs="-lmng"

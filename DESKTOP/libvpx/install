@@ -1,0 +1,3 @@
+cd libvpx-build
+make install
+ldconfig

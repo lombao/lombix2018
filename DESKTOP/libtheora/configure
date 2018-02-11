@@ -1,0 +1,15 @@
+sed -i 's/png_\(sizeof\)/\1/g' examples/png2theora.c
+
+export LDFLAGS="-L/usr/pkgs/libogg/lib -logg"
+./configure --prefix=$PREFIX 			\
+	    --build=$LMBX_BUILD			\
+            --with-ogg=/usr/pkgs/libogg 	\
+            --with-vorbis=/usr/pkgs/libvorbis 	\
+            --with-sdl-prefix=/usr/pkgs/sdl 	\
+            --disable-static 			\
+            --disable-sdltest 			\
+	    --disable-vorbistest 		\
+	    --disable-oggtest  			\
+            --disable-examples 			\
+            --datarootdir=$DATAROOTDIR
+

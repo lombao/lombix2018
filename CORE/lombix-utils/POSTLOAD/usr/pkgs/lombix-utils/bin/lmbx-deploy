@@ -19,14 +19,21 @@ rm -fr /root/.viminfo
 rm -fr /root/.wget-hsts
 rm -fr /root/.Xauth*
 rm -fr /root/.config
+rm -fr /root/.dbus
+rm -fr /root/.cache
+rm -fr /root/.gimp*
+
 
 rm -fr /var/log/*
 rm -fr /var/mail/*
 
+rm -fr /var/cache/fontconfig/*
+
 find /usr -type f -name "*~" -exec rm {} \;
 find /var -type f -name "*~" -exec rm {} \;
 find /usr -type f -name "*.la" -exec rm {} \;
+find /usr -type f -name "DEADJOE" -exec rm {} \;
+
 
 rm -fr /var/cache/lmbx/*
-
 rm -fr /var/spool/fcron/*

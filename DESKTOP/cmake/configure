@@ -1,0 +1,6 @@
+sed -i '/CMAKE_USE_LIBUV 1/s/1/0/' CMakeLists.txt     || exit 1
+sed -i '/"lib64"/s/64//' Modules/GNUInstallDirs.cmake || exit 1
+
+./bootstrap --prefix=$PREFIX    	\
+            --verbose			\
+	    --parallel=2		             

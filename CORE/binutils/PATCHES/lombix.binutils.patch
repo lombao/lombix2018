@@ -1,0 +1,27 @@
+diff -Naur binutils-2.29.orig/ld/configure.tgt binutils-2.29/ld/configure.tgt
+--- binutils-2.29.orig/ld/configure.tgt	2017-07-04 08:43:21.000000000 +0000
++++ binutils-2.29/ld/configure.tgt	2018-02-11 13:38:18.769000000 +0000
+@@ -883,7 +883,7 @@
+ 
+ esac
+ 
+-NATIVE_LIB_DIRS='/usr/local/lib /lib /usr/lib'
++NATIVE_LIB_DIRS='/usr/pgks/glibc/lib /usr/pkgs/binutils/lib /usr/pkgs/util-linux/lib'
+ case "${target}" in
+ 
+ *-*-dragonfly*)
+diff -Naur binutils-2.29.orig/ld/ld.1 binutils-2.29/ld/ld.1
+--- binutils-2.29.orig/ld/ld.1	2017-07-24 10:00:23.000000000 +0000
++++ binutils-2.29/ld/ld.1	2018-02-11 13:40:11.361000000 +0000
+@@ -1775,9 +1775,9 @@
+ libraries needed by it. The \f(CW\*(C`DT_RPATH\*(C'\fR entries are ignored if
+ \&\f(CW\*(C`DT_RUNPATH\*(C'\fR entries exist.
+ .IP "7." 4
+-The default directories, normally \fI/lib\fR and \fI/usr/lib\fR.
++The default directories, normally \fI/usr/pkgs/glibc/lib\fR and \fI/usr/pgks/binutils/lib\fR.
+ .IP "8." 4
+-For a native linker on an \s-1ELF\s0 system, if the file \fI/etc/ld.so.conf\fR
++For a native linker on an \s-1ELF\s0 system, if the file \fI/usr/etc/ld.so.conf\fR
+ exists, the list of directories found in that file.
+ .RE
+ .RS 4

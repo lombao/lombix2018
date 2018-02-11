@@ -1,0 +1,7 @@
+export LDFLAGS="-L/usr/pkgs/alsa/lib -L/usr/pkgs/flac/lib -L/usr/pkgs/libogg/lib -L/usr/pkgs/libvorbis/lib -L/usr/pkgs/sqlite/lib"
+export CFLAGS="-I/usr/pkgs/alsa/include -I/usr/pkgs/flac/include -I/usr/pkgs/libogg/include -I/usr/pkgs/libvorbis/include -I/usr/pkgs/sqlite/include"
+
+./configure --prefix=$PREFIX 		\
+	    --build=$LMBX_BUILD		\
+            --datarootdir=$DATAROOTDIR 	\
+            --disable-static 

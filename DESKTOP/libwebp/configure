@@ -1,0 +1,11 @@
+export LDFLAGS="-L/usr/pkgs/libtiff/lib -L/usr/pkgs/libjpeg/lib -L/usr/pkgs/giflib/lib"
+export CFLAGS="-I/usr/pkgs/libtiff/include -I/usr/pkgs/libjpeg/include -I/usr/pkgs/giflib/include"
+
+./configure --prefix=$PREFIX        	\
+	    --build=$LMBX_BUILD		\
+            --enable-libwebpmux     	\
+            --enable-libwebpdemux   	\
+            --enable-libwebpdecoder 	\
+            --enable-libwebpextras  	\
+            --enable-swap-16bit-csp 	\
+            --disable-static        

@@ -1,0 +1,858 @@
+diff -Naur libtool-2.4.6.orig/ChangeLog libtool-2.4.6/ChangeLog
+--- libtool-2.4.6.orig/ChangeLog	2015-02-15 17:15:37.000000000 +0000
++++ libtool-2.4.6/ChangeLog	2018-02-11 17:08:52.978000000 +0000
+@@ -182,7 +182,7 @@
+ 	Some GNU/Linux distributions install libraries into /lib64 (or
+ 	/usr/lib64) on 64-bit machines, while /lib (/usr/lib
+ 	respectively) stays for multilib variant.  Other distributions
+-	keep /usr/lib for 64-bit variant and reserve other directory for
++	keep /usr/pkgs/glibc/lib for 64-bit variant and reserve other directory for
+ 	multilib. Detection of what approach a given system uses is
+ 	difficult, however, especially because Glibc's ldconfig does not
+ 	report the full and correct list of search paths. Allow the user
+@@ -23869,7 +23869,7 @@
+ 	* doc/libtool.texi(Link mode): document -no-install flag,
+ 	  correct -no-fast-install docs
+ 	* libtool.m4: check for "file" command
+-	* ltconfig.in: don't hardcode /usr/bin/file, remove second
++	* ltconfig.in: don't hardcode /usr/pkgs/file/bin/file, remove second
+ 	  definition of sysv5, replace linkopts -> linker_flags
+ 	* ltmain.in: add new -no-install flag, print help for -no-install
+ 	  and -no-fast-install flags
+@@ -24776,8 +24776,8 @@
+ 	Reported by David Kaelbling <drk@sgi.com>
+ 
+ 	* ltconfig.in (irix*, sys_lib_dlsearch_path_spec): /usr/local/lib
+-	is not searched by default.  /usr/lib is searched before /lib.
+-	* ltconfig.in (irix*, sys_lib_search_path_spec): /usr/lib is
++	is not searched by default.  /usr/pkgs/glibc/lib is searched before /lib.
++	* ltconfig.in (irix*, sys_lib_search_path_spec): /usr/pkgs/glibc/lib is
+ 	searched before /lib.
+ 
+ 	* ltconfig.in (irix5*, need_lib_prefix, need_version): Set to no,
+diff -Naur libtool-2.4.6.orig/build-aux/ltmain.in libtool-2.4.6/build-aux/ltmain.in
+--- libtool-2.4.6.orig/build-aux/ltmain.in	2015-02-06 12:57:56.000000000 +0000
++++ libtool-2.4.6/build-aux/ltmain.in	2018-02-11 17:08:51.827000000 +0000
+@@ -6342,7 +6342,7 @@
+ 		  *-*-darwin* )
+ 		    # if the lib is a (non-dlopened) module then we cannot
+ 		    # link against it, someone is ignoring the earlier warnings
+-		    if /usr/bin/file -L $add 2> /dev/null |
++		    if /usr/pkgs/file/bin/file -L $add 2> /dev/null |
+ 			 $GREP ": [^:]* bundle" >/dev/null; then
+ 		      if test "X$dlopenmodule" != "X$lib"; then
+ 			$ECHO "*** Warning: lib $linklib is a module, not a shared library"
+diff -Naur libtool-2.4.6.orig/build-aux/ltmain.sh libtool-2.4.6/build-aux/ltmain.sh
+--- libtool-2.4.6.orig/build-aux/ltmain.sh	2015-02-15 16:15:12.000000000 +0000
++++ libtool-2.4.6/build-aux/ltmain.sh	2018-02-11 17:08:52.093000000 +0000
+@@ -8254,7 +8254,7 @@
+ 		  *-*-darwin* )
+ 		    # if the lib is a (non-dlopened) module then we cannot
+ 		    # link against it, someone is ignoring the earlier warnings
+-		    if /usr/bin/file -L $add 2> /dev/null |
++		    if /usr/pkgs/file/bin/file -L $add 2> /dev/null |
+ 			 $GREP ": [^:]* bundle" >/dev/null; then
+ 		      if test "X$dlopenmodule" != "X$lib"; then
+ 			$ECHO "*** Warning: lib $linklib is a module, not a shared library"
+diff -Naur libtool-2.4.6.orig/configure libtool-2.4.6/configure
+--- libtool-2.4.6.orig/configure	2015-02-15 16:14:34.000000000 +0000
++++ libtool-2.4.6/configure	2018-02-11 17:08:52.481000000 +0000
+@@ -6277,7 +6277,7 @@
+ 
+ bsdi[45]*)
+   lt_cv_deplibs_check_method='file_magic ELF [0-9][0-9]*-bit [ML]SB (shared object|dynamic lib)'
+-  lt_cv_file_magic_cmd='/usr/bin/file -L'
++  lt_cv_file_magic_cmd='/usr/pkgs/file/bin/file -L'
+   lt_cv_file_magic_test_file=/shlib/libc.so
+   ;;
+ 
+@@ -6318,7 +6318,7 @@
+       # Not sure whether the presence of OpenBSD here was a mistake.
+       # Let's accept both of them until this is cleared up.
+       lt_cv_deplibs_check_method='file_magic (FreeBSD|OpenBSD|DragonFly)/i[3-9]86 (compact )?demand paged shared library'
+-      lt_cv_file_magic_cmd=/usr/bin/file
++      lt_cv_file_magic_cmd=/usr/pkgs/file/bin/file
+       lt_cv_file_magic_test_file=`echo /usr/lib/libc.so.*`
+       ;;
+     esac
+@@ -6332,7 +6332,7 @@
+   ;;
+ 
+ hpux10.20* | hpux11*)
+-  lt_cv_file_magic_cmd=/usr/bin/file
++  lt_cv_file_magic_cmd=/usr/pkgs/file/bin/file
+   case $host_cpu in
+   ia64*)
+     lt_cv_deplibs_check_method='file_magic (s[0-9][0-9][0-9]|ELF-[0-9][0-9]) shared object file - IA64'
+@@ -6379,7 +6379,7 @@
+ 
+ newos6*)
+   lt_cv_deplibs_check_method='file_magic ELF [0-9][0-9]*-bit [ML]SB (executable|dynamic lib)'
+-  lt_cv_file_magic_cmd=/usr/bin/file
++  lt_cv_file_magic_cmd=/usr/pkgs/file/bin/file
+   lt_cv_file_magic_test_file=/usr/lib/libnls.so
+   ;;
+ 
+@@ -7522,7 +7522,7 @@
+   ac_status=$?
+   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+   test $ac_status = 0; }; then
+-    case `/usr/bin/file conftest.$ac_objext` in
++    case `/usr/pkgs/file/bin/file conftest.$ac_objext` in
+       *ELF-32*)
+ 	HPUX_IA64_MODE=32
+ 	;;
+@@ -7543,7 +7543,7 @@
+   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+   test $ac_status = 0; }; then
+     if test yes = "$lt_cv_prog_gnu_ld"; then
+-      case `/usr/bin/file conftest.$ac_objext` in
++      case `/usr/pkgs/file/bin/file conftest.$ac_objext` in
+ 	*32-bit*)
+ 	  LD="${LD-ld} -melf32bsmip"
+ 	  ;;
+@@ -7555,7 +7555,7 @@
+ 	;;
+       esac
+     else
+-      case `/usr/bin/file conftest.$ac_objext` in
++      case `/usr/pkgs/file/bin/file conftest.$ac_objext` in
+ 	*32-bit*)
+ 	  LD="${LD-ld} -32"
+ 	  ;;
+@@ -7581,7 +7581,7 @@
+   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+   test $ac_status = 0; }; then
+     emul=elf
+-    case `/usr/bin/file conftest.$ac_objext` in
++    case `/usr/pkgs/file/bin/file conftest.$ac_objext` in
+       *32-bit*)
+ 	emul="${emul}32"
+ 	;;
+@@ -7589,7 +7589,7 @@
+ 	emul="${emul}64"
+ 	;;
+     esac
+-    case `/usr/bin/file conftest.$ac_objext` in
++    case `/usr/pkgs/file/bin/file conftest.$ac_objext` in
+       *MSB*)
+ 	emul="${emul}btsmip"
+ 	;;
+@@ -7597,7 +7597,7 @@
+ 	emul="${emul}ltsmip"
+ 	;;
+     esac
+-    case `/usr/bin/file conftest.$ac_objext` in
++    case `/usr/pkgs/file/bin/file conftest.$ac_objext` in
+       *N32*)
+ 	emul="${emul}n32"
+ 	;;
+@@ -7621,14 +7621,14 @@
+   ac_status=$?
+   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+   test $ac_status = 0; }; then
+-    case `/usr/bin/file conftest.o` in
++    case `/usr/pkgs/file/bin/file conftest.o` in
+       *32-bit*)
+ 	case $host in
+ 	  x86_64-*kfreebsd*-gnu)
+ 	    LD="${LD-ld} -m elf_i386_fbsd"
+ 	    ;;
+ 	  x86_64-*linux*)
+-	    case `/usr/bin/file conftest.o` in
++	    case `/usr/pkgs/file/bin/file conftest.o` in
+ 	      *x86-64*)
+ 		LD="${LD-ld} -m elf32_x86_64"
+ 		;;
+@@ -7734,7 +7734,7 @@
+   ac_status=$?
+   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+   test $ac_status = 0; }; then
+-    case `/usr/bin/file conftest.o` in
++    case `/usr/pkgs/file/bin/file conftest.o` in
+     *64-bit*)
+       case $lt_cv_prog_gnu_ld in
+       yes*)
+@@ -11729,7 +11729,7 @@
+   esac
+   sys_lib_search_path_spec=`$ECHO "$lt_search_path_spec" | $lt_NL2SP`
+ else
+-  sys_lib_search_path_spec="/lib /usr/lib /usr/local/lib"
++  sys_lib_search_path_spec="/lib /usr/pkgs/glibc/lib /usr/local/lib"
+ fi
+ library_names_spec=
+ libname_spec='lib$name'
+@@ -11885,8 +11885,8 @@
+   soname_spec='$libname$release$shared_ext$major'
+   finish_cmds='PATH="\$PATH:/sbin" ldconfig $libdir'
+   shlibpath_var=LD_LIBRARY_PATH
+-  sys_lib_search_path_spec="/shlib /usr/lib /usr/X11/lib /usr/contrib/lib /lib /usr/local/lib"
+-  sys_lib_dlsearch_path_spec="/shlib /usr/lib /usr/local/lib"
++  sys_lib_search_path_spec="/shlib /usr/pkgs/glibc/lib /usr/X11/lib /usr/contrib/lib /lib /usr/local/lib"
++  sys_lib_dlsearch_path_spec="/shlib /usr/pkgs/glibc/lib /usr/local/lib"
+   # the default ld.so.conf also contains /usr/contrib/lib and
+   # /usr/X11R6/lib (/usr/X11 is a link to /usr/X11R6), but let us allow
+   # libtool to hard-code these into programs
+@@ -12265,7 +12265,7 @@
+   # appending ld.so.conf contents (and includes) to the search path.
+   if test -f /etc/ld.so.conf; then
+     lt_ld_extra=`awk '/^include / { system(sprintf("cd /etc; cat %s 2>/dev/null", \$2)); skip = 1; } { if (!skip) print \$0; skip = 0; }' < /etc/ld.so.conf | $SED -e 's/#.*//;/^[	 ]*hwcap[	 ]/d;s/[:,	]/ /g;s/=[^=]*$//;s/=[^= ]* / /g;s/"//g;/^$/d' | tr '\n' ' '`
+-    sys_lib_dlsearch_path_spec="/lib /usr/lib $lt_ld_extra"
++    sys_lib_dlsearch_path_spec="/lib /usr/pkgs/glibc/lib $lt_ld_extra"
+   fi
+ 
+   # We used to test for /lib/ld.so.1 and disable shared libraries on
+@@ -12343,7 +12343,7 @@
+   library_names_spec='${libname}_dll.$libext'
+   dynamic_linker='OS/2 ld.exe'
+   shlibpath_var=BEGINLIBPATH
+-  sys_lib_search_path_spec="/lib /usr/lib /usr/local/lib"
++  sys_lib_search_path_spec="/lib /usr/pkgs/glibc/lib /usr/local/lib"
+   sys_lib_dlsearch_path_spec=$sys_lib_search_path_spec
+   postinstall_cmds='base_file=`basename \$file`~
+     dlpath=`$SHELL 2>&1 -c '\''. $dir/'\''\$base_file'\''i; $ECHO \$dlname'\''`~
+@@ -12366,7 +12366,7 @@
+   soname_spec='$libname$release$shared_ext$major'
+   library_names_spec='$libname$release$shared_ext$versuffix $libname$release$shared_ext$major $libname$shared_ext'
+   shlibpath_var=LD_LIBRARY_PATH
+-  sys_lib_search_path_spec="/usr/shlib /usr/ccs/lib /usr/lib/cmplrs/cc /usr/lib /usr/local/lib /var/shlib"
++  sys_lib_search_path_spec="/usr/shlib /usr/ccs/lib /usr/lib/cmplrs/cc /usr/pkgs/glibc/lib /usr/local/lib /var/shlib"
+   sys_lib_dlsearch_path_spec=$sys_lib_search_path_spec
+   ;;
+ 
+@@ -12417,7 +12417,7 @@
+       need_lib_prefix=no
+       need_version=no
+       shlibpath_overrides_runpath=no
+-      sys_lib_search_path_spec='/lib /usr/lib /usr/ccs/lib'
++      sys_lib_search_path_spec='/lib /usr/pkgs/glibc/lib /usr/ccs/lib'
+       ;;
+   esac
+   ;;
+@@ -12441,7 +12441,7 @@
+   shlibpath_overrides_runpath=yes
+   hardcode_into_libs=yes
+   if test yes = "$with_gnu_ld"; then
+-    sys_lib_search_path_spec='/usr/local/lib /usr/gnu/lib /usr/ccs/lib /usr/lib /lib'
++    sys_lib_search_path_spec='/usr/local/lib /usr/gnu/lib /usr/ccs/lib /usr/pkgs/glibc/lib /lib'
+   else
+     sys_lib_search_path_spec='/usr/ccs/lib /usr/lib'
+     case $host_os in
+@@ -17176,8 +17176,8 @@
+   soname_spec='$libname$release$shared_ext$major'
+   finish_cmds='PATH="\$PATH:/sbin" ldconfig $libdir'
+   shlibpath_var=LD_LIBRARY_PATH
+-  sys_lib_search_path_spec="/shlib /usr/lib /usr/X11/lib /usr/contrib/lib /lib /usr/local/lib"
+-  sys_lib_dlsearch_path_spec="/shlib /usr/lib /usr/local/lib"
++  sys_lib_search_path_spec="/shlib /usr/pkgs/glibc/lib /usr/X11/lib /usr/contrib/lib /lib /usr/local/lib"
++  sys_lib_dlsearch_path_spec="/shlib /usr/pkgs/glibc/lib /usr/local/lib"
+   # the default ld.so.conf also contains /usr/contrib/lib and
+   # /usr/X11R6/lib (/usr/X11 is a link to /usr/X11R6), but let us allow
+   # libtool to hard-code these into programs
+@@ -17554,7 +17554,7 @@
+   # appending ld.so.conf contents (and includes) to the search path.
+   if test -f /etc/ld.so.conf; then
+     lt_ld_extra=`awk '/^include / { system(sprintf("cd /etc; cat %s 2>/dev/null", \$2)); skip = 1; } { if (!skip) print \$0; skip = 0; }' < /etc/ld.so.conf | $SED -e 's/#.*//;/^[	 ]*hwcap[	 ]/d;s/[:,	]/ /g;s/=[^=]*$//;s/=[^= ]* / /g;s/"//g;/^$/d' | tr '\n' ' '`
+-    sys_lib_dlsearch_path_spec="/lib /usr/lib $lt_ld_extra"
++    sys_lib_dlsearch_path_spec="/lib /usr/pkgs/glibc/lib $lt_ld_extra"
+   fi
+ 
+   # We used to test for /lib/ld.so.1 and disable shared libraries on
+@@ -17632,7 +17632,7 @@
+   library_names_spec='${libname}_dll.$libext'
+   dynamic_linker='OS/2 ld.exe'
+   shlibpath_var=BEGINLIBPATH
+-  sys_lib_search_path_spec="/lib /usr/lib /usr/local/lib"
++  sys_lib_search_path_spec="/lib /usr/pkgs/glibc/lib /usr/local/lib"
+   sys_lib_dlsearch_path_spec=$sys_lib_search_path_spec
+   postinstall_cmds='base_file=`basename \$file`~
+     dlpath=`$SHELL 2>&1 -c '\''. $dir/'\''\$base_file'\''i; $ECHO \$dlname'\''`~
+@@ -17655,7 +17655,7 @@
+   soname_spec='$libname$release$shared_ext$major'
+   library_names_spec='$libname$release$shared_ext$versuffix $libname$release$shared_ext$major $libname$shared_ext'
+   shlibpath_var=LD_LIBRARY_PATH
+-  sys_lib_search_path_spec="/usr/shlib /usr/ccs/lib /usr/lib/cmplrs/cc /usr/lib /usr/local/lib /var/shlib"
++  sys_lib_search_path_spec="/usr/shlib /usr/ccs/lib /usr/lib/cmplrs/cc /usr/pkgs/glibc/lib /usr/local/lib /var/shlib"
+   sys_lib_dlsearch_path_spec=$sys_lib_search_path_spec
+   ;;
+ 
+@@ -17706,7 +17706,7 @@
+       need_lib_prefix=no
+       need_version=no
+       shlibpath_overrides_runpath=no
+-      sys_lib_search_path_spec='/lib /usr/lib /usr/ccs/lib'
++      sys_lib_search_path_spec='/lib /usr/pkgs/glibc/lib /usr/ccs/lib'
+       ;;
+   esac
+   ;;
+@@ -17730,7 +17730,7 @@
+   shlibpath_overrides_runpath=yes
+   hardcode_into_libs=yes
+   if test yes = "$with_gnu_ld"; then
+-    sys_lib_search_path_spec='/usr/local/lib /usr/gnu/lib /usr/ccs/lib /usr/lib /lib'
++    sys_lib_search_path_spec='/usr/local/lib /usr/gnu/lib /usr/ccs/lib /usr/pkgs/glibc/lib /lib'
+   else
+     sys_lib_search_path_spec='/usr/ccs/lib /usr/lib'
+     case $host_os in
+@@ -20342,8 +20342,8 @@
+   soname_spec='$libname$release$shared_ext$major'
+   finish_cmds='PATH="\$PATH:/sbin" ldconfig $libdir'
+   shlibpath_var=LD_LIBRARY_PATH
+-  sys_lib_search_path_spec="/shlib /usr/lib /usr/X11/lib /usr/contrib/lib /lib /usr/local/lib"
+-  sys_lib_dlsearch_path_spec="/shlib /usr/lib /usr/local/lib"
++  sys_lib_search_path_spec="/shlib /usr/pkgs/glibc/lib /usr/X11/lib /usr/contrib/lib /lib /usr/local/lib"
++  sys_lib_dlsearch_path_spec="/shlib /usr/pkgs/glibc/lib /usr/local/lib"
+   # the default ld.so.conf also contains /usr/contrib/lib and
+   # /usr/X11R6/lib (/usr/X11 is a link to /usr/X11R6), but let us allow
+   # libtool to hard-code these into programs
+@@ -20714,7 +20714,7 @@
+   # appending ld.so.conf contents (and includes) to the search path.
+   if test -f /etc/ld.so.conf; then
+     lt_ld_extra=`awk '/^include / { system(sprintf("cd /etc; cat %s 2>/dev/null", \$2)); skip = 1; } { if (!skip) print \$0; skip = 0; }' < /etc/ld.so.conf | $SED -e 's/#.*//;/^[	 ]*hwcap[	 ]/d;s/[:,	]/ /g;s/=[^=]*$//;s/=[^= ]* / /g;s/"//g;/^$/d' | tr '\n' ' '`
+-    sys_lib_dlsearch_path_spec="/lib /usr/lib $lt_ld_extra"
++    sys_lib_dlsearch_path_spec="/lib /usr/pkgs/glibc/lib $lt_ld_extra"
+   fi
+ 
+   # We used to test for /lib/ld.so.1 and disable shared libraries on
+@@ -20792,7 +20792,7 @@
+   library_names_spec='${libname}_dll.$libext'
+   dynamic_linker='OS/2 ld.exe'
+   shlibpath_var=BEGINLIBPATH
+-  sys_lib_search_path_spec="/lib /usr/lib /usr/local/lib"
++  sys_lib_search_path_spec="/lib /usr/pkgs/glibc/lib /usr/local/lib"
+   sys_lib_dlsearch_path_spec=$sys_lib_search_path_spec
+   postinstall_cmds='base_file=`basename \$file`~
+     dlpath=`$SHELL 2>&1 -c '\''. $dir/'\''\$base_file'\''i; $ECHO \$dlname'\''`~
+@@ -20815,7 +20815,7 @@
+   soname_spec='$libname$release$shared_ext$major'
+   library_names_spec='$libname$release$shared_ext$versuffix $libname$release$shared_ext$major $libname$shared_ext'
+   shlibpath_var=LD_LIBRARY_PATH
+-  sys_lib_search_path_spec="/usr/shlib /usr/ccs/lib /usr/lib/cmplrs/cc /usr/lib /usr/local/lib /var/shlib"
++  sys_lib_search_path_spec="/usr/shlib /usr/ccs/lib /usr/lib/cmplrs/cc /usr/pkgs/glibc/lib /usr/local/lib /var/shlib"
+   sys_lib_dlsearch_path_spec=$sys_lib_search_path_spec
+   ;;
+ 
+@@ -20866,7 +20866,7 @@
+       need_lib_prefix=no
+       need_version=no
+       shlibpath_overrides_runpath=no
+-      sys_lib_search_path_spec='/lib /usr/lib /usr/ccs/lib'
++      sys_lib_search_path_spec='/lib /usr/pkgs/glibc/lib /usr/ccs/lib'
+       ;;
+   esac
+   ;;
+@@ -20890,7 +20890,7 @@
+   shlibpath_overrides_runpath=yes
+   hardcode_into_libs=yes
+   if test yes = "$with_gnu_ld"; then
+-    sys_lib_search_path_spec='/usr/local/lib /usr/gnu/lib /usr/ccs/lib /usr/lib /lib'
++    sys_lib_search_path_spec='/usr/local/lib /usr/gnu/lib /usr/ccs/lib /usr/pkgs/glibc/lib /lib'
+   else
+     sys_lib_search_path_spec='/usr/ccs/lib /usr/lib'
+     case $host_os in
+@@ -23643,8 +23643,8 @@
+   soname_spec='$libname$release$shared_ext$major'
+   finish_cmds='PATH="\$PATH:/sbin" ldconfig $libdir'
+   shlibpath_var=LD_LIBRARY_PATH
+-  sys_lib_search_path_spec="/shlib /usr/lib /usr/X11/lib /usr/contrib/lib /lib /usr/local/lib"
+-  sys_lib_dlsearch_path_spec="/shlib /usr/lib /usr/local/lib"
++  sys_lib_search_path_spec="/shlib /usr/pkgs/glibc/lib /usr/X11/lib /usr/contrib/lib /lib /usr/local/lib"
++  sys_lib_dlsearch_path_spec="/shlib /usr/pkgs/glibc/lib /usr/local/lib"
+   # the default ld.so.conf also contains /usr/contrib/lib and
+   # /usr/X11R6/lib (/usr/X11 is a link to /usr/X11R6), but let us allow
+   # libtool to hard-code these into programs
+@@ -24015,7 +24015,7 @@
+   # appending ld.so.conf contents (and includes) to the search path.
+   if test -f /etc/ld.so.conf; then
+     lt_ld_extra=`awk '/^include / { system(sprintf("cd /etc; cat %s 2>/dev/null", \$2)); skip = 1; } { if (!skip) print \$0; skip = 0; }' < /etc/ld.so.conf | $SED -e 's/#.*//;/^[	 ]*hwcap[	 ]/d;s/[:,	]/ /g;s/=[^=]*$//;s/=[^= ]* / /g;s/"//g;/^$/d' | tr '\n' ' '`
+-    sys_lib_dlsearch_path_spec="/lib /usr/lib $lt_ld_extra"
++    sys_lib_dlsearch_path_spec="/lib /usr/pkgs/glibc/lib $lt_ld_extra"
+   fi
+ 
+   # We used to test for /lib/ld.so.1 and disable shared libraries on
+@@ -24093,7 +24093,7 @@
+   library_names_spec='${libname}_dll.$libext'
+   dynamic_linker='OS/2 ld.exe'
+   shlibpath_var=BEGINLIBPATH
+-  sys_lib_search_path_spec="/lib /usr/lib /usr/local/lib"
++  sys_lib_search_path_spec="/lib /usr/pkgs/glibc/lib /usr/local/lib"
+   sys_lib_dlsearch_path_spec=$sys_lib_search_path_spec
+   postinstall_cmds='base_file=`basename \$file`~
+     dlpath=`$SHELL 2>&1 -c '\''. $dir/'\''\$base_file'\''i; $ECHO \$dlname'\''`~
+@@ -24116,7 +24116,7 @@
+   soname_spec='$libname$release$shared_ext$major'
+   library_names_spec='$libname$release$shared_ext$versuffix $libname$release$shared_ext$major $libname$shared_ext'
+   shlibpath_var=LD_LIBRARY_PATH
+-  sys_lib_search_path_spec="/usr/shlib /usr/ccs/lib /usr/lib/cmplrs/cc /usr/lib /usr/local/lib /var/shlib"
++  sys_lib_search_path_spec="/usr/shlib /usr/ccs/lib /usr/lib/cmplrs/cc /usr/pkgs/glibc/lib /usr/local/lib /var/shlib"
+   sys_lib_dlsearch_path_spec=$sys_lib_search_path_spec
+   ;;
+ 
+@@ -24167,7 +24167,7 @@
+       need_lib_prefix=no
+       need_version=no
+       shlibpath_overrides_runpath=no
+-      sys_lib_search_path_spec='/lib /usr/lib /usr/ccs/lib'
++      sys_lib_search_path_spec='/lib /usr/pkgs/glibc/lib /usr/ccs/lib'
+       ;;
+   esac
+   ;;
+@@ -24191,7 +24191,7 @@
+   shlibpath_overrides_runpath=yes
+   hardcode_into_libs=yes
+   if test yes = "$with_gnu_ld"; then
+-    sys_lib_search_path_spec='/usr/local/lib /usr/gnu/lib /usr/ccs/lib /usr/lib /lib'
++    sys_lib_search_path_spec='/usr/local/lib /usr/gnu/lib /usr/ccs/lib /usr/pkgs/glibc/lib /lib'
+   else
+     sys_lib_search_path_spec='/usr/ccs/lib /usr/lib'
+     case $host_os in
+diff -Naur libtool-2.4.6.orig/libltdl/configure libtool-2.4.6/libltdl/configure
+--- libtool-2.4.6.orig/libltdl/configure	2015-02-15 16:15:15.000000000 +0000
++++ libtool-2.4.6/libltdl/configure	2018-02-11 17:08:54.792000000 +0000
+@@ -5162,7 +5162,7 @@
+ 
+ bsdi[45]*)
+   lt_cv_deplibs_check_method='file_magic ELF [0-9][0-9]*-bit [ML]SB (shared object|dynamic lib)'
+-  lt_cv_file_magic_cmd='/usr/bin/file -L'
++  lt_cv_file_magic_cmd='/usr/pkgs/file/bin/file -L'
+   lt_cv_file_magic_test_file=/shlib/libc.so
+   ;;
+ 
+@@ -5203,7 +5203,7 @@
+       # Not sure whether the presence of OpenBSD here was a mistake.
+       # Let's accept both of them until this is cleared up.
+       lt_cv_deplibs_check_method='file_magic (FreeBSD|OpenBSD|DragonFly)/i[3-9]86 (compact )?demand paged shared library'
+-      lt_cv_file_magic_cmd=/usr/bin/file
++      lt_cv_file_magic_cmd=/usr/pkgs/file/bin/file
+       lt_cv_file_magic_test_file=`echo /usr/lib/libc.so.*`
+       ;;
+     esac
+@@ -5217,7 +5217,7 @@
+   ;;
+ 
+ hpux10.20* | hpux11*)
+-  lt_cv_file_magic_cmd=/usr/bin/file
++  lt_cv_file_magic_cmd=/usr/pkgs/file/bin/file
+   case $host_cpu in
+   ia64*)
+     lt_cv_deplibs_check_method='file_magic (s[0-9][0-9][0-9]|ELF-[0-9][0-9]) shared object file - IA64'
+@@ -5264,7 +5264,7 @@
+ 
+ newos6*)
+   lt_cv_deplibs_check_method='file_magic ELF [0-9][0-9]*-bit [ML]SB (executable|dynamic lib)'
+-  lt_cv_file_magic_cmd=/usr/bin/file
++  lt_cv_file_magic_cmd=/usr/pkgs/file/bin/file
+   lt_cv_file_magic_test_file=/usr/lib/libnls.so
+   ;;
+ 
+@@ -6408,7 +6408,7 @@
+   ac_status=$?
+   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+   test $ac_status = 0; }; then
+-    case `/usr/bin/file conftest.$ac_objext` in
++    case `/usr/pkgs/file/bin/file conftest.$ac_objext` in
+       *ELF-32*)
+ 	HPUX_IA64_MODE=32
+ 	;;
+@@ -6429,7 +6429,7 @@
+   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+   test $ac_status = 0; }; then
+     if test yes = "$lt_cv_prog_gnu_ld"; then
+-      case `/usr/bin/file conftest.$ac_objext` in
++      case `/usr/pkgs/file/bin/file conftest.$ac_objext` in
+ 	*32-bit*)
+ 	  LD="${LD-ld} -melf32bsmip"
+ 	  ;;
+@@ -6441,7 +6441,7 @@
+ 	;;
+       esac
+     else
+-      case `/usr/bin/file conftest.$ac_objext` in
++      case `/usr/pkgs/file/bin/file conftest.$ac_objext` in
+ 	*32-bit*)
+ 	  LD="${LD-ld} -32"
+ 	  ;;
+@@ -6467,7 +6467,7 @@
+   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+   test $ac_status = 0; }; then
+     emul=elf
+-    case `/usr/bin/file conftest.$ac_objext` in
++    case `/usr/pkgs/file/bin/file conftest.$ac_objext` in
+       *32-bit*)
+ 	emul="${emul}32"
+ 	;;
+@@ -6475,7 +6475,7 @@
+ 	emul="${emul}64"
+ 	;;
+     esac
+-    case `/usr/bin/file conftest.$ac_objext` in
++    case `/usr/pkgs/file/bin/file conftest.$ac_objext` in
+       *MSB*)
+ 	emul="${emul}btsmip"
+ 	;;
+@@ -6483,7 +6483,7 @@
+ 	emul="${emul}ltsmip"
+ 	;;
+     esac
+-    case `/usr/bin/file conftest.$ac_objext` in
++    case `/usr/pkgs/file/bin/file conftest.$ac_objext` in
+       *N32*)
+ 	emul="${emul}n32"
+ 	;;
+@@ -6507,14 +6507,14 @@
+   ac_status=$?
+   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+   test $ac_status = 0; }; then
+-    case `/usr/bin/file conftest.o` in
++    case `/usr/pkgs/file/bin/file conftest.o` in
+       *32-bit*)
+ 	case $host in
+ 	  x86_64-*kfreebsd*-gnu)
+ 	    LD="${LD-ld} -m elf_i386_fbsd"
+ 	    ;;
+ 	  x86_64-*linux*)
+-	    case `/usr/bin/file conftest.o` in
++	    case `/usr/pkgs/file/bin/file conftest.o` in
+ 	      *x86-64*)
+ 		LD="${LD-ld} -m elf32_x86_64"
+ 		;;
+@@ -6620,7 +6620,7 @@
+   ac_status=$?
+   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+   test $ac_status = 0; }; then
+-    case `/usr/bin/file conftest.o` in
++    case `/usr/pkgs/file/bin/file conftest.o` in
+     *64-bit*)
+       case $lt_cv_prog_gnu_ld in
+       yes*)
+@@ -10753,7 +10753,7 @@
+   esac
+   sys_lib_search_path_spec=`$ECHO "$lt_search_path_spec" | $lt_NL2SP`
+ else
+-  sys_lib_search_path_spec="/lib /usr/lib /usr/local/lib"
++  sys_lib_search_path_spec="/lib /usr/pkgs/glibc/lib /usr/local/lib"
+ fi
+ library_names_spec=
+ libname_spec='lib$name'
+@@ -10909,8 +10909,8 @@
+   soname_spec='$libname$release$shared_ext$major'
+   finish_cmds='PATH="\$PATH:/sbin" ldconfig $libdir'
+   shlibpath_var=LD_LIBRARY_PATH
+-  sys_lib_search_path_spec="/shlib /usr/lib /usr/X11/lib /usr/contrib/lib /lib /usr/local/lib"
+-  sys_lib_dlsearch_path_spec="/shlib /usr/lib /usr/local/lib"
++  sys_lib_search_path_spec="/shlib /usr/pkgs/glibc/lib /usr/X11/lib /usr/contrib/lib /lib /usr/local/lib"
++  sys_lib_dlsearch_path_spec="/shlib /usr/pkgs/glibc/lib /usr/local/lib"
+   # the default ld.so.conf also contains /usr/contrib/lib and
+   # /usr/X11R6/lib (/usr/X11 is a link to /usr/X11R6), but let us allow
+   # libtool to hard-code these into programs
+@@ -11289,7 +11289,7 @@
+   # appending ld.so.conf contents (and includes) to the search path.
+   if test -f /etc/ld.so.conf; then
+     lt_ld_extra=`awk '/^include / { system(sprintf("cd /etc; cat %s 2>/dev/null", \$2)); skip = 1; } { if (!skip) print \$0; skip = 0; }' < /etc/ld.so.conf | $SED -e 's/#.*//;/^[	 ]*hwcap[	 ]/d;s/[:,	]/ /g;s/=[^=]*$//;s/=[^= ]* / /g;s/"//g;/^$/d' | tr '\n' ' '`
+-    sys_lib_dlsearch_path_spec="/lib /usr/lib $lt_ld_extra"
++    sys_lib_dlsearch_path_spec="/lib /usr/pkgs/glibc/lib $lt_ld_extra"
+   fi
+ 
+   # We used to test for /lib/ld.so.1 and disable shared libraries on
+@@ -11367,7 +11367,7 @@
+   library_names_spec='${libname}_dll.$libext'
+   dynamic_linker='OS/2 ld.exe'
+   shlibpath_var=BEGINLIBPATH
+-  sys_lib_search_path_spec="/lib /usr/lib /usr/local/lib"
++  sys_lib_search_path_spec="/lib /usr/pkgs/glibc/lib /usr/local/lib"
+   sys_lib_dlsearch_path_spec=$sys_lib_search_path_spec
+   postinstall_cmds='base_file=`basename \$file`~
+     dlpath=`$SHELL 2>&1 -c '\''. $dir/'\''\$base_file'\''i; $ECHO \$dlname'\''`~
+@@ -11390,7 +11390,7 @@
+   soname_spec='$libname$release$shared_ext$major'
+   library_names_spec='$libname$release$shared_ext$versuffix $libname$release$shared_ext$major $libname$shared_ext'
+   shlibpath_var=LD_LIBRARY_PATH
+-  sys_lib_search_path_spec="/usr/shlib /usr/ccs/lib /usr/lib/cmplrs/cc /usr/lib /usr/local/lib /var/shlib"
++  sys_lib_search_path_spec="/usr/shlib /usr/ccs/lib /usr/lib/cmplrs/cc /usr/pkgs/glibc/lib /usr/local/lib /var/shlib"
+   sys_lib_dlsearch_path_spec=$sys_lib_search_path_spec
+   ;;
+ 
+@@ -11441,7 +11441,7 @@
+       need_lib_prefix=no
+       need_version=no
+       shlibpath_overrides_runpath=no
+-      sys_lib_search_path_spec='/lib /usr/lib /usr/ccs/lib'
++      sys_lib_search_path_spec='/lib /usr/pkgs/glibc/lib /usr/ccs/lib'
+       ;;
+   esac
+   ;;
+@@ -11465,7 +11465,7 @@
+   shlibpath_overrides_runpath=yes
+   hardcode_into_libs=yes
+   if test yes = "$with_gnu_ld"; then
+-    sys_lib_search_path_spec='/usr/local/lib /usr/gnu/lib /usr/ccs/lib /usr/lib /lib'
++    sys_lib_search_path_spec='/usr/local/lib /usr/gnu/lib /usr/ccs/lib /usr/pkgs/glibc/lib /lib'
+   else
+     sys_lib_search_path_spec='/usr/ccs/lib /usr/lib'
+     case $host_os in
+diff -Naur libtool-2.4.6.orig/m4/libtool.m4 libtool-2.4.6/m4/libtool.m4
+--- libtool-2.4.6.orig/m4/libtool.m4	2015-01-20 16:15:19.000000000 +0000
++++ libtool-2.4.6/m4/libtool.m4	2018-02-11 17:08:52.611000000 +0000
+@@ -1292,7 +1292,7 @@
+   # options accordingly.
+   echo 'int i;' > conftest.$ac_ext
+   if AC_TRY_EVAL(ac_compile); then
+-    case `/usr/bin/file conftest.$ac_objext` in
++    case `/usr/pkgs/file/bin/file conftest.$ac_objext` in
+       *ELF-32*)
+ 	HPUX_IA64_MODE=32
+ 	;;
+@@ -1309,7 +1309,7 @@
+   echo '[#]line '$LINENO' "configure"' > conftest.$ac_ext
+   if AC_TRY_EVAL(ac_compile); then
+     if test yes = "$lt_cv_prog_gnu_ld"; then
+-      case `/usr/bin/file conftest.$ac_objext` in
++      case `/usr/pkgs/file/bin/file conftest.$ac_objext` in
+ 	*32-bit*)
+ 	  LD="${LD-ld} -melf32bsmip"
+ 	  ;;
+@@ -1321,7 +1321,7 @@
+ 	;;
+       esac
+     else
+-      case `/usr/bin/file conftest.$ac_objext` in
++      case `/usr/pkgs/file/bin/file conftest.$ac_objext` in
+ 	*32-bit*)
+ 	  LD="${LD-ld} -32"
+ 	  ;;
+@@ -1343,7 +1343,7 @@
+   echo '[#]line '$LINENO' "configure"' > conftest.$ac_ext
+   if AC_TRY_EVAL(ac_compile); then
+     emul=elf
+-    case `/usr/bin/file conftest.$ac_objext` in
++    case `/usr/pkgs/file/bin/file conftest.$ac_objext` in
+       *32-bit*)
+ 	emul="${emul}32"
+ 	;;
+@@ -1351,7 +1351,7 @@
+ 	emul="${emul}64"
+ 	;;
+     esac
+-    case `/usr/bin/file conftest.$ac_objext` in
++    case `/usr/pkgs/file/bin/file conftest.$ac_objext` in
+       *MSB*)
+ 	emul="${emul}btsmip"
+ 	;;
+@@ -1359,7 +1359,7 @@
+ 	emul="${emul}ltsmip"
+ 	;;
+     esac
+-    case `/usr/bin/file conftest.$ac_objext` in
++    case `/usr/pkgs/file/bin/file conftest.$ac_objext` in
+       *N32*)
+ 	emul="${emul}n32"
+ 	;;
+@@ -1379,14 +1379,14 @@
+   # not appear in the list.
+   echo 'int i;' > conftest.$ac_ext
+   if AC_TRY_EVAL(ac_compile); then
+-    case `/usr/bin/file conftest.o` in
++    case `/usr/pkgs/file/bin/file conftest.o` in
+       *32-bit*)
+ 	case $host in
+ 	  x86_64-*kfreebsd*-gnu)
+ 	    LD="${LD-ld} -m elf_i386_fbsd"
+ 	    ;;
+ 	  x86_64-*linux*)
+-	    case `/usr/bin/file conftest.o` in
++	    case `/usr/pkgs/file/bin/file conftest.o` in
+ 	      *x86-64*)
+ 		LD="${LD-ld} -m elf32_x86_64"
+ 		;;
+@@ -1454,7 +1454,7 @@
+   # options accordingly.
+   echo 'int i;' > conftest.$ac_ext
+   if AC_TRY_EVAL(ac_compile); then
+-    case `/usr/bin/file conftest.o` in
++    case `/usr/pkgs/file/bin/file conftest.o` in
+     *64-bit*)
+       case $lt_cv_prog_gnu_ld in
+       yes*)
+@@ -2357,7 +2357,7 @@
+   esac
+   sys_lib_search_path_spec=`$ECHO "$lt_search_path_spec" | $lt_NL2SP`
+ else
+-  sys_lib_search_path_spec="/lib /usr/lib /usr/local/lib"
++  sys_lib_search_path_spec="/lib /usr/pkgs/glibc/lib /usr/local/lib"
+ fi])
+ library_names_spec=
+ libname_spec='lib$name'
+@@ -2514,8 +2514,8 @@
+   soname_spec='$libname$release$shared_ext$major'
+   finish_cmds='PATH="\$PATH:/sbin" ldconfig $libdir'
+   shlibpath_var=LD_LIBRARY_PATH
+-  sys_lib_search_path_spec="/shlib /usr/lib /usr/X11/lib /usr/contrib/lib /lib /usr/local/lib"
+-  sys_lib_dlsearch_path_spec="/shlib /usr/lib /usr/local/lib"
++  sys_lib_search_path_spec="/shlib /usr/pkgs/glibc/lib /usr/X11/lib /usr/contrib/lib /lib /usr/local/lib"
++  sys_lib_dlsearch_path_spec="/shlib /usr/pkgs/glibc/lib /usr/local/lib"
+   # the default ld.so.conf also contains /usr/contrib/lib and
+   # /usr/X11R6/lib (/usr/X11 is a link to /usr/X11R6), but let us allow
+   # libtool to hard-code these into programs
+@@ -2875,7 +2875,7 @@
+   # appending ld.so.conf contents (and includes) to the search path.
+   if test -f /etc/ld.so.conf; then
+     lt_ld_extra=`awk '/^include / { system(sprintf("cd /etc; cat %s 2>/dev/null", \[$]2)); skip = 1; } { if (!skip) print \[$]0; skip = 0; }' < /etc/ld.so.conf | $SED -e 's/#.*//;/^[	 ]*hwcap[	 ]/d;s/[:,	]/ /g;s/=[^=]*$//;s/=[^= ]* / /g;s/"//g;/^$/d' | tr '\n' ' '`
+-    sys_lib_dlsearch_path_spec="/lib /usr/lib $lt_ld_extra"
++    sys_lib_dlsearch_path_spec="/lib /usr/pkgs/glibc/lib $lt_ld_extra"
+   fi
+ 
+   # We used to test for /lib/ld.so.1 and disable shared libraries on
+@@ -2953,7 +2953,7 @@
+   library_names_spec='${libname}_dll.$libext'
+   dynamic_linker='OS/2 ld.exe'
+   shlibpath_var=BEGINLIBPATH
+-  sys_lib_search_path_spec="/lib /usr/lib /usr/local/lib"
++  sys_lib_search_path_spec="/lib /usr/pkgs/glibc/lib /usr/local/lib"
+   sys_lib_dlsearch_path_spec=$sys_lib_search_path_spec
+   postinstall_cmds='base_file=`basename \$file`~
+     dlpath=`$SHELL 2>&1 -c '\''. $dir/'\''\$base_file'\''i; $ECHO \$dlname'\''`~
+@@ -2976,7 +2976,7 @@
+   soname_spec='$libname$release$shared_ext$major'
+   library_names_spec='$libname$release$shared_ext$versuffix $libname$release$shared_ext$major $libname$shared_ext'
+   shlibpath_var=LD_LIBRARY_PATH
+-  sys_lib_search_path_spec="/usr/shlib /usr/ccs/lib /usr/lib/cmplrs/cc /usr/lib /usr/local/lib /var/shlib"
++  sys_lib_search_path_spec="/usr/shlib /usr/ccs/lib /usr/lib/cmplrs/cc /usr/pkgs/glibc/lib /usr/local/lib /var/shlib"
+   sys_lib_dlsearch_path_spec=$sys_lib_search_path_spec
+   ;;
+ 
+@@ -3027,7 +3027,7 @@
+       need_lib_prefix=no
+       need_version=no
+       shlibpath_overrides_runpath=no
+-      sys_lib_search_path_spec='/lib /usr/lib /usr/ccs/lib'
++      sys_lib_search_path_spec='/lib /usr/pkgs/glibc/lib /usr/ccs/lib'
+       ;;
+   esac
+   ;;
+@@ -3051,7 +3051,7 @@
+   shlibpath_overrides_runpath=yes
+   hardcode_into_libs=yes
+   if test yes = "$with_gnu_ld"; then
+-    sys_lib_search_path_spec='/usr/local/lib /usr/gnu/lib /usr/ccs/lib /usr/lib /lib'
++    sys_lib_search_path_spec='/usr/local/lib /usr/gnu/lib /usr/ccs/lib /usr/pkgs/glibc/lib /lib'
+   else
+     sys_lib_search_path_spec='/usr/ccs/lib /usr/lib'
+     case $host_os in
+@@ -3454,7 +3454,7 @@
+ 
+ bsdi[[45]]*)
+   lt_cv_deplibs_check_method='file_magic ELF [[0-9]][[0-9]]*-bit [[ML]]SB (shared object|dynamic lib)'
+-  lt_cv_file_magic_cmd='/usr/bin/file -L'
++  lt_cv_file_magic_cmd='/usr/pkgs/file/bin/file -L'
+   lt_cv_file_magic_test_file=/shlib/libc.so
+   ;;
+ 
+@@ -3495,7 +3495,7 @@
+       # Not sure whether the presence of OpenBSD here was a mistake.
+       # Let's accept both of them until this is cleared up.
+       lt_cv_deplibs_check_method='file_magic (FreeBSD|OpenBSD|DragonFly)/i[[3-9]]86 (compact )?demand paged shared library'
+-      lt_cv_file_magic_cmd=/usr/bin/file
++      lt_cv_file_magic_cmd=/usr/pkgs/file/bin/file
+       lt_cv_file_magic_test_file=`echo /usr/lib/libc.so.*`
+       ;;
+     esac
+@@ -3509,7 +3509,7 @@
+   ;;
+ 
+ hpux10.20* | hpux11*)
+-  lt_cv_file_magic_cmd=/usr/bin/file
++  lt_cv_file_magic_cmd=/usr/pkgs/file/bin/file
+   case $host_cpu in
+   ia64*)
+     lt_cv_deplibs_check_method='file_magic (s[[0-9]][[0-9]][[0-9]]|ELF-[[0-9]][[0-9]]) shared object file - IA64'
+@@ -3556,7 +3556,7 @@
+ 
+ newos6*)
+   lt_cv_deplibs_check_method='file_magic ELF [[0-9]][[0-9]]*-bit [[ML]]SB (executable|dynamic lib)'
+-  lt_cv_file_magic_cmd=/usr/bin/file
++  lt_cv_file_magic_cmd=/usr/pkgs/file/bin/file
+   lt_cv_file_magic_test_file=/usr/lib/libnls.so
+   ;;
+ 
+diff -Naur libtool-2.4.6.orig/tests/configure-funcs.at libtool-2.4.6/tests/configure-funcs.at
+--- libtool-2.4.6.orig/tests/configure-funcs.at	2015-01-20 16:08:10.000000000 +0000
++++ libtool-2.4.6/tests/configure-funcs.at	2018-02-11 17:08:53.709000000 +0000
+@@ -39,7 +39,7 @@
+ _AT_FUNC_SETUP([func_munge_path_list])
+ 
+ cat <<\EOF >> func_munge_path_list
+-for orig in "/usr/lib" " /lib /usr/lib "; do
++for orig in "/usr/lib" " /lib /usr/pkgs/glibc/lib "; do
+   $ECHO "'$orig':"
+   for path in "/p1:" "/p3:/p2:" ":/a1" ":/a2:/a3" "/p4::/a4" "/p6:/p5::/a5:/a6"; do
+     old=$orig
+@@ -54,17 +54,17 @@
+ ['/usr/lib':
+ munge (/p1:) = /p1 /usr/lib
+ munge (/p3:/p2:) = /p3 /p2 /p1 /usr/lib
+-munge (:/a1) = /p3 /p2 /p1 /usr/lib /a1
+-munge (:/a2:/a3) = /p3 /p2 /p1 /usr/lib /a1 /a2 /a3
+-munge (/p4::/a4) = /p4 /p3 /p2 /p1 /usr/lib /a1 /a2 /a3 /a4
+-munge (/p6:/p5::/a5:/a6) = /p6 /p5 /p4 /p3 /p2 /p1 /usr/lib /a1 /a2 /a3 /a4 /a5 /a6
+-' /lib /usr/lib ':
+-munge (/p1:) = /p1  /lib /usr/lib @&t@
+-munge (/p3:/p2:) = /p3 /p2 /p1  /lib /usr/lib @&t@
+-munge (:/a1) = /p3 /p2 /p1  /lib /usr/lib  /a1
+-munge (:/a2:/a3) = /p3 /p2 /p1  /lib /usr/lib  /a1 /a2 /a3
+-munge (/p4::/a4) = /p4 /p3 /p2 /p1  /lib /usr/lib  /a1 /a2 /a3 /a4
+-munge (/p6:/p5::/a5:/a6) = /p6 /p5 /p4 /p3 /p2 /p1  /lib /usr/lib  /a1 /a2 /a3 /a4 /a5 /a6
++munge (:/a1) = /p3 /p2 /p1 /usr/pkgs/glibc/lib /a1
++munge (:/a2:/a3) = /p3 /p2 /p1 /usr/pkgs/glibc/lib /a1 /a2 /a3
++munge (/p4::/a4) = /p4 /p3 /p2 /p1 /usr/pkgs/glibc/lib /a1 /a2 /a3 /a4
++munge (/p6:/p5::/a5:/a6) = /p6 /p5 /p4 /p3 /p2 /p1 /usr/pkgs/glibc/lib /a1 /a2 /a3 /a4 /a5 /a6
++' /lib /usr/pkgs/glibc/lib ':
++munge (/p1:) = /p1  /lib /usr/pkgs/glibc/lib @&t@
++munge (/p3:/p2:) = /p3 /p2 /p1  /lib /usr/pkgs/glibc/lib @&t@
++munge (:/a1) = /p3 /p2 /p1  /lib /usr/pkgs/glibc/lib  /a1
++munge (:/a2:/a3) = /p3 /p2 /p1  /lib /usr/pkgs/glibc/lib  /a1 /a2 /a3
++munge (/p4::/a4) = /p4 /p3 /p2 /p1  /lib /usr/pkgs/glibc/lib  /a1 /a2 /a3 /a4
++munge (/p6:/p5::/a5:/a6) = /p6 /p5 /p4 /p3 /p2 /p1  /lib /usr/pkgs/glibc/lib  /a1 /a2 /a3 /a4 /a5 /a6
+ ], [])
+ 
+ AT_CLEANUP
+diff -Naur libtool-2.4.6.orig/tests/testsuite libtool-2.4.6/tests/testsuite
+--- libtool-2.4.6.orig/tests/testsuite	2015-02-15 16:15:25.000000000 +0000
++++ libtool-2.4.6/tests/testsuite	2018-02-11 17:08:54.337000000 +0000
+@@ -2315,7 +2315,7 @@
+ 
+ 
+ cat <<\EOF >> func_munge_path_list
+-for orig in "/usr/lib" " /lib /usr/lib "; do
++for orig in "/usr/lib" " /lib /usr/pkgs/glibc/lib "; do
+   $ECHO "'$orig':"
+   for path in "/p1:" "/p3:/p2:" ":/a1" ":/a2:/a3" "/p4::/a4" "/p6:/p5::/a5:/a6"; do
+     old=$orig
+@@ -2337,17 +2337,17 @@
+ echo >>"$at_stdout"; $as_echo "'/usr/lib':
+ munge (/p1:) = /p1 /usr/lib
+ munge (/p3:/p2:) = /p3 /p2 /p1 /usr/lib
+-munge (:/a1) = /p3 /p2 /p1 /usr/lib /a1
+-munge (:/a2:/a3) = /p3 /p2 /p1 /usr/lib /a1 /a2 /a3
+-munge (/p4::/a4) = /p4 /p3 /p2 /p1 /usr/lib /a1 /a2 /a3 /a4
+-munge (/p6:/p5::/a5:/a6) = /p6 /p5 /p4 /p3 /p2 /p1 /usr/lib /a1 /a2 /a3 /a4 /a5 /a6
+-' /lib /usr/lib ':
+-munge (/p1:) = /p1  /lib /usr/lib 
+-munge (/p3:/p2:) = /p3 /p2 /p1  /lib /usr/lib 
+-munge (:/a1) = /p3 /p2 /p1  /lib /usr/lib  /a1
+-munge (:/a2:/a3) = /p3 /p2 /p1  /lib /usr/lib  /a1 /a2 /a3
+-munge (/p4::/a4) = /p4 /p3 /p2 /p1  /lib /usr/lib  /a1 /a2 /a3 /a4
+-munge (/p6:/p5::/a5:/a6) = /p6 /p5 /p4 /p3 /p2 /p1  /lib /usr/lib  /a1 /a2 /a3 /a4 /a5 /a6
++munge (:/a1) = /p3 /p2 /p1 /usr/pkgs/glibc/lib /a1
++munge (:/a2:/a3) = /p3 /p2 /p1 /usr/pkgs/glibc/lib /a1 /a2 /a3
++munge (/p4::/a4) = /p4 /p3 /p2 /p1 /usr/pkgs/glibc/lib /a1 /a2 /a3 /a4
++munge (/p6:/p5::/a5:/a6) = /p6 /p5 /p4 /p3 /p2 /p1 /usr/pkgs/glibc/lib /a1 /a2 /a3 /a4 /a5 /a6
++' /lib /usr/pkgs/glibc/lib ':
++munge (/p1:) = /p1  /lib /usr/pkgs/glibc/lib 
++munge (/p3:/p2:) = /p3 /p2 /p1  /lib /usr/pkgs/glibc/lib 
++munge (:/a1) = /p3 /p2 /p1  /lib /usr/pkgs/glibc/lib  /a1
++munge (:/a2:/a3) = /p3 /p2 /p1  /lib /usr/pkgs/glibc/lib  /a1 /a2 /a3
++munge (/p4::/a4) = /p4 /p3 /p2 /p1  /lib /usr/pkgs/glibc/lib  /a1 /a2 /a3 /a4
++munge (/p6:/p5::/a5:/a6) = /p6 /p5 /p4 /p3 /p2 /p1  /lib /usr/pkgs/glibc/lib  /a1 /a2 /a3 /a4 /a5 /a6
+ " | \
+   $at_diff - "$at_stdout" || at_failed=:
+ at_fn_check_status 0 $at_status "$at_srcdir/configure-funcs.at:68"

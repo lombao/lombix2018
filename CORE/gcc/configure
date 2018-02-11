@@ -1,29 +1,27 @@
 
-for file in gcc/config/{linux,i386/linux{,64}}.h
-do
- cp -uv $file{,.orig}
- sed -e 's@/lib\(64\)\?\(32\)\?/ld@/usr/pkgs/glibc/lib/ld@g' $file.orig > $file
- echo '
-#undef STANDARD_STARTFILE_PREFIX_1
-#undef STANDARD_STARTFILE_PERFIX_2
-#define STANDARD_STARTFILE_PREFIX_1 "/usr/pkgs/glibc/lib"
-#define STANDARD_STARTFILE_PREFIX_2 ""' >> $file
- touch $file.orig
-done
-
-
-sed 's@/usr/include@/usr/pkgs/glibc/include@' -i gcc/config.gcc || exit 1
-
-
+#for file in gcc/config/{linux,i386/linux{,64}}.h
+#do
+# cp -uv $file{,.orig}
+# sed -e 's@/lib\(64\)\?\(32\)\?/ld@/usr/pkgs/glibc/lib/ld@g' $file.orig > $file
+# echo '
+##undef STANDARD_STARTFILE_PREFIX_1
+##undef STANDARD_STARTFILE_PERFIX_2
+##define STANDARD_STARTFILE_PREFIX_1 "/usr/pkgs/glibc/lib"
+##define STANDARD_STARTFILE_PREFIX_2 ""' >> $file
+# touch $file.orig
+#done
+#
+#
+#sed 's@/usr/include@/usr/pkgs/glibc/include@' -i gcc/config.gcc || exit 1
+#
+#
 # To make the /lib64 become /lib
-sed -e '/m64=/s/lib64/lib/' -i.orig gcc/config/i386/t-linux64 || exit 1
-
+#sed -e '/m64=/s/lib64/lib/' -i.orig gcc/config/i386/t-linux64 || exit 1
+#
 
 mkdir build
 cd    build
 
-#unset C_INCLUDE_PATH
-#unset CPLUS_INCLUDE_PATH
 
 export LDFLAGS="-L/usr/pkgs/zlib/lib  -L/usr/pkgs/isl/lib -L/usr/pkgs/libffi/lib"
 export CFLAGS="-I/usr/pkgs/zlib/include -I/usr/pkgs/isl/include -I/usr/pkgs/libffi/include"

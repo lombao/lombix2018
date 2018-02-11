@@ -1,0 +1,166 @@
+diff -Naur cmake-3.9.1-orig/Modules/FindCURL.cmake cmake-3.9.1/Modules/FindCURL.cmake
+--- cmake-3.9.1-orig/Modules/FindCURL.cmake	2017-08-10 13:36:32.000000000 +0000
++++ cmake-3.9.1/Modules/FindCURL.cmake	2017-12-03 15:30:47.490764203 +0000
+@@ -16,6 +16,11 @@
+ #   CURL_FOUND          - True if curl found.
+ #   CURL_VERSION_STRING - the version of curl found (since CMake 2.8.8)
+ 
++
++
++set(CURL_INCLUDE_DIR "/usr/pkgs/curl/include")
++set(CURL_LIBRARY "/usr/pkgs/curl/lib")
++
+ # Look for the header file.
+ find_path(CURL_INCLUDE_DIR NAMES curl/curl.h)
+ mark_as_advanced(CURL_INCLUDE_DIR)
+diff -Naur cmake-3.9.1-orig/Modules/FindCurses.cmake cmake-3.9.1/Modules/FindCurses.cmake
+--- cmake-3.9.1-orig/Modules/FindCurses.cmake	2017-08-10 13:36:32.000000000 +0000
++++ cmake-3.9.1/Modules/FindCurses.cmake	2017-12-03 15:24:51.108774733 +0000
+@@ -42,6 +42,11 @@
+ 
+ include(${CMAKE_CURRENT_LIST_DIR}/CheckLibraryExists.cmake)
+ 
++set(CURSES_LIBRARIES "/usr/pkgs/ncurses/lib")
++set(CURSES_INCLUDE_DIRS 
++	"/usr/pkgs/ncurses/include/ncursesw"
++	"/usr/pkgs/ncurses/include")
++
+ find_library(CURSES_CURSES_LIBRARY NAMES curses )
+ 
+ find_library(CURSES_NCURSES_LIBRARY NAMES ncurses )
+@@ -167,6 +172,7 @@
+   endif()
+ endif()
+ 
++set(CURSES_FORM_LIBRARY "/usr/pkgs/ncurses/lib")
+ find_library(CURSES_FORM_LIBRARY form HINTS "${_cursesLibDir}")
+ find_library(CURSES_FORM_LIBRARY form )
+ 
+diff -Naur cmake-3.9.1-orig/Modules/FindEXPAT.cmake cmake-3.9.1/Modules/FindEXPAT.cmake
+--- cmake-3.9.1-orig/Modules/FindEXPAT.cmake	2017-08-10 13:36:32.000000000 +0000
++++ cmake-3.9.1/Modules/FindEXPAT.cmake	2017-12-03 15:39:09.030749384 +0000
+@@ -16,9 +16,11 @@
+ #   EXPAT_FOUND        - True if expat found.
+ 
+ find_package(PkgConfig QUIET)
+-
+ pkg_check_modules(PC_EXPAT QUIET expat)
+ 
++set (EXPAT_INCLUDE_DIR 	PATH "/usr/pkgs/expat/include")
++set (EXPAT_LIBRARY	PATH "/usr/pkgs/expat/lib")
++
+ # Look for the header file.
+ find_path(EXPAT_INCLUDE_DIR NAMES expat.h HINTS ${PC_EXPAT_INCLUDE_DIRS})
+ 
+diff -Naur cmake-3.9.1-orig/Modules/FindFreetype.cmake cmake-3.9.1/Modules/FindFreetype.cmake
+--- cmake-3.9.1-orig/Modules/FindFreetype.cmake	2017-08-10 13:36:32.000000000 +0000
++++ cmake-3.9.1/Modules/FindFreetype.cmake	2017-12-03 18:12:53.584476829 +0000
+@@ -53,6 +53,7 @@
+     ENV GTKMM_BASEPATH
+     [HKEY_CURRENT_USER\\SOFTWARE\\gtkmm\\2.4;Path]
+     [HKEY_LOCAL_MACHINE\\SOFTWARE\\gtkmm\\2.4;Path]
++    /usr/pkgs/X11
+ )
+ 
+ find_path(
+diff -Naur cmake-3.9.1-orig/Modules/FindJPEG.cmake cmake-3.9.1/Modules/FindJPEG.cmake
+--- cmake-3.9.1-orig/Modules/FindJPEG.cmake	2017-08-10 13:36:32.000000000 +0000
++++ cmake-3.9.1/Modules/FindJPEG.cmake	2017-12-03 19:38:27.013325153 +0000
+@@ -21,6 +21,10 @@
+ #
+ #   JPEG_LIBRARY, where to find the JPEG library.
+ 
++
++set(JPEG_INCLUDE_DIR	"/usr/pkgs/libjpeg/include")
++set(JPEG_LIBRARY 	"/usr/pkgs/libjpeg/lib/libjpeg.so")
++
+ find_path(JPEG_INCLUDE_DIR jpeglib.h)
+ 
+ set(JPEG_NAMES ${JPEG_NAMES} jpeg libjpeg)
+diff -Naur cmake-3.9.1-orig/Modules/FindLCMS2.cmake cmake-3.9.1/Modules/FindLCMS2.cmake
+--- cmake-3.9.1-orig/Modules/FindLCMS2.cmake	1970-01-01 00:00:00.000000000 +0000
++++ cmake-3.9.1/Modules/FindLCMS2.cmake	2017-12-03 19:25:48.179347574 +0000
+@@ -0,0 +1,4 @@
++set(LCMS2_LIBRARY 	"/usr/pkgs/lcms2/lib/liblcms2.so")
++set(LCMS2_INCLUDE_DIR 	"/usr/pkgs/lcms2/include")
++
++mark_as_advanced(LCMS2_LIBRARY LCMS2_INCLUDE_DIR)
+diff -Naur cmake-3.9.1-orig/Modules/FindLibArchive.cmake cmake-3.9.1/Modules/FindLibArchive.cmake
+--- cmake-3.9.1-orig/Modules/FindLibArchive.cmake	2017-08-10 13:36:32.000000000 +0000
++++ cmake-3.9.1/Modules/FindLibArchive.cmake	2017-12-03 15:24:30.139775352 +0000
+@@ -20,12 +20,14 @@
+   NAMES archive.h
+   PATHS
+   "[HKEY_LOCAL_MACHINE\\SOFTWARE\\GnuWin32\\LibArchive;InstallPath]/include"
++  "/usr/pkgs/libarchive/include"
+   )
+ 
+ find_library(LibArchive_LIBRARY
+   NAMES archive libarchive
+   PATHS
+   "[HKEY_LOCAL_MACHINE\\SOFTWARE\\GnuWin32\\LibArchive;InstallPath]/lib"
++  "/usr/pkgs/libarchive/lib"
+   )
+ 
+ mark_as_advanced(LibArchive_INCLUDE_DIR LibArchive_LIBRARY)
+diff -Naur cmake-3.9.1-orig/Modules/FindPNG.cmake cmake-3.9.1/Modules/FindPNG.cmake
+--- cmake-3.9.1-orig/Modules/FindPNG.cmake	2017-08-10 13:36:32.000000000 +0000
++++ cmake-3.9.1/Modules/FindPNG.cmake	2017-12-03 19:13:28.616369426 +0000
+@@ -45,6 +45,11 @@
+ # Since PNG depends on the ZLib compression library, none of the above
+ # will be defined unless ZLib can be found.
+ 
++set(PNG_PNG_INCLUDE_DIR "/usr/pkgs/libpng/include")
++set(PNG_LIBRARY		"/usr/pkgs/libpng/lib/libpng16.so")
++
++
++
+ if(PNG_FIND_QUIETLY)
+   set(_FIND_ZLIB_ARG QUIET)
+ endif()
+diff -Naur cmake-3.9.1-orig/Modules/FindTIFF.cmake cmake-3.9.1/Modules/FindTIFF.cmake
+--- cmake-3.9.1-orig/Modules/FindTIFF.cmake	2017-08-10 13:36:32.000000000 +0000
++++ cmake-3.9.1/Modules/FindTIFF.cmake	2017-12-03 19:13:20.528369665 +0000
+@@ -39,6 +39,11 @@
+ # ``TIFF_LIBRARY``
+ #   the path to the TIFF library
+ 
++
++set(TIFF_INCLUDE_DIR "/usr/pkgs/libtiff/include")
++set(TIFF_LIBRARY	"/usr/pkgs/libtiff/lib/libtiff.so")
++
++
+ find_path(TIFF_INCLUDE_DIR tiff.h)
+ 
+ set(TIFF_NAMES ${TIFF_NAMES} tiff libtiff tiff3 libtiff3)
+diff -Naur cmake-3.9.1-orig/Modules/FindX11.cmake cmake-3.9.1/Modules/FindX11.cmake
+--- cmake-3.9.1-orig/Modules/FindX11.cmake	2017-08-10 13:36:32.000000000 +0000
++++ cmake-3.9.1/Modules/FindX11.cmake	2017-12-03 17:57:19.477504429 +0000
+@@ -71,6 +71,7 @@
+     /usr/openwin/share/include
+     /opt/graphics/OpenGL/include
+     /opt/X11/include
++    /usr/pkgs/X11/include
+   )
+ 
+   set(X11_LIB_SEARCH_PATH
+@@ -79,6 +80,7 @@
+     /usr/X11R7/lib
+     /usr/openwin/lib
+     /opt/X11/lib
++    /usr/pkgs/X11/lib
+   )
+ 
+   find_path(X11_X11_INCLUDE_PATH X11/X.h                             ${X11_INC_SEARCH_PATH})
+diff -Naur cmake-3.9.1-orig/Modules/FindZLIB.cmake cmake-3.9.1/Modules/FindZLIB.cmake
+--- cmake-3.9.1-orig/Modules/FindZLIB.cmake	2017-08-10 13:36:32.000000000 +0000
++++ cmake-3.9.1/Modules/FindZLIB.cmake	2017-12-03 15:24:47.260774846 +0000
+@@ -60,7 +60,7 @@
+ # Normal search.
+ set(_ZLIB_SEARCH_NORMAL
+   PATHS "[HKEY_LOCAL_MACHINE\\SOFTWARE\\GnuWin32\\Zlib;InstallPath]"
+-        "$ENV{PROGRAMFILES}/zlib"
++        "/usr/pkgs/zlib"
+   )
+ list(APPEND _ZLIB_SEARCHES _ZLIB_SEARCH_NORMAL)
+ 

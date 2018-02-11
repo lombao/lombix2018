@@ -1,0 +1,14 @@
+
+export CFLAGS="-I/usr/pkgs/nspr/include -I/usr/pkgs/nspr/include/nspr -I/usr/pkgs/sqlite/include -I/usr/pkgs/zlib/include"
+export LDFLAGS="-L/usr/pkgs/nspr/lib -L/usr/pkgs/sqlite/lib -L/usr/pkgs/zlib/lib"
+
+cd nss 
+
+make -j1 BUILD_OPT=1                  		\
+  NSPR_INCLUDE_DIR=/usr/pkgs/nspr/include/nspr  \
+  NSPR_LIB_DIR=/usr/pkg/nsprs/lib		\
+  USE_SYSTEM_ZLIB=1                   		\
+  ZLIB_LIBS=-lz                       		\
+  USE_64=1                            		\
+  NSS_USE_SYSTEM_SQLITE=1
+

@@ -1,0 +1,18 @@
+export CFLAGS="-I/usr/pkgs/libtiff/include -I/usr/pkgs/curl/include -I/usr/pkgs/cairo/include -I/usr/pkgs/libjpeg/include -I/usr/pkgs/libpng/include -I/usr/pkgs/lcms2/include -I/usr/pkgs/nss/include/nss"
+export LDFLAGS="-L/usr/pkgs/libtiff/lib -L/usr/pkgs/curl/lib -L/usr/pkgs/cairo/lib -L/usr/pkgs/libjpeg/lib -L/usr/pkgs/libpng/lib -L/usr/pkgs/lcms2/lib -L/usr/pkgs/nss/lib"
+
+export CXXFLAGS=$CFLAGS
+./configure 	--prefix=$PREFIX 			\
+		--build=$LMBX_BUILD			\
+           	--disable-nls   			\
+	        --datarootdir=$DATAROOTDIR		\
+		--disable-static			\
+		--enable-build-type=release		\
+		--enable-cmyk				\
+		--enable-xpdf-headers			\
+		--enable-libcurl			\
+		--enable-libopenjpeg=unmaintained 	\
+		--enable-dctdecoder=libjpeg		\
+		--enable-cms=lcms2
+
+

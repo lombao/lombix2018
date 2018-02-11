@@ -1,0 +1,9 @@
+sed "s@AM_CONFIG_HEADER@AC_CONFIG_HEADERS@g" -i configure.ac || exit 1
+touch NEWS AUTHORS ChangeLog                                 || exit 1
+
+autoreconf -i
+./configure --prefix=$PREFIX 		\
+	    --build=$LMBX_BUILD		\
+	    --datarootdir=$DATAROOTDIR 	\
+            --disable-static 
+ 

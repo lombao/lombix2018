@@ -1,0 +1,6 @@
+export LDFLAGS="-L/usr/pkgs/nettle/lib -L/usr/pkgs/libxml2/lib -L/usr/pkgs/expat/lib -L/usr/pkgs/lzo/lib -L/usr/pkgs/bzip2/lib -L/usr/pkgs/openssl/lib"
+export CFLAGS="-I/usr/pkgs/nettle/include -I/usr/pkgs/libxml2/include -I/usr/pkgs/expat/include -I/usr/pkgs/lzo/include -I/usr/pkgs/bzip2/include -I/usr/pkgs/openssl/include"
+
+./configure 	--prefix=$PREFIX 		\
+                --datarootdir=$DATAROOTDIR 	\
+		--disable-static

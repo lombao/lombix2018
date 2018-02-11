@@ -1,0 +1,4 @@
+make install
+rm -v $PREFIX/lib/libSDL2*.a
+ldconfig
+

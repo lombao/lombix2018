@@ -1,0 +1,7 @@
+export LDFLAGS="-L/usr/pkgs/openssl/lib"
+export CFLAGS="-I/usr/pkgs/openssl/include"
+
+./configure --prefix=$PREFIX 		\
+	    --build=$LMBX_BUILD		\
+            --datarootdir=$DATAROOTDIR 	\
+            --disable-static

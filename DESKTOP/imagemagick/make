@@ -1,1 +1,8 @@
+export LDFLAGS="-L/usr/pkgs/glibc/lib -L/usr/pkgs/libraw/lib -L/usr/pkgs/ghostscript/lib -L/usr/pkgs/librsvg/lib -L/usr/pkgs/libtiff/lib -L/usr/pkgs/lcms2/lib -L/usr/pkgs/X11/lib -L/usr/pkgs/fftw/lib -L/usr/pkgs/icu/lib -L/usr/pkgs/bzip2/lib -L/usr/pkgs/libtool/lib -L/usr/pkgs/libjpeg/lib"
+export CFLAGS="-I/usr/pkgs/libraw/include -I/usr/pkgs/ghostscript/include -I/usr/pkgs/librsvg/include -I/usr/pkgs/libtiff/include -I/usr/pkgs/lcms2/include -I/usr/pkgs/X11/include -I/usr/pkgs/fftw/include -I/usr/pkgs/icu/include -I/usr/pkgs/bzip2/include -I/usr/pkgs/libtool/include -I/usr/pkgs/libjpeg/include"
+export CXXFLAGS=$CFLAGS
+export LD_LIBRARY_PATH=/usr/pkgs/glibc/lib
+
+
 make
+

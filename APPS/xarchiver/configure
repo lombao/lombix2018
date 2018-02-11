@@ -1,0 +1,11 @@
+
+export LDFLAGS="-L/usr/pkgs/lzo/lib -L/usr/pkgs/zlib/lib  -L/usr/pkgs/xz/lib -L/usr/pkgs/bzip2/lib"
+export CFLAGS="-I/usr/pkgs/lzo/include -I/usr/pkgs/zlib/include  -I/usr/pkgs/xz/include -I/usr/pkgs/bzip2/include"
+export CPPFLAGS=$CFLAGS
+
+
+./autogen.sh --prefix=$PREFIX 		\
+	    --build=$LMBX_DUILD		\
+            --datarootdir=$DATAROOTDIR 	\
+            --sysconfdir=$PREFIX/etc    \
+            --disable-nls

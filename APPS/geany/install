@@ -1,3 +1,4 @@
 make install
-#rm -fr $PREFIX/share
+gtk-update-icon-cache
+update-desktop-database
 
