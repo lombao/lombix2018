@@ -1,0 +1,4 @@
+make install
+
+rm $DATAROOTDIR/applications/pcmanfm-desktop-pref.desktop
+

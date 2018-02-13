@@ -19,10 +19,13 @@ messagebus:x:18:
 lpadmin:x:19:
 fcron:x:22:
 input:x:24:
+apache:x:25:
 postfix:x:32:
 postdrop:x:33:
 mail:x:34:
 postgres:x:41:
+ftp:x:45:
+vsftpd:x:47:
 rsyncd:x:48:
 sshd:x:50:
 squid:x:51:
@@ -33,5 +36,3 @@ netdev:x:86:
 ntp:x:87:
 nogroup:x:99:
 users:x:999:
-vsftpd:x:47:
-ftp:x:45:

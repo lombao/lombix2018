@@ -1,0 +1,7 @@
+
+#export LDFLAGS="-L/usr/pkg/lame/lib -L/usr/pkg/libtheora/lib -L/usr/pkg/libogg/lib -L/usr/pkg/libvorbis/lib"
+#export C_INCLUDE_PATH=/usr/pkg/libtheora/include:/usr/pkg/lame/include:/usr/pkg/libogg/include:/usr/pkg/freetype/include:/usr/pkg/libvorbis/include:/usr/pkg/x264/include
+#export CPLUS_INCLUDE_PATH=$C_INCLUDE_PATH
+#export LIBRARY_PATH=/usr/pkg/libtheora/lib:/usr/pkg/libogg/lib:/usr/pkg/zlib/lib:/usr/pkg/libvorbis/lib:/usr/pkg/lame/lib
+
+make

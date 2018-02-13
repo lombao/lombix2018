@@ -1,0 +1,36 @@
+
+export CC="gcc -I/usr/pkgs/glibc/include"
+export GXX="g++ -I/usr/pkgs/glibc/include"
+
+./configure --prefix=$PREFIX		\
+	--build=$LMBX_BUILD		\
+	--sysconfdir=$PREFIX/etc	\
+	--datarootdir=$DATAROOTDIR	\
+	--mandir=$DATAROOTDIR/man	\
+	--with-apxs2			\
+	--with-libxml-dir=/usr/pkgs/libxml2	\
+	--with-openssl=/usr/pkgs/openssl	\
+	--with-config-file-path=$PREFIX/etc	\
+	--with-pcre-regex=/usr/pkgs/pcre	\
+	--with-zlib=/usr/pkgs/zlib		\
+	--with-bz2=/usr/pkgs/bzip2		\
+	--with-readline=/usr/pkgs/readline	\
+	--with-gdbm=/usr/pkgs/gdbm		\
+	--with-gmp=/usr/pkgs/gmp		\
+	--with-gettext=/usr/pkgs/gettext	\
+	--with-curl=/usr/pkgs/curl		\
+	--with-gd=/usr/pkgs/libgd		\
+	--with-webp-dir=/usr/pkgs/libwebp	\
+	--with-jpeg-dir=/usr/pkgs/libjpeg	\
+	--with-png-dir=/usr/pkgs/libpng		\
+	--with-freetype-dir=/usr/pkgs/X11	\
+	--with-icu-dir=/usr/pkgs/icu		\
+	--with-pgsql=/usr/services/postgres	\
+	--with-pear				\
+	--enable-exif				\
+	--enable-mbstring			\
+	--enable-bcmath				\
+	--enable-ftp				\
+	--enable-calendar			\
+	--enable-dba=shared			
+

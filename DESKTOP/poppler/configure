@@ -10,9 +10,5 @@ export CXXFLAGS=$CFLAGS
 		--enable-build-type=release		\
 		--enable-cmyk				\
 		--enable-xpdf-headers			\
-		--enable-libcurl			\
-		--enable-libopenjpeg=unmaintained 	\
-		--enable-dctdecoder=libjpeg		\
 		--enable-cms=lcms2
-
 

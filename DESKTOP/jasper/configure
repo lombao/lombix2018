@@ -1,0 +1,13 @@
+
+mkdir BUILD &&
+cd    BUILD || exit 1
+
+
+export CC="gcc -B/usr/pkgs/glibc/lib"
+export GCC=$CC
+
+cmake -DCMAKE_INSTALL_PREFIX=$PREFIX    \
+      -DCMAKE_BUILD_TYPE=Release     	\
+      -DCMAKE_SKIP_INSTALL_RPATH=YES 	\
+      -DCMAKE_INSTALL_DOCDIR=$DATAROOTDIR/doc/jasper-2.0.12 \
+      ..  || exit 1

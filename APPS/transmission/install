@@ -1,0 +1,4 @@
+make install
+gtk-update-icon-cache
+update-desktop-database
+

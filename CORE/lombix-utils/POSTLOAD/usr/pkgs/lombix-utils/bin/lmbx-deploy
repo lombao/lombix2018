@@ -22,6 +22,10 @@ rm -fr /root/.config
 rm -fr /root/.dbus
 rm -fr /root/.cache
 rm -fr /root/.gimp*
+rm -fr /root/D*
+rm -fr /root/.thumbnails
+rm -fr /root/.cmake
+rm -fr /root/.cargo
 
 
 rm -fr /var/log/*

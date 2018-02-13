@@ -1,2 +1,5 @@
 make install
 
+# Apache install the man as a nobody nogroup
+# The mans should be owned by root:root 
+chown -R root:root $DATAROOTDIR/man

@@ -1,3 +1,6 @@
 make install
 
 ln -sfv libsudo_util.so.0.0.0 $PREFIX/lib/sudo/libsudo_util.so.0
+
+rm $DATAROOTDIR/man/man8/sudoedit.8
+ln -svf sudo.8.gz $DATAROOTDIR/man/man8/sudoedit.8.gz

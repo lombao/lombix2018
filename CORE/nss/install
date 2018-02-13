@@ -3,13 +3,14 @@ cd dist
 
 mkdir -pv $PREFIX/include/nss
 mkdir -pv $PREFIX/bin
+mkdir -pv $PREFIX/lib
 
-install -v -m755 Linux*/lib/*.so              $PREFIX/lib              &&
-install -v -m644 Linux*/lib/{*.chk,libcrmf.a} $PREFIX/lib              &&
+install -v -m755 Linux*/lib/*.so              $PREFIX/lib              || exit 1
+install -v -m644 Linux*/lib/{*.chk,libcrmf.a} $PREFIX/lib              || exit 1
 
-install -v -m755 -d                           $PREFIX/include/nss      &&
-cp -v -RL {public,private}/nss/*              $PREFIX/include/nss      &&
-chmod -v 644                                  $PREFIX/include/nss/*    &&
+install -v -m755 -d                           $PREFIX/include/nss      || exit 1
+cp -v -RL {public,private}/nss/*              $PREFIX/include/nss      || exit 1
+chmod -v 644                                  $PREFIX/include/nss/*    || exit 1
 
 install -v -m755 Linux*/bin/{certutil,nss-config,pk12util} $PREFIX/bin 
 install -v -m644 Linux*/lib/pkgconfig/nss.pc  $DATAROOTDIR/pkgconfig

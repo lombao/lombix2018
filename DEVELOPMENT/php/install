@@ -1,0 +1,4 @@
+make install
+install -v -m644 php.ini-production	$PREFIX/etc/php.ini
+
+ldconfig

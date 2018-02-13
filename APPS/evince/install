@@ -1,0 +1,6 @@
+make install 
+
+# We do not need these
+rm -fr $PREFIX/lib/systemd
+rm -fr $DATAROOTDIR/GConf
+

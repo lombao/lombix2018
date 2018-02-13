@@ -1,0 +1,16 @@
+
+export LDFLAGS="-L/usr/pkg2/icu/lib -L/usr/pkg2/libxml2/lib"
+export CFLAGS="-I/usr/pkg2/icu/include -I/usr/pkg2/libxml2/include"
+export CXXFLAGS=$CFLAGS
+
+./configure   \
+	--prefix=$PREFIX		  \
+        --datarootdir=$DATAROOTDIR	  \
+        --disable-nls		          \
+	--disable-nautilus		  \
+        --without-keyring                 \
+	--enable-compile-warnings=minimum \
+        --disable-schemas-compile         \
+        --disable-libgnome-desktop        \
+        --disable-static                 
+

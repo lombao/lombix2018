@@ -1,0 +1,5 @@
+cd BUILD
+make install
+
+cp -Rp $PREFIX/share/man/* $DATAROOTDIR/man
+rm -fr $PREFIX/share

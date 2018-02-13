@@ -1,7 +1,10 @@
-export LDFLAGS="-L/usr/pkgs/python3/lib -L/usr/pkgs/icu/lib"
+export LDFLAGS="-L/usr/pkgs/python3/lib -L/usr/pkgs/python2/lib -L/usr/pkgs/icu/lib"
 export CFLAGS="-I/usr/pkgs/icu/include"
 
-export PYTHON=$PYTHON3
+# In order to create the python modules you have to choose one 
+# and the compile again
+#export PYTHON=$PYTHON3
+export PYTHON=$PYTHON2
 
 ./configure --prefix=$PREFIX 			\
             --disable-static 			\
@@ -11,5 +14,4 @@ export PYTHON=$PYTHON3
 	    --with-threads			\
 	    --with-zlib=/usr/pkgs/zlib		\
 	    --with-lzma=/usr/pkgs/xz   		\
-	    --with-python=/usr/pkgs/python3	\
             --with-history   

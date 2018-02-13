@@ -1,0 +1,22 @@
+sed -i 's/-lflite"/-lflite -lasound"/' configure || exit 1
+
+export LDFLAGS="-L/usr/pkgs/rtmpdump/lib -L/usr/pkgs/zlib/lib -L/usr/pkgs/bzip2/lib -L/usr/pkgs/xz/lib -L/usr/pkgs/X11/lib -L/usr/pkgs/xvid/lib -L/usr/pkgs/libmad/lib -L/usr/pkgs/liba52/lib -L/usr/pkgs/flac/lib -L/usr/pkgs/fdk-aac/lib -L/usr/pkgs/faad2/lib -L/usr/pkgs/faac/lib -L/usr/pkgs/x264/lib -L/usr/pkgs/libvpx/lib -L/usr/pkgs/opus/lib -L/usr/pkgs/lame/lib -L/usr/pkgs/libtheora/lib -L/usr/pkgs/libogg/lib -L/usr/pkgs/libvorbis/lib -L/usr/pkgs/libass/lib"
+export CFLAGS="-I/usr/pkgs/rtmpdump/include -I/usr/pkgs/zlib/include -I/usr/pkgs/bzip2/include -I/usr/pkgs/xz/include -I/usr/pkgs/X11/include -I/usr/pkgs/xvid/include -I/usr/pkgs/libmad/include -I/usr/pkgs/liba52/include -I/usr/pkgs/flac/include -I/usr/pkgs/fdk-aac/include -I/usr/pkgs/faad2/include -I/usr/pkgs/faac/include -I/usr/pkgs/x264/include -I/usr/pkgs/libvpx/include -I/usr/pkgs/opus/include -I/usr/pkgs/lame/include -I/usr/pkgs/libtheora/include -I/usr/pkgs/libogg/include -I/usr/pkgs/libvorbis/include -I/usr/pkgs/libass/include"
+
+./configure 	--prefix=$PREFIX 	\
+		--disable-doc		\
+		--disable-htmlpages	\
+		--enable-gpl		\
+		--enable-version3	\
+		--disable-static	\
+		--enable-shared		\
+		--disable-debug		\
+		--enable-libass		\
+		--enable-libopus	\
+		--enable-libfreetype	\
+		--enable-libtheora	\
+		--enable-libvorbis	\
+		--enable-libvpx		\
+		--enable-libx264	\
+		--enable-libmp3lame
+

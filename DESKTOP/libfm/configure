@@ -1,0 +1,5 @@
+./configure --prefix=$PREFIX 		\
+            --datarootdir=$DATAROOTDIR 	\
+            --disable-static 		\
+            --disable-nls 		\
+            --with-gtk=3

@@ -53,20 +53,8 @@ SKIP_SUFFIX="${BRACKET}[${INFO} SKIP ${BRACKET}]${NORMAL}"
 BOOTLOG=/run/bootlog
 KILLDELAY=3
 
-# Set any user specified environment variables e.g. HEADLESS
-[ -r /usr/etc/sysconfig/rc.site ]  && . /usr/etc/sysconfig/rc.site
-
-## Screen Dimensions
-# Find current screen size
-if [ -z "${COLUMNS}" ]; then
-   COLUMNS=$(stty size)
-   COLUMNS=${COLUMNS##* }
-fi
-
-# When using remote connections, such as a serial port, stty size returns 0
-if [ "${COLUMNS}" = "0" ]; then
-   COLUMNS=80
-fi
+# Always columns 80
+COLUMNS=80
 
 ## Measurements for positioning result messages
 COL=$((${COLUMNS} - 8))

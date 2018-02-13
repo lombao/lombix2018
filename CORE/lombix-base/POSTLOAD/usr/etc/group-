@@ -34,3 +34,4 @@ ntp:x:87:
 nogroup:x:99:
 users:x:999:
 vsftpd:x:47:
+ftp:x:45:
