@@ -7,7 +7,7 @@ URL=http://fcron.free.fr/archives/fcron-3.2.0.src.tar.gz
 ##
 # PREFIX: Where the package is going to be installed. 
 # If you are familiar with autotools you know what prefix usually means
-PREFIX=/usr/services/fcron
+PREFIX=/usr/pkgs/fcron
 
 ##
 # CREDITS: Files that specifically you want to be copied over from 

@@ -1,0 +1,19 @@
+diff -Naur dmidecode-3.1.orig/Makefile dmidecode-3.1/Makefile
+--- dmidecode-3.1.orig/Makefile	2017-05-23 13:34:14.000000000 +0000
++++ dmidecode-3.1/Makefile	2018-02-15 21:42:27.786000000 +0000
+@@ -30,11 +30,11 @@
+ LDFLAGS =
+ 
+ DESTDIR =
+-prefix  = /usr/local
+-sbindir = $(prefix)/sbin
+-mandir  = $(prefix)/share/man
++prefix  = 
++sbindir = $(prefix)/bin
++mandir  = /usr/share/man
+ man8dir = $(mandir)/man8
+-docdir  = $(prefix)/share/doc/dmidecode
++docdir  = /usr/share/doc/dmidecode
+ 
+ INSTALL         := install
+ INSTALL_DATA    := $(INSTALL) -m 644

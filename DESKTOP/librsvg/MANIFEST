@@ -7,7 +7,7 @@ URL=ftp://ftp.gnome.org/pub/gnome/sources/librsvg/2.40/librsvg-2.40.18.tar.xz
 ##
 # PREFIX: Where the package is going to be installed. 
 # If you are familiar with autotools you know what prefix usually means
-PREFIX=/usr/pkgs/cairo
+PREFIX=/usr/pkgs/librsvg
 
 ##
 # CREDITS: Files that specifically you want to be copied over from 

@@ -45,17 +45,17 @@ case "${1}" in
 
       # Start the udev daemon to continually watch for, and act on,
       # uevents
-      /usr/services/eudev/bin/udevd --daemon
+      /usr/pkgs/eudev/bin/udevd --daemon
 
       # Now traverse /sys in order to "coldplug" devices that have
       # already been discovered
-      /usr/services/eudev/bin/udevadm trigger --action=add    --type=subsystems
-      /usr/services/eudev/bin/udevadm trigger --action=add    --type=devices
-      /usr/services/eudev/bin/udevadm trigger --action=change --type=devices
+      /usr/pkgs/eudev/bin/udevadm trigger --action=add    --type=subsystems
+      /usr/pkgs/eudev/bin/udevadm trigger --action=add    --type=devices
+      /usr/pkgs/eudev/bin/udevadm trigger --action=change --type=devices
 
       # Now wait for udevd to process the uevents we triggered
       if ! is_true "$OMIT_UDEV_SETTLE"; then
-         /usr/services/eudev/bin/udevadm settle
+         /usr/pkgs/eudev/bin/udevadm settle
       fi
 
       # If any LVM based partitions are on the system, ensure they

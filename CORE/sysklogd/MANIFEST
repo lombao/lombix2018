@@ -7,7 +7,7 @@ URL=http://www.infodrom.org/projects/sysklogd/download/sysklogd-1.5.1.tar.gz
 ##
 # PREFIX: Where the package is going to be installed. 
 # If you are familiar with autotools you know what prefix usually means
-PREFIX=/usr/services/sysklogd
+PREFIX=/usr/pkgs/sysklogd
 
 ##
 # CREDITS: Files that specifically you want to be copied over from 

@@ -7,7 +7,7 @@ URL=http://dev.gentoo.org/~blueness/eudev/eudev-3.2.2.tar.gz
 ##
 # PREFIX: Where the package is going to be installed. 
 # If you are familiar with autotools you know what prefix usually means
-PREFIX=/usr/services/eudev
+PREFIX=/usr/pkgs/eudev
 
 ##
 # CREDITS: Files that specifically you want to be copied over from 

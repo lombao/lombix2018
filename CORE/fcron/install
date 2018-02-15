@@ -1,6 +1,6 @@
 make install
-
 rm -fr $DATAROOTDIR/man/fr
 
 #
+# I am used to issue "crontab" 
 ln -svf $PREFIX/bin/fcrontab $PREFIX/bin/crontab

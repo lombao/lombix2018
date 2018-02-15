@@ -16,7 +16,7 @@
 
 . /usr/pkgs/lombix-base/lib/services/init-functions
 
-BIN_FILE="/usr/services/fcron/sbin/fcron"
+BIN_FILE="/usr/pkgs/fcron/sbin/fcron"
 
 #$LastChangedBy: bdubbs $
 #$Date: 2011-12-05 20:37:16 -0600 (Mon, 05 Dec 2011) $

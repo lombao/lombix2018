@@ -6,7 +6,7 @@ mkdir -pv /var/lib/hwclock
             --sbindir=$PREFIX/bin 				\
             --sysconfdir=$PREFIX/etc 				\
             --datarootdir=$DATAROOTDIR 				\
-            --docdir=$DATAROODIR/doc 				\
+            --docdir=$DATAROOTDIR/doc 				\
             --without-python     				\
             --disable-chfn-chsh  				\
             --disable-plymouth_support 				\
@@ -18,7 +18,6 @@ mkdir -pv /var/lib/hwclock
             --disable-pylibmount 				\
             --disable-static     				\
             --disable-pg        				\
-            --disable-nls        				\
             --without-systemd    				\
             --without-systemdsystemunitdir
 

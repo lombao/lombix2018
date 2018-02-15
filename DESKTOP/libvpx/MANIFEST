@@ -7,7 +7,7 @@ URL=http://storage.googleapis.com/downloads.webmproject.org/releases/webm/libvpx
 ##
 # PREFIX: Where the package is going to be installed. 
 # If you are familiar with autotools you know what prefix usually means
-PREFIX=/usr/pkgs/cairo
+PREFIX=/usr/pkgs/libvpx
 
 ##
 # CREDITS: Files that specifically you want to be copied over from 

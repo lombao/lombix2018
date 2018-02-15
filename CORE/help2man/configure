@@ -1,5 +1,0 @@
-autoreconf -i
-./configure --prefix=$PREFIX  		\
-            --datarootdir=$DATAROOTDIR 	\
-            --disable-nls    
-

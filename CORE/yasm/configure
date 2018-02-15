@@ -1,7 +1,0 @@
-sed -i 's#) ytasm.*#)#' Makefile.in || exit 1
-
-./configure --prefix=$PREFIX 		\
-	    --enable-python		\
-	    --build=$LMBX_BUILD		\
-            --datarootdir=$DATAROOTDIR 	\
-            --disable-nls

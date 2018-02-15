@@ -35,14 +35,14 @@ case "$1" in
    start)
       log_info_msg "Starting the D-Bus Messagebus Daemon..."
       /usr/pkgs/coreutils/bin/mkdir -p /run/dbus
-      /usr/services/dbus/bin/dbus-uuidgen --ensure
-      start_daemon /usr/services/dbus/bin/dbus-daemon --system
+      /usr/pkgs/dbus/bin/dbus-uuidgen --ensure
+      start_daemon /usr/pkgs/dbus/bin/dbus-daemon --system
       evaluate_retval
       ;;
 
    stop)
       log_info_msg "Stopping the D-Bus Messagebus Daemon..."
-      killproc /usr/services/dbus/bin/dbus-daemon
+      killproc /usr/pkgs/dbus/bin/dbus-daemon
       evaluate_retval
       /usr/pkgs/coreutils/bin/rm -f $socket $pidfile
       ;;
@@ -54,7 +54,7 @@ case "$1" in
       ;;
 
    status)
-      statusproc /usr/services/dbus/bin/dbus-daemon
+      statusproc /usr/pkgs/dbus/bin/dbus-daemon
       ;;
 
    *)
