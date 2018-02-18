@@ -1,6 +1,5 @@
 ./configure --prefix=$PREFIX         	\
             --disable-static         	\
-            --datarootdir=$DATAROOTDIR 	\
             --enable-pcre16          	\
             --enable-unicode-properties \
             --enable-pcre32          	\

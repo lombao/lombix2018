@@ -1,0 +1,19 @@
+mkdir -pv $PREFIX/share/applications
+
+cat > $$PREFIX/share/applications/firefox.desktop << "EOF" &&
+[Desktop Entry]
+Encoding=UTF-8
+Name=Firefox Web Browser
+Comment=Browse the World Wide Web
+GenericName=Web Browser
+Exec=firefox %u
+Terminal=false
+Type=Application
+Icon=firefox
+Categories=GNOME;GTK;Network;WebBrowser;
+MimeType=application/xhtml+xml;text/xml;application/xhtml+xml;application/vnd.mozilla.xul+xml;text/mml;x-scheme-handler/http;x-scheme-handler/https;
+StartupNotify=true
+EOF
+
+ln -sfv $PREFIX/lib/firefox-55.0.3/browser/icons/mozicon128.png \
+        $PREFIX/share/pixmaps/firefox.png

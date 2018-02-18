@@ -2,7 +2,6 @@
 ./configure 						\
 	--prefix=$PREFIX 				\
         --sysconfdir=$PREFIX/etc			\
-	--datarootdir=$DATAROOTDIR			\
 	--with-confdir=$PREFIX/etc			\
 	--enable-python3_bindings			\
         --sbindir=$PREFIX/bin				\

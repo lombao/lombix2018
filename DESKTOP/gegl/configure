@@ -4,8 +4,7 @@ export CXXFLAGS=$CFLAGS
 export CPPFLAGS=$CFLAGS
 
 ./configure 	--prefix=$PREFIX 		\
+	        --build=$LMBX_BUILD		\
 		--without-vala			\
-		--disable-nls			\
-		--disable-docs			\
-	        --datadir=$DATAROOTDIR		\
-		--datarootdir=$DATAROOTDIR
+		--disable-docs		
+	

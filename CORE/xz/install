@@ -1,6 +1,2 @@
 make install
 
-rm -fr $DATAROOTDIR/man/man1/xzcat.1
-ln -fsv xz.1.gz $DATAROOTDIR/man/man1/xzcat.1.gz
-
-ldconfig

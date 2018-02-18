@@ -1,8 +1,8 @@
 
 ./configure --prefix=$PREFIX 		\
             --sysconfdir=$PREFIX/etc 	\
-            --datadir=$DATAROOTDIR   	\
             --libdir=$PREFIX/lib     	\
 	    --libexecdir=$PREFIX/lib	\
-            --mandir=$DATAROOTDIR/man 	\
+	    --sbindir=$PREFIX/bin	\
+            --mandir=$PREFIX/share/man 	\
             --dbdir=/var/db/dhcpcd      

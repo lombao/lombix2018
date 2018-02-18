@@ -6,7 +6,6 @@ export PYTHON=$PYTHON2
 ./configure --prefix=$PREFIX           		\
 	    --build=$LMBX_BUILD			\
             --sysconfdir=$PREFIX/etc   		\
-	    --datarootdir=$DATAROOTDIR		\
             --with-x                   		\
             --enable-debug=no         		\
             --enable-xkb              		\

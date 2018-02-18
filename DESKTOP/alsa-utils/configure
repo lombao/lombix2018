@@ -1,0 +1,14 @@
+export LDFLAGS="-L/usr/pkgs/fftw/lib -L/usr/pkgs/libsamplerate/lib"
+export CFLAGS="-I/usr/pkgs/fftw/include -I/usr/pkgs/libsamplerate/include"
+./configure --prefix=$PREFIX 			\
+            --sbindir=$PREFIX/bin 		\
+            --mandir=$PREFIX/share/man	 	\
+	    --localstatedir=/var		\
+            --disable-alsaconf   		\
+            --disable-nls        		\
+            --disable-bat        		\
+            --disable-xmlto      		\
+	    --with-udev-rules-dir=/usr/pkgs/eudev/lib/udev/rules.d	\
+            --with-alsa-prefix=/usr/pkgs/alsa/lib 			\
+            --with-alsa-inc-prefix=/usr/pkgs/alsa/include 		\
+            --with-curses=ncursesw

@@ -1,12 +1,12 @@
 mkdir -pv /var/lib/hwclock
 
 ./configure ADJTIME_PATH=/var/lib/hwclock/adjtime   		\
+	    --build=$LMBX_BUILD					\
             --prefix=$PREFIX      				\
             --libdir=$PREFIX/lib  				\
             --sbindir=$PREFIX/bin 				\
             --sysconfdir=$PREFIX/etc 				\
-            --datarootdir=$DATAROOTDIR 				\
-            --docdir=$DATAROOTDIR/doc 				\
+            --docdir=$PREFIX/share/doc 				\
             --without-python     				\
             --disable-chfn-chsh  				\
             --disable-plymouth_support 				\

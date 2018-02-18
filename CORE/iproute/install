@@ -3,5 +3,4 @@ make BINDIR=$PREFIX/bin  		\
      LIBDIR=$PREFIX/lib 		\
      PREFIX=$PREFIX     		\
      CONFDIR=$PREFIX/etc	   	\
-     DATADIR=$DATAROOTDIR 		\
      install

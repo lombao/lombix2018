@@ -10,10 +10,8 @@ sed -i 's/1000/999/' etc/useradd
 
 
 ./configure --prefix=$PREFIX 			\
-            --disable-nls			\
             --sbindir=$PREFIX/bin		\
 	    --bindir=$PREFIX/bin		\
-            --datarootdir=$DATAROOTDIR 		\
             --sysconfdir=/usr/etc 		\
             --with-group-name-max-length=32 	
 		

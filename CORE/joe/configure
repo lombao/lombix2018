@@ -8,8 +8,7 @@ sed 's@"/bin/cat"@"/usr/pkgs/coreutils/bin/cat"@g' -i joe/main.c || exit 1
 sed 's@;/bin/rm@;/usr/pkgs/coreutils/bin/rm@g' -i joe/builtins.c || exit 1
 autoreconf -i
 ./configure --prefix=$PREFIX 			\
-	    --datarootdir=$DATAROOTDIR		\
-            --mandir=$DATAROOTDIR/man		\
-	    --docdir=$DATAROOTDIR/doc		\
-	    --infodir=$DATAROOTDIR/info
+            --mandir=$PREFIX/share/man		\
+	    --docdir=$PREFIX/share/doc		\
+	    --infodir=$PREFIX/share/info
 

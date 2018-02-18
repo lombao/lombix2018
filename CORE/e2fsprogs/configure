@@ -2,14 +2,13 @@ sed -i -e 's:\[\.-\]::' tests/filter.sed
 mkdir build
 cd build
 ../configure --prefix=$PREFIX        	\
+	     --build=$LMBX_BUILD	\
              --bindir=$PREFIX/bin     	\
              --sbindir=$PREFIX/bin     	\
              --libdir=$PREFIX/lib      	\
-             --datarootdir=$DATAROOTDIR \
              --sysconfdir=$PREFIX/etc  	\
              --with-root-prefix=""   	\
              --enable-elf-shlibs     	\
-	     --disable-nls	    	\
              --disable-libblkid     	\
              --disable-libuuid       	\
              --disable-uuidd        

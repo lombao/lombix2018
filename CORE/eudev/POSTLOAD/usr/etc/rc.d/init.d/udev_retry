@@ -28,7 +28,7 @@
 # X-LFS-Provided-By:   LFS
 ### END INIT INFO
 
-. /usr/pkgs/lombix-base/lib/services/init-functions
+. /usr/etc/rc.d/init.d/init-functions
 
 case "${1}" in
    start)
@@ -39,7 +39,7 @@ case "${1}" in
       for file in ${rundir}/tmp-rules--*; do
          dest=${file##*tmp-rules--}
          [ "$dest" = '*' ] && break
-         /usr/pkgs/coreutils/bin/cat $file >> /usr/services/eudev/etc/udev/rules.d/$dest
+         /usr/pkgs/coreutils/bin/cat $file >> /usr/pkgs/eudev/etc/udev/rules.d/$dest
          /usr/pkgs/coreutils/bin/rm -f $file
       done
 
@@ -48,13 +48,13 @@ case "${1}" in
       /usr/pkgs/sed/bin/sed -e 's/#.*$//' /usr/etc/sysconfig/udev_retry | /usr/pkgs/grep/bin/grep -v '^$' | \
       while read line ; do
          for subsystem in $line ; do
-            /usr/services/eudev/bin/udevadm trigger --subsystem-match=$subsystem --action=add
+            /usr/pkgs/eudev/bin/udevadm trigger --subsystem-match=$subsystem --action=add
          done
       done
 
       # Now wait for udevd to process the uevents we triggered
       if ! is_true "$OMIT_UDEV_RETRY_SETTLE"; then
-         /usr/services/eudev/bin/udevadm settle
+         /usr/pkgs/eudev/bin/udevadm settle
       fi
 
       evaluate_retval

@@ -3,7 +3,6 @@ rm -f src/fcobjshash.h
 
 ./configure --prefix=$PREFIX           		\
             --localstatedir=/var       		\
-            --datarootdir=$DATAROOTDIR 		\
             --with-default-fonts=$FONTS_PATH 	\
             --disable-static           		\
             --disable-docs             

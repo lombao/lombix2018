@@ -7,7 +7,7 @@ URL=https://transmission.cachefly.net/transmission-2.92.tar.xz
 ##
 # PREFIX: Where the package is going to be installed. 
 # If you are familiar with autotools you know what prefix usually means
-PREFIX=/usr/apps/transmission
+PREFIX=/usr/pkgs/transmission
 
 ##
 # CREDITS: Files that specifically you want to be copied over from 

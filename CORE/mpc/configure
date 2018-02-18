@@ -1,6 +1,5 @@
 autoreconf -i
 ./configure --prefix=$PREFIX         	\
-            --datarootdir=$DATAROOTDIR 	\
             --with-gmp=/usr/pkgs/gmp  	\
             --with-mpfr=/usr/pkgs/mpfr 	\
             --disable-static

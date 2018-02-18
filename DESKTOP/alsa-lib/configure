@@ -1,0 +1,16 @@
+export LDFLAGS="-L/usr/pkgs/python2/lib"
+export CFLAGS="-I/usr/pkgs/python2/include"
+
+PYTHON=$PYTHON2
+./configure --prefix=$PREFIX 			\
+	    --sysconfdir=$PREFIX/etc 		\
+            --mandir=$PREFIX/share/man   	\
+	    --build=$LMBX_BUILD			\
+ 	    --with-configdir=$PREFIX/etc 	\
+	    --with-plugindir=$PREFIX/lib	\
+	    --with-tmpdir=/run			\
+	    --with-tmpdir=directory=/run	
+
+
+
+

@@ -1,7 +1,5 @@
 
 ./configure --prefix=$PREFIX  		\
 	    --localstatedir=/var	\
-            --disable-nls     		\
-            --datarootdir=$DATAROOTDIR 	\
             --without-selinux 
 

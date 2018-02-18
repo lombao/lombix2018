@@ -1,2 +1,1 @@
 make install
-#rm -fr $PREFIX/share

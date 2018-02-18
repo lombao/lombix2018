@@ -1,12 +1,7 @@
 
 
-#export LDFLAGS="-L/usr/pkgs/cups/lib"
-#export CFLAGS="-I/usr/pkgs/X11/include -I/usr/pkgs/cups/include"
-#export CXXFLAGS=$CFLAGS
-
 ./configure --prefix=$PREFIX         	\
-            --disable-nls             	\
-            --datarootdir=$DATAROOTDIR 	\
+	    --build=$LMBX_BUILD		\
             --enable-debug=no         	\
             --enable-gtk2-dependency  	\
             --enable-xkb              	\

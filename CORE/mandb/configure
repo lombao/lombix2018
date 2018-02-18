@@ -8,12 +8,9 @@ sed -i 's@/bin/sh@/usr/pkgs/bash/bin/bash@'       src/man.c	|| exit 1
 
 ./configure --prefix=$PREFIX                     	\
 	    --build=$LMBX_BUILD				\
-	    --datarootdir=$DATAROOTDIR           	\
-            --docdir=$DATAROOTDIR/doc		 	\
             --sysconfdir=$PREFIX/etc             	\
 	    --sbindir=$PREFIX/bin		 	\
 	    --with-db=gdbm			 	\
             --libdir=$PREFIX/lib                 	\
-            --disable-setuid                     	\
-            --disable-nls                        
+            --disable-setuid                     	
 

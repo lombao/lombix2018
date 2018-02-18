@@ -25,7 +25,7 @@ diff -Naur vsftpd-3.0.3.orig/defs.h vsftpd-3.0.3/defs.h
  #define VSF_DEFS_H
  
 -#define VSFTP_DEFAULT_CONFIG    "/etc/vsftpd.conf"
-+#define VSFTP_DEFAULT_CONFIG    "/usr/services/vsftpd/etc/vsftpd.conf"
++#define VSFTP_DEFAULT_CONFIG    "/opt/vsftpd/etc/vsftpd.conf"
  
  #define VSFTP_COMMAND_FD        0
  
@@ -38,12 +38,12 @@ diff -Naur vsftpd-3.0.3.orig/tunables.c vsftpd-3.0.3/tunables.c
    install_str_setting(0, &tunable_ftpd_banner);
 -  install_str_setting("/etc/vsftpd.banned_emails", &tunable_banned_email_file);
 -  install_str_setting("/etc/vsftpd.chroot_list", &tunable_chroot_list_file);
-+  install_str_setting("/usr/services/vsftpd/etc/vsftpd.banned_emails", &tunable_banned_email_file);
-+  install_str_setting("/usr/services/vsftpd/etc/vsftpd.chroot_list", &tunable_chroot_list_file);
++  install_str_setting("/opt/vsftpd/etc/vsftpd.banned_emails", &tunable_banned_email_file);
++  install_str_setting("/opt/vsftpd/etc/vsftpd.chroot_list", &tunable_chroot_list_file);
    install_str_setting("ftp", &tunable_pam_service_name);
    install_str_setting("ftp", &tunable_guest_username);
 -  install_str_setting("/etc/vsftpd.user_list", &tunable_userlist_file);
-+  install_str_setting("/usr/services/vsftpd/etc/vsftpd.user_list", &tunable_userlist_file);
++  install_str_setting("/opt/vsftpd/etc/vsftpd.user_list", &tunable_userlist_file);
    install_str_setting(0, &tunable_anon_root);
    install_str_setting(0, &tunable_local_root);
    install_str_setting(0, &tunable_banner_file);
@@ -52,7 +52,7 @@ diff -Naur vsftpd-3.0.3.orig/tunables.c vsftpd-3.0.3/tunables.c
    install_str_setting(0, &tunable_deny_file);
    install_str_setting(0, &tunable_user_sub_token);
 -  install_str_setting("/etc/vsftpd.email_passwords",
-+  install_str_setting("/usr/services/vsftpd/etc/vsftpd.email_passwords",
++  install_str_setting("/opt/vsftpd/etc/vsftpd.email_passwords",
                        &tunable_email_password_file);
    install_str_setting("/usr/share/ssl/certs/vsftpd.pem",
                        &tunable_rsa_cert_file);
@@ -135,7 +135,7 @@ diff -Naur vsftpd-3.0.3.orig/vsftpd.8 vsftpd-3.0.3/vsftpd.8
  .Pa listen=YES
  in
 -.Pa /etc/vsftpd.conf .
-+.Pa /usr/services/vsftpd/etc/vsftpd.conf .
++.Pa /opt/vsftpd/etc/vsftpd.conf .
  Direct execution of the
  .Nm vsftpd
  binary will then launch the FTP service ready for immediate client connections.
@@ -144,7 +144,7 @@ diff -Naur vsftpd-3.0.3.orig/vsftpd.8 vsftpd-3.0.3/vsftpd.8
  strict order that they are encountered on the command line.
  If no config files are specified, the default configuration file of
 -.Pa /etc/vsftpd.conf
-+.Pa /usr/services/vsftpd/etc/vsftpd.conf
++.Pa /opt/vsftpd/etc/vsftpd.conf
  will be loaded, after all other command line options are processed.
  .Pp
  Supported options are:
@@ -153,7 +153,7 @@ diff -Naur vsftpd-3.0.3.orig/vsftpd.8 vsftpd-3.0.3/vsftpd.8
  .El
  .Sh EXAMPLES
 -vsftpd -olisten=NO /etc/vsftpd.conf -oftpd_banner=blah
-+vsftpd -olisten=NO /usr/services/vsftpd/etc/vsftpd.conf -oftpd_banner=blah
++vsftpd -olisten=NO /opt/vsftpd/etc/vsftpd.conf -oftpd_banner=blah
  .Pp
  That example overrides vsftpd's built-in default for the "listen" option to be
  NO, but then loads /etc/vsftpd.conf which may override that setting. Finally,
@@ -161,7 +161,7 @@ diff -Naur vsftpd-3.0.3.orig/vsftpd.8 vsftpd-3.0.3/vsftpd.8
  setting and any identical setting that was in the config file.
  .Sh FILES
 -.Pa /etc/vsftpd.conf
-+.Pa /usr/services/vsftpd/etc/vsftpd.conf
++.Pa /opt/vsftpd/etc/vsftpd.conf
  .Sh SEE ALSO
  .Xr vsftpd.conf 5
  .end
@@ -170,7 +170,7 @@ diff -Naur vsftpd-3.0.3.orig/vsftpd.conf vsftpd-3.0.3/vsftpd.conf
 +++ vsftpd-3.0.3/vsftpd.conf	2018-02-07 21:13:33.890000000 +0000
 @@ -1,4 +1,4 @@
 -# Example config file /etc/vsftpd.conf
-+# Example config file /usr/services/vsftpd/etc/vsftpd.conf
++# Example config file /opt/vsftpd/etc/vsftpd.conf
  #
  # The default compiled in settings are fairly paranoid. This sample file
  # loosens things up a bit, to make the ftp daemon more usable.
@@ -207,7 +207,7 @@ diff -Naur vsftpd-3.0.3.orig/vsftpd.conf vsftpd-3.0.3/vsftpd.conf
  #deny_email_enable=YES
  # (default follows)
 -#banned_email_file=/etc/vsftpd.banned_emails
-+#banned_email_file=/usr/services/vsftpd/etc/vsftpd.banned_emails
++#banned_email_file=/opt/vsftpd/etc/vsftpd.banned_emails
  #
  # You may specify an explicit list of local users to chroot() to their home
  # directory. If chroot_local_user is YES, then this list becomes a list of
@@ -216,7 +216,7 @@ diff -Naur vsftpd-3.0.3.orig/vsftpd.conf vsftpd-3.0.3/vsftpd.conf
  #chroot_list_enable=YES
  # (default follows)
 -#chroot_list_file=/etc/vsftpd.chroot_list
-+#chroot_list_file=/usr/services/vsftpd/etc/vsftpd.chroot_list
++#chroot_list_file=/opt/vsftpd/etc/vsftpd.chroot_list
 +#
 +#
 +
@@ -235,7 +235,7 @@ diff -Naur vsftpd-3.0.3.orig/vsftpd.conf.5 vsftpd-3.0.3/vsftpd.conf.5
  vsftpd.conf may be used to control various aspects of vsftpd's behaviour. By
  default, vsftpd looks for this file at the location
 -.BR /etc/vsftpd.conf .
-+.BR /usr/services/vsftpd/etc/vsftpd.conf .
++.BR /opt/vsftpd/etc/vsftpd.conf .
  However, you may override this by specifying a command line argument to
  vsftpd. The command line argument is the pathname of the configuration file
  for vsftpd. This behaviour is useful because you may wish to use an advanced
@@ -253,7 +253,7 @@ diff -Naur vsftpd-3.0.3.orig/vsftpd.conf.5 vsftpd-3.0.3/vsftpd.conf.5
  a list of users which are NOT to be placed in a chroot() jail.
  By default, the file containing this list is
 -/etc/vsftpd.chroot_list, but you may override this with the
-+/usr/services/vsftpd/etc/vsftpd.chroot_list, but you may override this with the
++/opt/vsftpd/etc/vsftpd.chroot_list, but you may override this with the
  .BR chroot_list_file
  setting.
  
@@ -262,7 +262,7 @@ diff -Naur vsftpd-3.0.3.orig/vsftpd.conf.5 vsftpd-3.0.3/vsftpd.conf.5
  If activated, you may provide a list of anonymous password e-mail responses
  which cause login to be denied. By default, the file containing this list is
 -/etc/vsftpd.banned_emails, but you may override this with the
-+/usr/services/vsftpd/etc/vsftpd.banned_emails, but you may override this with the
++/opt/vsftpd/etc/vsftpd.banned_emails, but you may override this with the
  .BR banned_email_file
  setting.
  
@@ -289,7 +289,7 @@ diff -Naur vsftpd-3.0.3.orig/vsftpd.conf.5 vsftpd-3.0.3/vsftpd.conf.5
  .BR email_password_file
  setting. The file format is one password per line, no extra whitespace. The
 -default filename is /etc/vsftpd.email_passwords.
-+default filename is /usr/services/vsftpd/etc/vsftpd.email_passwords.
++default filename is /opt/vsftpd/etc/vsftpd.email_passwords.
  
  Default: NO
  .TP
@@ -307,7 +307,7 @@ diff -Naur vsftpd-3.0.3.orig/vsftpd.conf.5 vsftpd-3.0.3/vsftpd.conf.5
  is enabled.
  
 -Default: /etc/vsftpd.banned_emails
-+Default: /usr/services/vsftpd/etc/vsftpd.banned_emails
++Default: /opt/vsftpd/etc/vsftpd.banned_emails
  .TP
  .B banner_file
  This option is the name of a file containing text to display when someone
@@ -316,7 +316,7 @@ diff -Naur vsftpd-3.0.3.orig/vsftpd.conf.5 vsftpd-3.0.3/vsftpd.conf.5
  chroot() jail.
  
 -Default: /etc/vsftpd.chroot_list
-+Default: /usr/services/vsftpd/etc/vsftpd.chroot_list
++Default: /opt/vsftpd/etc/vsftpd.chroot_list
  .TP
  .B cmds_allowed
  This options specifies a comma separated list of allowed FTP commands (post
@@ -325,7 +325,7 @@ diff -Naur vsftpd-3.0.3.orig/vsftpd.conf.5 vsftpd-3.0.3/vsftpd.conf.5
  setting.
  
 -Default: /etc/vsftpd.email_passwords
-+Default: /usr/services/vsftpd/etc/vsftpd.email_passwords
++Default: /opt/vsftpd/etc/vsftpd.email_passwords
  .TP
  .B ftp_username
  This is the name of the user we use for handling anonymous FTP. The home
@@ -334,11 +334,11 @@ diff -Naur vsftpd-3.0.3.orig/vsftpd.conf.5 vsftpd-3.0.3/vsftpd.conf.5
  .BR user_config_dir
  to be
 -.BR /etc/vsftpd_user_conf
-+.BR /usr/services/vsftpd/etc/vsftpd_user_conf
++.BR /opt/vsftpd/etc/vsftpd_user_conf
  and then log on as the user "chris", then vsftpd will apply the settings in
  the file
 -.BR /etc/vsftpd_user_conf/chris
-+.BR /usr/services/vsftpd/etc/vsftpd_user_conf/chris
++.BR /opt/vsftpd/etc/vsftpd_user_conf/chris
  for the duration of the session. The format of this file is as detailed in
  this manual page! PLEASE NOTE that not all settings are effective on a
  per-user basis. For example, many settings only prior to the user's session
@@ -347,7 +347,7 @@ diff -Naur vsftpd-3.0.3.orig/vsftpd.conf.5 vsftpd-3.0.3/vsftpd.conf.5
  option is active.
  
 -Default: /etc/vsftpd.user_list
-+Default: /usr/services/vsftpd/etc/vsftpd.user_list
++Default: /opt/vsftpd/etc/vsftpd.user_list
  .TP
  .B vsftpd_log_file
  This option is the name of the file to which we write the vsftpd style

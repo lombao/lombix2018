@@ -3,10 +3,9 @@ sed 's@'/bin/sh@'/usr/pkgs/bash/bin/bash@g' -i src/*.c 		|| exit 1
 sed 's@/usr/bin/sort@/usr/pkgs/coreutils/bin/sort@g' -i src/*.c	|| exit 1
 
 
-FORCE_UNSAFE_CONFIGURE=1 ./configure    \
+./configure    \
             --prefix=$PREFIX            \
 	    --build=$LMBX_BUILD		\
             --without-selinux           \
-            --datarootdir=$DATAROOTDIR  \
             --enable-no-install-program=kill,uptime,chcon,shred
 

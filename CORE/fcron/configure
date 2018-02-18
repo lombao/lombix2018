@@ -1,5 +1,4 @@
 ./configure --prefix=$PREFIX 		\
-            --datarootdir=$DATAROOTDIR 	\
             --localstatedir=/var 	\
             --without-sendmail         	\
             --with-boot-install=no     	\

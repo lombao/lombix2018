@@ -8,4 +8,3 @@ ln -sv bzip2 $PREFIX/bin/bunzip2
 ln -sv bzip2 $PREFIX/bin/bzcat
 
 chown root:root $PREFIX/lib/libbz*
-ldconfig

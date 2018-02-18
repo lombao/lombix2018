@@ -1,5 +1,4 @@
 ./configure --prefix=$PREFIX 		\
             --disable-thorough-tests 	\
-            --disable-static 		\
-            --datarootdir=$DATAROOTDIR
+            --disable-static 		
 

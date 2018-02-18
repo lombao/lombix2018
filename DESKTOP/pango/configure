@@ -1,8 +1,5 @@
 
-#export CFLAGS="-I/usr/pkg/X11/include"
-#export CXXFLAGS="-I/usr/pkg/X11/include"
 ./configure --prefix=$PREFIX 		\
-             --datarootdir=$DATAROOTDIR \
              --enable-debug=no    	\
              --enable-static=no   	\
              --disable-gtk-doc

@@ -1,4 +1,2 @@
 ./configure --prefix=$PREFIX 		\
-            --datarootdir=$DATAROOTDIR 	\
-	    --with-gtk=3		\
-            --disable-nls
+	    --with-gtk=3		

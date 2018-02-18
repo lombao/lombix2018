@@ -4,6 +4,5 @@ export CFLAGS="-I/usr/pkgs/lvm2/include"
 ./configure 				\
 	--prefix=$PREFIX 		\
         --sbindir=$PREFIX/bin		\
-	--datarootdir=$DATAROOTDIR	\
 	--disable-static
 

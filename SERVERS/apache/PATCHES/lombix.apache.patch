@@ -8,17 +8,17 @@ diff -Naur httpd-2.4.27.orig/config.layout httpd-2.4.27/config.layout
 +
 +# Lombix Layout
 +<Layout Lombix>
-+    prefix:          /usr/services/apache
++    prefix:          /opt/apache
 +    exec_prefix:     ${prefix}
 +    bindir:          ${prefix}/bin
 +    sbindir:         ${prefix}/sbin
 +    libdir:          ${prefix}/lib
 +    libexecdir:      ${prefix}/lib/modules
 +    installbuilddir: ${prefix}/lib/build
-+    mandir:          /usr/share/man
++    mandir:          ${prefix}/share/man
 +    sysconfdir:      ${prefix}/etc
 +    datadir:         /var/www
-+    iconsdir:        /usr/share/icons
++    iconsdir:        ${prefix}/share/icons
 +    htdocsdir:       ${datadir}/htdocs
 +    manualdir:       ${htdocsdir}/manual
 +    cgidir:          ${datadir}/cgi-bin

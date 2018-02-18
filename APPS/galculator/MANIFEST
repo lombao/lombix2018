@@ -6,7 +6,7 @@ URL=http://galculator.mnim.org/downloads/galculator-2.1.4.tar.gz
 ##
 # PREFIX: Where the package is going to be installed. 
 # If you are familiar with autotools you know what prefix usually means
-PREFIX=/usr/apps/galculator
+PREFIX=/usr/pkgs/galculator
 
 ##
 # CREDITS: Files that specifically you want to be copied over from 

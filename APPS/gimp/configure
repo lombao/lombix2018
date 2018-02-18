@@ -6,12 +6,11 @@ export CFLAGS="-I/usr/pkgs/libtiff/include -I/usr/pkgs/libjpeg/include  -I/usr/p
 export CPPFLAGS=$CFLAGS
 
 ./configure --prefix=$PREFIX 					\
-            --datarootdir=$DATAROOTDIR 				\
             --sysconfdir=$PREFIX/etc    			\
             --without-gvfs   					\
 	    --disable-glibtest					\
 	    --disable-gtktest					\
 	    --with-alsa-prefix=/usr/pkgs/alsa/lib 		\
             --with-alsa-inc-prefix=/usr/pkg/alsa/include 	\
-	    --with-desktop-dir=$DATAROOTDIR      		\
-            --disable-nls
+	    --with-desktop-dir=$PREFIX/share
+      		

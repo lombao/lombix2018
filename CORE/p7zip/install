@@ -1,4 +1,4 @@
 make 	DEST_HOME=$PREFIX 		\
-	DEST_MAN=$DATAROOTDIR/man 	\
-	DEST_SHARE_DOC=$DATAROOTDIR/doc install
+	DEST_MAN=$$PREFIX/share/man 	\
+	DEST_SHARE_DOC=$PREFIX/share/doc install
 

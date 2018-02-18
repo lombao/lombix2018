@@ -1,7 +1,5 @@
-./configure --prefix=$PREFIX 		\
-            --disable-nls    		\
-	    --datarootdir=$DATAROOTDIR	\
-	    --mandir=$DATAROOTDIR/man	\
-	    --infodir=$DATAROOTDIR/info	\
-	    --docdir=$DATAROOTDIR/doc	
+./configure --prefix=$PREFIX 			\
+	    --mandir=$PREFIX/share/man		\
+	    --infodir=$PREFIX/share/info	\
+	    --docdir=$PREFIX/share/doc	
 

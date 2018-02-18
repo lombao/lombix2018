@@ -7,7 +7,7 @@ URL=https://download.gimp.org/pub/gimp/v2.8/gimp-2.8.22.tar.bz2
 ##
 # PREFIX: Where the package is going to be installed. 
 # If you are familiar with autotools you know what prefix usually means
-PREFIX=/usr/apps/gimp
+PREFIX=/usr/pkgs/gimp
 
 ##
 # CREDITS: Files that specifically you want to be copied over from 

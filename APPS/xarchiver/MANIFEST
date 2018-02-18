@@ -7,7 +7,7 @@ URL=https://downloads.sourceforge.net/xarchiver/xarchiver-0.5.4.tar.bz2
 ##
 # PREFIX: Where the package is going to be installed. 
 # If you are familiar with autotools you know what prefix usually means
-PREFIX=/usr/apps/xarchiver
+PREFIX=/usr/pkgs/xarchiver
 
 ##
 # CREDITS: Files that specifically you want to be copied over from 

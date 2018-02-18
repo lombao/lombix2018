@@ -6,6 +6,4 @@ export CPPFLAGS=$CFLAGS
 
 ./autogen.sh --prefix=$PREFIX 		\
 	    --build=$LMBX_DUILD		\
-            --datarootdir=$DATAROOTDIR 	\
-            --sysconfdir=$PREFIX/etc    \
-            --disable-nls
+            --sysconfdir=$PREFIX/etc    

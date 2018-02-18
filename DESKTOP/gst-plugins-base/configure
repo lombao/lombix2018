@@ -1,4 +1,2 @@
-#export LIBS="-lxcb"
 ./configure --prefix=$PREFIX 						\
-            --datarootdir=$DATAROOTDIR 					\
             --with-package-name="Gstreamer Base Plugins 1.12.2 LOMBIX" 

@@ -1,0 +1,5 @@
+mv -v autoconf.texi autoconf213.texi
+rm -v autoconf.info
+./configure --prefix=$PREFIX \
+            --program-suffix=2.13
+ 

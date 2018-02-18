@@ -6,7 +6,6 @@ sed -i 's@/lib/modules@/usr/boot/modules@' tools/*.c || exit 1
 	    --build=$LMBX_BUILD			\
             --bindir=$PREFIX/bin          	\
             --sbindir=$PREFIX/bin         	\
-            --datarootdir=$DATAROOTDIR    	\
             --sysconfdir=$PREFIX/etc      	\
 	    --enable-python			\
             --with-rootlibdir=$PREFIX/lib 	\

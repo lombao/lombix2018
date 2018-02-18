@@ -1,3 +1,0 @@
-make prefix=$PREFIX MANDIR=$DATAROOTDIR/man DEFAULTFONTDIR=$DATAROOTDIR/figlet install
-
-

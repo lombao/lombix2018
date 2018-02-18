@@ -1,0 +1,13 @@
+
+
+./configure   					\
+            --prefix=$PREFIX      		\
+	    --build=$LMBX_BUILD			\
+            --libdir=$PREFIX/lib  		\
+            --sbindir=$PREFIX/bin 		\
+            --sysconfdir=$PREFIX/etc 		\
+            --with-python=$PYTHON3	 	\
+            --disable-static     		\
+            --disable-selinux    		\
+            --with-pcre=system  
+

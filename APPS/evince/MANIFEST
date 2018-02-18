@@ -7,7 +7,7 @@ URL=ftp://ftp.gnome.org/pub/gnome/sources/evince/3.24/evince-3.24.1.tar.xz
 ##
 # PREFIX: Where the package is going to be installed. 
 # If you are familiar with autotools you know what prefix usually means
-PREFIX=/usr/apps/evince
+PREFIX=/usr/pkgs/evince
 
 ##
 # CREDITS: Files that specifically you want to be copied over from 

@@ -1,3 +1,2 @@
-./configure --prefix=$PREFIX 		\
-	--datarootdir=$DATAROOTDIR	\
+./configure --prefix=$PREFIX 		
 

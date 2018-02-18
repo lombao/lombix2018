@@ -8,7 +8,6 @@ find ./ -type f -exec sed -i 's@/usr/bin/file@/usr/pkgs/file/bin/file@' {} \; ||
             --bindir=$PREFIX/bin       		\
             --sbindir=$PREFIX/bin		\
             --libdir=$PREFIX/lib       		\
-            --datarootdir=$DATAROOTDIR 		\
             --with-rootrundir=/run     		\
             --with-rootlibdir=$PREFIX/lib  	\
             --enable-manpages       		\

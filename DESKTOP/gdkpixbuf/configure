@@ -3,9 +3,7 @@ export CPPFLAGS="-I/usr/pkgs/libjpeg/include"
 
 ./configure --prefix=$PREFIX 		\
             --enable-debug=no		\
-            --datarootdir=$DATAROOTDIR 	\
             --with-x11 			\
-            --disable-nls 		\
 	    --disable-glibtest		\
             --disable-gtk-doc
 

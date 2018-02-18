@@ -4,7 +4,6 @@ export CFLAGS="-I/usr/pkgs/expat/include"
 
 ./configure --prefix=$PREFIX 			\
             --localstatedir=/var     		\
-            --datarootdir=$DATAROOTDIR 		\
             --disable-doxygen-docs   		\
             --disable-xml-docs      		\
             --disable-static         		\

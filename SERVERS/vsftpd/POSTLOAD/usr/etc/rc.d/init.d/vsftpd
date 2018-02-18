@@ -23,7 +23,7 @@
 # X-LFS-Provided-By:   LFS
 ### END INIT INFO
 
-. /usr/pkgs/lombix-base/lib/services/init-functions
+. /etc/rc.d/init.d/init-functions
 
 #$LastChangedBy: bdubbs $
 #$Date: 2011-12-05 20:37:16 -0600 (Mon, 05 Dec 2011) $
@@ -31,19 +31,19 @@
 case "$1" in
    start)
       log_info_msg "Starting vsFTPD Server..."
-      start_daemon /usr/services/vsftpd/bin/vsftpd
+      start_daemon /opt/vsftpd/bin/vsftpd
       evaluate_retval
       ;;
 
    stop)
       log_info_msg "Stopping vsFTPD Server..."
-      killproc /usr/services/vsftpd/bin/vsftpd
+      killproc /opt/vsftpd/bin/vsftpd
       evaluate_retval
       ;;
 
    reload)
       log_info_msg "Reloading vsFTPD Server..."
-      killproc /usr/services/vsftpd/bin/vsftpd -HUP
+      killproc /opt/vsftpd/bin/vsftpd -HUP
       evaluate_retval
       ;;
 
@@ -54,7 +54,7 @@ case "$1" in
       ;;
 
    status)
-      statusproc /usr/services/vsftpd/bin/vsftpd
+      statusproc /opt/vsftpd/bin/vsftpd
       ;;
 
    *)

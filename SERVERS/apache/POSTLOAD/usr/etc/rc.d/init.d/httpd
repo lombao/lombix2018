@@ -24,7 +24,7 @@
 # X-LFS-Provided-By:   BLFS / LFS 7.0
 ### END INIT INFO
 
-. /usr/pkgs/lombix-base/lib/services/init-functions
+. /usr/etc/rc.d/init.d/init-functions
 
 #$LastChangedBy: krejzi $
 #$Date: 2013-01-26 22:28:34 -0600 (Sat, 26 Jan 2013) $
@@ -33,24 +33,24 @@ case "$1" in
    start)
       log_info_msg "Starting Apache HTTP daemon..."
       mkdir -p /run/httpd
-      start_daemon /usr/services/apache/sbin/apachectl -k start
+      start_daemon /opt/apache/sbin/apachectl -k start
       evaluate_retval
       ;;
 
    stop)
       log_info_msg "Stopping Apache HTTP daemon..."
-      start_daemon /usr/services/apache/sbin/apachectl -k stop
+      start_daemon /opt/apache/sbin/apachectl -k stop
       evaluate_retval
       ;;
 
    restart)
       log_info_msg "Restarting Apache HTTP daemon..."
-      start_daemon /usr/services/apache/sbin/apachectl -k restart
+      start_daemon /opt/apache/sbin/apachectl -k restart
       evaluate_retval
       ;;
 
    status)
-      statusproc /usr/services/apache/sbin/httpd
+      statusproc /opt/apache/sbin/httpd
       ;;
 
    *)

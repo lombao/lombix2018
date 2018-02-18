@@ -1,2 +1,3 @@
-./configure --prefix=$PREFIX --disable-nls --datarootdir=$DATAROOTDIR
+./configure --prefix=$PREFIX 
+
 

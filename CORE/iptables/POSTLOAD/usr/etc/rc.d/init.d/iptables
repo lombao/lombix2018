@@ -24,7 +24,7 @@
 # X-LFS-Provided-By: BLFS / LFS 7.0
 ### END INIT INFO
 
-. /usr/lib/lsb/init-functions
+. /usr/etc/rc.d/init.d/init-functions
 
 #$LastChangedBy: krejzi $
 #$Date: 2013-06-11 11:01:46 -0500 (Tue, 11 Jun 2013) $
@@ -40,38 +40,38 @@ case "$1" in
 
     lock)
         log_info_msg "Locking system iptables firewall..."
-        /usr/pkgs/iptables/sbin/iptables --policy INPUT   DROP
-        /usr/pkgs/iptables/sbin/iptables --policy OUTPUT  DROP
-        /usr/pkgs/iptables/sbin/iptables --policy FORWARD DROP
-        /usr/pkgs/iptables/sbin/iptables           --flush
-        /usr/pkgs/iptables/sbin/iptables -t nat    --flush
-        /usr/pkgs/iptables/sbin/iptables -t mangle --flush
-        /usr/pkgs/iptables/sbin/iptables           --delete-chain
-        /usr/pkgs/iptables/sbin/iptables -t nat    --delete-chain
-        /usr/pkgs/iptables/sbin/iptables -t mangle --delete-chain
-        /usr/pkgs/iptables/sbin/iptables -A INPUT  -i lo -j ACCEPT
-        /usr/pkgs/iptables/sbin/iptables -A OUTPUT -o lo -j ACCEPT
+        /usr/pkgs/iptables/bin/iptables --policy INPUT   DROP
+        /usr/pkgs/iptables/bin/iptables --policy OUTPUT  DROP
+        /usr/pkgs/iptables/bin/iptables --policy FORWARD DROP
+        /usr/pkgs/iptables/bin/iptables           --flush
+        /usr/pkgs/iptables/bin/iptables -t nat    --flush
+        /usr/pkgs/iptables/bin/iptables -t mangle --flush
+        /usr/pkgs/iptables/bin/iptables           --delete-chain
+        /usr/pkgs/iptables/bin/iptables -t nat    --delete-chain
+        /usr/pkgs/iptables/bin/iptables -t mangle --delete-chain
+        /usr/pkgs/iptables/bin/iptables -A INPUT  -i lo -j ACCEPT
+        /usr/pkgs/iptables/bin/iptables -A OUTPUT -o lo -j ACCEPT
         evaluate_retval
         ;;
 
     clear)
         log_info_msg "Clearing system iptables iptables..."
-        /usr/pkgs/iptables/sbin/iptables --policy INPUT   ACCEPT
-        /usr/pkgs/iptables/sbin/iptables --policy OUTPUT  ACCEPT
-        /usr/pkgs/iptables/sbin/iptables --policy FORWARD ACCEPT
-        /usr/pkgs/iptables/sbin/iptables           --flush
-        /usr/pkgs/iptables/sbin/iptables -t nat    --flush
-        /usr/pkgs/iptables/sbin/iptables -t mangle --flush
-        /usr/pkgs/iptables/sbin/iptables           --delete-chain
-        /usr/pkgs/iptables/sbin/iptables -t nat    --delete-chain
-        /usr/pkgs/iptables/sbin/iptables -t mangle --delete-chain
+        /usr/pkgs/iptables/bin/iptables --policy INPUT   ACCEPT
+        /usr/pkgs/iptables/bin/iptables --policy OUTPUT  ACCEPT
+        /usr/pkgs/iptables/bin/iptables --policy FORWARD ACCEPT
+        /usr/pkgs/iptables/bin/iptables           --flush
+        /usr/pkgs/iptables/bin/iptables -t nat    --flush
+        /usr/pkgs/iptables/bin/iptables -t mangle --flush
+        /usr/pkgs/iptables/bin/iptables           --delete-chain
+        /usr/pkgs/iptables/bin/iptables -t nat    --delete-chain
+        /usr/pkgs/iptables/bin/iptables -t mangle --delete-chain
         evaluate_retval
         ;;
 
     status)
-        /usr/pkgs/iptables/sbin/iptables           --numeric --list
-        /usr/pkgs/iptables/sbin/iptables -t nat    --numeric --list
-        /usr/pkgs/iptables/sbin/iptables -t mangle --numeric --list
+        /usr/pkgs/iptables/bin/iptables           --numeric --list
+        /usr/pkgs/iptables/bin/iptables -t nat    --numeric --list
+        /usr/pkgs/iptables/bin/iptables -t mangle --numeric --list
         ;;
 
     *)

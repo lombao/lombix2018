@@ -1,12 +1,10 @@
 sed -i '/LIBTOOL_INSTALL/d' c++/Makefile.in || exit 1
 
 ./configure --prefix=$PREFIX           				\
-            --datarootdir=$DATAROOTDIR 				\
-            --mandir=$DATAROOTDIR/man 				\
+            --mandir=$PREFIX/share/man 				\
             --with-shared           				\
             --without-debug         				\
-            --disable-nls           				\
             --without-normal        				\
-            --with-pkg-config-libdir=$DATAROOTDIR/pkgconfig 	\
+            --with-pkg-config-libdir=$PREFIX/lib/pkgconfig 	\
             --enable-pc-files       				\
             --enable-widec

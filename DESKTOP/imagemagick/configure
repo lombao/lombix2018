@@ -9,7 +9,6 @@ autoreconf -i || exit 1
 
 ./configure --prefix=$PREFIX 					\
 	    --build=$LMBX_BUILD					\
-	    --datarootdir=$DATAROOTDIR				\
 	    --disable-docs					\
 	    --with-x						\
             --with-rsvg						\

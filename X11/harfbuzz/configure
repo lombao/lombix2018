@@ -4,6 +4,5 @@
 ./configure --prefix=$PREFIX           	\
             --with-freetype            	\
             --with-icu                 	\
-            --datarootdir=$DATAROOTDIR 	\
             --with-gobject        
 

@@ -1,3 +1,1 @@
 make install
-ldconfig
-#rm -fr $PREFIX/share

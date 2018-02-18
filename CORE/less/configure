@@ -1,3 +1,2 @@
 ./configure --prefix=$PREFIX 		\
-            --datarootdir=$DATAROOTDIR 	\
             --sysconfdir=$PREFIX/etc

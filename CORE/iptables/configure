@@ -2,6 +2,5 @@
 ./configure --prefix=$PREFIX 		\
 	    --sbindir=$PREFIX/bin	\
             --disable-nftables    	\
-            --datarootdir=$DATAROOTDIR 	\
             --enable-libipq       	\
             --with-xtlibdir=$PREFIX/lib/xtables 

@@ -1,5 +1,4 @@
 ./configure --prefix=$PREFIX 	\
-            --disable-nls 	\
             --with-gtk=no 	\
             --with-extra-only 	\
             --disable-static 

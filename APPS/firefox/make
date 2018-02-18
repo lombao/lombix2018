@@ -1,0 +1,13 @@
+export CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:/usr/pkgs/X11/include:/usr/pkgs/nss/include/nss:/usr/pkgs/nspr/include/nspr:/usr/pkgs/libpng/include:/usr/pkgs/sqlite/include:/usr/pkgs/alsa-lib/include:/usr/pkgs/libevent/include:/usr/pkgs/libvpx/include:/usr/pkgs/icu/include:/usr/pkgs/startup-notification/include:/usr/pkgs/harfbuzz/include:/usr/pkgs/pixman/include:/usr/pkgs/zlib/include:/usr/pkgs/libjpeg/include:/usr/pkgs/bzip2/include:/usr/pkgs/pth/include:/usr/pkgs/libffi/include
+export C_INCLUDE_PATH=/usr/pkgs/libvpx/include:/usr/pkgs/X11/include:/usr/pkgs/zlib/include:/usr/pkgs/libjpeg/include:/usr/pkgs/libpng/include
+export LDFLAGS="-L/usr/pkgs/nss/lib -L/usr/pkgs/nspr/lib -L/usr/pkgs/libpng/lib -L/usr/pkgs/zlib/lib -L/usr/pkgs/libjpeg/lib -L/usr/pkgs/X11/lib -L/usr/pkgs/libvpx/lib"
+export CFLAGS="-I/usr/pkgs/nss/include -I/usr/pkgs/nspr/include -I/usr/pkgs/libpng/include -I/usr/pkgs/zlib/include -I/usr/pkgs/libjpeg/include -I/usr/pkgs/X11/include -I/usr/pkgs/libvpx/include"
+export CXXFLAGS=$CFLAGS
+
+make -f client.mk || exit 1
+
+make -f client.mk install INSTALL_SDK= || exit 1
+chown -R root:root $PREFIX/lib/firefox-* || exit 1
+
+mkdir -pv  $PREFIX/lib/mozilla/plugins
+ln -sfv ../../mozilla/plugins $PREFIX/lib/firefox-55.0.3/browser

@@ -1,0 +1,6 @@
+export LDFLAGS="-L/usr/pkgs/ffmpeg/lib -L/usr/pkgs/libsamplerate/lib -L/usr/pkgs/alsa/lib -L/usr/pkgs/speex/lib"
+export CFLAGS="-I/usr/pkgs/ffmpeg/include -I/usr/pkgs/libsamplerate/include -I/usr/pkgs/alsa/include -I/usr/pkgs/speex/include"
+
+./configure --prefix=$PREFIX 		\
+ 	--with-plugindir=$PREFIX/lib	
+

@@ -14,7 +14,7 @@
 # X-LFS-Provided-By:   BLFS
 ### END INIT INFO
 
-. /usr/pkgs/lombix-base/lib/services/init-functions
+. /usr/etc/rc.d/init.d/init-functions
 
 BIN_FILE="/usr/pkgs/fcron/sbin/fcron"
 

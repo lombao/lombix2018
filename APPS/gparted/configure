@@ -1,0 +1,9 @@
+export LDFLAGS="-L/usr/pkgs/parted/lib -L/usr/pkgs/util-linux/lib -L/usr/pkgs/rarian/lib -L/usr/pkgs/glib/lib"
+export CFLAGS="-I/usr/pkgs/parted/include -I/usr/pkgs/util-linux/include -I/usr/pkgs/rarian/include -I/usr/pkgs/glib/include"
+export CXXFLAGS=$CFLAGS
+
+./configure --prefix=$PREFIX 		\
+	    --sbindir=$PREFIX/bin	\
+	    --disable-static		\
+	    --disable-doc		\
+	    --disable-scrollkeeper	

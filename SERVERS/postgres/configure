@@ -8,8 +8,5 @@ export PYTHON=$PYTHON3
 	    --with-python		\
 	    --with-openssl		\
 	    --with-uuid=e2fs		\
-            --enable-thread-safety 	\
-	    --datarootdir=$DATAROOTDIR	\
-            --docdir=$DATAROOTDIR/doc 
-
+            --enable-thread-safety 	
 

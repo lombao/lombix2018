@@ -1,0 +1,34 @@
+cat > mozconfig << "EOF"
+ac_add_options --disable-necko-wifi
+ac_add_options --x-includes=/usr/pkgs/X11/include
+ac_add_options --x-libraries=/usr/pkgs/X11/lib
+ac_add_options --disable-pulseaudio
+ac_add_options --enable-alsa
+ac_add_options --disable-gconf
+ac_add_options --enable-system-sqlite
+ac_add_options --with-system-libevent
+ac_add_options --with-system-libvpx
+ac_add_options --with-system-nspr
+ac_add_options --with-system-nss
+ac_add_options --with-system-icu
+ac_add_options --prefix=/usr/pkgs/firefox
+ac_add_options --enable-application=browser
+ac_add_options --disable-crashreporter
+ac_add_options --disable-updater
+ac_add_options --disable-tests
+ac_add_options --enable-optimize
+ac_add_options --enable-official-branding
+ac_add_options --enable-safe-browsing
+ac_add_options --enable-url-classifier
+ac_add_options --enable-system-ffi
+ac_add_options --enable-system-pixman
+ac_add_options --with-pthreads
+ac_add_options --with-system-bz2
+ac_add_options --with-system-jpeg
+ac_add_options --with-system-png
+ac_add_options --with-system-zlib
+
+mk_add_options MOZ_OBJDIR=@TOPSRCDIR@/firefox-build-dir
+EOF
+
+

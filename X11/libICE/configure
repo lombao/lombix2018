@@ -1,4 +1,3 @@
 ./configure --prefix=$PREFIX 		\
             --disable-static 		\
-	    --datarootdir=$DATAROOTDIR	\
 	    ICE_LIBS=-lpthread

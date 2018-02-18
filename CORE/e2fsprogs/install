@@ -3,4 +3,3 @@ make install
 make install-libs
 
 chmod -v u+w $PREFIX/lib/{libcom_err,libe2p,libext2fs,libss}.a
-ldconfig

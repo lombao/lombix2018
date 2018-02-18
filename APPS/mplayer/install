@@ -1,18 +1,4 @@
 make install
-gtk-update-icon-cache
-update-desktop-database
-
-#cp -Rp $PREFIX/share/icons/* $DATAROOTDIR/icons
-#rm -fr $PREFIX/share/icons
-
-#cp -Rp $PREFIX/share/applications/* $DATAROOTDIR/applications
-#rm -fr $PREFIX/share/applications
-
-
-#ln -svf ../icons/hicolor/48x48/apps/mplayer.png \
-#        $DATAROOTDIR/pixmaps/mplayer.png
-
-
 
 
 install -v -m644 etc/codecs.conf $PREFIX/etc/mplayer

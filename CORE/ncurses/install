@@ -7,4 +7,5 @@ for lib in ncurses form panel menu ; do
     ln -sfv ${lib}w.pc        $PREFIX/lib/pkgconfig/${lib}.pc
 done
 
-ldconfig
+
+ln -svf ncursesw $PREFIX/include/ncurses

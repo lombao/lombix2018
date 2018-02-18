@@ -1,0 +1,8 @@
+
+./configure --prefix=$PREFIX 					\
+		--with-screen=ncurses				\
+		--enable-charset				\
+		--with-ncurses-includes=/usr/pkgs/ncurses/include	\
+		--with-ncurses-lib=/usr/pkgs/ncurses/lib	\
+		--with-pcre=/usr/pkgs/pcre		
+		

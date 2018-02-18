@@ -1,0 +1,3 @@
+make prefix=$PREFIX MANDIR=$PREFIX/share/man DEFAULTFONTDIR=$PREFIX/share/figlet install
+
+
