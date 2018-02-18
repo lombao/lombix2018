@@ -1,5 +1,4 @@
 ./configure --prefix=$PREFIX    				\
 	    --build=$LMBX_BUILD					\
-            --datarootdir=$DATAROOTDIR 				\
-	    --with-installbuilddir=$DATAROOTDIR/apr-1/build	\
+	    --with-installbuilddir=$PREFIX/share/apr-1/build	\
             --disable-static 		

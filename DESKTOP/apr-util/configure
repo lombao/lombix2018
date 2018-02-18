@@ -3,6 +3,5 @@
             --with-apr=$PREFIX			\
  	    --with-gdbm=/usr/pkgs/gdbm		\
 	    --with-openssl=/usr/pkgs/openssl	\
-            --datarootdir=$DATAROOTDIR 		\
 	    --with-crypto
 

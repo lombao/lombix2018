@@ -27,7 +27,7 @@ bindir="${exec_prefix}/bin"
 libdir="${exec_prefix}/lib"
 datarootdir="${prefix}"
 datadir="${prefix}"
-installbuilddir="/usr/share/apr-1/build"
+installbuilddir="/usr/pkgs/apr/share/apr-1/build"
 includedir="${prefix}/include/apr-${APR_MAJOR_VERSION}"
 
 CC="/usr/bin/gcc"

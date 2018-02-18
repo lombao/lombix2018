@@ -186,7 +186,7 @@ msg="The Keyboard Layout:
 Please, select which keyboard you have. Probably it is the same
 as the country you are in.
 "
-OPTIONS=(uk "United Kingdom" es "Spain" us "United States" it "Italy")
+OPTIONS=(uk "United Kingdom" es "Spain" us "United States" it "Italy" fi "Finland" gr "Greece" lt "Lithuania" pl "Poland")
 CHOICE=$(/usr/pkgs/dialog/bin/dialog --clear \
 	--title "Keyboard" 	\
 	--menu "$msg"		\

@@ -31,7 +31,7 @@ export LMBX_AREA_CREDITS=/usr/share/credits
 export LMBX_SHELL=/usr/pkgs/bash/bin/bash
 
 # The version of the installed
-export LMBX_INSTALLER_VERSION=2018.9
+export LMBX_INSTALLER_VERSION=2018.11
 
 # Commands used. This purpose is more an inventory of the
 # tools used. 
@@ -284,6 +284,9 @@ function buildPackage {
         find /usr/etc/profile.d -type f -exec sed -i "s@%PREFIX@$PREFIX@g" {} \;
         find /usr/etc/ld.so.conf.d -type f -exec sed -i "s@%PREFIX@$PREFIX@g" {} \;	
 
+	[ -d $PKGFOLDER/POSTLOAD/opt    ]	&& $CP -Rp  $PKGFOLDER/POSTLOAD/opt/* /opt  
+
+
 	#####
 	### We copy all the credits or any other file specified by the package
 	### Credits
@@ -334,57 +337,83 @@ function buildPackage {
         if [ "$PREFIX" != "/usr" ]; then
         
 		# Now, move the .desktops files
-		if [ -d "$PREFIX/share/applications" ]; then
-			$CP -Rp $PREFIX/share/applications/* /usr/share/applications
-			$MRM -fr $PREFIX/share/applications
-		fi
+		#if [ -d "$PREFIX/share/applications" ]; then
+		#	$CP -Rp $PREFIX/share/applications/* /usr/share/applications
+		#	$MRM -fr $PREFIX/share/applications
+		#fi
 
 		# Now , the pkgconfig
-		if [ -d "$PREFIX/lib/pkgconfig" ]; then
-			$CP -Rp $PREFIX/lib/pkgconfig/* /usr/share/pkgconfig
-			$MRM -fr $PREFIX/lib/pkgconfig
-		fi
+		#if [ -d "$PREFIX/lib/pkgconfig" ]; then
+		#	$CP -Rp $PREFIX/lib/pkgconfig/* /usr/share/pkgconfig
+		#	$MRM -fr $PREFIX/lib/pkgconfig
+		#fi
 	
 		# Now, the man
-		if [ -d "$PREFIX/share/man" ]; then
-			$CP -Rp $PREFIX/share/man/* /usr/share/man
-			$MRM -fr $PREFIX/share/man
-		fi
+		#if [ -d "$PREFIX/share/man" ]; then
+		#	$CP -Rp $PREFIX/share/man/* /usr/share/man
+		#	$MRM -fr $PREFIX/share/man
+		#fi
 	
-		# Now, the icons
-		if [ -d "$PREFIX/share/icons" ]; then
-			$CP -Rp $PREFIX/share/icons/* /usr/share/icons
+		# Now, the icons. If it is an already link should not be executed
+		if [ -d "$PREFIX/share/icons" ] && [ ! -L "$PREFIX/share/icons" ]; then
+			$CP -Rp $PREFIX/share/icons/* $ICONS_SHARE_PATH
 			$MRM -fr $PREFIX/share/icons
+			ln -sv $ICONS_SHARE_PATH $PREFIX/share/icons
 		fi
 	
 		# Now, the pixmaps
-		if [ -d "$PREFIX/share/pixmaps" ]; then
-			$CP -Rp $PREFIX/share/pixmaps/* /usr/share/pixmaps
+		if [ -d "$PREFIX/share/pixmaps" ] && [ ! -L "$PREFIX/share/pixmaps" ]; then
+			$CP -Rp $PREFIX/share/pixmaps/* $PIXMAPS_SHARE_PATH
 			$MRM -fr $PREFIX/share/pixmaps
-		fi
-
-		# Now, the aclocal
-		if [ -d "$PREFIX/share/aclocal" ]; then
-			$CP -Rp $PREFIX/share/aclocal/* /usr/share/aclocal
-			$MRM -fr $PREFIX/share/aclocal
-		fi
-
-		# Now, the aclocal
-		if [ -d "$PREFIX/share/mime" ]; then
-			$CP -Rp $PREFIX/share/mime/* /usr/share/mime
-			$MRM -fr $PREFIX/share/mime
+			ln -sv $PIXMAPS_SHARE_PATH $PREFIX/share/pixmaps
 		fi
 		
-		# Now, the doc
-		if [ -d "$PREFIX/share/doc" ]; then
-			$MRM -fr $PREFIX/share/doc
+		# Now, the dbus-1
+		if [ -d "$PREFIX/share/dbus-1" ] && [ ! -L "$PREFIX/share/dbus-1" ]; then
+			$CP -Rp $PREFIX/share/dbus-1/* $DBUS_SHARE_PATH
+			$MRM -fr $PREFIX/share/dbus-1
+			ln -sv $DBUS_SHARE_PATH $PREFIX/share/dbus-1
 		fi
+		
+		# Now, the gettext
+		if [ -d "$PREFIX/share/gettext" ] && [ ! -L "$PREFIX/share/gettext" ]; then
+			$CP -Rp $PREFIX/share/gettext/* $DATAROOTDIR/gettext
+			$MRM -fr $PREFIX/share/gettext
+			ln -sv $DATAROOTDIR/gettext $PREFIX/share/gettext
+		fi
+
+		# Now, the glib-2.0
+		if [ -d "$PREFIX/share/glib-2.0" ] && [ ! -L "$PREFIX/share/glib-2.0" ]; then
+			$CP -Rp $PREFIX/share/glib-2.0/* $DATAROOTDIR/glib-2.0
+			$MRM -fr $PREFIX/share/glib-2.0
+			ln -sv $DATAROOTDIR/glib-2.0 $PREFIX/share/glib-2.0
+		fi
+
+
+		
+
+		# Now, the aclocal
+		#if [ -d "$PREFIX/share/aclocal" ]; then
+		#	$CP -Rp $PREFIX/share/aclocal/* /usr/share/aclocal
+		#	$MRM -fr $PREFIX/share/aclocal
+		#fi
+
+		# Now, the mime
+		#if [ -d "$PREFIX/share/mime" ]; then
+		#	$CP -Rp $PREFIX/share/mime/* /usr/share/mime
+		#	$MRM -fr $PREFIX/share/mime
+		#fi
+		
+		# Now, the doc
+		#if [ -d "$PREFIX/share/doc" ]; then
+		#	$MRM -fr $PREFIX/share/doc
+		#fi
 
 		# Now, the info
-		if [ -d "$PREFIX/share/info" ]; then
-			$MRM -fr $PREFIX/share/info
-		fi
-
+		#if [ -d "$PREFIX/share/info" ]; then
+		#	$MRM -fr $PREFIX/share/info
+		#fi
+		
 	fi
 	
 	

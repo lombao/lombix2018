@@ -1,8 +1,9 @@
 
 
-TERMINFO=/usr/share/terminfo 		\
+#TERMINFO=/usr/share/terminfo 		
+# TERMINFO is already defined in the /etc/profile
+
   ./configure --prefix=$PREFIX 		\
-	--datarootdir=$DATAROOTDIR	\
 	--with-pcre			\
 	--enable-256-color		\
 	--with-app-defaults=$PREFIX/etc/app-defaults
