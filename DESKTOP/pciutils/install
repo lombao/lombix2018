@@ -1,7 +1,7 @@
 make PREFIX=$PREFIX 			\
      SBINDIR=$PREFIX/bin 		\
-     MANDIR=$DATAROOTDIR/man      	\
-     SHAREDIR=$DATAROOTDIR/hwdata 	\
+     MANDIR=$PREFIX/share/man      	\
+     SHAREDIR=$PREFIX/share/hwdata 	\
      SHARED=yes     			\
      install installll-lib
 

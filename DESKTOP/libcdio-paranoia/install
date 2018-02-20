@@ -1,4 +1,1 @@
 make install
-
-# No japanese for the time being
-rm -fr $DATAROOTDIR/man/jp

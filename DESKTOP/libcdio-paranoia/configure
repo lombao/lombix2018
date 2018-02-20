@@ -1,5 +1,4 @@
 ./configure --prefix=$PREFIX 		\
 	    --build=$LMBX_BUILD		\
-	    --datarootdir=$DATAROOTDIR 	\
             --disable-static 
  

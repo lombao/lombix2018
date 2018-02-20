@@ -1,3 +1,103 @@
+diff -Naur fluxbox-1.3.7.orig/configure fluxbox-1.3.7/configure
+--- fluxbox-1.3.7.orig/configure	2015-02-08 10:44:53.821187099 +0000
++++ fluxbox-1.3.7/configure	2018-02-18 20:06:56.678000000 +0000
+@@ -1535,13 +1535,13 @@
+   --without-libiconv-prefix     don't search for libiconv in includedir and libdir
+   --with-menu=path        location menu file (PREFIX/share/fluxbox/menu)
+   --with-windowmenu=path  location windowmenu file
+-                          (PREFIX/share/fluxbox/windowmenu)
+-  --with-style=path       style by default (PREFIX/share/fluxbox/styles/bloe)
+-  --with-keys=path        location keys file (PREFIX/share/fluxbox/keys)
+-  --with-apps=path        location apps file (PREFIX/share/fluxbox/apps)
+-  --with-overlay=path     location overlay file (PREFIX/share/fluxbox/overlay)
+-  --with-init=path        location init file (PREFIX/share/fluxbox/init)
+-  --with-locale=path      location for nls files (PREFIX/share/fluxbox/nls)
++                          (PREFIX/share/windowmenu)
++  --with-style=path       style by default (PREFIX/share/styles/bloe)
++  --with-keys=path        location keys file (PREFIX/share/keys)
++  --with-apps=path        location apps file (PREFIX/share/apps)
++  --with-overlay=path     location overlay file (PREFIX/share/overlay)
++  --with-init=path        location init file (PREFIX/share/init)
++  --with-locale=path      location for nls files (PREFIX/share/nls)
+ 
+ Some influential environment variables:
+   CC          C compiler command
+@@ -10555,7 +10555,7 @@
+ if test "${with_menu+set}" = set; then :
+   withval=$with_menu; default_menu="$withval"
+ else
+-  default_menu="$prefix/share/fluxbox/menu"
++  default_menu="$prefix/share/menu"
+ 
+ fi
+ 
+@@ -10567,7 +10567,7 @@
+ if test "${with_windowmenu+set}" = set; then :
+   withval=$with_windowmenu; default_windowmenu="$withval"
+ else
+-  default_windowmenu="$prefix/share/fluxbox/windowmenu"
++  default_windowmenu="$prefix/share/windowmenu"
+ 
+ fi
+ 
+@@ -10579,7 +10579,7 @@
+ if test "${with_style+set}" = set; then :
+   withval=$with_style; default_style="$withval"
+ else
+-  default_style="$prefix/share/fluxbox/styles/bloe"
++  default_style="$prefix/share/styles/bloe"
+ 
+ fi
+ 
+@@ -10591,7 +10591,7 @@
+ if test "${with_keys+set}" = set; then :
+   withval=$with_keys; default_keys="$withval"
+ else
+-  default_keys="$prefix/share/fluxbox/keys"
++  default_keys="$prefix/share/keys"
+ 
+ fi
+ 
+@@ -10603,7 +10603,7 @@
+ if test "${with_apps+set}" = set; then :
+   withval=$with_apps; default_apps="$withval"
+ else
+-  default_apps="$prefix/share/fluxbox/apps"
++  default_apps="$prefix/share/apps"
+ 
+ fi
+ 
+@@ -10615,7 +10615,7 @@
+ if test "${with_overlay+set}" = set; then :
+   withval=$with_overlay; default_overlay="$withval"
+ else
+-  default_overlay="$prefix/share/fluxbox/overlay"
++  default_overlay="$prefix/share/overlay"
+ 
+ fi
+ 
+@@ -10627,7 +10627,7 @@
+ if test "${with_init+set}" = set; then :
+   withval=$with_init; default_init="$withval"
+ else
+-  default_init="$prefix/share/fluxbox/init"
++  default_init="$prefix/share/init"
+ 
+ fi
+ 
+@@ -10647,10 +10647,10 @@
+ 
+ else
+ 
+-	locale_path="$prefix/share/fluxbox/nls"
++	locale_path="$prefix/share/nls"
+ 
+ cat >>confdefs.h <<_ACEOF
+-#define LOCALEPATH "$prefix/share/fluxbox/nls"
++#define LOCALEPATH "$prefix/share/nls"
+ _ACEOF
+ 
+ 
 diff -Naur fluxbox-1.3.7.orig/configure.ac fluxbox-1.3.7/configure.ac
 --- fluxbox-1.3.7.orig/configure.ac	2015-02-08 10:44:45.333187008 +0000
 +++ fluxbox-1.3.7/configure.ac	2018-02-18 15:46:44.811000000 +0000
@@ -230,7 +330,7 @@ diff -Naur fluxbox-1.3.7.orig/util/fbsetbg fluxbox-1.3.7/util/fbsetbg
  
 diff -Naur fluxbox-1.3.7.orig/util/fluxbox-generate_menu.in fluxbox-1.3.7/util/fluxbox-generate_menu.in
 --- fluxbox-1.3.7.orig/util/fluxbox-generate_menu.in	2015-02-08 10:44:45.377187009 +0000
-+++ fluxbox-1.3.7/util/fluxbox-generate_menu.in	2018-02-18 14:44:24.261000000 +0000
++++ fluxbox-1.3.7/util/fluxbox-generate_menu.in	2018-02-18 20:57:16.599000000 +0000
 @@ -1,4 +1,4 @@
 -#!/bin/sh
 +#!/usr/pkgs/bash/bin/bash
@@ -364,15 +464,6 @@ diff -Naur fluxbox-1.3.7.orig/util/fluxbox-generate_menu.in fluxbox-1.3.7/util/f
      find_it     nautilus append "[exec] (nautilus) {nautilus --no-desktop --browser}"
      cli_find mc
  append_menu_end
-@@ -1699,7 +1700,7 @@
-        append_menu_end
- 
-        append_submenu "${MUSICMENU}"
--               normal_find xmms noatun alsaplayer gqmpeg aumix xmixer gnome-alsamixer gmix kmix kscd \
-+               normal_find mpg123 xmms noatun alsaplayer gqmpeg aumix xmixer gnome-alsamixer gmix kmix kscd \
-                    grecord kmidi xplaycd soundtracker grip easytag audacity \
-                    zinf rhythmbox kaboodle beep-media-player amarok tagtool \
-                    audacious bmpx
 @@ -1724,9 +1725,10 @@
  append_submenu "${OFFICEMENU}"
      normal_find xclock xcalc kcalc grisbi qbankmanager evolution
@@ -400,7 +491,7 @@ diff -Naur fluxbox-1.3.7.orig/util/fluxbox-generate_menu.in fluxbox-1.3.7/util/f
    append_menu_end
  
 -  normal_find firestarter gtk-lshw gproftd gpureftpd guitoo porthole gtk-iptables \
-+  normal_find firestarter gtk-lshw gparted gproftd gpureftpd guitoo porthole gtk-iptables \
++  normal_find lxtask firestarter gtk-lshw gparted gproftd gpureftpd guitoo porthole gtk-iptables \
                gtk-cpuspeedy
    find_it    fireglcontrol   append "[exec] (ATI Config) {fireglcontrol}"
    cli_find    top htop iotop ntop powertop

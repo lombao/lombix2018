@@ -1,7 +1,5 @@
 export LDFLAGS="-L/usr/pkgs/icu/lib"
 export CFLAGS="-I/usr/pkgs/icu/include"
 
-./configure --prefix=$PREFIX 		\
-            --datarootdir=$DATAROOTDIR 	\
-            --disable-nls
+./configure --prefix=$PREFIX 		
 

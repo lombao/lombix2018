@@ -5,7 +5,6 @@ export CXXFLAGS=$CFLAGS
 export CPPFLAGS=$CFLAGS
 
 ./configure --prefix=$PREFIX    	\
-            --datarootdir=$DATAROOTDIR 	\
             --enable-shared     	\
             --with-system-expat 	\
             --with-system-ffi   	\

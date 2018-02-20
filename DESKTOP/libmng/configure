@@ -1,5 +1,4 @@
 ./configure --prefix=$PREFIX 			\
-            --datarootdir=$DATAROOTDIR 		\
 	    --with-zlib=/usr/pkgs/zlib  	\
 	    --with-jpeg=/usr/pkgs/libjpeg 	\
             --with-lcms2=/usr/pkgs/lcms2 	\

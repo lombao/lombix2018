@@ -1,4 +1,4 @@
-make PREFIX=$PREFIX INSTALL_MAN=$DATAROOTDIR/man install
+make PREFIX=$PREFIX INSTALL_MAN=$PREFIX/share/man install
 
 rm -fr $PREFIX/bin
 mv $PREFIX/sbin $PREFIX/bin

@@ -3,5 +3,4 @@ export CFLAGS="-I/usr/pkgs/libogg/include"
 
 ./configure --prefix=$PREFIX 		\
 	    --build=$LMBX_BUILD		\
-            --disable-static  		\
-            --datarootdir=$DATAROOTDIR
+            --disable-static  		

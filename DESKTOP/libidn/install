@@ -1,5 +1,2 @@
 make install
 
-rm -fr $DATAROOTDIR/emacs
-
-ldconfig

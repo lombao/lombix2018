@@ -4,7 +4,6 @@ cd    build
 ../configure                               	\
       --build=$LMBX_BUILD		   	\
       --prefix=$PREFIX                     	\
-      --datarootdir=$DATAROOTDIR           	\
       --with-mpc=/usr/pkgs/mpc		   	\
       --with-isl=/usr/pkgs/isl		   	\
       --with-mpfr=/usr/pkgs/mpfr	 	\
@@ -13,7 +12,6 @@ cd    build
       --with-system-zlib		   	\
       --enable-shared                      	\
       --disable-werror                     	\
-      --disable-nls                        	\
 	sys_lib_search_path_spec="/usr/pkgs/glibc/lib /usr/pkgs/binutils/lib"
 
 

@@ -1,0 +1,12 @@
+diff -Naur man-db-2.7.6.1.orig/include/manconfig.h.in man-db-2.7.6.1/include/manconfig.h.in
+--- man-db-2.7.6.1.orig/include/manconfig.h.in	2014-09-29 11:45:14.000000000 +0000
++++ man-db-2.7.6.1/include/manconfig.h.in	2018-02-18 21:21:46.941000000 +0000
+@@ -77,7 +77,7 @@
+ 
+ /* The maximum number of manual page hierarchies expected in the manpath.  
+    Also the maximum amount of non-comment lines in the config file. */
+-#define MAXDIRS 128
++#define MAXDIRS 512
+ 
+ /* CATMODE is the mode of the formatted cat pages that we create. The man-db
+    package can be run in 4 main modes, 3 of which are relatively secure and

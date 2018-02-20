@@ -4,12 +4,10 @@ export CFLAGS="-I/usr/pkgs/openssl/include"
 
 ./configure --prefix=$PREFIX 			\
 	    --enable-threads			\
-            --datarootdir=$DATAROOTDIR 		\
 	    --enable-threads=pth		\
 	    --disable-debug			\
 	    --with-ssl=openssl			\
 	    --with-openssl			\
 	    --with-libpth-prefix=/usr/pkgs/pth	\
-            --with-libidn=/usr/pkgs/libidn	\
-            --disable-nls
+            --with-libidn=/usr/pkgs/libidn	
 

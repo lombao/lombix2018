@@ -1,4 +1,3 @@
 ./configure --prefix=$PREFIX 					\
             --disable-static 					\
-	    --datarootdir=$DATAROOTDIR				\
-            --with-xorg-conf-dir=$DATAROOTDIR/X11/xorg.conf.d	
+            --with-xorg-conf-dir=$PREFIX/share/X11/xorg.conf.d	

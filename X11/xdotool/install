@@ -1,1 +1,1 @@
-make PREFIX=$PREFIX INSTALLMAN=$DATAROOTDIR/man install
+make PREFIX=$PREFIX INSTALLMAN=$PREFIX/share/man install

@@ -1,5 +1,4 @@
 ./configure --prefix=$PREFIX \
-            --disable-static \
-            --datarootdir=$DATAROOTDIR
+            --disable-static 
 
 

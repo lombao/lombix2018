@@ -1,3 +1,2 @@
 make install
 cp liba52/a52_internal.h $PREFIX/include/a52dec 
-ldconfig

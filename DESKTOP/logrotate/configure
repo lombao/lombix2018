@@ -13,5 +13,4 @@ export CFLAGS="-I/usr/pkgs/popt/include"
 
 
 
-./configure --prefix=$PREFIX 		\
-            --datarootdir=$DATAROOTDIR 	
+./configure --prefix=$PREFIX 		

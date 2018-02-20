@@ -1,5 +1,4 @@
 sed -e '/^libdocdir =/ s/$(book_name)/libsigc++-2.10.0/' -i docs/Makefile.in || exit 1
 
 ./configure --prefix=$PREFIX		\
-	--build=$LMBX_BUILD		\
-	--datarootdir=$DATAROOTDIR
+	--build=$LMBX_BUILD	

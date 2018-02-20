@@ -1,5 +1,4 @@
 ./configure --prefix=$PREFIX 		\
-	--datarootdir=$DATAROOTDIR	\
 	--enable-kms-only 		\
 	--enable-uxa 			\
 	--disable-static

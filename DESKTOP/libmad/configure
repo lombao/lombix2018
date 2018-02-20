@@ -4,6 +4,5 @@ touch NEWS AUTHORS ChangeLog                                 || exit 1
 autoreconf -i
 ./configure --prefix=$PREFIX 		\
 	    --build=$LMBX_BUILD		\
-	    --datarootdir=$DATAROOTDIR 	\
             --disable-static 
  

@@ -6,5 +6,4 @@ export CFLAGS="-I/usr/pkgs/icu/include"
 ./configure --prefix=$PREFIX 		\
 	    --build=$LMBX_BUILD		\
 	    --disable-introspection	\
-            --disable-static 		\
-            --datarootdir=$DATAROOTDIR
+            --disable-static 		

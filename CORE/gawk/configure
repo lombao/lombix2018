@@ -1,7 +1,3 @@
 ./configure --prefix=$PREFIX 		\
-	    --build=$LMBX_BUILD		\
-            --disable-nls    		\
-	    --datarootdir=$DATAROOTDIR	\
-	    --mandir=$DATAROOTDIR/man	\
-	    --infodir=$DATAROOTDIR/info
+	    --build=$LMBX_BUILD		
 

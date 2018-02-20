@@ -1,6 +1,5 @@
 sed -e 's/$serverargs $vtarg/ s/serverargs/: #&/' -i startx.cpp
 
 ./configure --prefix=$PREFIX 		\
-	--datarootdir=$DATAROOTDIR	\
 	--with-xinitdir=$PREFIX/etc/app-defaults
 

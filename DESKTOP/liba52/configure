@@ -1,6 +1,6 @@
 ./configure --prefix=$PREFIX 			\
 	    --build=$LMBX_BUILD			\
-            --mandir=$DATAROOTDIR/man 		\
+            --mandir=$PREFIX/share/man 		\
             --disable-static 			\
             --enable-shared 			\
             CFLAGS="-g -O2 -fPIC"

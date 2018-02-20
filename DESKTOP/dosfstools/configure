@@ -1,6 +1,3 @@
 ./configure --prefix=$PREFIX 		\
-	    --datarootdir=$DATAROOTDIR 	\
             --sbindir=$PREFIX/bin      	\
-            --enable-compat-symlinks   	\
-	    --mandir=$DATAROOTDIR/man  	\
-	    --docdir=$DATAROOTDIR/doc 
+            --enable-compat-symlinks   	

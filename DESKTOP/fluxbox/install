@@ -1,2 +1,9 @@
 make install
 
+
+# I am not able to make the installation behave, so 
+# some dirty patch here to place the styles where I want
+cp -Rp $PREFIX/share/fluxbox/styles $PREFIX/share/
+rm -fr $PREFIX/share/fluxbox
+
+

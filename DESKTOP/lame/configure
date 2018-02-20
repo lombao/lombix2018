@@ -1,7 +1,5 @@
 ./configure --prefix=$PREFIX 		\
 	    --build=$LMBX_BUILD		\
             --enable-mp3rtp  		\
-            --disable-static 		\
-            --datarootdir=$DATAROOTDIR
-
+            --disable-static 	
 

@@ -1,14 +1,3 @@
-make prefix=$PREFIX datarootdir=$DATAROOTDIR install
-
-rm -fr $DATAROOTDIR/man/e*
-rm -fr $DATAROOTDIR/man/n*
-rm -fr $DATAROOTDIR/man/p*
-rm -fr $DATAROOTDIR/man/d*
-rm -fr $DATAROOTDIR/man/f*
-rm -fr $DATAROOTDIR/man/u*
-rm -fr $DATAROOTDIR/man/z*
-rm -fr $DATAROOTDIR/man/s*
-
-
+make prefix=$PREFIX install
 
 

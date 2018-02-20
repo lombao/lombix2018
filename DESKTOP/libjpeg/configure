@@ -1,7 +1,4 @@
 ./configure --prefix=$PREFIX 		\
-            --datarootdir=$DATAROOTDIR 	\
-            --mandir=$DATAROOTDIR/man	\
-            --docdir=$DATAROOTDIR/doc	\
             --with-jpeg8     		\
             --disable-static 
 

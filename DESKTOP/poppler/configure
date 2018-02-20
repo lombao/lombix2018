@@ -4,8 +4,6 @@ export LDFLAGS="-L/usr/pkgs/libtiff/lib -L/usr/pkgs/curl/lib -L/usr/pkgs/cairo/l
 export CXXFLAGS=$CFLAGS
 ./configure 	--prefix=$PREFIX 			\
 		--build=$LMBX_BUILD			\
-           	--disable-nls   			\
-	        --datarootdir=$DATAROOTDIR		\
 		--disable-static			\
 		--enable-build-type=release		\
 		--enable-cmyk				\

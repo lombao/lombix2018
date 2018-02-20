@@ -3,5 +3,4 @@ export CFLAGS="-I/usr/pkgs/alsa/include -I/usr/pkgs/flac/include -I/usr/pkgs/lib
 
 ./configure --prefix=$PREFIX 		\
 	    --build=$LMBX_BUILD		\
-            --datarootdir=$DATAROOTDIR 	\
             --disable-static 

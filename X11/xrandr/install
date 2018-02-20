@@ -1,3 +1,4 @@
 make install
 
+# It seems this executable is wrong and bad, following LFS advise
 rm -fr $PREFIX/bin/xkeystone

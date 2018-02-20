@@ -25,8 +25,8 @@ find ./ -type f -exec sed 's@/usr/bin/wget@/usr/pkgs/wget/bin/wget@' -i {} \;
 sh Configure -des -Dprefix=$PREFIX                 	\
                   -Dvendorprefix=$PREFIX           	\
                   -Dcc="/usr/pkgs/gcc/bin/gcc"       	\
-                  -Dman1dir=$DATAROOTDIR/man/man1 	\
-                  -Dman3dir=$DATAROOTDIR/man/man3 	\
+                  -Dman1dir=$PREFIX/share/man/man1 	\
+                  -Dman3dir=$PREFIX/share/man/man3 	\
                   -Dpager="/usr/pksg/less/bin/less -isR" \
                   -Dosname=linux                   	\
 		  -Dlocincpath="/usr/pkgs/pcre/include /usr/pkgs/glibc/include /usr/pkgs/gbdm/include /usr/pkgs/openssl/include /usr/pkgs/expat/include /usr/pkgs/zlib/include /usr/pkgs/bzip2/include" \

@@ -8,7 +8,6 @@ export PYTHON=$PYTHON2
 
 ./configure --prefix=$PREFIX 			\
             --disable-static 			\
-            --datarootdir=$DATAROOTDIR 		\
             --with-icu				\
 	    --with-readline=/usr/pkgs/readline 	\
 	    --with-threads			\

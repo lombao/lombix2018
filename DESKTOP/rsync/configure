@@ -1,3 +1,2 @@
 ./configure --prefix=$PREFIX		\
-	--without-included-zlib		\
-	--datarootdir=$DATAROOTDIR
+	--without-included-zlib		

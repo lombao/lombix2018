@@ -10,6 +10,5 @@ export LDFLAGS="-L/usr/pkgs/libogg/lib -logg"
             --disable-sdltest 			\
 	    --disable-vorbistest 		\
 	    --disable-oggtest  			\
-            --disable-examples 			\
-            --datarootdir=$DATAROOTDIR
+            --disable-examples 			
 

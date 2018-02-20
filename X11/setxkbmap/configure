@@ -1,3 +1,2 @@
-#export LIBS="-lxcb"
 ./configure --prefix=$PREFIX 				\
-            --with-xkb-config-root=$DATAROOTDIR/X11/xkb
+            --with-xkb-config-root=$PREFIX/share/xkb
