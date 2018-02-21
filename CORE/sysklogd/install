@@ -1,5 +1,5 @@
 
-mkdir -pv $DATAROOTDIR/man/man8
-mkdir -pv $DATAROOTDIR/man/man5
+mkdir -pv $PREFIX/share/man/man8
+mkdir -pv $PREFIX/share/man/man5
 mkdir -pv $PREFIX/bin
-make BINDIR=$PREFIX/bin MANDIR=$DATAROOTDIR/man install
+make BINDIR=$PREFIX/bin MANDIR=$PREFIX/share/man install

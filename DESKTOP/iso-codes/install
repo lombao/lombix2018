@@ -1,5 +1,5 @@
-#rm -fr $DATAROOTDIR/locale
-rm -fr $DATAROOTDIR/xml/iso-codes
+rm -fr /usr/share/xml/iso-codes
+rm -fr $PREFIX/share/locale
+
 make install
 
-#rm -fr $DATAROOTDIR/locale

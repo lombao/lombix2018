@@ -1,4 +1,6 @@
 mkdir -pv $PREFIX/bin
+mkdir -pv $PREFIX/share/man/man8
+
 cd lsof_4.89_src
 install -v -m0755 -o root -g root lsof $PREFIX/bin
-install -v lsof.8 $DATAROOTDIR/man/man8
+install -v lsof.8 $PREFIX/share/man/man8

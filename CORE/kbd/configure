@@ -6,7 +6,5 @@ sed -i 's/resizecons.8 //' docs/man/man8/Makefile.in
 	    --build=$LMBX_BUILD			\
             --bindir=$PREFIX/bin          	\
             --sbindir=$PREFIX/bin         	\
-            --datarootdir=$DATAROOTDIR    	\
             --sysconfdir=$PREFIX/etc      	\
-            --disable-nls                 	\
             --disable-vlock

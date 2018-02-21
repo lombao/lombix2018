@@ -12,11 +12,10 @@ autoreconf -i || exit 1
 	    --disable-docs					\
 	    --with-x						\
             --with-rsvg						\
-	    --with-dejavu-font-dir=$DATAROOTDIR/fonts/dejavu  	\
-	    --with-pkgconfigdir=$DATAROOTDIR/pkgconfig		\
+	    --with-dejavu-font-dir=/usr/share/fonts/dejavu  	\
+	    --with-pkgconfigdir=$PREFIX/lib/pkgconfig		\
             --disable-static 					\
-            --mandir=$DATAROOTDIR/man				\
-            --docdir=$DATAROOTDIR/doc				\
+            --mandir=$PREFIX/share/man				\
             --enable-hdri  					\
             --with-modules 					\
             --with-perl   

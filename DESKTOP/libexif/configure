@@ -1,5 +1,4 @@
 ./configure --prefix=$PREFIX 				\
-            --disable-static 				\
-            --with-doc-dir=$DATAROOTDIR/doc/libexif
+            --disable-static 				
 
 

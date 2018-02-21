@@ -1,2 +1,2 @@
 ./configure --prefix=$PREFIX \
-            --with-configdir=$DATAROOTDIR/fontconfig/conf.avail
+            --with-configdir=/usr/pkgs/X11/share/fontconfig/conf.avail

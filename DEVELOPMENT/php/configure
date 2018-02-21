@@ -1,12 +1,11 @@
 
 export CC="gcc -I/usr/pkgs/glibc/include"
+export GCC=$CC
 export GXX="g++ -I/usr/pkgs/glibc/include"
 
 ./configure --prefix=$PREFIX		\
 	--build=$LMBX_BUILD		\
 	--sysconfdir=$PREFIX/etc	\
-	--datarootdir=$DATAROOTDIR	\
-	--mandir=$DATAROOTDIR/man	\
 	--with-apxs2			\
 	--with-libxml-dir=/usr/pkgs/libxml2	\
 	--with-openssl=/usr/pkgs/openssl	\
@@ -25,7 +24,7 @@ export GXX="g++ -I/usr/pkgs/glibc/include"
 	--with-png-dir=/usr/pkgs/libpng		\
 	--with-freetype-dir=/usr/pkgs/X11	\
 	--with-icu-dir=/usr/pkgs/icu		\
-	--with-pgsql=/usr/services/postgres	\
+	--with-pgsql=/opt/postgres		\
 	--with-pear				\
 	--enable-exif				\
 	--enable-mbstring			\

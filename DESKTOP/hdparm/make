@@ -1,4 +1,4 @@
 #unset strip otherwise this makefile goes bananas 
 unset STRIP 
 
-make	mandir=$DATAROOTDIR/man  sbindir=$PREFIX/bin
+make	mandir=$PREFIX/share/man  sbindir=$PREFIX/bin

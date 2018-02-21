@@ -1,4 +1,4 @@
-mkdir -pv $DATAROOTDIR/fonts/dejavu
-cp -Rp dejavu-fonts-ttf-2.37/ttf/*  $DATAROOTDIR/fonts/dejavu
+mkdir -pv /usr/share/fonts/dejavu
+cp -Rp dejavu-fonts-ttf-2.37/ttf/*  /usr/share/fonts/dejavu
 cp dejavu-fonts-ttf-2.37/fontconfig/* /usr/pkgs/X11/etc/fonts/conf.d/
 

@@ -1,2 +1,2 @@
-make mandir=$DATAROOTDIR/man sbindir=$PREFIX/bin install
+make mandir=$PREFIX/share/man sbindir=$PREFIX/bin install
 

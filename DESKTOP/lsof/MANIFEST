@@ -2,7 +2,7 @@
 # URL: The place where the source code has been downloaded.
 # If you remove the package the installation tool will try to 
 # download it again from this place.
-URL=ftp://lsof.itap.purdue.edu/pub/tools/unix/lsof/lsof_4.89.tar.gz
+URL=https://www.mirrorservice.org/sites/lsof.itap.purdue.edu/pub/tools/unix/lsof/lsof_4.89.tar.gz
 
 ##
 # PREFIX: Where the package is going to be installed. 

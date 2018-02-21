@@ -1,2 +1,3 @@
-pathappend	/usr/pkg/jasper/bin		PATH
-pathappend	/usr/pkg/jasper/lib/pkgconfig	PKG_CONFIG_PATH
+pathappend	%PREFIX//bin		PATH
+pathappend	%PREFIX/lib/pkgconfig	PKG_CONFIG_PATH
+pathappend	%PREFIX/share/man	MANPATH

@@ -1,1 +1,1 @@
-cp -v $DATAROOTDIR/zoneinfo/UTC /usr/etc/localtime
+cp -v /usr/share/zoneinfo/UTC /usr/etc/localtime

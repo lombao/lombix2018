@@ -1,7 +1,6 @@
 ./configure --prefix=$PREFIX  		\
              --with-internal-glib       \
             --disable-compile-warnings  \
-            --disable-host-tool        	\
-            --datarootdir=$DATAROOTDIR 
+            --disable-host-tool        	
 
 

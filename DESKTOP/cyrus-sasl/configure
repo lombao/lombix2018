@@ -1,0 +1,18 @@
+
+export LDFLAGS="-L/usr/pksg/openssl/lib "
+export CFLAGS="-I/usr/pkgs/openssl/include "
+
+autoreconf -fi || exit 1
+
+export GCC="gcc -B/usr/pkgs/gdbm/lib -I/usr/pkgs/gdbm/include"
+export CC=$GCC
+
+./configure --prefix=$PREFIX    		\
+	    --build=$LMBX_BUILD			\
+            --sysconfdir=$PREFIX/etc    	\
+	    --sbindir=$PREFIX/bin		\
+	    --mandir=$PREFIX/share/man		\
+            --enable-auth-sasldb 		\
+ 	    --with-devrandom=/dev/urandom	\
+            --with-dbpath=/var/lib/sasl/sasldb2 \
+            --with-saslauthd=/run/saslauthd 

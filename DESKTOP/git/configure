@@ -2,7 +2,6 @@ export LDFLAGS="-L/usr/pkgs/openssl/lib"
 export CFLAGS="-I/usr/pkgs/openssl/include"
 export CXXFLAGS=$CFLAGS
 ./configure 	--prefix=$PREFIX 			\
-		--datarootdir=$DATAROOTDIR		\
 		--with-gitconfig=$PREFIX/etc		\
 		--with-perl=$PERL			\
 		--with-python=$PYTHON3			\

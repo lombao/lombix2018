@@ -1,6 +1,3 @@
-#make curl=1 exif=1 PREFIX=$PREFIX ICON_PREFIX=$ICONS_PATH install
 
 make curl=1 exif=1 PREFIX=$PREFIX ICON_PREFIX=$PREFIX/share/icons install
 
-#cp -Rp $PREFIX/share/* $DATAROOTDIR/
-#rm -fr $PREFIX/share

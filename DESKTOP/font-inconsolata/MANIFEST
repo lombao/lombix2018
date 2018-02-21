@@ -2,7 +2,7 @@
 # URL: The place where the source code has been downloaded.
 # If you remove the package the installation tool will try to 
 # download it again from this place.
-http://fakedownload/Inconsolata.zip
+URL=https://sourceforge.net/projects/lombix/files/LOMBIX2018/SOURCES/Inconsolata.zip
 
 ##
 # PREFIX: Where the package is going to be installed. 
@@ -22,9 +22,6 @@ CREDITS="OFL.txt"
 # strip --strip-unneeded over all the files from the PREFIX. This eliminates
 # debug symbols and reduce the size of binaries ( execs and libs ). 
 STRIP=no
-
-
-
 
 
 

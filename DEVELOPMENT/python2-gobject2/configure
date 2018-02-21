@@ -1,4 +1,3 @@
 ./configure --prefix=$PREFIX 		\
 	--build=$LMBX_BUILD		\
-	--disable-introspection		\
-	--datarootdir=$DATAROOTDIR
+	--disable-introspection	

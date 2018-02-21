@@ -3,7 +3,6 @@
 
 ./configure --prefix=$PREFIX \
             --sysconfdir=$PREFIX/etc \
-            --datarootdir=$DATAROOTDIR \
             --with-md5-passwords     \
             --with-pie               \
             --with-privsep-path=/var/lib/sshd
