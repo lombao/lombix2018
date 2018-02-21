@@ -1,0 +1,324 @@
+diff -Naur ntp-4.2.8p10.orig/include/ntp_config.h ntp-4.2.8p10/include/ntp_config.h
+--- ntp-4.2.8p10.orig/include/ntp_config.h	2015-09-23 10:29:17.000000000 +0000
++++ ntp-4.2.8p10/include/ntp_config.h	2018-02-21 22:29:44.033000000 +0000
+@@ -14,7 +14,7 @@
+  */
+ #ifndef CONFIG_FILE
+ # ifndef SYS_WINNT
+-#  define	CONFIG_FILE "/etc/ntp.conf"
++#  define	CONFIG_FILE "/opt/ntp/etc/ntp.conf"
+ # else /* SYS_WINNT */
+ #  define	CONFIG_FILE	"%windir%\\system32\\drivers\\etc\\ntp.conf"
+ #  define	ALT_CONFIG_FILE "%windir%\\ntp.conf"
+diff -Naur ntp-4.2.8p10.orig/libntp/audio.c ntp-4.2.8p10/libntp/audio.c
+--- ntp-4.2.8p10.orig/libntp/audio.c	2017-03-21 13:04:19.000000000 +0000
++++ ntp-4.2.8p10/libntp/audio.c	2018-02-21 22:25:02.507000000 +0000
+@@ -66,7 +66,7 @@
+ static struct audio_device device; /* audio device ident */
+ #endif /* HAVE_SYS_AUDIOIO_H */
+ #ifdef PCM_STYLE_SOUND
+-# define INIT_FILE "/etc/ntp.audio"
++# define INIT_FILE "/opt/ntp/etc/ntp.audio"
+ 
+ static ioctl_arg_T agc		= SOUND_MIXER_WRITE_RECLEV; /* or IGAIN or LINE */
+ static ioctl_arg_T audiomonitor	= SOUND_MIXER_WRITE_VOLUME; /* or OGAIN */
+diff -Naur ntp-4.2.8p10.orig/ntpd/ntp.conf.5man ntp-4.2.8p10/ntpd/ntp.conf.5man
+--- ntp-4.2.8p10.orig/ntpd/ntp.conf.5man	2017-03-21 14:44:09.000000000 +0000
++++ ntp-4.2.8p10/ntpd/ntp.conf.5man	2018-02-21 22:24:24.779000000 +0000
+@@ -3124,7 +3124,7 @@
+ .SH FILES
+ .RS
+ .TP 15
+-.NOP \fI/etc/ntp.conf\f[]
++.NOP \fI/opt/ntp/etc/ntp.conf\f[]
+ the default name of the configuration file
+ .br
+ .ns
+diff -Naur ntp-4.2.8p10.orig/ntpd/ntp.conf.5mdoc ntp-4.2.8p10/ntpd/ntp.conf.5mdoc
+--- ntp-4.2.8p10.orig/ntpd/ntp.conf.5mdoc	2017-03-21 14:44:20.000000000 +0000
++++ ntp-4.2.8p10/ntpd/ntp.conf.5mdoc	2018-02-21 22:24:24.829000000 +0000
+@@ -2945,8 +2945,8 @@
+ .Sh "ENVIRONMENT"
+ See \fBOPTION PRESETS\fP for configuration environment variables.
+ .Sh FILES
+-.Bl -tag -width /etc/ntp.drift -compact
+-.It Pa /etc/ntp.conf
++.Bl -tag -width /opt/ntp/etc/ntp.drift -compact
++.It Pa /opt/ntp/etc/ntp.conf
+ the default name of the configuration file
+ .It Pa ntp.keys
+ private MD5 keys
+diff -Naur ntp-4.2.8p10.orig/ntpd/ntp.conf.html ntp-4.2.8p10/ntpd/ntp.conf.html
+--- ntp-4.2.8p10.orig/ntpd/ntp.conf.html	2017-03-21 14:44:15.000000000 +0000
++++ ntp-4.2.8p10/ntpd/ntp.conf.html	2018-02-21 22:24:24.937000000 +0000
+@@ -2740,7 +2740,7 @@
+ <h4 class="subsection">ntp.conf Files</h4>
+ 
+           <dl>
+-<dt><span class="file">/etc/ntp.conf</span><dd>the default name of the configuration file
++<dt><span class="file">/opt/ntp/etc/ntp.conf</span><dd>the default name of the configuration file
+ <br><dt><span class="file">ntp.keys</span><dd>private MD5 keys
+ <br><dt><span class="file">ntpkey</span><dd>RSA private key
+ <br><dt><span class="file">ntpkey_</span><kbd>host</kbd><dd>RSA public key
+diff -Naur ntp-4.2.8p10.orig/ntpd/ntp_config.c ntp-4.2.8p10/ntpd/ntp_config.c
+--- ntp-4.2.8p10.orig/ntpd/ntp_config.c	2017-03-21 13:04:21.000000000 +0000
++++ ntp-4.2.8p10/ntpd/ntp_config.c	2018-02-21 22:24:25.036000000 +0000
+@@ -4514,7 +4514,7 @@
+ 
+ 
+ /*
+- * getconfig() - process startup configuration file e.g /etc/ntp.conf
++ * getconfig() - process startup configuration file e.g /opt/ntp/etc/ntp.conf
+  */
+ void
+ getconfig(
+diff -Naur ntp-4.2.8p10.orig/ntpd/ntpd.1ntpdman ntp-4.2.8p10/ntpd/ntpd.1ntpdman
+--- ntp-4.2.8p10.orig/ntpd/ntpd.1ntpdman	2017-03-21 14:44:12.000000000 +0000
++++ ntp-4.2.8p10/ntpd/ntpd.1ntpdman	2018-02-21 22:24:25.345000000 +0000
+@@ -153,7 +153,7 @@
+ configuration file name.
+ .sp
+ The name and path of the configuration file,
+-\fI/etc/ntp.conf\fP
++\fI/opt/ntp/etc/ntp.conf\fP
+ by default.
+ .TP
+ .NOP \f\*[B-Font]\-d\f[], \f\*[B-Font]\-\-debug\-level\f[]
+@@ -171,12 +171,12 @@
+ frequency drift file name.
+ .sp
+ The name and path of the frequency file,
+-\fI/etc/ntp.drift\fP
++\fI/opt/ntp/etc/ntp.drift\fP
+ by default.
+ This is the same operation as the
+ \fBdriftfile\fP \fIdriftfile\fP
+ configuration specification in the
+-\fI/etc/ntp.conf\fP
++\fI/opt/ntp/etc/ntp.conf\fP
+ file.
+ .TP
+ .NOP \f\*[B-Font]\-g\f[], \f\*[B-Font]\-\-panicgate\f[]
+@@ -240,7 +240,7 @@
+ path to symmetric keys.
+ .sp
+ Specify the name and path of the symmetric key file.
+-\fI/etc/ntp.keys\fP
++\fI/opt/ntp/etc/ntp.keys\fP
+ is the default.
+ This is the same operation as the
+ \fBkeys\fP \fIkeyfile\fP
+@@ -900,17 +900,17 @@
+ See \fBOPTION PRESETS\fP for configuration environment variables.
+ .SH FILES
+ .TP 15
+-.NOP \fI/etc/ntp.conf\f[]
++.NOP \fI/opt/ntp/etc/ntp.conf\f[]
+ the default name of the configuration file
+ .br
+ .ns
+ .TP 15
+-.NOP \fI/etc/ntp.drift\f[]
++.NOP \fI/opt/ntp/etc/ntp.drift\f[]
+ the default name of the drift file
+ .br
+ .ns
+ .TP 15
+-.NOP \fI/etc/ntp.keys\f[]
++.NOP \fI/opt/ntp/etc/ntp.keys\f[]
+ the default name of the key file
+ .PP
+ .SH "EXIT STATUS"
+diff -Naur ntp-4.2.8p10.orig/ntpd/ntpd.1ntpdmdoc ntp-4.2.8p10/ntpd/ntpd.1ntpdmdoc
+--- ntp-4.2.8p10.orig/ntpd/ntpd.1ntpdmdoc	2017-03-21 14:44:22.000000000 +0000
++++ ntp-4.2.8p10/ntpd/ntpd.1ntpdmdoc	2018-02-21 22:24:25.362000000 +0000
+@@ -125,7 +125,7 @@
+ configuration file name.
+ .sp
+ The name and path of the configuration file,
+-\fI/etc/ntp.conf\fP
++\fI/opt/ntp/etc/ntp.conf\fP
+ by default.
+ .It  Fl d , Fl \-debug\-level 
+ Increase debug verbosity level.
+@@ -140,12 +140,12 @@
+ frequency drift file name.
+ .sp
+ The name and path of the frequency file,
+-\fI/etc/ntp.drift\fP
++\fI/opt/ntp/etc/ntp.drift\fP
+ by default.
+ This is the same operation as the
+ \fBdriftfile\fP \fIdriftfile\fP
+ configuration specification in the
+-\fI/etc/ntp.conf\fP
++\fI/opt/ntp/etc/ntp.conf\fP
+ file.
+ .It  Fl g , Fl \-panicgate 
+ Allow the first adjustment to be Big.
+@@ -204,7 +204,7 @@
+ path to symmetric keys.
+ .sp
+ Specify the name and path of the symmetric key file.
+-\fI/etc/ntp.keys\fP
++\fI/opt/ntp/etc/ntp.keys\fP
+ is the default.
+ This is the same operation as the
+ \fBkeys\fP \fIkeyfile\fP
+@@ -809,12 +809,12 @@
+ .Sh "ENVIRONMENT"
+ See \fBOPTION PRESETS\fP for configuration environment variables.
+ .Sh FILES
+-.Bl -tag -width /etc/ntp.drift -compact
+-.It Pa /etc/ntp.conf
++.Bl -tag -width /opt/ntp/etc/ntp.drift -compact
++.It Pa /opt/ntp/etc/ntp.conf
+ the default name of the configuration file
+-.It Pa /etc/ntp.drift
++.It Pa /opt/ntp/etc/ntp.drift
+ the default name of the drift file
+-.It Pa /etc/ntp.keys
++.It Pa /opt/ntp/etc/ntp.keys
+ the default name of the key file
+ .El
+ .Sh "EXIT STATUS"
+diff -Naur ntp-4.2.8p10.orig/ntpd/ntpd.html ntp-4.2.8p10/ntpd/ntpd.html
+--- ntp-4.2.8p10.orig/ntpd/ntpd.html	2017-03-21 14:44:14.000000000 +0000
++++ ntp-4.2.8p10/ntpd/ntpd.html	2018-02-21 22:24:25.422000000 +0000
+@@ -390,7 +390,7 @@
+ This is the &ldquo;configuration file name&rdquo; option. 
+ This option takes a string argument. 
+ The name and path of the configuration file,
+-<span class="file">/etc/ntp.conf</span>
++<span class="file">/opt/ntp/etc/ntp.conf</span>
+ by default. 
+ <div class="node">
+ <p><hr>
+@@ -406,12 +406,12 @@
+ This is the &ldquo;frequency drift file name&rdquo; option. 
+ This option takes a string argument. 
+ The name and path of the frequency file,
+-<span class="file">/etc/ntp.drift</span>
++<span class="file">/opt/ntp/etc/ntp.drift</span>
+ by default. 
+ This is the same operation as the
+ <code>driftfile</code> <kbd>driftfile</kbd>
+ configuration specification in the
+-<span class="file">/etc/ntp.conf</span>
++<span class="file">/opt/ntp/etc/ntp.conf</span>
+ file. 
+ <div class="node">
+ <p><hr>
+@@ -534,7 +534,7 @@
+ This is the &ldquo;path to symmetric keys&rdquo; option. 
+ This option takes a string argument. 
+ Specify the name and path of the symmetric key file. 
+-<span class="file">/etc/ntp.keys</span>
++<span class="file">/opt/ntp/etc/ntp.keys</span>
+ is the default. 
+ This is the same operation as the
+ <code>keys</code> <kbd>keyfile</kbd>
+diff -Naur ntp-4.2.8p10.orig/ntpd/ntp.keys.5man ntp-4.2.8p10/ntpd/ntp.keys.5man
+--- ntp-4.2.8p10.orig/ntpd/ntp.keys.5man	2017-03-21 14:44:10.000000000 +0000
++++ ntp-4.2.8p10/ntpd/ntp.keys.5man	2018-02-21 22:24:25.628000000 +0000
+@@ -156,7 +156,7 @@
+ so it is generally appropriate to specify these keys in ASCII format.
+ .SH FILES
+ .TP 14
+-.NOP \fI/etc/ntp.keys\f[]
++.NOP \fI/opt/ntp/etc/ntp.keys\f[]
+ the default name of the configuration file
+ .PP
+ .SH "SEE ALSO"
+diff -Naur ntp-4.2.8p10.orig/ntpd/ntp.keys.5mdoc ntp-4.2.8p10/ntpd/ntp.keys.5mdoc
+--- ntp-4.2.8p10.orig/ntpd/ntp.keys.5mdoc	2017-03-21 14:44:21.000000000 +0000
++++ ntp-4.2.8p10/ntpd/ntp.keys.5mdoc	2018-02-21 22:24:25.633000000 +0000
+@@ -131,8 +131,8 @@
+ .Sh "ENVIRONMENT"
+ See \fBOPTION PRESETS\fP for configuration environment variables.
+ .Sh FILES
+-.Bl -tag -width /etc/ntp.keys -compact
+-.It Pa /etc/ntp.keys
++.Bl -tag -width /opt/ntp/etc/ntp.keys -compact
++.It Pa /opt/ntp/etc/ntp.keys
+ the default name of the configuration file
+ .El
+ .Sh "EXIT STATUS"
+diff -Naur ntp-4.2.8p10.orig/ntpd/ntp.keys.html ntp-4.2.8p10/ntpd/ntp.keys.html
+--- ntp-4.2.8p10.orig/ntpd/ntp.keys.html	2017-03-21 14:44:14.000000000 +0000
++++ ntp-4.2.8p10/ntpd/ntp.keys.html	2018-02-21 22:24:25.643000000 +0000
+@@ -58,7 +58,7 @@
+ <h3 class="section">Description</h3>
+ 
+ <p>The name and location of the symmetric key file for <code>ntpd</code> can
+-be specified in a configuration file, by default <code>/etc/ntp.keys</code>.
++be specified in a configuration file, by default <code>/opt/ntp/etc/ntp.keys</code>.
+ 
+ <div class="node">
+ <p><hr>
+@@ -176,7 +176,7 @@
+ <h4 class="subsection">ntp.keys Files</h4>
+ 
+      <dl>
+-<dt><span class="file">/etc/ntp.keys</span><dd>the default name of the configuration file
++<dt><span class="file">/opt/ntp/etc/ntp.keys</span><dd>the default name of the configuration file
+ </dl>
+ <div class="node">
+ <p><hr>
+diff -Naur ntp-4.2.8p10.orig/ntpd/refclock_oncore.c ntp-4.2.8p10/ntpd/refclock_oncore.c
+--- ntp-4.2.8p10.orig/ntpd/refclock_oncore.c	2017-03-21 13:04:20.000000000 +0000
++++ ntp-4.2.8p10/ntpd/refclock_oncore.c	2018-02-21 22:24:26.735000000 +0000
+@@ -129,7 +129,7 @@
+  *
+  *  Lat,Long,Ht, cable-delay, offset, and the ReceiverID (along with the
+  *  state machine state) are printed to CLOCKSTATS if that file is enabled
+- *  in /etc/ntp.conf.
++ *  in /opt/ntp/etc/ntp.conf.
+  *
+  * --------------------------------------------------------------------------
+  *
+@@ -1211,7 +1211,7 @@
+ 
+ 	FILE	*fd;
+ 	char	*cc, *ca, line[100], units[2], device[64];
+-	const char	*dirs[] = { "/etc/ntp", "/etc", 0 };
++	const char	*dirs[] = { "/opt/ntp/etc", "/etc", 0 };
+ 	const char *cp, **cpp;
+ 	int	i, sign, lat_flg, long_flg, ht_flg, mode, mask;
+ 	double	f1, f2, f3;
+diff -Naur ntp-4.2.8p10.orig/ntpdate/ntpdate.c ntp-4.2.8p10/ntpdate/ntpdate.c
+--- ntp-4.2.8p10.orig/ntpdate/ntpdate.c	2017-03-21 13:04:20.000000000 +0000
++++ ntp-4.2.8p10/ntpdate/ntpdate.c	2018-02-21 22:25:38.971000000 +0000
+@@ -179,7 +179,7 @@
+ 
+ #ifndef KEYFILE
+ # ifndef SYS_WINNT
+-#define KEYFILE 	"/etc/ntp.keys"
++#define KEYFILE 	"/opt/ntp/etc/ntp.keys"
+ # else
+ #define KEYFILE 	"%windir%\\ntp.keys"
+ # endif /* SYS_WINNT */
+diff -Naur ntp-4.2.8p10.orig/ntpq/ntpq.html ntp-4.2.8p10/ntpq/ntpq.html
+--- ntp-4.2.8p10.orig/ntpq/ntpq.html	2017-03-21 14:45:25.000000000 +0000
++++ ntp-4.2.8p10/ntpq/ntpq.html	2018-02-21 22:26:42.603000000 +0000
+@@ -1100,7 +1100,7 @@
+ 
+ <p><table summary=""><tr align="left"><th valign="top" width="23%">What </th><th valign="top" width="23%">Default </th><th valign="top" width="5%">Flag </th><th valign="top" width="15%">Option
+ <br></th></tr><tr align="left"><td valign="top" width="23%">configuration file
+-</td><td valign="top" width="23%"><code>/etc/ntp.conf</code>
++</td><td valign="top" width="23%"><code>/opt/ntp/etc/ntp.conf</code>
+ </td><td valign="top" width="5%"><code>-c</code>
+ </td><td valign="top" width="15%"><code>conffile</code>
+ <br></td></tr><tr align="left"><td valign="top" width="23%">frequency file
+diff -Naur ntp-4.2.8p10.orig/ntpq/ntpq.texi ntp-4.2.8p10/ntpq/ntpq.texi
+--- ntp-4.2.8p10.orig/ntpq/ntpq.texi	2017-03-21 13:04:30.000000000 +0000
++++ ntp-4.2.8p10/ntpq/ntpq.texi	2018-02-21 22:26:20.587000000 +0000
+@@ -77,7 +77,7 @@
+ @multitable @columnfractions .23 .23 .05 .15
+ @headitem What @tab Default @tab Flag @tab Option
+ @item configuration file
+-@tab @code{/etc/ntp.conf}
++@tab @code{/opt/ntp/etc/ntp.conf}
+ @tab @code{-c}
+ @tab @code{conffile}
+ @item frequency file

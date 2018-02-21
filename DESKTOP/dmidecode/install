@@ -1,1 +1,5 @@
 make prefix=$PREFIX install
+
+mkdir -pv $PREFIX/bin
+cp -Rp $PREFIX/sbin/* $PREFIX/bin
+rm -fr $PREFIX/sbin

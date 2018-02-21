@@ -1,5 +1,8 @@
 make DESTDIR=$PREFIX MANDIR=$PREFIX/share/man update
+
 rm -fr $PREFIX/usr
 mv $PREFIX/sbin/* $PREFIX/bin
 rm -fr $PREFIX/sbin
 
+mkdir -pv $PREFIX/share/man/man8
+cp man/en_US/*8 $PREFIX/share/man/man8

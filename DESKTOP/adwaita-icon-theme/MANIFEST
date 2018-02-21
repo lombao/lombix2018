@@ -7,7 +7,7 @@ URL=ftp://ftp.gnome.org/pub/gnome/sources/adwaita-icon-theme/3.22/adwaita-icon-t
 ##
 # PREFIX: Where the package is going to be installed. 
 # If you are familiar with autotools you know what prefix usually means
-PREFIX=/usr
+PREFIX=/usr/pkgs/adwaita-icon-theme
 
 ##
 # CREDITS: Files that specifically you want to be copied over from 

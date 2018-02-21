@@ -1,10 +1,12 @@
-./configure 			 	\
+sed -e "s/https/http/"			\
+    -e 's/"(\\S+)"/"?([^\\s"]+)"?/'	\
+    -i scripts/update-leap/update-leap.in
+
+#autoreconf -i || exit 1
+
+./configure CFLAGS="-O2 -g -fPIC"	\
 	--build=$LMBX_BUILD		\
 	--prefix=$PREFIX		\
-	--bindir=$PREFIX/bin		\
-	--sbindir=$PREFIX/sbin		\
-	--datarootdir=$DATAROOTDIR	\
-	--docdir=$DATAROOTDIR/doc	\
 	--localstatedir=/var		\
 	--sysconfdir=$PREFIX/etc	\
 	--enable-linuxcaps		\

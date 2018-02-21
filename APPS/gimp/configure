@@ -7,8 +7,10 @@ export CPPFLAGS=$CFLAGS
 
 ./configure --prefix=$PREFIX 					\
             --sysconfdir=$PREFIX/etc    			\
+	    --with-gimpdir=.config/gimp				\
             --without-gvfs   					\
 	    --disable-glibtest					\
+	    --with-lcms						\
 	    --disable-gtktest					\
 	    --with-alsa-prefix=/usr/pkgs/alsa/lib 		\
             --with-alsa-inc-prefix=/usr/pkg/alsa/include 	\

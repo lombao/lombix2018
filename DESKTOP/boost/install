@@ -1,0 +1,2 @@
+./b2 install threading=multi link=shared
+
