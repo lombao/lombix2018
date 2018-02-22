@@ -11,10 +11,10 @@
 #$LastChangedBy: bdubbs $
 #$Date: 2012-04-09 14:48:51 -0500 (Mon, 09 Apr 2012) $
 
-. /usr/pkgs/lombix-base/lib/services/init-functions
+. /usr/etc/rc.d/init.d/init-functions
 . $IFCONFIG
 
-pidfile="/var/run/dhcpcd-$1.pid"
+pidfile="/run/dhcpcd-$1.pid"
 
 case "$2" in
     up)
@@ -30,7 +30,7 @@ case "$2" in
           ps `cat "$pidfile"` | grep dhcpcd > /dev/null
 
           if [ $? != 0 ]; then
-             rm -f /var/run/dhcpcd-$1.pid > /dev/null
+             rm -f /run/dhcpcd-$1.pid > /dev/null
           
           else
              log_warning_msg "dhcpcd is already running!"
@@ -38,7 +38,7 @@ case "$2" in
           fi
        fi
 
-       /usr/pkgs/dhcpcd/sbin/dhcpcd $1 $DHCP_START &> /dev/null
+       /usr/pkgs/dhcpcd/bin/dhcpcd $1 $DHCP_START &> /dev/null
        evaluate_retval
        ;;
 
@@ -46,10 +46,10 @@ case "$2" in
        log_info_msg "Stopping dhcpcd on the $1 interface..."
 
        if [ -z "$DHCP_STOP" ]; then
-          killproc -p "${pidfile}" /usr/pkgs/dhcpcd/sbin/dhcpcd
+          killproc -p "${pidfile}" /usr/pkgs/dhcpcd/bin/dhcpcd
 
        else
-          /usr/pkgs/dhcpcd/sbin/dhcpcd $1 $DHCP_STOP &> /dev/null
+          /usr/pkgs/dhcpcd/bin/dhcpcd $1 $DHCP_STOP &> /dev/null
 
           if [ "$?" -eq 1 ]; then
              log_warning_msg "dhcpcd not running!"

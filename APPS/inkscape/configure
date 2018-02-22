@@ -6,7 +6,5 @@ cd build
 		
 cmake 	-DCMAKE_INSTALL_PREFIX=$PREFIX 	\
    	-DCMAKE_BUILD_TYPE=Release	\
-	-DLCMS2_INCLUDE_DIR=/usr/pkgs/lcms2/include 	\
-	-DLCMS2_LIBRARY=/usr/pkgs/lcms2/lib		\
 	..
 

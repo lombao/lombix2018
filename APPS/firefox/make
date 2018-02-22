@@ -5,6 +5,8 @@ export CXXFLAGS=$CFLAGS
 
 make -f client.mk || exit 1
 
+echo "Stage 1 completed !!!"
+
 make -f client.mk install INSTALL_SDK= || exit 1
 chown -R root:root $PREFIX/lib/firefox-* || exit 1
 

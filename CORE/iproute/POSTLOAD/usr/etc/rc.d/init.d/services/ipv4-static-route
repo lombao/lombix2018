@@ -12,7 +12,7 @@
 #
 ########################################################################
 
-. /usr/lib/lsb/init-functions
+. /usr/etc/rc.d/init.d/init-functions
 . ${IFCONFIG}
 
 case "${TYPE}" in

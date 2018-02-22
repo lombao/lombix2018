@@ -18,9 +18,9 @@ diff -Naur httpd-2.4.27.orig/config.layout httpd-2.4.27/config.layout
 +    mandir:          ${prefix}/share/man
 +    sysconfdir:      ${prefix}/etc
 +    datadir:         /var/www
-+    iconsdir:        ${prefix}/share/icons
++    iconsdir:        ${datadir}/icons
 +    htdocsdir:       ${datadir}/htdocs
-+    manualdir:       ${htdocsdir}/manual
++    manualdir:       ${datadir}/manual
 +    cgidir:          ${datadir}/cgi-bin
 +    errordir:        ${datadir}/error
 +    includedir:      ${prefix}/include/

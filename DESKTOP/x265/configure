@@ -1,8 +1,8 @@
-mkdir bld &&
-cd    bld &&
+mkdir bld || exit 1
+cd    bld 
 
-export GCC="gcc -B/usr/pkgs/glibc/lib"
-export CC=$GCC
+#export GCC="gcc -B/usr/pkgs/glibc/lib"
+#export CC=$GCC
 
 cmake -DCMAKE_INSTALL_PREFIX=$PREFIX 	\
       -DENABLE_STATIC=OFF         	\

@@ -53,7 +53,7 @@ file=/usr/etc/sysconfig/ifconfig.${1}
 # Skip backup files
 [ "${file}" = "${file%""~""}" ] || exit 0
 
-. /usr/pkgs/lombix-base/lib/services/init-functions 
+. /usr/etc/rc.d/init.d/init-functions 
 
 if [ ! -r "${file}" ]; then
    log_warning_msg "${file} is missing or cannot be accessed."
@@ -71,8 +71,8 @@ fi
 S=`echo ${SERVICE} | cut -f1 -d" "`
 
 if /usr/pkgs/iproute/bin/ip link show ${IFACE} > /dev/null 2>&1; then
-   if [ -n "${S}" -a -x "/usr/pkgs/lombix-base/lib/services/${S}" ]; then
-     IFCONFIG=${file} /usr/pkgs/lombix-base/lib/services/${S} ${IFACE} down
+   if [ -n "${S}" -a -x "/usr/etc/rc.d/init.d/services/${S}" ]; then
+     IFCONFIG=${file} /usr/etc/rc.d/init.d/services/${S} ${IFACE} down
    else
      MSG="Unable to process ${file}.  Either "
      MSG="${MSG}the SERVICE variable was not set "

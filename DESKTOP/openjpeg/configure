@@ -1,5 +1,7 @@
 mkdir -v build &&
 cd       build &&
 
-cmake -DLCMS2_LIBRARY="/usr/pkgs/lcms2/lib/liblcms2.so" -DLCMS2_INCLUDE_DIR="/usr/pkgs/lcms2/include" -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$PREFIX .. 
-
+cmake 					\
+	-DCMAKE_BUILD_TYPE=Release 	\
+	-DCMAKE_INSTALL_PREFIX=$PREFIX 	\
+	.. 

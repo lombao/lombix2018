@@ -70,7 +70,7 @@ file=/usr/etc/sysconfig/ifconfig.${1}
 # Skip backup files
 [ "${file}" = "${file%""~""}" ] || exit 0
 
-. /usr/pkgs/lombix-base/lib/services/init-functions
+. /usr/etc/rc.d/init.d/init-functions
 
 log_info_msg "Bringing up the ${1} interface... "
 
@@ -94,7 +94,7 @@ if [ "${IN_BOOT}" = "1" -a "${ONBOOT}" != "yes" ]; then
 fi
 
 for S in ${SERVICE}; do
-  if [ ! -x "/usr/pkgs/lombix-base/lib/services/${S}" ]; then
+  if [ ! -x "/usr/etc/rc.d/init.d/services/${S}" ]; then
     MSG="\nUnable to process ${file}.  Either " 
     MSG="${MSG}the SERVICE '${S} was not present "
     MSG="${MSG}or cannot be executed."
@@ -107,7 +107,7 @@ if [ "${SERVICE}" = "wpa" ]; then log_success_msg; fi
 
 # Create/configure the interface
 for S in ${SERVICE}; do 
-  IFCONFIG=${file} /usr/pkgs/lombix-base/lib/services/${S} ${IFACE} up
+  IFCONFIG=${file} /usr/etc/rc.d/init.d/services/${S} ${IFACE} up
 done
 
 # Bring up the interface and any components
