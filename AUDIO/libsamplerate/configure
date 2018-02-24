@@ -1,0 +1,6 @@
+export LDFLAGS="-L/usr/pkgs/fftw/lib -L/usr/pkgs/libsndfile/lib"
+export CFLAGS="-I/usr/pkgs/fftw/include -I/usr/pkgs/libsndfile/include"
+
+./configure --prefix=$PREFIX 		\
+            --disable-static 		
+

@@ -2,23 +2,26 @@
 mkdir -vp build
 cd build
 
-export LDFLAGS="-L/usr/pkgs/libjpeg/lib -L/usr/pkgs/libusb/lib \
-	-L/usr/pkgs/ncurses/lib -L/usr/pkgs/alsa/lib \
-	-L/usr/pkgs/lzo/lib -L/usr/pkgs/bzip2/lib"
-export CFLAGS="-I/usr/pkgs/libjpeg/include -I/usr/pkgs/libusb/include \
-	-I/usr/pkgs/ncurses/include -I/usr/pkgs/alsa/include \
-	-I/usr/pkgs/lzo/include -I/usr/pkgs/bzip2/include"
+export LDFLAGS="-L/usr/pkgs/libjpeg/lib -L/usr/pkgs/libusb/lib 		\
+	-L/usr/pkgs/ncurses/lib -L/usr/pkgs/alsa/lib 			\
+	-L/usr/pkgs/lzo/lib -L/usr/pkgs/bzip2/lib			\
+	-L/usr/pkgs/gnupg/lib"
 
-../configure --prefix=$PREFIX \
-             --python=$PYTHON2 \
-             --sysconfdir=$PREFIX/etc \
-             --localstatedir=/var  	  \
-             --target-list=x86_64-softmmu \
-             --audio-drv-list=alsa        \
-             --with-sdlabi=2.0            \
-	     --with-gtkabi=3.0            \
-             --extra-cflags="$CFLAGS"     \
-             --extra-ldflags="$LDFLAGS"   \
+export CFLAGS="-I/usr/pkgs/libjpeg/include -I/usr/pkgs/libusb/include 	\
+	-I/usr/pkgs/ncurses/include -I/usr/pkgs/alsa/include 		\
+	-I/usr/pkgs/lzo/include -I/usr/pkgs/bzip2/include		\
+	-I/usr/pkgs/gnupg"
+
+../configure --prefix=$PREFIX 			\
+             --python=$PYTHON2 			\
+             --sysconfdir=$PREFIX/etc 		\
+             --localstatedir=/var  	  	\
+             --target-list=x86_64-softmmu 	\
+             --audio-drv-list=alsa        	\
+             --with-sdlabi=2.0            	\
+	     --with-gtkabi=3.0            	\
+             --extra-cflags="$CFLAGS"     	\
+             --extra-ldflags="$LDFLAGS"   	\
              --mandir=$PREFIX/share/man    
       
 

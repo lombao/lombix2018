@@ -202,6 +202,25 @@ fi
 ##
 ##
 
+##
+## configuring the first netcard
+IFACE=$(/usr/pkgs/eudev/bin/udevadm info -e |		\
+	 /usr/pkgs/grep/bin/grep ID_NET_NAME_PATH | 	\
+	 /usr/pkgs/coreutils/bin/tail -n 1 | /usr/pkgs/gawk/bin/awk -F= '{print $2}')
+
+echo "ONBOOT=yes" 		>  /usr/etc/sysconfig/ifconfig.$IFACE
+echo "IFACE=$IFACE"     	>> /usr/etc/sysconfig/ifconfig.$IFACE
+echo 'SERVICE="dhcpcd"'  	>> /usr/etc/sysconfig/ifconfig.$IFACE
+echo 'DHCP_START=""'		>> /usr/etc/sysconfig/ifconfig.$IFACE
+echo 'DHCP_STOP="-k"'		>> /usr/etc/sysconfig/ifconfig.$IFACE
+
+
+
+##
+##
+##
+
+
 msg="Job Done!!!
 Now you can start using Lombix. Enjoy!!!
 
@@ -210,11 +229,12 @@ SOME DETAILS YOU SHOULD KNOW
   I would appreciate if you let me know of these problems: 
   http::/lombix.org
   
-* The system is 'harcoded' to boot up with dhcpd , and it assume the 
-  ethernet device is called enp3s0. See /usr/etc/sysconfig
+* The network has been configured to use dhcpcd, so you do not neet 
+  provide an IP Address. If you want to change this please see
+  /usr/etc/sysconfig
   
 * The system will startup in text mode, if you want to start the X ,
-  use the command startx
+  use the command startx once you have log in
 
 * Some packages when recompiled will overwrite all configuration files. 
   This is a well known issue that must be corrected.
