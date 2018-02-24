@@ -23,7 +23,7 @@
 # X-LFS-Provided-By:   LFS
 ### END INIT INFO
  
-. /usr/pkgs/lombix-base/lib/services/init-functions
+. /usr/etc/rc.d/init.d/init-functions
 
 #$LastChangedBy: dj $
 #$Date: 2012-06-18 18:42:28 -0500 (Mon, 18 Jun 2012) $

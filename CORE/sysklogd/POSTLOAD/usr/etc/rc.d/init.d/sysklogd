@@ -29,7 +29,7 @@
 # Note: sysklogd is not started in runlevel 2 due to possible
 # remote logging configurations
 
-. /usr/pkgs/lombix-base/lib/services/init-functions
+. /usr/etc/rc.d/init.d/init-functions
 
 case "${1}" in
    start)

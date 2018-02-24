@@ -28,7 +28,7 @@
 # Assure that the kernel has module support.
 [ -e /proc/modules ] || exit 0
 
-. /usr/pkgs/lombix-base/lib/services/init-functions
+. /usr/etc/rc.d/init.d/init-functions
 
 case "${1}" in
    start)

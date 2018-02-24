@@ -26,7 +26,7 @@
 # X-LFS-Provided-By:   LFS
 ### END INIT INFO
 
-. /usr/pkgs/lombix-base/lib/services/init-functions
+. /etc/rc.d/init.d/init-functions
 
 [ -r /usr/etc/sysconfig/hostname ] && export HOSTNAME=$(/usr/pkgs/coreutils/bin/cat /usr/etc/sysconfig/hostname) 
 [ -r /usr/etc/sysconfig/network ] && source /usr/etc/sysconfig/network

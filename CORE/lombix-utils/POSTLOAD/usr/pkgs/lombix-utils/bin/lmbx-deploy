@@ -26,7 +26,7 @@ rm -fr /root/D*
 rm -fr /root/.thumbnails
 rm -fr /root/.cmake
 rm -fr /root/.cargo
-
+rm -fr /root/.lesshst
 
 rm -fr /var/log/*
 rm -fr /var/mail/*
@@ -41,3 +41,5 @@ find /usr -type f -name "DEADJOE" -exec rm {} \;
 
 rm -fr /var/cache/lmbx/*
 rm -fr /var/spool/fcron/*
+
+touch /firstboot

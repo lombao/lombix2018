@@ -26,7 +26,7 @@
 # X-LFS-Provided-By:   LFS BLFS
 ### END INIT INFO
 
-. /usr/pkgs/lombix-base/lib/services/init-functions
+. /usr/etc/rc.d/init.d/init-functions
 
 [ -r /usr/etc/sysconfig/clock ] && . /usr/etc/sysconfig/clock
 

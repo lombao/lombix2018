@@ -35,6 +35,11 @@ pathappend () {
 
 
 
+# SOme identification
+export USER="$(/usr/pkgs/coreutils/bin/id -un)"
+
+
+
 # Set initial variables
 export PATH=/usr/bin
 export HISTSIZE=1000
@@ -52,16 +57,16 @@ export DATAROOTDIR=/usr/share
 export XDG_DATA_DIRS=$DATAROOTDIR
 export XDG_CONFIG_DIRS=/usr/etc/xdg
 export XDG_DATA_HOME=/usr/share
+export XDG_RUNTIME_DIR=/tmp/xdg-${USER}
 export HOSTNAME=$(/usr/pkgs/coreutils/bin/cat /usr/etc/sysconfig/hostname)
-export FONTS_PATH=$DATAROOTDIR/fonts
-export ICONS_PATH=$DATAROOTDIR/icons
+export FONTS_SHARE_PATH=$DATAROOTDIR/fonts
+export ICONS_SHARE_PATH=$DATAROOTDIR/icons
+export DBUS_SHARE_PATH=$DATAROOTDIR/dbus-1
+export PIXMAPS_SHARE_PATH=$DATAROOTDIR/pixmaps
 export CC=/usr/pkgs/gcc/bin/gcc
 export GCC=$CC
 export CXX="/usr/pkgs/gcc/bin/g++"
 export CPP="/usr/pkgs/gcc/bin/cpp"
-
-# SOme identification
-export USER="$(/usr/pkgs/coreutils/bin/id -un)"
 
 export LOGNAME=$USER
 export MAIL="/var/mail/${USER}"

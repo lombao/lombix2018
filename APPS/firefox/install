@@ -17,3 +17,15 @@ EOF
 
 ln -sfv $PREFIX/lib/firefox-55.0.3/browser/icons/mozicon128.png \
         $PREFIX/share/pixmaps/firefox.png
+
+
+
+export LDFLAGS="-L/usr/pkgs/alsa/lib -L/usr/pkgs/pixman/lib -L/usr/pkgs/nss/lib -L/usr/pkgs/nspr/lib -L/usr/pkgs/libpng/lib -L/usr/pkgs/zlib/lib -L/usr/pkgs/libjpeg/lib -L/usr/pkgs/X11/lib -L/usr/pkgs/libvpx/lib"
+export CFLAGS="-I/usr/pkgs/alsa/include -I/usr/pkgs/pixman/include -I/usr/pkgs/nss/include/nss -I/usr/pkgs/nss/include -I/usr/pkgs/nspr/include -I/usr/pkgs/libpng/include -I/usr/pkgs/zlib/include -I/usr/pkgs/libjpeg/include -I/usr/pkgs/X11/include -I/usr/pkgs/libvpx/include"
+export CXXFLAGS=$CFLAGS
+
+make -f client.mk install INSTALL_SDK= || exit 1
+chown -R root:root $PREFIX/lib/firefox-* || exit 1
+
+mkdir -pv  $PREFIX/lib/mozilla/plugins
+ln -sfv ../../mozilla/plugins $PREFIX/lib/firefox-55.0.3/browser

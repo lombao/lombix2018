@@ -1,0 +1,8 @@
+cd build
+make install
+
+
+chgrp kvm $PREFIX/libexec/qemu-bridge-helper
+chmod 4750 $PREFIX/libexec/qemu-bridge-helper
+
+ln -sfv qemu-system-$(uname -m) $PREFIX/bin/qemu

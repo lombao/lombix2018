@@ -389,6 +389,27 @@ function buildPackage {
 			ln -sv $DATAROOTDIR/glib-2.0 $PREFIX/share/glib-2.0
 		fi
 
+		# Now, the xml
+		if [ -d "$PREFIX/share/xml" ] && [ ! -L "$PREFIX/share/xml" ]; then
+			$CP -Rp $PREFIX/share/xml/* $DATAROOTDIR/xml
+			$MRM -fr $PREFIX/share/xml
+			ln -sv $DATAROOTDIR/xml $PREFIX/share/xml
+		fi
+		
+		# Now, the sgml
+		if [ -d "$PREFIX/share/sgml" ] && [ ! -L "$PREFIX/share/sgml" ]; then
+			$CP -Rp $PREFIX/share/sgml/* $DATAROOTDIR/sgml
+			$MRM -fr $PREFIX/share/sgml
+			ln -sv $DATAROOTDIR/sgml $PREFIX/share/sgml
+		fi
+
+		# Now, the mime
+		if [ -d "$PREFIX/share/mime" ] && [ ! -L "$PREFIX/share/mime" ]; then
+			$CP -Rp $PREFIX/share/mime/* $DATAROOTDIR/mime
+			$MRM -fr $PREFIX/share/mime
+			ln -sv $DATAROOTDIR/mime $PREFIX/share/mime
+		fi
+
 
 		
 
@@ -396,12 +417,6 @@ function buildPackage {
 		#if [ -d "$PREFIX/share/aclocal" ]; then
 		#	$CP -Rp $PREFIX/share/aclocal/* /usr/share/aclocal
 		#	$MRM -fr $PREFIX/share/aclocal
-		#fi
-
-		# Now, the mime
-		#if [ -d "$PREFIX/share/mime" ]; then
-		#	$CP -Rp $PREFIX/share/mime/* /usr/share/mime
-		#	$MRM -fr $PREFIX/share/mime
 		#fi
 		
 		# Now, the doc
@@ -490,15 +505,25 @@ done
 
 ###
 # We do not want these
-$MRM -fr $DATAROOTDIR/doc
-$MRM -fr $DATAROOTDIR/devhelp
-$MRM -fr $DATAROOTDIR/gtk-doc
-$MRM -fr $DATAROOTDIR/man/man3
+$MRM -fr $PREFIX/share/doc
+$MRM -fr $PREFIX/share/devhelp
+$MRM -fr $PREFIX/share/gtk-doc
+$MRM -fr $PREFIX/share/man/man3
+$MRM -fr $PREFIX/share/info
+
 
 ##
 # Compress the man pages to save a bit of space
-$MGZIP -f /usr/share/man/man1/*.1 2> /dev/null
-$MGZIP -f /usr/share/man/man4/*.4 2> /dev/null
-$MGZIP -f /usr/share/man/man5/*.5 2> /dev/null
-$MGZIP -f /usr/share/man/man7/*.7 2> /dev/null
-$MGZIP -f /usr/share/man/man8/*.8 2> /dev/null
+$MGZIP -f $PREFIX/share/man/man1/*.1 2> /dev/null
+$MGZIP -f $PREFIX/share/man/man4/*.4 2> /dev/null
+$MGZIP -f $PREFIX/share/man/man5/*.5 2> /dev/null
+$MGZIP -f $PREFIX/share/man/man6/*.6 2> /dev/null
+$MGZIP -f $PREFIX/share/man/man7/*.7 2> /dev/null
+$MGZIP -f $PREFIX/share/man/man8/*.8 2> /dev/null
+
+
+#
+# Just in case, we run ldconfig if the install part hasn't.
+# 
+ldconfig
+

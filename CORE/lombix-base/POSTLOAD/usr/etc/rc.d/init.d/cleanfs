@@ -27,7 +27,7 @@
 # X-LFS-Provided-By:   LFS
 ### END INIT INFO
 
-. /usr/pkgs/lombix-base/lib/services/init-functions
+. /etc/rc.d/init.d/init-functions
 
 # Function to create files/directory on boot.
 create_files() 

@@ -27,7 +27,7 @@
 # X-LFS-Provided-By:   LFS
 ### END INIT INFO
 
-. /usr/pkgs/lombix-base/lib/services/init-functions
+. /usr/etc/rc.d/init.d/init-functions
 
 # Native English speakers probably don't have /etc/sysconfig/console at all
 [ -r /usr/etc/sysconfig/console ] && . /usr/etc/sysconfig/console

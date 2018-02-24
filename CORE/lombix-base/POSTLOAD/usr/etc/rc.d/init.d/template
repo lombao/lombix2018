@@ -25,7 +25,7 @@
 # X-LFS-Provided-By:
 ### END INIT INFO
 
-. /usr/pkgs/lombix-base/lib/services/init-functions
+. /etc/rc.d/init.d/init-functions
 
 case "${1}" in
    start)
