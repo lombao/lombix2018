@@ -1,0 +1,43 @@
+
+#
+# NOTE: IT seems the OPUS lib is not found , I do suspect some error
+# in the configure file because it is looking for opusfile but the .pc file
+# is named just "opus" . Also, even when I add them into the LDFLAGS 
+# the configure don't get it.
+
+export LDFLAGS="-L/usr/pkgs/file/lib 	\
+	-L/usr/pkgs/mpg123/lib 		\
+	-L/usr/pkgs/libmad/lib 		\
+	-L/usr/pkgs/lame/lib 		\
+	-L/usr/pkgs/flac/lib 		\
+	-L/usr/pkgs/libsndfile/lib 	\
+	-L/usr/pkgs/libpng/lib 		\
+	-L/usr/pkgs/libao/lib 		\
+	-L/usr/pkgs/alsa-lib/lib 	\
+	-L/usr/pkgs/libogg/lib 		\
+	-L/usr/pkgs/libvorbis/lib 	\
+	-L/usr/pkgs/opus/lib"
+
+export CFLAGS="-I/usr/pkgs/file/include 	\
+	-I/usr/pkgs/mpg123/include 	\
+	-I/usr/pkgs/libmad/include 	\
+	-I/usr/pkgs/lame/include 	\
+	-I/usr/pkgs/flac/include 	\
+	-I/usr/pkgs/libsndfile/include 	\
+	-I/usr/pkgs/libpng/include 	\
+	-I/usr/pkgs/libao/include 	\
+	-I/usr/pkgs/alsa-lib/include 	\
+	-I/usr/pkgs/libogg/include 	\
+	-I/usr/pkgs/libvorbis/include 	\
+	-I/usr/pkgs/opus/include"
+
+export CXXFLAGS=$CFLAGS
+export CPPFLAGS=$CFLAGS
+
+./configure --prefix=$PREFIX		\
+	--build=$LMBX_BUILD		\
+	--disable-static		\
+	--with-opus			\
+	--with-distro=Lombix		\
+	--mandir=$PREFIX/share/man	
+

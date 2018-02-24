@@ -1,0 +1,4 @@
+./configure --prefix=$PREFIX 		\
+            --mandir=$PREFIX/share/man 	\
+            --enable-shared 		\
+            --disable-static 

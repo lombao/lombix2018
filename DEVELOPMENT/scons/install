@@ -1,0 +1,4 @@
+
+python2 setup.py install --prefix=$PREFIX  		\
+                        --standard-lib 			\
+                        --optimize=1   			

@@ -6,7 +6,7 @@ autoreconf -i || exit 1
 ./configure --prefix=$PREFIX 				\
             --with-menu=$PREFIX/share/menu 		\
             --with-windowmenu=$PREFIX/share/windowmenu 	\
-            --with-style=$PREFIX/share/styles/bloe     	\
+            --with-style=$PREFIX/share/styles/zimek_darkblue   	\
             --with-keys=$PREFIX/share/keys 		\
             --with-apps=$PREFIX/share/apps 		\
             --with-overlay=$PREFIX/share/overlay 	\

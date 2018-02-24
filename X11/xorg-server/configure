@@ -1,4 +1,4 @@
-./configure --prefix=$PREFIX --disable-nls 		\
+./configure --prefix=$PREFIX 		 		\
             --localstatedir=/var   			\
             --with-os-vendor=Lombix 			\
             --with-os-name=Lombix   			\

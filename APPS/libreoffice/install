@@ -1,0 +1,2 @@
+unset PREFIX
+make distro-pack-install

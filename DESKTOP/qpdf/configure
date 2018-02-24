@@ -1,0 +1,8 @@
+export LDFLAGS="-L/usr/pkgs/pcre/lib -L/usr/pkgs/zlib/lib -L/usr/pkgs/xml/lib -L/usr/pkgs/icu/lib"
+export CFLAGS="-I/usr/pkgs/pcre/include -I/usr/pkgs/zlib/include -I/usr/pkgs/xml/include -I/usr/pkgs/icu/include"
+export CXXFLAGS=$CFLAGS
+
+./configure --prefix=$PREFIX 		\
+	--disable-static		\
+	--mandir=$PREFIX/share/man	\
+ 

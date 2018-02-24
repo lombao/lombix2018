@@ -1,0 +1,11 @@
+sed 	-e 's/client_set/set/' 	\
+	-e 's/gnutls_retr/&2/'	\
+	-e 's/type - t/cert_&/' \
+	-i src/ne_gnutls.c
+
+./configure 				\
+	--prefix=$PREFIX 		\
+	--with-ssl			\
+	--enable-shared			\
+	--disable-static
+

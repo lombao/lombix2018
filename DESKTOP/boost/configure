@@ -1,10 +1,15 @@
 
-#sed -e '/using python/ s@;@: /usr/include/python${PYTHON_VERSION/3*/${PYTHON_VERSION}m} ;@' \
-#	-i bootstrap.sh
+sed -e '/using python/ s@;@: /usr/pkgs/python3/include/python3.6m ;@' \
+	-i bootstrap.sh
 
-export LDFLAGS="-L/usr/pkgs/bzip2/lib -L/usr/pkgs/icu/lib -L/usr/pkgs/python3/lib"
-export CFLAGS="-I/usr/pkgs/bzip2/include -I/usr/pkgs/icu/lib 			\
-	-I/usr/pkgs/python3/include -I/usr/pkgs/python3/include/python3.6.m"
+export LDFLAGS="-L/usr/pkgs/bzip2/lib	\
+	-L/usr/pkgs/icu/lib 		\
+	-L/usr/pkgs/python3/lib"
+
+export CFLAGS="-I/usr/pkgs/bzip2/include 	\
+	-I/usr/pkgs/icu/lib 			\
+	-I/usr/pkgs/python3/include 		\
+	-I/usr/pkgs/python3/include/python3.6.m"
 
 export CXXFLAGS=$CFLAGS
 export CPPFLAGS=$CFLAGS

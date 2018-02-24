@@ -1,0 +1,64 @@
+export LO_PREFIX=$PREFIX
+
+sed -e "/distro-install-file-lists/d" -i Makefile.in || exit 1
+
+export LDFLAGS="-L/usr/pkgs/gnupg/lib 	\
+	-L/usr/pkgs/boost/lib 		\
+	-L/usr/pkgs/cups/lib 		\
+	-L/usr/pkgs/libjpeg/lib 	\
+	-L/usr/pkgs/openssl/lib 	\
+	-L/usr/pkgs/openldap/lib 	\
+	-L/usr/pkgs/nss/lib 		\
+	-L/usr/pkgs/icu/lib"
+
+export CFLAGS="-I/usr/pkgs/gnupg/include 	\
+	-I/usr/pkgs/boost/include/boost 	\
+	-I/usr/pkg/cups/include 		\
+	-I/usr/pkg/libjpeg/include 		\
+	-I/usr/pkg/openssl/include 		\
+	-I/usr/pkg/openldap/include 		\
+	-I/usr/pkg/nss/include 			\
+	-I/usr/pkg/nss/include/nss 		\
+	-I/usr/pkg/icu/include"
+
+export CXXFLAGS=$CFLAGS
+export CPPFLAGS=$CFLAGS
+
+unset PREFIX
+./autogen.sh --prefix=$LO_PREFIX         	\
+             --sysconfdir=$LO_PREFIX/etc    	\
+             --with-vendor=Lombix        	\
+             --with-lang='en-GB'         	\
+             --with-help                 	\
+             --with-myspell-dicts        	\
+             --with-alloc=system         	\
+             --without-junit             	\
+             --without-system-dicts      	\
+             --disable-dconf             	\
+             --disable-odk               	\
+             --enable-release-build=yes  	\
+             --enable-python=system      	\
+             --x-includes=/usr/pkgs/X11/incldue \
+	     --x-libraries=/usr/pkgs/X11/lib    \
+             --with-system-cairo         	\
+ 	     --with-system-openldap	 	\
+             --with-system-curl          	\
+             --with-system-expat         	\
+             --with-system-harfbuzz      	\
+             --with-system-boost	 	\
+             --with-system-icu           	\
+             --with-system-jpeg          	\
+             --with-system-graphite	 	\
+             --with-system-lcms2         	\
+             --with-system-libpng        	\
+	     --with-system-libatomic_ops 	\
+             --with-system-libxml        	\
+             --with-system-neon          	\
+             --with-system-nss           	\
+             --with-system-openssl       	\
+             --with-system-poppler       	\
+             --with-system-postgresql    	\
+             --with-system-epoxy         	\
+             --without-java              	\
+             --with-perl-home=/usr/pkgs/perl 	\
+             --with-system-zlib

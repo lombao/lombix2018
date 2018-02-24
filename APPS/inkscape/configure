@@ -1,5 +1,6 @@
 sed -i 's| abs(| std::fabs(|g' src/ui/tools/flood-tool.cpp
 
+unset CPLUS_INCLUDE_PATH
 
 mkdir build
 cd build

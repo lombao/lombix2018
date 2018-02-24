@@ -1,0 +1,4 @@
+
+unset PREFIX
+ make build-nocheck
+

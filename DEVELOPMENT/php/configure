@@ -1,7 +1,14 @@
 
-export CC="gcc -I/usr/pkgs/glibc/include"
-export GCC=$CC
-export GXX="g++ -I/usr/pkgs/glibc/include"
+export LDFLAGS="-L/usr/pkgs/libgd/lib	\
+	-L/usr/pkgs/gettext/lib"
+
+export CFLAGS="-I/usr/pkgs/libgd/include	\
+	-I/usr/pkgs/gettext/include		\
+	-I/usr/pkgs/glibc/include"
+
+export CPPFLAGS=$CFLAGS
+export CXXFLAGS=$CFLAGS
+
 
 ./configure --prefix=$PREFIX		\
 	--build=$LMBX_BUILD		\
