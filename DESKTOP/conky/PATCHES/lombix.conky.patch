@@ -1,0 +1,11 @@
+diff -Naur conky-1.9.1.orig/Makefile.am conky-1.9.1/Makefile.am
+--- conky-1.9.1.orig/Makefile.am	2016-07-18 15:09:34.000000000 +0000
++++ conky-1.9.1/Makefile.am	2018-02-25 14:09:22.590000000 +0000
+@@ -27,7 +27,6 @@
+ 
+ SUBDIRS = 					\
+ 	src 					\
+-	doc					\
+ 	lua					\
+ 	data
+ 

@@ -1,0 +1,13 @@
+
+export LUA_CFLAGS="-I/usr/pgks/lua/include"
+export LUA_LIBS="-L/usr/pkgs/lua/lib"
+
+
+export LDFLAGS="-L/usr/pkgs/lua/lib -L/usr/pkgs/curl/lib -L/usr/pkgs/cairo/lib"
+export CFLAGS="-I/usr/pkgs/lua/include -I/usr/pkgs/curl/include -I/usr/pkgs/cairo/include"
+export LIBS="-llua"
+
+./autogen.sh || exit 1
+./configure --prefix=$PREFIX	\
+	--build=$LMBX_BUILD	\
+	--enable-imlib2

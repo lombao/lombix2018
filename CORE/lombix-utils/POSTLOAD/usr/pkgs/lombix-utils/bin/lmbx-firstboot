@@ -229,9 +229,10 @@ SOME DETAILS YOU SHOULD KNOW
   I would appreciate if you let me know of these problems: 
   http::/lombix.org
   
-* The network has been configured to use dhcpcd, so you do not neet 
-  provide an IP Address. If you want to change this please see
-  /usr/etc/sysconfig
+* The network has been configured to use dhcpcd, the net device will be
+  detected and configured ( to use dhcp ) automatically. If you want to 
+  change this please see  /usr/etc/sysconfig and find a file named
+  ifconfig.<devicename>
   
 * The system will startup in text mode, if you want to start the X ,
   use the command startx once you have log in

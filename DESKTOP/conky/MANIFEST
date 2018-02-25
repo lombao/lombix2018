@@ -1,0 +1,27 @@
+##
+# URL: The place where the source code has been downloaded.
+# If you remove the package the installation tool will try to 
+# download it again from this place.
+URL=https://github.com/brndnmtthws/conky/archive/1.9.1.tar.gz
+
+##
+# PREFIX: Where the package is going to be installed. 
+# If you are familiar with autotools you know what prefix usually means
+PREFIX=/usr/pkgs/conky
+
+##
+# CREDITS: Files that specifically you want to be copied over from 
+# the source code into the credits area. The installer will automatically
+# try to copy a wide range of files but if you want any particular file to 
+# added , just write it here
+CREDITS="COPYING LICENSE.BSD"
+
+
+##
+# STRIP: Afer the installation the installer will try to execute a
+# strip --strip-unneeded over all the files from the PREFIX. This eliminates
+# debug symbols and reduce the size of binaries ( execs and libs ). 
+STRIP=yes
+
+
+

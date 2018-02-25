@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=DosBox
+Comment=x86 Emulator
+Exec=/usr/pkgs/dosbox/bin/dosbox
+Icon=DOSBox_icon.png
+Terminal=false
+Type=Application
+Categories=Game;
+StartupNotify=true
