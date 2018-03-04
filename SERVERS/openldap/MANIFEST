@@ -7,7 +7,7 @@ URL=ftp://ftp.openldap.org/pub/OpenLDAP/openldap-release/openldap-2.4.45.tgz
 ##
 # PREFIX: Where the package is going to be installed. 
 # If you are familiar with autotools you know what prefix usually means
-PREFIX=/opt/openldap
+PREFIX=/usr/pkgs/servers/openldap
 
 ##
 # CREDITS: Files that specifically you want to be copied over from 

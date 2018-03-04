@@ -1,0 +1,13 @@
+[Desktop Entry]
+Name=Background
+Name[en_US]=Background
+GenericName=Use this image as Wallpaper
+GenericName[en_US]=Image viewer
+Comment=Use this image as Wallpaper
+Exec=fbsetbg -a %f
+Terminal=false
+Type=Application
+Icon=preferences-desktop-wallpaper.png
+Categories=Graphics;2DGraphics;Viewer;
+MimeType=image/bmp;image/gif;image/jpeg;image/jpg;image/pjpeg;image/png;image/tiff;image/x-bmp;image/x-pcx;image/x-png;image/x-portable-anymap;image/x-portable-bitmap;image/x-portable-graymap;image/x-portable-pixmap;image/x-tga;image/x-xbitmap;
+NoDisplay=true

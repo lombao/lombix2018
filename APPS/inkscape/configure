@@ -1,11 +1,19 @@
 sed -i 's| abs(| std::fabs(|g' src/ui/tools/flood-tool.cpp
 
-unset CPLUS_INCLUDE_PATH
+./autogen.sh || exit 1
 
-mkdir build
-cd build
-		
-cmake 	-DCMAKE_INSTALL_PREFIX=$PREFIX 	\
-   	-DCMAKE_BUILD_TYPE=Release	\
-	..
+
+export LDFLAGS="-L/usr/pkgs/popt/lib 	\
+	-L/usr/pkgs/lcms2/lib 		\
+	-L/usr/pkgs/poppler/lib"
+
+export CFLAGS="-I/usr/pkgs/popt/include \
+	-I/usr/pkgs/lcms2/include 	\
+	-I/usr/pkgs/poppler/include"
+
+export CXXFLAGS=$CFLAGS
+export CPPFLAGS=$CFLAGS
+
+./configure --prefix=$PREFIX	\
+	--build=$LMBX_BUILD
 

@@ -2,10 +2,20 @@
 
 autoconf || exit 1
 
-export LDFLAGS="-L/usr/pkgs/glibc/lib -L/usr/pkgs/openssl/lib -L/usr/pkgs/gnutls/lib \
-	-L/usr/pkgs/postgres/lib -L/usr/pkgs/icu/lib -L/usr/pkgs/cyrus-sasl/lib" 
-export CFLAGS="-I/usr/pkgs/glibc/include -I/usr/pkgs/openssl/include -I/usr/pkgs/gnutls/include \
-	-I/usr/pkgs/postgres/include -I/usr/pkgs/icu/include -I/usr/pkgs/cyrus-sasl/include "
+export LDFLAGS="-L/usr/pkgs/glibc/lib 	\
+	-L/usr/pkgs/openssl/lib 	\
+	-L/usr/pkgs/gnutls/lib 		\
+	-L/usr/pkgs/postgres/lib 	\
+	-L/usr/pkgs/icu/lib 		\
+	-L/usr/pkgs/cyrus-sasl/lib" 
+
+export CFLAGS="-I/usr/pkgs/glibc/include 	\
+	-I/usr/pkgs/openssl/include 		\
+	-I/usr/pkgs/gnutls/include 		\
+	-I/usr/pkgs/postgres/include 		\
+	-I/usr/pkgs/icu/include 		\
+	-I/usr/pkgs/cyrus-sasl/include "
+
 
 ./configure --prefix=$PREFIX      	\
 	    --build=$LMBX_BUILD		\

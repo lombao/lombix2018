@@ -1,0 +1,19 @@
+
+export LDFLAGS="-L/usr/pkgs/sdl/lib -L/usr/pkgs/gtk3/lib"
+export CXXFLAGS="-I/usr/pkgs/sdl/include -I/usr/pkgs/gtk3/include"
+export CFLAGS=$CXXFLAGS
+
+./configure --prefix=$PREFIX		\
+	--x-includes=/usr/pkgs/X11/include	\
+	--x-libraries=/usr/pkgs/X11/lib		\
+	--enable-fcdb=postgres			\
+	--enable-mapimg=magickwand		\
+	--enable-client=gtk3			\
+	--enable-debug=no			\
+	--disable-sdltest			\
+	--disable-sdl2test			\
+	--with-sdl-prefix=/usr/pkgs/sdl		\
+	--with-sdl2-prefix=/usr/pkgs/sdl	\
+	--with-postgres-prefix=/opt/postgres	\
+	--with-readline				\
+	--with-desktopdir=$PREFIX/share/applications	

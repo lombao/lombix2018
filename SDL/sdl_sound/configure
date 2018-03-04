@@ -1,0 +1,11 @@
+export LDFLAGS="-L/usr/pkgs/alsa/lib -L/usr/pkgs/libvorbis/lib -L/usr/pkgs/libogg/lib  -L/usr/pkgs/libmad/lib -L/usr/pkgs/libmikmod/lib"
+export CFLAGS="-I/usr/pkgs/alsa/include -I/usr/pkgs/libvorbis/include -I/usr/pkgs/libogg/include  -I/usr/pkgs/libmad/include -I/usr/pkgs/libmikmod/include"
+export CPPFLAGS=$CFLAGS
+
+./configure --prefix=$PREFIX 		\
+	--disable-static		\
+	--enable-wav			\
+	--enable-voc			\
+	--enable-raw			\
+	--enable-mikmod			\
+	--enable-vorbis

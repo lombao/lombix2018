@@ -32,13 +32,13 @@
 case "$1" in
    start)
       log_info_msg "Starting ntpd..."
-      start_daemon /opt/ntp/bin/ntpd -g -u ntp:ntp
+      start_daemon /usr/pkgs/servers/ntp/bin/ntpd -g -u ntp:ntp
       evaluate_retval
       ;;
 
    stop)
       log_info_msg "Stopping ntpd..."
-      killproc /opt/ntp/bin/ntpd
+      killproc /usr/pkgs/servers/ntp/bin/ntpd
       evaluate_retval
       ;;
 
@@ -49,7 +49,7 @@ case "$1" in
       ;;
 
    status)
-      statusproc /opt/ntp/bin/ntpd
+      statusproc /usr/pkgs/servers/ntp/bin/ntpd
       ;;
 
    *)

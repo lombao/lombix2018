@@ -1,0 +1,17 @@
+export LDFLAGS="-L/usr/pkgs/libogg/lib 	\
+	-L/usr/pkgs/sdl/lib 		\
+	-L/usr/pkgs/libpng/lib 		\
+	-L/usr/pkgs/alsa/lib"
+
+export CFLAGS="-I/usr/pkgs/libogg/include 	\
+	-I/usr/pkgs/sdl/include 		\
+	-I/usr/pkgs/libpng/include 		\
+	-I/usr/pkgs/alsa/include"
+
+./bootstrap
+./configure --prefix=$PREFIX 			\
+	    --build=$LMBX_BUILD			\
+            --bindir=$PREFIX/bin 		\
+	    --with-sdl-prefix=/usr/pkgs/sdl 	\
+            --datadir=$PREFIX/share 
+

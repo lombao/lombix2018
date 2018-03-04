@@ -31,19 +31,19 @@
 case "$1" in
    start)
       log_info_msg "Starting vsFTPD Server..."
-      start_daemon /opt/vsftpd/bin/vsftpd
+      start_daemon /usr/pkgs/servers/vsftpd/bin/vsftpd
       evaluate_retval
       ;;
 
    stop)
       log_info_msg "Stopping vsFTPD Server..."
-      killproc /opt/vsftpd/bin/vsftpd
+      killproc /usr/pkgs/servers/vsftpd/bin/vsftpd
       evaluate_retval
       ;;
 
    reload)
       log_info_msg "Reloading vsFTPD Server..."
-      killproc /opt/vsftpd/bin/vsftpd -HUP
+      killproc /usr/pkgs/servers/vsftpd/bin/vsftpd -HUP
       evaluate_retval
       ;;
 
@@ -54,7 +54,7 @@ case "$1" in
       ;;
 
    status)
-      statusproc /opt/vsftpd/bin/vsftpd
+      statusproc /usr/pkgs/servers/vsftpd/bin/vsftpd
       ;;
 
    *)

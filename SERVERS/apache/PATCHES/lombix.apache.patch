@@ -8,7 +8,7 @@ diff -Naur httpd-2.4.27.orig/config.layout httpd-2.4.27/config.layout
 +
 +# Lombix Layout
 +<Layout Lombix>
-+    prefix:          /opt/apache
++    prefix:          /usr/pkgs/servers/apache
 +    exec_prefix:     ${prefix}
 +    bindir:          ${prefix}/bin
 +    sbindir:         ${prefix}/sbin

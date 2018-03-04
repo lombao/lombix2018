@@ -1,3 +1,19 @@
+
+export LDFLAGS="-L/usr/pkgs/libpng/lib	\
+	-L/usr/pkgs/libjpeg/lib		\
+	-L/usr/pkgs/libtiff/lib		\
+	-L/usr/pkgs/giflib/lib		\
+	-L/usr/pkgs/bzip2/lib		\
+	-L/usr/pkgs/zlib/lib"
+
+export CFLAGS="-I/usr/pkgs/libpng/include	\
+	-I/usr/pkgs/libjpeg/include		\
+	-I/usr/pkgs/libtiff/include		\
+	-I/usr/pkgs/giflib/include		\
+	-I/usr/pkgs/bzip2/include		\
+	-I/usr/pkgs/zlib/include"
+
+
 ./configure --prefix=$PREFIX 		\
 	    --build=$LMBX_BUILD		\
             --disable-static

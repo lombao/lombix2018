@@ -1,5 +1,7 @@
+unset CPP
 
 export LDFLAGS="-L/usr/pkgs/alsa/lib 	\
+	-L/usr/pkgs/python2/lib		\
 	-L/usr/pkgs/sqlite/lib		\
 	-L/usr/pkgs/icu/lib		\
 	-L/usr/pkgs/libwebp/lib		\
@@ -13,6 +15,7 @@ export LDFLAGS="-L/usr/pkgs/alsa/lib 	\
 	-L/usr/pkgs/libvpx/lib"
 
 export CFLAGS="-I/usr/pkgs/alsa/include 	\
+	-I/usr/pkgs/python2/include		\
 	-I/usr/pkgs/sqlite/include		\
 	-I/usr/pkgs/icu/include			\
 	-I/usr/pkgs/libwebp/include		\
@@ -29,10 +32,11 @@ export CFLAGS="-I/usr/pkgs/alsa/include 	\
 export CXXFLAGS=$CFLAGS
 
 make -f client.mk install INSTALL_SDK= 		|| exit 1
+echo "THE MAKE INSTALL CLIENT HAS BEEN COMPLETED"
 chown -R root:root $PREFIX/lib/firefox-* 	|| exit 1
 
 mkdir -pv  $PREFIX/lib/mozilla/plugins
-ln -sfv ../../mozilla/plugins $PREFIX/lib/firefox-55.0.3/browser
+ln -sfv ../../mozilla/plugins $PREFIX/lib/firefox-54.0/browser
 
 
 
@@ -53,7 +57,7 @@ MimeType=application/xhtml+xml;text/xml;application/xhtml+xml;application/vnd.mo
 StartupNotify=true
 EOF
 
-ln -sfv $PREFIX/lib/firefox-55.0.3/browser/icons/mozicon128.png \
+ln -sfv $PREFIX/lib/firefox-54.0/browser/icons/mozicon128.png \
         $PREFIX/share/pixmaps/firefox.png
 
 

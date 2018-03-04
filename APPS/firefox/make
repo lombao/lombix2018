@@ -1,5 +1,7 @@
+unset CPP
 
 export LDFLAGS="-L/usr/pkgs/alsa/lib 	\
+	-L/usr/pkgs/python2/lib		\
 	-L/usr/pkgs/sqlite/lib		\
 	-L/usr/pkgs/icu/lib		\
 	-L/usr/pkgs/libwebp/lib		\
@@ -13,6 +15,7 @@ export LDFLAGS="-L/usr/pkgs/alsa/lib 	\
 	-L/usr/pkgs/libvpx/lib"
 
 export CFLAGS="-I/usr/pkgs/alsa/include 	\
+	-I/usr/pkgs/python2/include		\
 	-I/usr/pkgs/sqlite/include		\
 	-I/usr/pkgs/icu/include			\
 	-I/usr/pkgs/libwebp/include		\
@@ -30,6 +33,5 @@ export CXXFLAGS=$CFLAGS
 
 
 make -f client.mk || exit 1
-
-
+echo "THE MAKE:::: The make -f client.mk is completed"
 

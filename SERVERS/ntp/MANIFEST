@@ -7,7 +7,7 @@ URL=https://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-4.2/ntp-4.2.8p10.tar.gz
 ##
 # PREFIX: Where the package is going to be installed. 
 # If you are familiar with autotools you know what prefix usually means
-PREFIX=/opt/ntp
+PREFIX=/usr/pkgs/servers/ntp
 
 ##
 # CREDITS: Files that specifically you want to be copied over from 

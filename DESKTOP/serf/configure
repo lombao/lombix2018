@@ -6,6 +6,10 @@ export ZLIB=/usr/pkgs/zlib
 sed -i "/Append/s:RPATH=libdir,::"   SConstruct || exit 1
 sed -i "/Default/s:lib_static,::"    SConstruct || exit 1
 sed -i "/Alias/s:install_static,::"  SConstruct || exit 1
-scons  CFLAGS="-I/usr/pkgs/zlib/include -L/usr/pkgs/zlib/lib -L/usr/pkgs/glibc/lib" ZLIB=$ZLIB APR=$APR APU=$APU OPENSSL=/usr/pkgs/openssl PREFIX=$PREFIX
+
+scons  CC="gcc -B/usr/pkgs/glibc/lib -L/usr/pkgs/zlib/lib" 	\
+	CFLAGS="-I/usr/pkgs/zlib/include -L/usr/pkgs/zlib/lib " \
+	ZLIB=$ZLIB APR=$APR APU=$APU OPENSSL=/usr/pkgs/openssl 	\
+	PREFIX=$PREFIX
 
 

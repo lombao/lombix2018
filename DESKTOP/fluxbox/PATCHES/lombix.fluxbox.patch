@@ -1,6 +1,6 @@
 diff -Naur fluxbox-1.3.7.orig/configure fluxbox-1.3.7/configure
 --- fluxbox-1.3.7.orig/configure	2015-02-08 10:44:53.821187099 +0000
-+++ fluxbox-1.3.7/configure	2018-02-25 15:48:14.306000000 +0000
++++ fluxbox-1.3.7/configure	2018-02-26 19:03:50.550000000 +0000
 @@ -1535,13 +1535,13 @@
    --without-libiconv-prefix     don't search for libiconv in includedir and libdir
    --with-menu=path        location menu file (PREFIX/share/fluxbox/menu)
@@ -100,7 +100,7 @@ diff -Naur fluxbox-1.3.7.orig/configure fluxbox-1.3.7/configure
  
 diff -Naur fluxbox-1.3.7.orig/configure.ac fluxbox-1.3.7/configure.ac
 --- fluxbox-1.3.7.orig/configure.ac	2015-02-08 10:44:45.333187008 +0000
-+++ fluxbox-1.3.7/configure.ac	2018-02-25 15:48:14.307000000 +0000
++++ fluxbox-1.3.7/configure.ac	2018-02-26 19:03:50.554000000 +0000
 @@ -487,63 +487,63 @@
  
  dnl Various resource paths
@@ -184,7 +184,7 @@ diff -Naur fluxbox-1.3.7.orig/configure.ac fluxbox-1.3.7/configure.ac
  
 diff -Naur fluxbox-1.3.7.orig/data/init.in fluxbox-1.3.7/data/init.in
 --- fluxbox-1.3.7.orig/data/init.in	2015-02-08 10:44:45.333187008 +0000
-+++ fluxbox-1.3.7/data/init.in	2018-02-25 15:48:14.308000000 +0000
++++ fluxbox-1.3.7/data/init.in	2018-02-26 19:03:50.569000000 +0000
 @@ -1,7 +1,7 @@
  ! If you're looking for settings to configure, they won't be saved here until
  ! you change something in the fluxbox configuration menu.
@@ -197,7 +197,7 @@ diff -Naur fluxbox-1.3.7.orig/data/init.in fluxbox-1.3.7/data/init.in
  session.configVersion:	13
 diff -Naur fluxbox-1.3.7.orig/data/Makemodule.am fluxbox-1.3.7/data/Makemodule.am
 --- fluxbox-1.3.7.orig/data/Makemodule.am	2015-02-08 10:44:45.333187008 +0000
-+++ fluxbox-1.3.7/data/Makemodule.am	2018-02-25 15:48:14.309000000 +0000
++++ fluxbox-1.3.7/data/Makemodule.am	2018-02-26 19:03:50.572000000 +0000
 @@ -53,7 +53,7 @@
  data/menu:
  	env MENUFILENAME=$@ \
@@ -207,579 +207,9 @@ diff -Naur fluxbox-1.3.7.orig/data/Makemodule.am fluxbox-1.3.7/data/Makemodule.a
  		INSTALL=Yes \
  		PATH="${PATH}:../util:../util/fbrun" \
  		sh util/fluxbox-generate_menu
-diff -Naur fluxbox-1.3.7.orig/lombix.fluxbox.patch fluxbox-1.3.7/lombix.fluxbox.patch
---- fluxbox-1.3.7.orig/lombix.fluxbox.patch	1970-01-01 00:00:00.000000000 +0000
-+++ fluxbox-1.3.7/lombix.fluxbox.patch	2018-02-25 15:48:01.615000000 +0000
-@@ -0,0 +1,566 @@
-+diff -Naur fluxbox-1.3.7.orig/configure fluxbox-1.3.7/configure
-+--- fluxbox-1.3.7.orig/configure	2015-02-08 10:44:53.821187099 +0000
-++++ fluxbox-1.3.7/configure	2018-02-18 20:06:56.678000000 +0000
-+@@ -1535,13 +1535,13 @@
-+   --without-libiconv-prefix     don't search for libiconv in includedir and libdir
-+   --with-menu=path        location menu file (PREFIX/share/fluxbox/menu)
-+   --with-windowmenu=path  location windowmenu file
-+-                          (PREFIX/share/fluxbox/windowmenu)
-+-  --with-style=path       style by default (PREFIX/share/fluxbox/styles/bloe)
-+-  --with-keys=path        location keys file (PREFIX/share/fluxbox/keys)
-+-  --with-apps=path        location apps file (PREFIX/share/fluxbox/apps)
-+-  --with-overlay=path     location overlay file (PREFIX/share/fluxbox/overlay)
-+-  --with-init=path        location init file (PREFIX/share/fluxbox/init)
-+-  --with-locale=path      location for nls files (PREFIX/share/fluxbox/nls)
-++                          (PREFIX/share/windowmenu)
-++  --with-style=path       style by default (PREFIX/share/styles/bloe)
-++  --with-keys=path        location keys file (PREFIX/share/keys)
-++  --with-apps=path        location apps file (PREFIX/share/apps)
-++  --with-overlay=path     location overlay file (PREFIX/share/overlay)
-++  --with-init=path        location init file (PREFIX/share/init)
-++  --with-locale=path      location for nls files (PREFIX/share/nls)
-+ 
-+ Some influential environment variables:
-+   CC          C compiler command
-+@@ -10555,7 +10555,7 @@
-+ if test "${with_menu+set}" = set; then :
-+   withval=$with_menu; default_menu="$withval"
-+ else
-+-  default_menu="$prefix/share/fluxbox/menu"
-++  default_menu="$prefix/share/menu"
-+ 
-+ fi
-+ 
-+@@ -10567,7 +10567,7 @@
-+ if test "${with_windowmenu+set}" = set; then :
-+   withval=$with_windowmenu; default_windowmenu="$withval"
-+ else
-+-  default_windowmenu="$prefix/share/fluxbox/windowmenu"
-++  default_windowmenu="$prefix/share/windowmenu"
-+ 
-+ fi
-+ 
-+@@ -10579,7 +10579,7 @@
-+ if test "${with_style+set}" = set; then :
-+   withval=$with_style; default_style="$withval"
-+ else
-+-  default_style="$prefix/share/fluxbox/styles/bloe"
-++  default_style="$prefix/share/styles/bloe"
-+ 
-+ fi
-+ 
-+@@ -10591,7 +10591,7 @@
-+ if test "${with_keys+set}" = set; then :
-+   withval=$with_keys; default_keys="$withval"
-+ else
-+-  default_keys="$prefix/share/fluxbox/keys"
-++  default_keys="$prefix/share/keys"
-+ 
-+ fi
-+ 
-+@@ -10603,7 +10603,7 @@
-+ if test "${with_apps+set}" = set; then :
-+   withval=$with_apps; default_apps="$withval"
-+ else
-+-  default_apps="$prefix/share/fluxbox/apps"
-++  default_apps="$prefix/share/apps"
-+ 
-+ fi
-+ 
-+@@ -10615,7 +10615,7 @@
-+ if test "${with_overlay+set}" = set; then :
-+   withval=$with_overlay; default_overlay="$withval"
-+ else
-+-  default_overlay="$prefix/share/fluxbox/overlay"
-++  default_overlay="$prefix/share/overlay"
-+ 
-+ fi
-+ 
-+@@ -10627,7 +10627,7 @@
-+ if test "${with_init+set}" = set; then :
-+   withval=$with_init; default_init="$withval"
-+ else
-+-  default_init="$prefix/share/fluxbox/init"
-++  default_init="$prefix/share/init"
-+ 
-+ fi
-+ 
-+@@ -10647,10 +10647,10 @@
-+ 
-+ else
-+ 
-+-	locale_path="$prefix/share/fluxbox/nls"
-++	locale_path="$prefix/share/nls"
-+ 
-+ cat >>confdefs.h <<_ACEOF
-+-#define LOCALEPATH "$prefix/share/fluxbox/nls"
-++#define LOCALEPATH "$prefix/share/nls"
-+ _ACEOF
-+ 
-+ 
-+diff -Naur fluxbox-1.3.7.orig/configure.ac fluxbox-1.3.7/configure.ac
-+--- fluxbox-1.3.7.orig/configure.ac	2015-02-08 10:44:45.333187008 +0000
-++++ fluxbox-1.3.7/configure.ac	2018-02-18 15:46:44.811000000 +0000
-+@@ -487,63 +487,63 @@
-+ 
-+ dnl Various resource paths
-+ AC_ARG_WITH([menu],
-+-	AS_HELP_STRING([--with-menu=path], [location menu file (PREFIX/share/fluxbox/menu)]),
-++	AS_HELP_STRING([--with-menu=path], [location menu file (PREFIX/share/menu)]),
-+ 	[default_menu="$withval"],
-+-	[default_menu="$prefix/share/fluxbox/menu"]
-++	[default_menu="$prefix/share/menu"]
-+ )
-+ AC_SUBST([DEFAULT_MENU], [$default_menu])
-+ 
-+ AC_ARG_WITH([windowmenu],
-+-	AS_HELP_STRING([--with-windowmenu=path], [location windowmenu file (PREFIX/share/fluxbox/windowmenu)]),
-++	AS_HELP_STRING([--with-windowmenu=path], [location windowmenu file (PREFIX/share/windowmenu)]),
-+ 	[default_windowmenu="$withval"],
-+-	[default_windowmenu="$prefix/share/fluxbox/windowmenu"]
-++	[default_windowmenu="$prefix/share/windowmenu"]
-+ )
-+ AC_SUBST([DEFAULT_WINDOWMENU], [$default_windowmenu])
-+ 
-+ AC_ARG_WITH([style],
-+-	AS_HELP_STRING([--with-style=path], [style by default (PREFIX/share/fluxbox/styles/bloe)]),
-++	AS_HELP_STRING([--with-style=path], [style by default (PREFIX/share/styles/bloe)]),
-+ 	[default_style="$withval"],
-+-	[default_style="$prefix/share/fluxbox/styles/bloe"]
-++	[default_style="$prefix/share/styles/bloe"]
-+ )
-+ AC_SUBST([DEFAULT_STYLE], [$default_style])
-+ 
-+ AC_ARG_WITH([keys],
-+-	AS_HELP_STRING([--with-keys=path], [location keys file (PREFIX/share/fluxbox/keys)]),
-++	AS_HELP_STRING([--with-keys=path], [location keys file (PREFIX/share/keys)]),
-+ 	[default_keys="$withval"],
-+-	[default_keys="$prefix/share/fluxbox/keys"]
-++	[default_keys="$prefix/share/keys"]
-+ )
-+ AC_SUBST([DEFAULT_KEYS], [$default_keys])
-+ 
-+ AC_ARG_WITH([apps],
-+-	AS_HELP_STRING([--with-apps=path], [location apps file (PREFIX/share/fluxbox/apps)]),
-++	AS_HELP_STRING([--with-apps=path], [location apps file (PREFIX/share/apps)]),
-+ 	[default_apps="$withval"],
-+-	[default_apps="$prefix/share/fluxbox/apps"]
-++	[default_apps="$prefix/share/apps"]
-+ )
-+ AC_SUBST([DEFAULT_APPS], [$default_apps])
-+ 
-+ AC_ARG_WITH([overlay],
-+-	AS_HELP_STRING([--with-overlay=path], [location overlay file (PREFIX/share/fluxbox/overlay)]),
-++	AS_HELP_STRING([--with-overlay=path], [location overlay file (PREFIX/share/overlay)]),
-+ 	[default_overlay="$withval"],
-+-	[default_overlay="$prefix/share/fluxbox/overlay"]
-++	[default_overlay="$prefix/share/overlay"]
-+ )
-+ AC_SUBST([DEFAULT_OVERLAY], [$default_overlay])
-+ 
-+ AC_ARG_WITH([init],
-+-	AS_HELP_STRING([--with-init=path], [location init file (PREFIX/share/fluxbox/init)]),
-++	AS_HELP_STRING([--with-init=path], [location init file (PREFIX/share/init)]),
-+ 	[default_init="$withval"],
-+-	[default_init="$prefix/share/fluxbox/init"]
-++	[default_init="$prefix/share/init"]
-+ )
-+ AC_SUBST([DEFAULT_INIT], [$default_init])
-+ 
-+ dnl we have to expand locale_path in the config.h file, but NOT in the
-+ dnl makefiles!
-+ AC_ARG_WITH([locale],
-+-	AS_HELP_STRING([--with-locale=path], [location for nls files (PREFIX/share/fluxbox/nls)]), [
-++	AS_HELP_STRING([--with-locale=path], [location for nls files (PREFIX/share/nls)]), [
-+ 	locale_path="$withval"
-+ 	AC_DEFINE_UNQUOTED([LOCALEPATH], ["$locale_path"], [location for nls files])
-+ ], [
-+-	locale_path="$prefix/share/fluxbox/nls"
-+-	AC_DEFINE_UNQUOTED([LOCALEPATH], ["$prefix/share/fluxbox/nls"], [location for nls files])
-++	locale_path="$prefix/share/nls"
-++	AC_DEFINE_UNQUOTED([LOCALEPATH], ["$prefix/share/nls"], [location for nls files])
-+ ])
-+ AC_SUBST([LOCALE_PATH], [$locale_path])
-+ 
-+diff -Naur fluxbox-1.3.7.orig/data/init.in fluxbox-1.3.7/data/init.in
-+--- fluxbox-1.3.7.orig/data/init.in	2015-02-08 10:44:45.333187008 +0000
-++++ fluxbox-1.3.7/data/init.in	2018-02-18 14:37:40.342000000 +0000
-+@@ -1,7 +1,7 @@
-+ ! If you're looking for settings to configure, they won't be saved here until
-+ ! you change something in the fluxbox configuration menu.
-+ 
-+-session.menuFile:	~/.@pkgprefix@fluxbox@pkgsuffix@/menu
-+-session.keyFile: ~/.@pkgprefix@fluxbox@pkgsuffix@/keys
-++session.menuFile:	~/.config/@pkgprefix@fluxbox@pkgsuffix@/menu
-++session.keyFile: ~/.config/@pkgprefix@fluxbox@pkgsuffix@/keys
-+ session.styleFile: @default_style@
-+ session.configVersion:	13
-+diff -Naur fluxbox-1.3.7.orig/data/Makemodule.am fluxbox-1.3.7/data/Makemodule.am
-+--- fluxbox-1.3.7.orig/data/Makemodule.am	2015-02-08 10:44:45.333187008 +0000
-++++ fluxbox-1.3.7/data/Makemodule.am	2018-02-18 14:37:40.338000000 +0000
-+@@ -53,7 +53,7 @@
-+ data/menu:
-+ 	env MENUFILENAME=$@ \
-+ 		PREFIX="${prefix}" \
-+-		MENUTITLE="Fluxbox-${VERSION}" \
-++		MENUTITLE="Lombix 2018" \
-+ 		INSTALL=Yes \
-+ 		PATH="${PATH}:../util:../util/fbrun" \
-+ 		sh util/fluxbox-generate_menu
-+diff -Naur fluxbox-1.3.7.orig/Makefile.in fluxbox-1.3.7/Makefile.in
-+--- fluxbox-1.3.7.orig/Makefile.in	2015-02-08 10:44:52.545187086 +0000
-++++ fluxbox-1.3.7/Makefile.in	2018-02-18 15:23:55.006000000 +0000
-+@@ -95,7 +95,7 @@
-+   test $$has_opt = yes
-+ am__make_dryrun = (target_option=n; $(am__make_running_with_option))
-+ am__make_keepgoing = (target_option=k; $(am__make_running_with_option))
-+-pkgdatadir = $(datadir)/@PACKAGE@
-++pkgdatadir = $(datadir)
-+ pkgincludedir = $(includedir)/@PACKAGE@
-+ pkglibdir = $(libdir)/@PACKAGE@
-+ pkglibexecdir = $(libexecdir)/@PACKAGE@
-+diff -Naur fluxbox-1.3.7.orig/src/cli_options.cc fluxbox-1.3.7/src/cli_options.cc
-+--- fluxbox-1.3.7.orig/src/cli_options.cc	2015-02-08 10:44:45.377187009 +0000
-++++ fluxbox-1.3.7/src/cli_options.cc	2018-02-18 14:37:40.360000000 +0000
-+@@ -48,7 +48,7 @@
-+         session_display.assign(env);
-+     }
-+ 
-+-    string fname = std::string("~/.") + realProgramName("fluxbox");
-++    string fname = std::string("~/.config/") + realProgramName("fluxbox");
-+     rc_path = FbTk::StringUtil::expandFilename(fname);
-+ 
-+     if (!rc_path.empty()) {
-+diff -Naur fluxbox-1.3.7.orig/src/FbCommands.cc fluxbox-1.3.7/src/FbCommands.cc
-+--- fluxbox-1.3.7.orig/src/FbCommands.cc	2015-02-08 10:44:45.353187009 +0000
-++++ fluxbox-1.3.7/src/FbCommands.cc	2018-02-18 14:37:40.356000000 +0000
-+@@ -153,7 +153,7 @@
-+     // this process exits immediately, so we don't have to worry about memleaks
-+     const char *shell = getenv("SHELL");
-+     if (!shell)
-+-        shell = "/bin/sh";
-++        shell = "/usr/pkgs/bash/bin/bash";
-+ 
-+     setsid();
-+     execl(shell, shell, "-c", m_cmd.c_str(), static_cast<void*>(NULL));
-+diff -Naur fluxbox-1.3.7.orig/src/main.cc fluxbox-1.3.7/src/main.cc
-+--- fluxbox-1.3.7.orig/src/main.cc	2015-02-08 10:44:45.377187009 +0000
-++++ fluxbox-1.3.7/src/main.cc	2018-02-18 14:37:40.367000000 +0000
-+@@ -270,7 +270,7 @@
-+         if (!restart_argument.empty()) {
-+             const char *shell = getenv("SHELL");
-+             if (!shell)
-+-                shell = "/bin/sh";
-++                shell = "/usr/pkgs/bash/bin/bash";
-+ 
-+             execlp(shell, shell, "-c", restart_argument.c_str(), (const char *) NULL);
-+             perror(restart_argument.c_str());
-+diff -Naur fluxbox-1.3.7.orig/util/fbrun/main.cc fluxbox-1.3.7/util/fbrun/main.cc
-+--- fluxbox-1.3.7.orig/util/fbrun/main.cc	2015-02-08 10:44:45.377187009 +0000
-++++ fluxbox-1.3.7/util/fbrun/main.cc	2018-02-18 14:37:40.368000000 +0000
-+@@ -64,7 +64,7 @@
-+         "   -fg [color name]            Foreground text color"<<endl<<
-+         "   -bg [color name]            Background color"<<endl<<
-+         "   -na                         Disable antialias"<<endl<<
-+-        "   -hf [history file]          History file to load (default ~/.fluxbox/fbrun_history)"<<endl<<
-++        "   -hf [history file]          History file to load (default ~/.config/fluxbox/fbrun_history)"<<endl<<
-+         "   -help                       Show this help"<<endl<<endl<<
-+         "Example: fbrun -fg black -bg white -text xterm -title \"run xterm\""<<endl;
-+ }
-+@@ -82,7 +82,7 @@
-+     string foreground("black");   // text color
-+     string background("white");   // text background color
-+     string display_name; // name of the display connection
-+-    string history_file("~/.fluxbox/fbrun_history"); // command history file
-++    string history_file("~/.config/fluxbox/fbrun_history"); // command history file
-+     // parse arguments
-+     for (int i=1; i<argc; i++) {
-+         string arg = argv[i];
-+diff -Naur fluxbox-1.3.7.orig/util/fbsetbg fluxbox-1.3.7/util/fbsetbg
-+--- fluxbox-1.3.7.orig/util/fbsetbg	2015-02-08 10:44:45.377187009 +0000
-++++ fluxbox-1.3.7/util/fbsetbg	2018-02-18 14:37:40.370000000 +0000
-+@@ -1,4 +1,4 @@
-+-#!/bin/sh
-++#!/usr/pkgs/bash/bin/bash
-+ #
-+ # Set wallpaper for fluxbox.
-+ #
-+@@ -45,11 +45,11 @@
-+ 
-+ # The wallpapersetter is selected in this order
-+ wpsetters="${wpsetters:=Esetroot wmsetbg feh hsetroot chbg display qiv xv xsri xli xsetbg}" # broken icewmbg'
-+-lastwallpaper="${HOME}/.fluxbox/lastwallpaper"
-++lastwallpaper="${HOME}/.config/fluxbox/lastwallpaper"
-+ 
-+ 
-+ WHOAMI=`whoami`
-+-[ "$WHOAMI" = root ] && PATH=/bin:/usr/bin/:/usr/local/bin:/usr/X11R6/bin
-++[ "$WHOAMI" = root ] && PATH=/usr/bin:/usr/pkgs/X11/bin:/usr/pkgs/coreutils/bin:/usr/pkgs/util-linux/bin:/usr/pkgs/findutils/bin:/usr/pkgs/grep/bin:/usr/pkgs/sed/bin:/usr/pkgs/fluxbox/bin:/usr/pkgs/gawk/bin
-+ 
-+ command="`basename \"$0\"`"
-+ 
-+@@ -99,7 +99,7 @@
-+ 
-+ Files:
-+ 
-+-    ~/.fluxbox/lastwallpaper     In this file the wallpaper you set
-++    ~/.config/fluxbox/lastwallpaper     In this file the wallpaper you set
-+                                  will be stored, for the -l option:
-+ Environment variables:
-+     wpsetters   Wallpapersetters to use.
-+@@ -123,7 +123,7 @@
-+    perl -pi -e 's,([^f]|^)bsetbg,$command,' filename
-+ 
-+ 2) If you want to set the wallpaper and you want $command to
-+-   remember the previous wallpaper put this in your ~/.fluxbox/overlay
-++   remember the previous wallpaper put this in your ~/.config/fluxbox/overlay
-+ 
-+    background: none
-+ 
-+@@ -194,8 +194,8 @@
-+ fi
-+ 
-+ # create directory and last wallpaper file 
-+-if [ ! -d  "$HOME/.fluxbox" ]; then
-+-	mkdir "$HOME/.fluxbox"
-++if [ ! -d  "$HOME/.config/fluxbox" ]; then
-++	mkdir "$HOME/.config/fluxbox"
-+     touch ${lastwallpaper}
-+ fi
-+ 
-+diff -Naur fluxbox-1.3.7.orig/util/fluxbox-generate_menu.in fluxbox-1.3.7/util/fluxbox-generate_menu.in
-+--- fluxbox-1.3.7.orig/util/fluxbox-generate_menu.in	2015-02-08 10:44:45.377187009 +0000
-++++ fluxbox-1.3.7/util/fluxbox-generate_menu.in	2018-02-18 20:57:16.599000000 +0000
-+@@ -1,4 +1,4 @@
-+-#!/bin/sh
-++#!/usr/pkgs/bash/bin/bash
-+ #
-+ # generate_menu for Fluxbox
-+ #
-+@@ -76,8 +76,8 @@
-+     -w  Homepage for console-browsers. Default is fluxbox.org
-+     -b  Favourite browser
-+     -m  Menu-title; default is "Fluxbox"
-+-    -o  Outputfile; default is ~/.@pkgprefix@fluxbox@pkgsuffix@/menu
-+-    -u  User sub-menu; default is ~/.@pkgprefix@fluxbox@pkgsuffix@/usermenu
-++    -o  Outputfile; default is ~/.config/@pkgprefix@fluxbox@pkgsuffix@/menu
-++    -u  User sub-menu; default is ~/.config/@pkgprefix@fluxbox@pkgsuffix@/usermenu
-+ 
-+     -h  Display this help
-+     -a  Display the authors of this script
-+@@ -90,8 +90,8 @@
-+ 
-+ 
-+ Files:
-+-    ~/.@pkgprefix@fluxbox@pkgsuffix@/usermenu     Your own submenu which will be included in the menu
-+-    ~/.@pkgprefix@fluxbox@pkgsuffix@/menuconfig   rc file for fluxbox-generate_menu
-++    ~/.config/@pkgprefix@fluxbox@pkgsuffix@/usermenu     Your own submenu which will be included in the menu
-++    ~/.config/@pkgprefix@fluxbox@pkgsuffix@/menuconfig   rc file for fluxbox-generate_menu
-+ 
-+ EOF
-+ }
-+@@ -345,7 +345,7 @@
-+     # $dnlamVERBOSE "# creating `date`" >> $ICONMAPPING
-+     # $dnlamVERBOSE "# using desktop files in $@" >> $ICONMAPPING
-+     # $dnlamVERBOSE "# searching for icons in `eval toSingleLine $OTHER_ICONPATHS`" >> $ICONMAPPING
-+-    # need to determine when to use .fluxbox/icons/$execname.xpm over those listed in iconmapping
-++    # need to determine when to use .config/fluxbox/icons/$execname.xpm over those listed in iconmapping
-+     # $dnlamVERBOSE echo "createIconMapping: $@"
-+     for DIR in "$@" ; do
-+         if [ -d "$DIR" ]; then
-+@@ -558,7 +558,7 @@
-+ 
-+ 
-+ WHOAMI=`whoami`
-+-[ "$WHOAMI" = root ] && PATH=/bin:/usr/bin:/usr/local/bin:/usr/X11R6/bin
-++#[ "$WHOAMI" = root ] && PATH=/usr/bin:/usr/pkgs/fluxbox/bin:/usr/pkgs/X11/bin:/usr/pkgs/coreutils/bin:/usr/pkgs/util-linux/bin:/usr/pkgs/findutils/bin:/usr/pgks/gawk/bin:/usr/pkgs/sed/bin:/usr/pkgs/diffutils/bin:/usr/pkgs/grep/bin
-+ 
-+ # Check for Imlib2-support
-+ if @pkgprefix@fluxbox@pkgsuffix@@EXEEXT@ -info 2> /dev/null | grep -q "^IMLIB"; then
-+@@ -1220,10 +1220,10 @@
-+ esac
-+ 
-+ # Set Defaults
-+-USERFLUXDIR="${HOME}/.@pkgprefix@fluxbox@pkgsuffix@"
-++USERFLUXDIR="${HOME}/.config/@pkgprefix@fluxbox@pkgsuffix@"
-+ MENUFILENAME="${MENUFILENAME:=${USERFLUXDIR}/menu}"
-+-MENUTITLE="${MENUTITLE:=Fluxbox}"
-+-HOMEPAGE="${HOMEPAGE:=fluxbox.org}"
-++MENUTITLE="${MENUTITLE:=Lombix 2018}"
-++HOMEPAGE="${HOMEPAGE:=lombix.org}"
-+ USERMENU="${USERMENU:=${USERFLUXDIR}/usermenu}"
-+ MENUCONFIG="${MENUCONFIG:=${USERFLUXDIR}/menuconfig}"
-+ DOSUDO="no"
-+@@ -1258,7 +1258,7 @@
-+ # HOMEPAGE=fluxbox.org
-+ 
-+ # location with your own menu-entries
-+-# USERMENU=~/.@pkgprefix@fluxbox@pkgsuffix@/usermenu
-++# USERMENU=~/.config/@pkgprefix@fluxbox@pkgsuffix@/usermenu
-+ 
-+ # Put the launcher you would like to use here
-+ # LAUNCHER=@pkgprefix@fbrun@pkgsuffix@@EXEEXT@
-+@@ -1280,7 +1280,7 @@
-+ 
-+ 
-+ # Separate the list of background dirs with colons ':'
-+-# BACKGROUND_DIRS="${USERFLUXDIR}/backgrounds/:@PREFIX@/share/fluxbox/backgrounds/:/usr/share/wallpapers"
-++# BACKGROUND_DIRS="${USERFLUXDIR}/backgrounds/:@PREFIX@/share/backgrounds/:/usr/share/wallpapers"
-+ 
-+ 
-+ # --- Boolean variables.
-+@@ -1485,7 +1485,7 @@
-+ 
-+ # directory for the backgrounds
-+ if [ -z "$BACKGROUND_DIRS" ]; then
-+-    BACKGROUND_DIRS="${USERFLUXDIR}/backgrounds/:${PREFIX}/share/fluxbox/backgrounds/"
-++    BACKGROUND_DIRS="${USERFLUXDIR}/backgrounds/:${PREFIX}/share/backgrounds/:/usr/share/backgrounds"
-+ fi
-+ 
-+ # find the default terminal
-+@@ -1561,7 +1561,7 @@
-+ # If you read this it means you want to edit this file manually, so here
-+ # are some useful tips:
-+ #
-+-# - You can add your own menu-entries to ~/.@pkgprefix@fluxbox@pkgsuffix@/usermenu
-++# - You can add your own menu-entries to ~/.config/@pkgprefix@fluxbox@pkgsuffix@/usermenu
-+ #
-+ # - If you miss apps please let me know and I will add them for the next
-+ #   release.
-+@@ -1570,8 +1570,8 @@
-+ #   makes things much more readable.
-+ #
-+ # - To prevent any other app from overwriting your menu
-+-#   you can change the menu name in ~/.@pkgprefix@fluxbox@pkgsuffix@/init to:
-+-#     session.menuFile: ~/.@pkgprefix@fluxbox@pkgsuffix@/my-menu
-++#   you can change the menu name in ~/.config/@pkgprefix@fluxbox@pkgsuffix@/init to:
-++#     session.menuFile: ~/.config/@pkgprefix@fluxbox@pkgsuffix@/my-menu
-+ 
-+ EOF
-+ 
-+@@ -1582,6 +1582,7 @@
-+ fi
-+ 
-+ append "[exec] (${DEFAULT_TERMNAME}) {${DEFAULT_TERM}}"
-++append "[exec] (File Browser) {pcmanfm}"
-+ 
-+ case "$DEFAULT_BROWSERNAME" in
-+     links|w3m|lynx)  append "[exec] (${DEFAULT_BROWSERNAME}) {${DEFAULT_TERM} -e ${DEFAULT_BROWSER} ${HOMEPAGE}}" ;;
-+@@ -1641,7 +1642,7 @@
-+     append_menu_end
-+ 
-+     append_submenu P2P
-+-        normal_find gtk-gnutella lopster nicotine pyslsk xmule amule \
-++        normal_find gtk-gnutella lopster transmission-gtk nicotine pyslsk xmule amule \
-+             valknut dcgui-qt dc_qt quickdc asami azureus
-+         cli_find TekNap giFTcurs
-+     append_menu_end
-+@@ -1682,7 +1683,7 @@
-+ 
-+ append_submenu "${FILEUTILSMENU}"
-+     find_it     konqueror append "[exec] (konqueror) {kfmclient openProfile filemanagement}"
-+-    normal_find gentoo krusader kcommander linuxcmd rox tuxcmd krename xfe xplore worker endeavour2 evidence
-++    normal_find xarchiver pcmanfm gentoo krusader kcommander linuxcmd rox tuxcmd krename xfe xplore worker endeavour2 evidence
-+     find_it     nautilus append "[exec] (nautilus) {nautilus --no-desktop --browser}"
-+     cli_find mc
-+ append_menu_end
-+@@ -1724,9 +1725,10 @@
-+ append_submenu "${OFFICEMENU}"
-+     normal_find xclock xcalc kcalc grisbi qbankmanager evolution
-+     find_it gcalc           append "[exec] (gcalc) {gcalc}" || \
-+-        find_it gnome-calculator append "[exec] (gcalc) {gnome-calculator}"
-++        find_it gnome-calculator append "[exec] (gcalc) {gnome-calculator}"     
-+     find_it ical            append "[exec] (Calendar)   {ical}"
-+-
-++    find_it galculator	 append "[exec] (galculator) {galculator}"
-++    
-+     # older <=1.1.3 apparently have stuff like swriter, not sowriter
-+     for ext in s so oo xoo; do
-+         find_it ${ext}ffice2 && (
-+@@ -1756,7 +1758,7 @@
-+         )
-+     done
-+ 
-+-    normal_find abiword kword wordperfect katoob lyx acroread xpdf gv ghostview
-++    normal_find abiword kword wordperfect katoob lyx acroread xpdf evince gv ghostview
-+     normal_find dia xfig
-+     normal_find gnumeric
-+ append_menu_end
-+@@ -1789,7 +1791,7 @@
-+     cli_find     mp3burn cdrx burncenter
-+   append_menu_end
-+ 
-+-  normal_find firestarter gtk-lshw gproftd gpureftpd guitoo porthole gtk-iptables \
-++  normal_find lxtask firestarter gtk-lshw gparted gproftd gpureftpd guitoo porthole gtk-iptables \
-+               gtk-cpuspeedy
-+   find_it    fireglcontrol   append "[exec] (ATI Config) {fireglcontrol}"
-+   cli_find    top htop iotop ntop powertop
-+@@ -1827,11 +1829,11 @@
-+     append "[config] (${CONFIGUREMENU})"
-+ 
-+     append_menu "[submenu] (${SYSTEMSTYLES}) {${STYLEMENUTITLE}}"
-+-        append "[stylesdir] (${PREFIX}/share/fluxbox/styles)"
-++        append "[stylesdir] (${PREFIX}/share/styles)"
-+     append_menu_end
-+ 
-+     append_menu "[submenu] (${USERSTYLES}) {${STYLEMENUTITLE}}"
-+-        append "[stylesdir] (~/.@pkgprefix@fluxbox@pkgsuffix@/styles)"
-++        append "[stylesdir] (~/.config/@pkgprefix@fluxbox@pkgsuffix@/styles)"
-+     append_menu_end
-+ 
-+     # Backgroundmenu
-+diff -Naur fluxbox-1.3.7.orig/util/fluxbox-update_configs.cc fluxbox-1.3.7/util/fluxbox-update_configs.cc
-+--- fluxbox-1.3.7.orig/util/fluxbox-update_configs.cc	2015-02-08 10:44:45.381187009 +0000
-++++ fluxbox-1.3.7/util/fluxbox-update_configs.cc	2018-02-18 14:37:40.380000000 +0000
-+@@ -99,7 +99,7 @@
-+ void update_move_groups_entries_to_apps_file(FbTk::ResourceManager& rm,
-+         const FbTk::FbString& keyfilename, const FbTk::FbString& appsfilename) {
-+ 
-+-    FbTk::Resource<string> rc_groupfile(rm, "~/.fluxbox/groups",
-++    FbTk::Resource<string> rc_groupfile(rm, "~/.config/fluxbox/groups",
-+             "session.groupFile", "Session.GroupFile");
-+     string groupfilename = FbTk::StringUtil::expandFilename(*rc_groupfile);
-+     string whole_groupfile = read_file(groupfilename);
-+@@ -540,9 +540,9 @@
-+ int run_updates(int old_version, FbTk::ResourceManager &rm) {
-+     int new_version = old_version;
-+ 
-+-    FbTk::Resource<string> rc_keyfile(rm, "~/.fluxbox/keys",
-++    FbTk::Resource<string> rc_keyfile(rm, "~/.config/fluxbox/keys",
-+             "session.keyFile", "Session.KeyFile");
-+-    FbTk::Resource<string> rc_appsfile(rm, "~/.fluxbox/apps",
-++    FbTk::Resource<string> rc_appsfile(rm, "~/.config/fluxbox/apps",
-+             "session.appsFile", "Session.AppsFile");
-+ 
-+     string appsfilename = FbTk::StringUtil::expandFilename(*rc_appsfile);
-+@@ -600,7 +600,7 @@
-+     }
-+ 
-+     if (rc_filename.empty())
-+-        rc_filename = FbTk::StringUtil::expandFilename("~/.fluxbox/init");
-++        rc_filename = FbTk::StringUtil::expandFilename("~/.config/fluxbox/init");
-+ 
-+     FbTk::ResourceManager resource_manager(rc_filename.c_str(),false);
-+     if (!resource_manager.load(rc_filename.c_str())) {
-+diff -Naur fluxbox-1.3.7.orig/util/startfluxbox.in fluxbox-1.3.7/util/startfluxbox.in
-+--- fluxbox-1.3.7.orig/util/startfluxbox.in	2015-02-08 10:44:45.381187009 +0000
-++++ fluxbox-1.3.7/util/startfluxbox.in	2018-02-18 14:37:40.384000000 +0000
-+@@ -1,7 +1,7 @@
-+-#!/bin/sh
-++#!/usr/pkgs/bash/bin/bash
-+ 
-+ command="`basename \"$0\"`"
-+-fluxdir="$HOME/.@pkgprefix@fluxbox@pkgsuffix@"
-++fluxdir="$HOME/.config/@pkgprefix@fluxbox@pkgsuffix@"
-+ startup="$fluxdir/startup"
-+ 
-+ while [ $# -gt 0 ]; do
-+@@ -33,7 +33,7 @@
-+     fi
-+     if [ ! -r "$startup" ]; then
-+         ( cat << EOF
-+-#!/bin/sh
-++#!/usr/pkgs/bash/bin/bash
-+ #
-+ # fluxbox startup-script:
-+ #
 diff -Naur fluxbox-1.3.7.orig/Makefile.in fluxbox-1.3.7/Makefile.in
 --- fluxbox-1.3.7.orig/Makefile.in	2015-02-08 10:44:52.545187086 +0000
-+++ fluxbox-1.3.7/Makefile.in	2018-02-25 15:48:14.312000000 +0000
++++ fluxbox-1.3.7/Makefile.in	2018-02-26 19:03:50.599000000 +0000
 @@ -95,7 +95,7 @@
    test $$has_opt = yes
  am__make_dryrun = (target_option=n; $(am__make_running_with_option))
@@ -791,7 +221,7 @@ diff -Naur fluxbox-1.3.7.orig/Makefile.in fluxbox-1.3.7/Makefile.in
  pkglibexecdir = $(libexecdir)/@PACKAGE@
 diff -Naur fluxbox-1.3.7.orig/src/cli_options.cc fluxbox-1.3.7/src/cli_options.cc
 --- fluxbox-1.3.7.orig/src/cli_options.cc	2015-02-08 10:44:45.377187009 +0000
-+++ fluxbox-1.3.7/src/cli_options.cc	2018-02-25 15:48:14.313000000 +0000
++++ fluxbox-1.3.7/src/cli_options.cc	2018-02-26 19:03:50.607000000 +0000
 @@ -48,7 +48,7 @@
          session_display.assign(env);
      }
@@ -803,7 +233,7 @@ diff -Naur fluxbox-1.3.7.orig/src/cli_options.cc fluxbox-1.3.7/src/cli_options.c
      if (!rc_path.empty()) {
 diff -Naur fluxbox-1.3.7.orig/src/FbCommands.cc fluxbox-1.3.7/src/FbCommands.cc
 --- fluxbox-1.3.7.orig/src/FbCommands.cc	2015-02-08 10:44:45.353187009 +0000
-+++ fluxbox-1.3.7/src/FbCommands.cc	2018-02-25 15:48:14.314000000 +0000
++++ fluxbox-1.3.7/src/FbCommands.cc	2018-02-26 19:03:50.609000000 +0000
 @@ -153,7 +153,7 @@
      // this process exits immediately, so we don't have to worry about memleaks
      const char *shell = getenv("SHELL");
@@ -815,7 +245,7 @@ diff -Naur fluxbox-1.3.7.orig/src/FbCommands.cc fluxbox-1.3.7/src/FbCommands.cc
      execl(shell, shell, "-c", m_cmd.c_str(), static_cast<void*>(NULL));
 diff -Naur fluxbox-1.3.7.orig/src/main.cc fluxbox-1.3.7/src/main.cc
 --- fluxbox-1.3.7.orig/src/main.cc	2015-02-08 10:44:45.377187009 +0000
-+++ fluxbox-1.3.7/src/main.cc	2018-02-25 15:48:14.316000000 +0000
++++ fluxbox-1.3.7/src/main.cc	2018-02-26 19:03:50.613000000 +0000
 @@ -270,7 +270,7 @@
          if (!restart_argument.empty()) {
              const char *shell = getenv("SHELL");
@@ -827,7 +257,7 @@ diff -Naur fluxbox-1.3.7.orig/src/main.cc fluxbox-1.3.7/src/main.cc
              perror(restart_argument.c_str());
 diff -Naur fluxbox-1.3.7.orig/util/fbrun/main.cc fluxbox-1.3.7/util/fbrun/main.cc
 --- fluxbox-1.3.7.orig/util/fbrun/main.cc	2015-02-08 10:44:45.377187009 +0000
-+++ fluxbox-1.3.7/util/fbrun/main.cc	2018-02-25 15:48:14.317000000 +0000
++++ fluxbox-1.3.7/util/fbrun/main.cc	2018-02-26 19:03:50.621000000 +0000
 @@ -64,7 +64,7 @@
          "   -fg [color name]            Foreground text color"<<endl<<
          "   -bg [color name]            Background color"<<endl<<
@@ -848,14 +278,21 @@ diff -Naur fluxbox-1.3.7.orig/util/fbrun/main.cc fluxbox-1.3.7/util/fbrun/main.c
          string arg = argv[i];
 diff -Naur fluxbox-1.3.7.orig/util/fbsetbg fluxbox-1.3.7/util/fbsetbg
 --- fluxbox-1.3.7.orig/util/fbsetbg	2015-02-08 10:44:45.377187009 +0000
-+++ fluxbox-1.3.7/util/fbsetbg	2018-02-25 15:48:14.318000000 +0000
-@@ -1,4 +1,4 @@
++++ fluxbox-1.3.7/util/fbsetbg	2018-02-27 19:23:26.100000000 +0000
+@@ -1,8 +1,11 @@
 -#!/bin/sh
 +#!/usr/pkgs/bash/bin/bash
  #
  # Set wallpaper for fluxbox.
  #
-@@ -45,11 +45,11 @@
+ # Copyright (c) 2003-2004 Han Boetes <han@mijncomputer.nl>
++# # 
++# Modifications made for Lombix 2018. Cesar Lombao. 
++# #
+ #
+ # Permission is hereby granted, free of charge, to any person obtaining
+ # a copy of this software and associated documentation files (the
+@@ -45,12 +48,9 @@
  
  # The wallpapersetter is selected in this order
  wpsetters="${wpsetters:=Esetroot wmsetbg feh hsetroot chbg display qiv xv xsri xli xsetbg}" # broken icewmbg'
@@ -863,11 +300,11 @@ diff -Naur fluxbox-1.3.7.orig/util/fbsetbg fluxbox-1.3.7/util/fbsetbg
 +lastwallpaper="${HOME}/.config/fluxbox/lastwallpaper"
  
  
- WHOAMI=`whoami`
+-WHOAMI=`whoami`
 -[ "$WHOAMI" = root ] && PATH=/bin:/usr/bin/:/usr/local/bin:/usr/X11R6/bin
-+[ "$WHOAMI" = root ] && PATH=/usr/bin:/usr/pkgs/X11/bin:/usr/pkgs/coreutils/bin:/usr/pkgs/util-linux/bin:/usr/pkgs/findutils/bin:/usr/pkgs/grep/bin:/usr/pkgs/sed/bin:/usr/pkgs/fluxbox/bin:/usr/pkgs/gawk/bin
- 
+-
  command="`basename \"$0\"`"
+ 
  
 @@ -99,7 +99,7 @@
  
@@ -887,7 +324,35 @@ diff -Naur fluxbox-1.3.7.orig/util/fbsetbg fluxbox-1.3.7/util/fbsetbg
  
     background: none
  
-@@ -194,8 +194,8 @@
+@@ -139,20 +139,13 @@
+ 
+ message() {
+ 
+-    # This Terminal detection method is inaccurate. Looking for a
+-    # replacement.
+-
+-    # echo if we have terminal output, otherwise pop up a window
+-    # if [ -t 1 ]; then
+-    #     echo "$command: $@"
+-    # else
+-    extra_args="-default okay"
+-        if find_it gxmessage; then
+-            gxmessage $extra_args -center "$command: $@" &
+-        else
+-            xmessage $extra_args -center "$command: $@" &
+-        fi
+-    # fi
++    echo "$@" | /usr/pkgs/yad/bin/yad --text-info 		\
++    				--window-icon=			\
++    				--image=dialog-error		\
++    				--center			\
++    				--title="$command"		\
++    				--button="gtk-ok:1" --width=600	\
++    				--height=150
+ }
+ 
+ remembercommand() {
+@@ -194,8 +187,8 @@
  fi
  
  # create directory and last wallpaper file 
@@ -898,27 +363,58 @@ diff -Naur fluxbox-1.3.7.orig/util/fbsetbg fluxbox-1.3.7/util/fbsetbg
      touch ${lastwallpaper}
  fi
  
+@@ -468,10 +461,10 @@
+         ;;
+     '')
+         message \
+-"I can't find an app to set the wallpaper with. You can install one in
+-many many ways but I will give you some simple advice: install Eterm and
+-you're set. Eterm provides Esetroot and thats a great wallpaper setter. I
+-recommend you install the package provided by your distro."
++"I can't find feh. This is the wallpaper setter that Lombix uses by default
++Although there are others that can be used feh should be available always
++I suggest to check /usr/pkgs/feh and if it is missing you can reinstall
++using lmbx -p feh"
+         exit 1
+         ;;
+ esac
 diff -Naur fluxbox-1.3.7.orig/util/fluxbox-generate_menu.in fluxbox-1.3.7/util/fluxbox-generate_menu.in
 --- fluxbox-1.3.7.orig/util/fluxbox-generate_menu.in	2015-02-08 10:44:45.377187009 +0000
-+++ fluxbox-1.3.7/util/fluxbox-generate_menu.in	2018-02-25 15:48:14.319000000 +0000
++++ fluxbox-1.3.7/util/fluxbox-generate_menu.in	2018-02-27 20:35:00.437000000 +0000
 @@ -1,4 +1,4 @@
 -#!/bin/sh
 +#!/usr/pkgs/bash/bin/bash
  #
  # generate_menu for Fluxbox
  #
-@@ -76,8 +76,8 @@
+@@ -59,8 +59,6 @@
+ 
+ Options:
+ 
+-    -k  Insert a KDE menu
+-    -g  Add a Gnome menu
+     -B  Enable backgrounds menu
+     -su Enable sudo commands
+     -r  Don't remove empty menu-entries; for templates
+@@ -75,9 +73,9 @@
+     -t  Favourite terminal
      -w  Homepage for console-browsers. Default is fluxbox.org
      -b  Favourite browser
-     -m  Menu-title; default is "Fluxbox"
+-    -m  Menu-title; default is "Fluxbox"
 -    -o  Outputfile; default is ~/.@pkgprefix@fluxbox@pkgsuffix@/menu
 -    -u  User sub-menu; default is ~/.@pkgprefix@fluxbox@pkgsuffix@/usermenu
++    -m  Menu-title; default is "Lombix"
 +    -o  Outputfile; default is ~/.config/@pkgprefix@fluxbox@pkgsuffix@/menu
 +    -u  User sub-menu; default is ~/.config/@pkgprefix@fluxbox@pkgsuffix@/usermenu
  
      -h  Display this help
      -a  Display the authors of this script
-@@ -90,8 +90,8 @@
+@@ -85,13 +83,11 @@
+   Only for packagers:
+ 
+     -p  Prefix; default is @PREFIX@
+-    -n  Gnome-prefix; /opt, /usr, /usr/X11R6 and /usr/local autodetected
+-    -q  KDE-prefix; idem dito
  
  
  Files:
@@ -929,7 +425,15 @@ diff -Naur fluxbox-1.3.7.orig/util/fluxbox-generate_menu.in fluxbox-1.3.7/util/f
  
  EOF
  }
-@@ -345,7 +345,7 @@
+@@ -107,6 +103,7 @@
+     Simon Bowden:       Cleanups and compatibility for SUN.
+     Jeramy B. Smith:    Packaging assistance, Gnome and KDE menu system.
+     Filippo Pappalardo: Italian locales and -t option.
++    Cesar Lombao:	Modifications ( not necesarily improvements ) for Lombix 2018
+     $WHOAMI:            Innocent bystander.
+ 
+ EOF
+@@ -345,7 +342,7 @@
      # $dnlamVERBOSE "# creating `date`" >> $ICONMAPPING
      # $dnlamVERBOSE "# using desktop files in $@" >> $ICONMAPPING
      # $dnlamVERBOSE "# searching for icons in `eval toSingleLine $OTHER_ICONPATHS`" >> $ICONMAPPING
@@ -938,7 +442,7 @@ diff -Naur fluxbox-1.3.7.orig/util/fluxbox-generate_menu.in fluxbox-1.3.7/util/f
      # $dnlamVERBOSE echo "createIconMapping: $@"
      for DIR in "$@" ; do
          if [ -d "$DIR" ]; then
-@@ -558,7 +558,7 @@
+@@ -558,7 +555,7 @@
  
  
  WHOAMI=`whoami`
@@ -947,7 +451,157 @@ diff -Naur fluxbox-1.3.7.orig/util/fluxbox-generate_menu.in fluxbox-1.3.7/util/f
  
  # Check for Imlib2-support
  if @pkgprefix@fluxbox@pkgsuffix@@EXEEXT@ -info 2> /dev/null | grep -q "^IMLIB"; then
-@@ -1220,10 +1220,10 @@
+@@ -586,9 +583,7 @@
+ FILEUTILSMENU='File utils'
+ FLUXBOXCOMMAND='Fluxbox Command'
+ GAMESMENU='Games'
+-GNOMEMENUTEXT='Gnome-menus'
+ GRAPHICMENU='Graphics'
+-KDEMENUTEXT='KDE-menus'
+ LOCKSCREEN='Lock screen'
+ MISCMENU='Misc'
+ MULTIMEDIAMENU='Multimedia'
+@@ -636,9 +631,7 @@
+         FILEUTILSMENU='æÁÊÌÏ×ÙÅ ÕÔÉÌÉÔÙ'
+         FLUXBOXCOMMAND='÷ÙÐÏÌÎÉÔØ ËÏÍÁÎÄÕ'
+         GAMESMENU='éÇÒÙ'
+-        GNOMEMENUTEXT='Gnome-ÍÅÎÀ'
+         GRAPHICMENU='çÒÁÆÉËÁ'
+-        KDEMENUTEXT='KDE-ÍÅÎÀ'
+         LOCKSCREEN='úÁÂÌÏËÉÒÏ×ÁÔØ ÜËÒÁÎ'
+         MISCMENU='ðÒÏÞÅÅ'
+         MUSICMENU='ú×ÕË'
+@@ -677,9 +670,7 @@
+         FILEUTILSMENU='Souborové utility'
+         FLUXBOXCOMMAND='Pøíkaz Fluxboxu'
+         GAMESMENU='Hry'
+-        GNOMEMENUTEXT='Gnome-menu'
+         GRAPHICMENU='Grafika'
+-        KDEMENUTEXT='KDE-menu'
+         LOCKSCREEN='Zamknout obrazovku'
+         MISCMENU='Rùzné'
+         MULTIMEDIAMENU='Multimédia'
+@@ -720,9 +711,7 @@
+         FILEUTILSMENU='Datei-Utilities'
+         FLUXBOXCOMMAND='Fluxbox Befehl'
+         GAMESMENU='Spiele'
+-        GNOMEMENUTEXT='Gnome-Menues'
+         GRAPHICMENU='Grafik'
+-        KDEMENUTEXT='Kde-Menues'
+         LOCKSCREEN='Bildschirmsperre'
+         MISCMENU='Sonstiges'
+         MUSICMENU='Musik'
+@@ -763,9 +752,7 @@
+         FILEUTILSMENU='Filverktyg'
+         FLUXBOXCOMMAND='Fluxbox kommando'
+         GAMESMENU='Spel'
+-        GNOMEMENUTEXT='Gnome-menyer'
+         GRAPHICMENU='Grafik'
+-        KDEMENUTEXT='KDE-menyer'
+         LOCKSCREEN='Lås skärm'
+         MISCMENU='Blandat'
+         MULTIMEDIAMENU='Multimedia'
+@@ -803,9 +790,7 @@
+         FILEUTILSMENU='Verkenners'
+         FLUXBOXCOMMAND='Fluxbox Commando'
+         GAMESMENU='Spelletjes'
+-        GNOMEMENUTEXT='Gnome-menu'
+         GRAPHICMENU='Grafisch'
+-        KDEMENUTEXT='KDE-menu'
+         LOCKSCREEN='Scherm op slot'
+         MISCMENU='Onregelmatig'
+         MUSICMENU='Muziek'
+@@ -843,9 +828,7 @@
+         FILEUTILSMENU='Tiedostotyökalut'
+         FLUXBOXCOMMAND='Fluxbox komentorivi'
+         GAMESMENU='Pelit'
+-        GNOMEMENUTEXT='Gnomen valikot'
+         GRAPHICMENU='Grafiikka'
+-        KDEMENUTEXT='KDE:n valikot'
+         LOCKSCREEN='Lukitse näyttö'
+         MISCMENU='Sekalaista'
+         MUSICMENU='Musiikki'
+@@ -886,9 +869,7 @@
+         FILEUTILSMENU='¥Õ¥¡¥¤¥ëÁàºî'
+         FLUXBOXCOMMAND='Fluxbox¥³¥Þ¥ó¥É'
+         GAMESMENU='¥²¡¼¥à'
+-        GNOMEMENUTEXT='Gnome¥á¥Ë¥å¡¼'
+         GRAPHICMENU='²èÁü'
+-        KDEMENUTEXT='KDE¥á¥Ë¥å¡¼'
+         LOCKSCREEN='¥¹¥¯¥ê¡¼¥ó¥í¥Ã¥¯'
+         MISCMENU='¤¤¤í¤¤¤í'
+         MUSICMENU='²»³Ú'
+@@ -930,9 +911,7 @@
+         FILEUTILSMENU='Outils fichiers'
+         FLUXBOXCOMMAND='Commande Fluxbox'
+         GAMESMENU='Jeux'
+-        GNOMEMENUTEXT='Menus Gnome'
+         GRAPHICMENU='Graphisme'
+-        KDEMENUTEXT='Menus KDE'
+         LOCKSCREEN="Verrouiller l'écran"
+         MISCMENU='Divers'
+         MULTIMEDIAMENU='Multimédia'
+@@ -971,9 +950,7 @@
+         FILEUTILSMENU='Utilità'
+         FLUXBOXCOMMAND='Comando Fluxbox'
+         GAMESMENU='Giochi'
+-        GNOMEMENUTEXT='Gnome'
+         GRAPHICMENU='Grafica'
+-        KDEMENUTEXT='KDE'
+         LOCKSCREEN='Blocca lo schermo'
+         MISCMENU='Varie'
+         MUSICMENU='Musica'
+@@ -1014,9 +991,7 @@
+         FILEUTILSMENU='Utilitare de fisier'
+         FLUXBOXCOMMAND='Comanda Fluxbox'
+         GAMESMENU='Jocuri'
+-        GNOMEMENUTEXT='Meniu Gnome'
+         GRAPHICMENU='Grafica'
+-        KDEMENUTEXT='Meniu KDE'
+         LOCKSCREEN='Incuie ecranul'
+         MISCMENU='Diverse'
+         MULTIMEDIAMENU='Multimedia'
+@@ -1056,9 +1031,7 @@
+         FILEUTILSMENU='Utilidades'
+         FLUXBOXCOMMAND='Comandos de Fluxbox'
+         GAMESMENU='Juegos'
+-        GNOMEMENUTEXT='Menús Gnome'
+         GRAPHICMENU='Gráficos'
+-        KDEMENUTEXT='Menús KDE'
+         LOCKSCREEN='Bloquear Pantalla'
+         MISCMENU='Varios'
+         MULTIMEDIAMENU='Multimedia'
+@@ -1102,9 +1075,7 @@
+         FILEUTILSMENU='Narzêdzia do plików'
+         FLUXBOXCOMMAND='Polecenia Fluxbox'
+         GAMESMENU='Gry'
+-        GNOMEMENUTEXT='Menu Gnome'
+         GRAPHICMENU='Grafika'
+-        KDEMENUTEXT='Menu KDE'
+         LOCKSCREEN='Zablokuj ekran'
+         MISCMENU='Ró¿ne'
+         MULTIMEDIAMENU='Multimedia'
+@@ -1144,9 +1115,7 @@
+         FILEUTILSMENU='Utilitários de Ficheiros'
+         FLUXBOXCOMMAND='Comando Fluxbox'
+         GAMESMENU='Jogos'
+-        GNOMEMENUTEXT='Menu Gnome'
+         GRAPHICMENU='Gráficos'
+-        KDEMENUTEXT='Menu KDE'
+         LOCKSCREEN='Trancar Ecrã'
+         MISCMENU='Misc.'
+         MULTIMEDIAMENU='Multimédia'
+@@ -1188,9 +1157,7 @@
+         FILEUTILSMENU='FilverktÃ¸y'
+         FLUXBOXCOMMAND='FluxBox-kommando'
+         GAMESMENU='Spill'
+-        GNOMEMENUTEXT='Gnome-menyer'
+         GRAPHICMENU='Grafikk'
+-        KDEMENUTEXT='KDE-menyer'
+         LOCKSCREEN='LÃ¥s skjermen'
+         MISCMENU='Diverse'
+         MULTIMEDIAMENU='Multimedia'
+@@ -1220,10 +1187,10 @@
  esac
  
  # Set Defaults
@@ -961,8 +615,12 @@ diff -Naur fluxbox-1.3.7.orig/util/fluxbox-generate_menu.in fluxbox-1.3.7/util/f
  USERMENU="${USERMENU:=${USERFLUXDIR}/usermenu}"
  MENUCONFIG="${MENUCONFIG:=${USERFLUXDIR}/menuconfig}"
  DOSUDO="no"
-@@ -1258,7 +1258,7 @@
- # HOMEPAGE=fluxbox.org
+@@ -1255,10 +1222,10 @@
+ # MENUTITLE=\`@pkgprefix@fluxbox@pkgsuffix@@EXEEXT@ -version|cut -d " " -f-2\`
+ 
+ # standard url for console-browsers
+-# HOMEPAGE=fluxbox.org
++# HOMEPAGE=http://lombix.org
  
  # location with your own menu-entries
 -# USERMENU=~/.@pkgprefix@fluxbox@pkgsuffix@/usermenu
@@ -970,25 +628,120 @@ diff -Naur fluxbox-1.3.7.orig/util/fluxbox-generate_menu.in fluxbox-1.3.7/util/f
  
  # Put the launcher you would like to use here
  # LAUNCHER=@pkgprefix@fbrun@pkgsuffix@@EXEEXT@
-@@ -1280,7 +1280,7 @@
+@@ -1271,16 +1238,8 @@
+ # These are prefixes; So if fluxbox is installed in @PREFIX@/bin/fluxbox
+ # your prefix is: @PREFIX@
  
- 
+-# fluxbox-generate already looks in /usr/X11R6, /usr, /usr/local and /opt so
+-# there should be no need to specify them.
+-#
+-# PREFIX=@PREFIX@
+-# GNOME_PREFIX=/opt/gnome
+-# KDE_PREFIX=/opt/kde
+-
+-
  # Separate the list of background dirs with colons ':'
 -# BACKGROUND_DIRS="${USERFLUXDIR}/backgrounds/:@PREFIX@/share/fluxbox/backgrounds/:/usr/share/wallpapers"
-+# BACKGROUND_DIRS="${USERFLUXDIR}/backgrounds/:@PREFIX@/share/backgrounds/:/usr/share/wallpapers"
++# BACKGROUND_DIRS="${USERFLUXDIR}/backgrounds/:/usr/share/wallpapers"
  
  
  # --- Boolean variables.
-@@ -1485,7 +1485,7 @@
+@@ -1290,12 +1249,6 @@
+ # Include all backgrounds in your backgrounds-directory
+ # BACKGROUNDMENUITEM=yes
+ 
+-# Include KDE-menus
+-# KDEMENU=yes
+-
+-# Include Gnome-menus
+-# GNOMEMENU=yes
+-
+ # Enable sudo commands
+ # DOSUDO=yes
+ 
+@@ -1323,8 +1276,6 @@
+ while [ $# -gt 0 ]; do
+     case "$1" in
+         -B) BACKGROUNDMENUITEM=yes; shift;;
+-        -k) KDEMENU=yes; shift;;
+-        -g) GNOMEMENU=yes; shift;;
+         -in) NO_ICON=yes; shift;;
+         -is) OTHER_ICONPATHS="
+                 /usr/share/icons
+@@ -1333,16 +1284,6 @@
+                 /usr/local/share/icons
+                 /usr/local/share/icons/mini
+                 /usr/local/share/pixmaps
+-                /usr/share/xclass/icons
+-                /usr/share/xclass/pixmaps
+-                /usr/local/share/xclass/icons
+-                /usr/local/share/xclass/pixmaps
+-                /usr/X11R6/share/icons/default/16x16
+-                /usr/X11R6/share/icons/kde/16x16
+-                /usr/X11R6/share/icons/hicolor/16x16
+-                /usr/local/X11R6/share/icons/default/16x16
+-                /usr/local/X11R6/share/icons/kde/16x16
+-                /usr/local/X11R6/share/icons/hicolor/16x16
+             "
+             shift;;
+         -ds) OTHER_DESKTOP_PATHS="
+@@ -1369,8 +1310,6 @@
+         -b) MY_BROWSER=${2}; testoption ex $1 $2; shift 2;;
+         -o) MENUFILENAME=${2}; shift 2; CHECKINIT=NO ;;
+         -p) PREFIX=${2}; testoption di $1 $2; shift 2;;
+-        -n) GNOME_PREFIX=${2}; testoption di $1 $2; shift 2;;
+-        -q) KDE_PREFIX=${2}; testoption di $1 $2; shift 2;;
+         -m) MENUTITLE=${2}; testoption sk $1 $2; shift 2;;
+         -w) HOMEPAGE=${2}; testoption sk $1 $2; shift 2;;
+         -u) USERMENU=${2}; testoption fl $1 $2; shift 2;;
+@@ -1425,20 +1364,6 @@
+ fi
+ 
+ 
+-# gnome prefix
+-for GNOME_PREFIX in "${GNOME_PREFIX}" /usr/local /usr/X11R6 /usr /opt "${PREFIX}"; do
+-    if [ -n "${GNOME_PREFIX}" -a -d "$GNOME_PREFIX/share/gnome" ]; then
+-        break;
+-    fi
+-done
+-# Will remain $PREFIX if all else fails
+-
+-# kde prefix
+-for KDE_PREFIX in "${KDE_PREFIX}" /usr/local /usr/X11R6 /usr /opt "${PREFIX}"; do
+-    if [ -n "${KDE_PREFIX}" -a -d "$KDE_PREFIX/share/applnk" ]; then
+-        break;
+-    fi
+-done
+ 
+ if [ -z "${INSTALL}" ] && [ -z "${NO_ICON}" ]; then
+     # [ -z "$dnlamVERBOSE" ] && dnlamVERBOSE=": echo"   # for debugging
+@@ -1446,16 +1371,6 @@
+     [ -r "$FB_ICONDIR" ] || mkdir "$FB_ICONDIR"
+     ICONMAPPING="$USERFLUXDIR/iconmapping"
+ 
+-    if [ "$GNOMEMENU" ] ; then
+-        OTHER_DESKTOP_PATHS="\"$HOME/.gnome/apps\" \"${GNOME_PREFIX}/share/gnome/apps\" $OTHER_DESKTOP_PATHS"
+-        #[ "OTHER_ICONPATHS" ] && OTHER_ICONPATHS=
+-    fi
+-    if [ "$KDEMENU" ] ; then
+-        OTHER_DESKTOP_PATHS="\"$HOME/.kde/share/applnk\" \"${KDE_PREFIX}/share/applnk\" $OTHER_DESKTOP_PATHS"
+-        [ "OTHER_ICONPATHS" ] && OTHER_ICONPATHS="\"$HOME\"/.kde/share/icons/{,*} $OTHER_ICONPATHS"
+-    fi
+-    [ "$GNOMEMENU$KDEMENU" ] && OTHER_DESKTOP_PATHS="\"$ETCAPPLNK\" $OTHER_DESKTOP_PATHS"
+-
+     checkDirs(){
+         #echo checkDirs: $* >&2
+         local CHECKED_DIRS=""
+@@ -1485,7 +1400,7 @@
  
  # directory for the backgrounds
  if [ -z "$BACKGROUND_DIRS" ]; then
 -    BACKGROUND_DIRS="${USERFLUXDIR}/backgrounds/:${PREFIX}/share/fluxbox/backgrounds/"
-+    BACKGROUND_DIRS="${USERFLUXDIR}/backgrounds/:${PREFIX}/share/backgrounds/:/usr/share/backgrounds"
++    BACKGROUND_DIRS="${USERFLUXDIR}/backgrounds/:/usr/share/wallpapers"
  fi
  
  # find the default terminal
-@@ -1561,7 +1561,7 @@
+@@ -1561,7 +1476,7 @@
  # If you read this it means you want to edit this file manually, so here
  # are some useful tips:
  #
@@ -997,7 +750,7 @@ diff -Naur fluxbox-1.3.7.orig/util/fluxbox-generate_menu.in fluxbox-1.3.7/util/f
  #
  # - If you miss apps please let me know and I will add them for the next
  #   release.
-@@ -1570,8 +1570,8 @@
+@@ -1570,8 +1485,8 @@
  #   makes things much more readable.
  #
  # - To prevent any other app from overwriting your menu
@@ -1008,7 +761,7 @@ diff -Naur fluxbox-1.3.7.orig/util/fluxbox-generate_menu.in fluxbox-1.3.7/util/f
  
  EOF
  
-@@ -1582,6 +1582,7 @@
+@@ -1582,6 +1497,7 @@
  fi
  
  append "[exec] (${DEFAULT_TERMNAME}) {${DEFAULT_TERM}}"
@@ -1016,7 +769,7 @@ diff -Naur fluxbox-1.3.7.orig/util/fluxbox-generate_menu.in fluxbox-1.3.7/util/f
  
  case "$DEFAULT_BROWSERNAME" in
      links|w3m|lynx)  append "[exec] (${DEFAULT_BROWSERNAME}) {${DEFAULT_TERM} -e ${DEFAULT_BROWSER} ${HOMEPAGE}}" ;;
-@@ -1641,7 +1642,7 @@
+@@ -1641,7 +1557,7 @@
      append_menu_end
  
      append_submenu P2P
@@ -1025,7 +778,7 @@ diff -Naur fluxbox-1.3.7.orig/util/fluxbox-generate_menu.in fluxbox-1.3.7/util/f
              valknut dcgui-qt dc_qt quickdc asami azureus
          cli_find TekNap giFTcurs
      append_menu_end
-@@ -1682,7 +1683,7 @@
+@@ -1682,14 +1598,14 @@
  
  append_submenu "${FILEUTILSMENU}"
      find_it     konqueror append "[exec] (konqueror) {kfmclient openProfile filemanagement}"
@@ -1034,7 +787,15 @@ diff -Naur fluxbox-1.3.7.orig/util/fluxbox-generate_menu.in fluxbox-1.3.7/util/f
      find_it     nautilus append "[exec] (nautilus) {nautilus --no-desktop --browser}"
      cli_find mc
  append_menu_end
-@@ -1724,9 +1725,10 @@
+ 
+ append_submenu "${MULTIMEDIAMENU}"
+        append_submenu "${GRAPHICMENU}"
+-               normal_find gimp gimp2 gimp-2.2 inkscape sodipodi xv gqview showimg xpaint kpaint kiconedit \
++               normal_find inkscape gimp gimp2 gimp-2.2 inkscape sodipodi xv gqview showimg xpaint kpaint kiconedit \
+                    ee xzgv xscreensaver-demo xlock gphoto tuxpaint krita skencil
+                find_it xnview           append "[exec] (xnview browser) {xnview -browser}"
+                find_it blender          append "[exec] (blender) {blender -w}"
+@@ -1724,9 +1640,10 @@
  append_submenu "${OFFICEMENU}"
      normal_find xclock xcalc kcalc grisbi qbankmanager evolution
      find_it gcalc           append "[exec] (gcalc) {gcalc}" || \
@@ -1047,7 +808,7 @@ diff -Naur fluxbox-1.3.7.orig/util/fluxbox-generate_menu.in fluxbox-1.3.7/util/f
      # older <=1.1.3 apparently have stuff like swriter, not sowriter
      for ext in s so oo xoo; do
          find_it ${ext}ffice2 && (
-@@ -1756,7 +1758,7 @@
+@@ -1756,14 +1673,14 @@
          )
      done
  
@@ -1056,7 +817,22 @@ diff -Naur fluxbox-1.3.7.orig/util/fluxbox-generate_menu.in fluxbox-1.3.7/util/f
      normal_find dia xfig
      normal_find gnumeric
  append_menu_end
-@@ -1789,7 +1791,7 @@
+ 
+ append_submenu "${GAMESMENU}"
+     normal_find bzflag gnibbles gnobots2 tuxpuck gataxx glines \
+-        gnect mahjongg gnomine gnome-stones gnometris gnotravex \
++        gweled powermanga gnect mahjongg gnomine gnome-stones gnometris gnotravex \
+         gnotski iagno knights eboard xboard scid freecell pysol \
+         gtali tuxracer xpenguins xsnow xeyes smclone \
+         openmortal quake2 quake3 skoosh same-gnome enigma xbill \
+@@ -1783,56 +1700,26 @@
+ append_menu_end
+ 
+ append_submenu "${SYSTEMTOOLSMENU}"
++
+   append_submenu "${BURNINGMENU}"
+     normal_find k3b cdbakeoven graveman xcdroast arson eroaster gcombust \
+                 gtoaster kiso kover gtkcdlabel kcdlabel cdw cdlabelgen 
      cli_find     mp3burn cdrx burncenter
    append_menu_end
  
@@ -1065,23 +841,132 @@ diff -Naur fluxbox-1.3.7.orig/util/fluxbox-generate_menu.in fluxbox-1.3.7/util/f
                gtk-cpuspeedy
    find_it    fireglcontrol   append "[exec] (ATI Config) {fireglcontrol}"
    cli_find    top htop iotop ntop powertop
-@@ -1827,11 +1829,11 @@
-     append "[config] (${CONFIGUREMENU})"
- 
-     append_menu "[submenu] (${SYSTEMSTYLES}) {${STYLEMENUTITLE}}"
+-append_menu_end
+-
+-
+-
+-
+-# We'll only use this once
+-ETCAPPLNK=/etc/X11/applnk
+-PARSING_DESKTOP="true"
+-# gnome menu
+-if [ "${GNOMEMENU}" ]; then
+-    append_submenu "${GNOMEMENUTEXT}"
+-    recurse_dir_menu "${GNOME_PREFIX}/share/gnome/apps" "$HOME/.gnome/apps" ${ETCAPPLNK}
+-    append_menu_end
+-    unset ETCAPPLNK
+-fi
+-
+-# kde submenu
+-if [ -d "${KDE_PREFIX}/share/applnk/" -a "${KDEMENU}" ]; then
+-    append_submenu "${KDEMENUTEXT}"
+-    recurse_dir_menu "${KDE_PREFIX}/share/applnk" "$HOME/.kde/share/applnk" ${ETCAPPLNK}
+-    append_menu_end
+-    unset ETCAPPLNK
+-fi
+-unset PARSING_DESKTOP
+-
+-#User menu
+-if [ -r "${USERMENU}" ]; then
+-    cat ${USERMENU} >> ${MENUFILENAME}
+-fi
+-
+-append_submenu "${FBSETTINGSMENU}"
+-    append "[config] (${CONFIGUREMENU})"
+-
+-    append_menu "[submenu] (${SYSTEMSTYLES}) {${STYLEMENUTITLE}}"
 -        append "[stylesdir] (${PREFIX}/share/fluxbox/styles)"
-+        append "[stylesdir] (${PREFIX}/share/styles)"
-     append_menu_end
- 
-     append_menu "[submenu] (${USERSTYLES}) {${STYLEMENUTITLE}}"
+-    append_menu_end
+-
+-    append_menu "[submenu] (${USERSTYLES}) {${STYLEMENUTITLE}}"
 -        append "[stylesdir] (~/.@pkgprefix@fluxbox@pkgsuffix@/styles)"
-+        append "[stylesdir] (~/.config/@pkgprefix@fluxbox@pkgsuffix@/styles)"
-     append_menu_end
+-    append_menu_end
++  
++  normal_find fluxconf fluxkeys fluxmenu
++  find_it fbpanel append "[exec] (Fluxbox panel) {fbpanel}"
++  find_it $XMESSAGE append \
++       "[exec] (${WINDOWNAME}) {xprop WM_CLASS|cut -d \\\" -f 2|$XMESSAGE -file - -center}"
++  find_it import append "[exec] (${SCREENSHOT} - JPG) {import screenshot.jpg && display -resize 50% screenshot.jpg}"
++  find_it import append "[exec] (${SCREENSHOT} - PNG) {import screenshot.png && display -resize 50% screenshot.png}"
++  find_it ${LAUNCHER} append "[exec] (${RUNCOMMAND}) {$LAUNCHER_CMD}"
++  find_it @pkgprefix@fluxbox-generate_menu@pkgsuffix@ append "[exec] (${REGENERATEMENU}) {$FBGM_CMD}"
  
      # Backgroundmenu
+     addbackground() {
+@@ -1840,7 +1727,6 @@
+                 append "[exec] (${picturename%.???}) {@pkgprefix@fbsetbg@pkgsuffix@ -a \"$1\" }"
+     }
+ 
+-    if [ "$BACKGROUNDMENUITEM" = yes ]; then
+         IFS=: # set delimetor for find
+         NUMBER_OF_BACKGROUNDS=`find $BACKGROUND_DIRS -follow -type f 2> /dev/null|wc -l`
+         if [ "$NUMBER_OF_BACKGROUNDS" -gt 0 ]; then
+@@ -1870,35 +1756,38 @@
+             echo "Warning: You wanted a background-menu but I couldn't find any backgrounds in:
+     $BACKGROUND_DIRS" >&2
+         fi
+-    fi
+ 
+-    append "[workspaces] (${WORKSPACEMENU})"
+ 
+-    append_submenu "${TOOLS}"
+-        normal_find fluxconf fluxkeys fluxmenu
+-        find_it fbpanel append "[exec] (Fluxbox panel) {fbpanel}"
+-        find_it $XMESSAGE append \
+-            "[exec] (${WINDOWNAME}) {xprop WM_CLASS|cut -d \\\" -f 2|$XMESSAGE -file - -center}"
+-        find_it import append "[exec] (${SCREENSHOT} - JPG) {import screenshot.jpg && display -resize 50% screenshot.jpg}"
+-        find_it import append "[exec] (${SCREENSHOT} - PNG) {import screenshot.png && display -resize 50% screenshot.png}"
+-        find_it ${LAUNCHER} append "[exec] (${RUNCOMMAND}) {$LAUNCHER_CMD}"
+-        find_it switch append "[exec] (gtk-theme-switch) {switch}"
+-        find_it switch2 append "[exec] (gtk2-theme-switch) {switch2}"
+-        find_it @pkgprefix@fluxbox-generate_menu@pkgsuffix@ append "[exec] (${REGENERATEMENU}) {$FBGM_CMD}"
+-    append_menu_end
++  
++append_menu_end
++
++
+ 
+-    append_submenu "${WINDOWMANAGERS}"
+-    #hard to properly maintain since there are so many exceptions to the rule.
+-    for wm in mwm twm wmii beryl compiz metacity icewm ion kde sawfish enlightenment fvwm openbox evilwm waimea xfce pekwm xfce4 fvwm2 blackbox ; do
+-        find_it start${wm} append "[restart] (${wm}) {start${wm}}" ||\
+-            find_it ${wm} append "[restart] (${wm}) {${wm}}"
+-    done
+-        find_it startgnome append "[restart] (gnome) {startgnome}" ||\
+-            find_it gnome-session append "[restart] (gnome) {gnome-session}"
+ 
+-        find_it startwindowmaker append "[restart] (windowmaker) {startwindowmaker}" ||\
+-            find_it wmaker append "[restart] (windowmaker) {wmaker}"
++# We'll only use this once
++ETCAPPLNK=/etc/X11/applnk
++PARSING_DESKTOP="true"
++# gnome menu
++
++#User menu
++if [ -r "${USERMENU}" ]; then
++    cat ${USERMENU} >> ${MENUFILENAME}
++fi
++
++append_submenu "${FBSETTINGSMENU}"
++    append "[config] (${CONFIGUREMENU})"
++
++    append_menu "[submenu] (${SYSTEMSTYLES}) {${STYLEMENUTITLE}}"
++        append "[stylesdir] (${PREFIX}/share/styles)"
++    append_menu_end
++
++    append_menu "[submenu] (${USERSTYLES}) {${STYLEMENUTITLE}}"
++        append "[stylesdir] (~/.config/@pkgprefix@fluxbox@pkgsuffix@/styles)"
+     append_menu_end
++
++
++    append "[workspaces] (${WORKSPACEMENU})"
++
+     find_it xlock append "[exec] (${LOCKSCREEN}) {xlock}" ||\
+         find_it xscreensaver-command append "[exec] (${LOCKSCREEN}) {xscreensaver-command -lock}"
+     append "[commanddialog] (${FLUXBOXCOMMAND})"
 diff -Naur fluxbox-1.3.7.orig/util/fluxbox-update_configs.cc fluxbox-1.3.7/util/fluxbox-update_configs.cc
 --- fluxbox-1.3.7.orig/util/fluxbox-update_configs.cc	2015-02-08 10:44:45.381187009 +0000
-+++ fluxbox-1.3.7/util/fluxbox-update_configs.cc	2018-02-25 15:48:14.321000000 +0000
++++ fluxbox-1.3.7/util/fluxbox-update_configs.cc	2018-02-26 19:03:50.639000000 +0000
 @@ -99,7 +99,7 @@
  void update_move_groups_entries_to_apps_file(FbTk::ResourceManager& rm,
          const FbTk::FbString& keyfilename, const FbTk::FbString& appsfilename) {
@@ -1114,7 +999,7 @@ diff -Naur fluxbox-1.3.7.orig/util/fluxbox-update_configs.cc fluxbox-1.3.7/util/
      if (!resource_manager.load(rc_filename.c_str())) {
 diff -Naur fluxbox-1.3.7.orig/util/startfluxbox.in fluxbox-1.3.7/util/startfluxbox.in
 --- fluxbox-1.3.7.orig/util/startfluxbox.in	2015-02-08 10:44:45.381187009 +0000
-+++ fluxbox-1.3.7/util/startfluxbox.in	2018-02-25 15:49:09.852000000 +0000
++++ fluxbox-1.3.7/util/startfluxbox.in	2018-02-26 19:03:50.644000000 +0000
 @@ -1,7 +1,7 @@
 -#!/bin/sh
 +#!/usr/pkgs/bash/bin/bash

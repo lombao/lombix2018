@@ -33,24 +33,24 @@ case "$1" in
    start)
       log_info_msg "Starting Apache HTTP daemon..."
       mkdir -p /run/httpd
-      start_daemon /opt/apache/sbin/apachectl -k start
+      start_daemon /usr/pkgs/servers/apache/sbin/apachectl -k start
       evaluate_retval
       ;;
 
    stop)
       log_info_msg "Stopping Apache HTTP daemon..."
-      start_daemon /opt/apache/sbin/apachectl -k stop
+      start_daemon /usr/pkgs/servers/apache/sbin/apachectl -k stop
       evaluate_retval
       ;;
 
    restart)
       log_info_msg "Restarting Apache HTTP daemon..."
-      start_daemon /opt/apache/sbin/apachectl -k restart
+      start_daemon /usr/pkgs/servers/apache/sbin/apachectl -k restart
       evaluate_retval
       ;;
 
    status)
-      statusproc /opt/apache/sbin/httpd
+      statusproc /usr/pkgs/servers/apache/sbin/httpd
       ;;
 
    *)

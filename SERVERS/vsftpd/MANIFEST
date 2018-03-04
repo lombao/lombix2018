@@ -7,7 +7,7 @@ URL=https://security.appspot.com/downloads/vsftpd-3.0.3.tar.gz
 ##
 # PREFIX: Where the package is going to be installed. 
 # If you are familiar with autotools you know what prefix usually means
-PREFIX=/opt/vsftpd
+PREFIX=/usr/pkgs/servers/vsftpd
 
 ##
 # CREDITS: Files that specifically you want to be copied over from 

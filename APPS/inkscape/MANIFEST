@@ -14,7 +14,7 @@ PREFIX=/usr/pkgs/inkscape
 # the source code into the credits area. The installer will automatically
 # try to copy a wide range of files but if you want any particular file to 
 # added , just write it here
-CREDITS="COPYING LICENSE"
+CREDITS="COPYING GPL2.txt GPL3.txt"
 
 ##
 # STRIP: Afer the installation the installer will try to execute a

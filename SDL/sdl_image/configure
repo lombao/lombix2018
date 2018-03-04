@@ -1,0 +1,11 @@
+export LDFLAGS="-L/usr/pkgs/libpng/lib 	\
+	-L/usr/pkgs/libtiff/lib 	\
+	-L/usr/pkgs/libjpeg/lib 	\
+	-L/usr/pkgs/libwebp/lib"
+
+export CFLAGS="-I/usr/pkgs/libpng/include 	\
+	-I/usr/pkgs/libtiff/include 		\
+	-I/usr/pkgs/libjpeg/include 		\
+	-I/usr/pkgs/libwebp/include"
+
+./configure --prefix=$PREFIX

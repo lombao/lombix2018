@@ -15,7 +15,7 @@ diff -Naur openssh-7.5p1.orig/defines.h openssh-7.5p1/defines.h
  
  #ifndef _PATH_STDPATH
 -# define _PATH_STDPATH "/usr/bin:/bin:/usr/sbin:/sbin"
-+# define _PATH_STDPATH "/usr/pkgs/coreutils/bin:/usr/pkgs/util-linux/bin:/usr/pkgs/shadow/bin:/usr/bin"
++# define _PATH_STDPATH "/usr/pkgs/coreutils/bin:/usr/pkgs/util-linux/bin:/usr/pkgs/shadow/bin:/usr/pkgs/sed/bin:/usr/pkgs/gawk/bin:/usr/pkgs/findutils/bin:/usr/bin"
  #endif
  
  #ifndef SUPERUSER_PATH
@@ -44,7 +44,7 @@ diff -Naur openssh-7.5p1.orig/pathnames.h openssh-7.5p1/pathnames.h
  
  #ifndef _PATH_SSH_PROGRAM
 -#define _PATH_SSH_PROGRAM		"/usr/bin/ssh"
-+#define _PATH_SSH_PROGRAM		"/usr/pkgs/openssh/bin/ssh"
++#define _PATH_SSH_PROGRAM		"/usr/pkgs/servers/openssh/bin/ssh"
  #endif
  
  /*
@@ -60,25 +60,25 @@ diff -Naur openssh-7.5p1.orig/pathnames.h openssh-7.5p1/pathnames.h
   */
  #ifndef _PATH_SSH_ASKPASS_DEFAULT
 -#define _PATH_SSH_ASKPASS_DEFAULT	"/usr/X11R6/bin/ssh-askpass"
-+#define _PATH_SSH_ASKPASS_DEFAULT	"/opt/pkgs/X11/bin/ssh-askpass"
++#define _PATH_SSH_ASKPASS_DEFAULT	"/usr/pkgs/X11/bin/ssh-askpass"
  #endif
  
  /* Location of ssh-keysign for hostbased authentication */
  #ifndef _PATH_SSH_KEY_SIGN
 -#define _PATH_SSH_KEY_SIGN		"/usr/libexec/ssh-keysign"
-+#define _PATH_SSH_KEY_SIGN		"/usr/pkgs/openssh/libexec/ssh-keysign"
++#define _PATH_SSH_KEY_SIGN		"/usr/pkgs/servers/openssh/libexec/ssh-keysign"
  #endif
  
  /* Location of ssh-pkcs11-helper to support keys in tokens */
  #ifndef _PATH_SSH_PKCS11_HELPER
 -#define _PATH_SSH_PKCS11_HELPER		"/usr/libexec/ssh-pkcs11-helper"
-+#define _PATH_SSH_PKCS11_HELPER		"/usr/pkgs/openssh/libexec/ssh-pkcs11-helper"
++#define _PATH_SSH_PKCS11_HELPER		"/usr/pkgs/servers/openssh/libexec/ssh-pkcs11-helper"
  #endif
  
  /* xauth for X11 forwarding */
  #ifndef _PATH_XAUTH
 -#define _PATH_XAUTH			"/usr/X11R6/bin/xauth"
-+#define _PATH_XAUTH			"/opt/pkgs/X11/bin/xauth"
++#define _PATH_XAUTH			"/usr/pkgs/X11/bin/xauth"
  #endif
  
  /* UNIX domain socket for X11 server; displaynum will replace %u */
@@ -87,7 +87,7 @@ diff -Naur openssh-7.5p1.orig/pathnames.h openssh-7.5p1/pathnames.h
  /* for sftp */
  #ifndef _PATH_SFTP_SERVER
 -#define _PATH_SFTP_SERVER		"/usr/libexec/sftp-server"
-+#define _PATH_SFTP_SERVER		"/usr/pkgs/openssh/libexec/sftp-server"
++#define _PATH_SFTP_SERVER		"/usr/pkgs/servers/openssh/libexec/sftp-server"
  #endif
  
  /* chroot directory for unprivileged user when UsePrivilegeSeparation=yes */
@@ -107,5 +107,5 @@ diff -Naur openssh-7.5p1.orig/pathnames.h openssh-7.5p1/pathnames.h
  /* Askpass program define */
  #ifndef ASKPASS_PROGRAM
 -#define ASKPASS_PROGRAM         "/usr/lib/ssh/ssh-askpass"
-+#define ASKPASS_PROGRAM         "/usr/pkgs/openssh/bin/ssh-askpass"
++#define ASKPASS_PROGRAM         "/usr/pkgs/servers/openssh/bin/ssh-askpass"
  #endif /* ASKPASS_PROGRAM */

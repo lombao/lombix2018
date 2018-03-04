@@ -35,14 +35,14 @@ case "$1" in
       log_info_msg "Starting PostgreSQL daemon..."
 
       /usr/pkgs/coreutils/bin/install -dm755 -o postgres -g postgres /run/postgresql
-      /usr/pkgs/shadow/bin/su - postgres -c '/usr/services/postgres/bin/pg_ctl start -W -D /var/db/pgsql/data \
+      /usr/pkgs/shadow/bin/su - postgres -c '/usr/pkgs/servers/postgres/bin/pg_ctl start -W -D /var/db/pgsql/data \
                          -l /var/db/pgsql/data/logfile -o "-i" '
       evaluate_retval
       ;;
 
    stop)
       log_info_msg "Stopping PostgreSQL daemon..."
-      /usr/pkgs/shadow/bin/su - postgres -c "/usr/services/postgres/bin/pg_ctl stop -m smart -D /var/db/pgsql/data"
+      /usr/pkgs/shadow/bin/su - postgres -c "/usr/pkgs/servers/postgres/bin/pg_ctl stop -m smart -D /var/db/pgsql/data"
       evaluate_retval
       ;;
 
@@ -53,7 +53,7 @@ case "$1" in
       ;;
 
    status)
-      /usr/pkgs/shadow/bin/su - postgres -c "/usr/services/postgres/bin/pg_ctl status -D /var/db/pgsql/data"
+      /usr/pkgs/shadow/bin/su - postgres -c "/usr/pkgs/servers/postgres/bin/pg_ctl status -D /var/db/pgsql/data"
       ;;
 
    *)

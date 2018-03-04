@@ -31,7 +31,7 @@
 case "$1" in
     start)
         log_info_msg "Starting SSH Server..."
-        start_daemon -f /usr/pkgs/openssh/sbin/sshd
+        start_daemon -f /usr/pkgs/servers/openssh/sbin/sshd
         evaluate_retval
         # Also prevent ssh from being killed by out of memory conditions
         sleep 1
@@ -41,7 +41,7 @@ case "$1" in
 
     stop)
         log_info_msg "Stopping SSH Server..."
-        killproc -p "/run/sshd.pid" /usr/pkgs/openssh/sbin/sshd
+        killproc -p "/run/sshd.pid" /usr/pkgs/servers/openssh/sbin/sshd
         evaluate_retval
         ;;
 
@@ -65,7 +65,7 @@ case "$1" in
         ;;
 
     status)
-        statusproc /usr/pkgs/openssh/sbin/sshd
+        statusproc /usr/pkgs/servers/openssh/sbin/sshd
         ;;
 
     *)

@@ -7,7 +7,7 @@ URL=http://ftp.openbsd.org/pub/OpenBSD/OpenSSH/portable/openssh-7.5p1.tar.gz
 ##
 # PREFIX: Where the package is going to be installed. 
 # If you are familiar with autotools you know what prefix usually means
-PREFIX=/usr/pkgs/openssh
+PREFIX=/usr/pkgs/servers/openssh
 
 ##
 # CREDITS: Files that specifically you want to be copied over from 

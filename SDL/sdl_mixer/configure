@@ -1,0 +1,9 @@
+export LDFLAGS="-L/usr/pkgs/alsa/lib -L/usr/pkgs/libvorbis/lib -L/usr/pkgs/libogg/lib -L/usr/pkgs/flac/lib -L/usr/pkgs/libmad/lib"
+export CFLAGS="-I/usr/pkgs/alsa/include -I/usr/pkgs/libvorbis/include -I/usr/pkgs/libogg/include -I/usr/pkgs/flac/include -I/usr/pkgs/libmad/include"
+export CPPFLAGS=$CFLAGS
+
+./configure --prefix=$PREFIX 		\
+           --enable-music-ogg 		\
+           --enable-music-mod 		\
+         --enable-music-mp3-mad-gpl
+

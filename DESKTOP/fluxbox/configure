@@ -1,12 +1,18 @@
-export LDFLAGS="-L/usr/pkgs/imlib2/lib -L/usr/pkgs/fribidi/lib -L/usr/pkgs/X11/lib   "
-export CFLAGS="-I/usr/pkgs/X11/include -I/usr/pkgs/fribidi/include -I/usr/pkgs/imlib2/include "
+export LDFLAGS="-L/usr/pkgs/imlib2/lib 	\
+	-L/usr/pkgs/fribidi/lib 	\
+	-L/usr/pkgs/X11/lib   "
+
+export CFLAGS="-I/usr/pkgs/X11/include 	\
+	-I/usr/pkgs/fribidi/include 	\
+	-I/usr/pkgs/imlib2/include "
+
 export CXXFLAGS=$CFLAGS
 
 autoreconf -i || exit 1
 ./configure --prefix=$PREFIX 				\
             --with-menu=$PREFIX/share/menu 		\
             --with-windowmenu=$PREFIX/share/windowmenu 	\
-            --with-style=$PREFIX/share/styles/zimek_darkblue   	\
+            --with-style=$PREFIX/share/styles/lombix1  	\
             --with-keys=$PREFIX/share/keys 		\
             --with-apps=$PREFIX/share/apps 		\
             --with-overlay=$PREFIX/share/overlay 	\

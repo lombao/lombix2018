@@ -1,3 +1,4 @@
+unset CPP
 cd build
 make install
 

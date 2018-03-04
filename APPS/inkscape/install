@@ -1,5 +1,2 @@
-cd build
 make install
 
-# Remove static libraries
-rm -v $PREFIX/lib/inkscape/lib*_LIB.a

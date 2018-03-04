@@ -1,0 +1,4 @@
+make install
+
+rm -fr $PREFIX/bin
+mv $PREFIX/games $PREFIX/bin

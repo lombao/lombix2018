@@ -1,0 +1,29 @@
+diff -Naur feh-2.21.orig/src/help.raw feh-2.21/src/help.raw
+--- feh-2.21.orig/src/help.raw	2017-10-07 10:43:45.000000000 +0000
++++ feh-2.21/src/help.raw	2018-02-27 19:47:12.769000000 +0000
+@@ -79,7 +79,7 @@
+                            fill the whole background, but the images' aspect
+                            ratio may not be preserved
+      --bg-tile FILE        Set FILE as tiled desktop background
+-     --no-fehbg            Do not write a ~/.fehbg file
++     --no-fehbg            Do not write a ~/.config/fehbg file
+  -C, --fontpath PATH       Specify an extra directory to look in for fonts,
+                            can be used multiple times to add multiple paths.
+  -M, --menu-font FONT      Use FONT for the font in menus.
+diff -Naur feh-2.21.orig/src/wallpaper.c feh-2.21/src/wallpaper.c
+--- feh-2.21.orig/src/wallpaper.c	2017-10-07 10:43:45.000000000 +0000
++++ feh-2.21/src/wallpaper.c	2018-02-27 19:46:36.594000000 +0000
+@@ -474,11 +474,11 @@
+ 				FILE *fp;
+ 				char *path;
+ 				struct stat s;
+-				path = estrjoin("/", home, ".fehbg", NULL);
++				path = estrjoin("/", home, ".config/fehbg", NULL);
+ 				if ((fp = fopen(path, "w")) == NULL) {
+ 					weprintf("Can't write to %s", path);
+ 				} else {
+-					fputs("#!/bin/sh\n", fp);
++					fputs("#!/usr/pkgs/bash/bin/bash\n", fp);
+ 					for (int i = 0; i < cmdargc; i++) {
+ 						fputs(shell_escape(cmdargv[i]), fp);
+ 						fputc(' ', fp);
