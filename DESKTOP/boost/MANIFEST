@@ -14,7 +14,7 @@ PREFIX=/usr/pkgs/boost
 # the source code into the credits area. The installer will automatically
 # try to copy a wide range of files but if you want any particular file to 
 # added , just write it here
-CREDITS="LICENSE_1.0.txt"
+CREDITS="LICENSE_1_0.txt"
 
 
 ##

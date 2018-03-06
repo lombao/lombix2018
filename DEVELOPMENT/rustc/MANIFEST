@@ -14,7 +14,7 @@ PREFIX=/usr/pkgs/rustc
 # the source code into the credits area. The installer will automatically
 # try to copy a wide range of files but if you want any particular file to 
 # added , just write it here
-CREDITS="AUTHORS.md LICENSE THANKS.md"
+CREDITS="CONTRIBUTING.md COPYRIGHT LICENSE-APACHE LICENSE-MIT README.md"
 
 
 ##

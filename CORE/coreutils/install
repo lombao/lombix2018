@@ -13,4 +13,7 @@ ln -fsv $PREFIX/bin/expr    	/usr/bin/expr
 ln -fsv $PREFIX/bin/basename 	/usr/bin/basename
 ln -fsv $PREFIX/bin/pwd     	/usr/bin/pwd
 ln -fsv $PREFIX/bin/uname   	/usr/bin/uname
+ln -fsv $PREFIX/bin/true	/usr/bin/true
+ln -fsv $PREFIX/bin/yes		/usr/bin/yes
+ln -fsv $PREFIX/bin/sort	/usr/bin/sort
 

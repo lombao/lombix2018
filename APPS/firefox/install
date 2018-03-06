@@ -36,7 +36,7 @@ echo "THE MAKE INSTALL CLIENT HAS BEEN COMPLETED"
 chown -R root:root $PREFIX/lib/firefox-* 	|| exit 1
 
 mkdir -pv  $PREFIX/lib/mozilla/plugins
-ln -sfv ../../mozilla/plugins $PREFIX/lib/firefox-54.0/browser
+ln -sfv ../../mozilla/plugins $PREFIX/lib/firefox-55.0.3/browser
 
 
 
@@ -57,7 +57,7 @@ MimeType=application/xhtml+xml;text/xml;application/xhtml+xml;application/vnd.mo
 StartupNotify=true
 EOF
 
-ln -sfv $PREFIX/lib/firefox-54.0/browser/icons/mozicon128.png \
+ln -sfv $PREFIX/lib/firefox-55.0.3/browser/icons/mozicon128.png \
         $PREFIX/share/pixmaps/firefox.png
 
 

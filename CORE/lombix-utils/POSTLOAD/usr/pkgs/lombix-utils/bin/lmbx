@@ -182,7 +182,7 @@ function buildPackage {
    	if [ ! -z "$TARFILE" ] && [ ! -r "$TARFILE" ] 
    	then
     		echo "Downloading from URL: $URL............"
-    		$WGET --no-check-certificate -q -nc $URL 
+    		$WGET --no-check-certificate -q -nc "$URL" 
     		[ $? != 0 ] && error_exit "Download of $URL: ERROR"
     		$CHMOD -R 644 $LMBX_AREA_CACHE/*
    	fi
@@ -280,7 +280,8 @@ function buildPackage {
 
 	## Cp any etc file ( most likely ld.conf.f and profile.d
 	
-	[ -d $PKGFOLDER/POSTLOAD/usr    ]	&& $CP -Rp  $PKGFOLDER/POSTLOAD/usr/* /usr  
+	[ -d $PKGFOLDER/POSTLOAD/usr/pkgs    ]	&& $CP -Rp  $PKGFOLDER/POSTLOAD/usr/pkgs/* /usr/pkgs/
+	[ -d $PKGFOLDER/POSTLOAD/usr/etc    ]	&& $CP -Rp  $PKGFOLDER/POSTLOAD/usr/etc/* /usr/etc/  
         find /usr/etc/profile.d -type f -exec sed -i "s@%PREFIX@$PREFIX@g" {} \;
         find /usr/etc/ld.so.conf.d -type f -exec sed -i "s@%PREFIX@$PREFIX@g" {} \;	
 
@@ -409,6 +410,14 @@ function buildPackage {
 			$MRM -fr $PREFIX/share/mime
 			ln -sv $DATAROOTDIR/mime $PREFIX/share/mime
 		fi
+
+		# Now, the mime
+		if [ -d "$PREFIX/share/applications" ] && [ ! -L "$PREFIX/share/applications" ]; then
+			$CP -Rp $PREFIX/share/applications/* $DATAROOTDIR/applications
+			$MRM -fr $PREFIX/share/applications
+			ln -sv $DATAROOTDIR/applications $PREFIX/share/applications
+		fi
+
 
 
 		

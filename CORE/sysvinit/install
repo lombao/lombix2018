@@ -10,7 +10,7 @@ rm -fr $PREFIX/sbin
 
 
 
-ln -svf $PREFIX/sbin/shutdown /usr/bin/shutdown
-ln -svf $PREFIX/sbin/init     /usr/bin/init
+ln -svf $PREFIX/bin/shutdown /usr/bin/shutdown
+ln -svf $PREFIX/bin/init     /usr/bin/init
 
 cp /usr/etc/inittab /usr/etc/inittab.bkp
