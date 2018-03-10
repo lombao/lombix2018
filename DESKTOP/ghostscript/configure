@@ -1,0 +1,12 @@
+rm -fr freetype lcms2 jpeg libpng
+rm -fr zlib
+
+
+export LDFLAGS="-L/usr/pkgs/X11/lib -L/usr/pkgs/lcms2/lib -L/usr/pkgs/libjpeg/lib -L/usr/pkgs/libpng/lib"
+export CFLAGS="-I/usr/pkgs/X11/include -I/usr/pkgs/lcms2/include -I/usr/pkgs/libjpeg/include -I/usr/pkgs/libpng/include"
+
+./configure --prefix=$PREFIX 		\
+	    --disable-compile-inits 	\
+	    --enable-dynamic		\
+	    --with-system-libtiff 
+

@@ -12,20 +12,21 @@ export LDFLAGS="-L/usr/pkgs/gnupg/lib 	\
 	-L/usr/pkgs/icu/lib"
 
 export CFLAGS="-I/usr/pkgs/gnupg/include 	\
-	-I/usr/pkgs/boost/include/boost 	\
-	-I/usr/pkg/cups/include 		\
-	-I/usr/pkg/libjpeg/include 		\
-	-I/usr/pkg/openssl/include 		\
-	-I/usr/pkg/openldap/include 		\
-	-I/usr/pkg/nss/include 			\
-	-I/usr/pkg/nss/include/nss 		\
-	-I/usr/pkg/icu/include"
+	-I/usr/pkgs/boost/include		\
+	-I/usr/pkgs/cups/include 		\
+	-I/usr/pkgs/libjpeg/include 		\
+	-I/usr/pkgs/openssl/include 		\
+	-I/usr/pkgs/openldap/include 		\
+	-I/usr/pkgs/nss/include 		\
+	-I/usr/pkgs/nss/include/nss 		\
+	-I/usr/pkgs/icu/include"
 
 export CXXFLAGS=$CFLAGS
 export CPPFLAGS=$CFLAGS
 
 unset PREFIX
 ./autogen.sh --prefix=$LO_PREFIX         	\
+	     --build=$LMBX_BUILD		\
              --sysconfdir=$LO_PREFIX/etc    	\
              --with-vendor=Lombix        	\
              --with-lang='en-GB'         	\
@@ -40,6 +41,7 @@ unset PREFIX
              --enable-python=system      	\
              --x-includes=/usr/pkgs/X11/incldue \
 	     --x-libraries=/usr/pkgs/X11/lib    \
+	     --with-boost=/usr/pkgs/boost	\
              --with-system-cairo         	\
  	     --with-system-openldap	 	\
              --with-system-curl          	\

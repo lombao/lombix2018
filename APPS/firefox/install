@@ -57,6 +57,8 @@ MimeType=application/xhtml+xml;text/xml;application/xhtml+xml;application/vnd.mo
 StartupNotify=true
 EOF
 
+
+mkdir -pv $PREFIX/share/pixmaps
 ln -sfv $PREFIX/lib/firefox-55.0.3/browser/icons/mozicon128.png \
         $PREFIX/share/pixmaps/firefox.png
 

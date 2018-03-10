@@ -1,0 +1,24 @@
+sed -i 's#@CUPS_HTMLVIEW@#firefox#' desktop/cups.desktop.in || exit 1
+sed -i 's:444:644:' Makedefs.in || exit 1
+sed -i '/MAN.EXT/s:.gz::g' configure config-scripts/cups-manpages.m4 || exit 1
+
+aclocal  -I config-scripts || exit 1
+autoconf -I config-scripts || exit 1
+
+export LDFLAGS="-L/usr/pkgs/gnutls/lib -L/usr/pkgs/nettle/lib -L/usr/pkgs/zlib/lib"
+export CFLAGS="-I/usr/pkgs/gnutls/include -I/usr/pkgs/nettle/include -I/usr/pkgs/zlib/include"
+export CXXFLAGS=$CFLAGS
+
+CC=gcc 						\
+./configure --prefix=$PREFIX			\
+	    --build=$LMBX_BUILD			\
+            --libdir=$PREFIX/lib        	\
+            --localstatedir=/var		\
+            --mandir=$PREFIX/share/man		\
+            --docdir=$PREFIX/share/doc		\
+            --sysconfdir=$PREFIX/etc		\
+            --disable-systemd           	\
+            --sbindir=$PREFIX/bin		\
+            --bindir=$PREFIX/bin		\
+            --with-rcdir=/tmp/cupsinit  	\
+            --with-system-groups=lpadmin 

@@ -80,9 +80,9 @@ case "${1}" in
       log_info_msg "Checking file systems..."
       # Note: -a option used to be -p; but this fails e.g. on fsck.minix
       if is_true "$VERBOSE_FSCK"; then
-        /usr/pkgs/e2fsprogs/bin/fsck ${options} -a -A -C -T
+        /usr/pkgs/util-linux/bin/fsck ${options} -a -A -C -T
       else
-        /usr/pkgs/e2fsprogs/bin/fsck ${options} -a -A -C -T >/dev/null
+        /usr/pkgs/util-linux/bin/fsck ${options} -a -A -C -T >/dev/null
       fi
 
       error_value=${?}

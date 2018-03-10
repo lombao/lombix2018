@@ -1,4 +1,4 @@
-unset CPP
+#unset CPP
 cd build
 make install
 

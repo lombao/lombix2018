@@ -27,6 +27,7 @@ rm -fr /root/.thumbnails
 rm -fr /root/.cmake
 rm -fr /root/.cargo
 rm -fr /root/.lesshst
+rm -fr /root/.mozilla
 
 rm -fr /var/log/*
 rm -fr /var/mail/*

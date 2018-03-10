@@ -1,6 +1,15 @@
 sed -i -e 's:\[\.-\]::' tests/filter.sed
+
+
+
+
 mkdir build
 cd build
+
+export CFLAGS="-I/usr/pkgs/util-linux/include"
+export LDFLAGS="-L/usr/pkgs/util-linux/lib -luuid"
+export LIBS="-L/usr/pkgs/util-linux/lib -luuid"
+
 ../configure --prefix=$PREFIX        	\
 	     --build=$LMBX_BUILD	\
              --bindir=$PREFIX/bin     	\
@@ -11,5 +20,6 @@ cd build
              --enable-elf-shlibs     	\
              --disable-libblkid     	\
              --disable-libuuid       	\
-             --disable-uuidd        
+             --disable-uuidd        	\
+	     --disable-fsck
 

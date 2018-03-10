@@ -6,12 +6,16 @@ unset CPP
 export LDFLAGS="-L/usr/pkgs/libjpeg/lib -L/usr/pkgs/libusb/lib 		\
 	-L/usr/pkgs/ncurses/lib -L/usr/pkgs/alsa/lib 			\
 	-L/usr/pkgs/lzo/lib -L/usr/pkgs/bzip2/lib			\
-	-L/usr/pkgs/gnupg/lib -L/usr/pkgs/glibc/lib"
+	-L/usr/pkgs/gnupg/lib -L/usr/pkgs/glibc/lib			\
+	-L/usr/pkgs/gnutls/lib -L/usr/pkgs/nettle/lib			\
+	-L/usr/pkgs/libtasn1"
 
 export CFLAGS="-I/usr/pkgs/libjpeg/include -I/usr/pkgs/libusb/include 	\
 	-I/usr/pkgs/ncurses/include -I/usr/pkgs/alsa/include 		\
 	-I/usr/pkgs/lzo/include -I/usr/pkgs/bzip2/include		\
-	-I/usr/pkgs/gnupg -I/usr/pkgs/glibc/include"
+	-I/usr/pkgs/gnupg -I/usr/pkgs/glibc/include			\
+	-I/usr/pkgs/gnutls/include -I/usr/pkgs/nettle/include		\
+	-I/usr/pkgs/libtasn1/include"
 
 ../configure --prefix=$PREFIX 			\
              --python=$PYTHON2 			\
@@ -21,6 +25,7 @@ export CFLAGS="-I/usr/pkgs/libjpeg/include -I/usr/pkgs/libusb/include 	\
              --audio-drv-list=alsa        	\
              --with-sdlabi=2.0            	\
 	     --with-gtkabi=3.0            	\
+	     --disable-strip			\
              --extra-cflags="$CFLAGS"     	\
              --extra-ldflags="$LDFLAGS"   	\
              --mandir=$PREFIX/share/man    

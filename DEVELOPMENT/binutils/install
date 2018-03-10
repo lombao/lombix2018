@@ -5,3 +5,4 @@ make tooldir=$PREFIX install
 ln -sfv $PREFIX/bin/ar /usr/bin/ar
 ln -sfv $PREFIX/bin/as /usr/bin/as
 ln -sfv $PREFIX/bin/ld /usr/bin/ld
+ln -sfv $PREFIX/bin/strip /usr/bin/strip

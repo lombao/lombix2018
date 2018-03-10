@@ -2,6 +2,7 @@ rm -f src/fcobjshash.h
 
 
 ./configure --prefix=$PREFIX           		\
+	    --build=$LMBX_BUILD			\
             --localstatedir=/var       		\
             --with-default-fonts=$FONTS_PATH 	\
             --disable-static           		\

@@ -1,0 +1,5 @@
+make install
+make soinstall
+install -v -m644 base/*.h $PREFIX/include/ghostscript || exit 1
+ln -v -s ghostscript $PREFIX/include/ps
+
