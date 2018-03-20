@@ -16,7 +16,7 @@ export CXXFLAGS=$CFLAGS
 	--localstatedir=/var		\
 	--mandir=$PREFIX/share/man	\
 	--with-apxs2			\
-	--with-libxml-dir=/usr/pkgs/libxml2	\
+	--with-libxml-dir=/usr/pkgs/xml		\
 	--with-openssl=/usr/pkgs/openssl	\
 	--with-config-file-path=$PREFIX/etc	\
 	--with-pcre-regex=/usr/pkgs/pcre	\

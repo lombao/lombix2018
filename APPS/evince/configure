@@ -1,6 +1,6 @@
 
-export LDFLAGS="-L/usr/pkg2/icu/lib -L/usr/pkg2/libxml2/lib"
-export CFLAGS="-I/usr/pkg2/icu/include -I/usr/pkg2/libxml2/include"
+export LDFLAGS="-L/usr/pkg2/icu/lib -L/usr/pkgs/xml/lib"
+export CFLAGS="-I/usr/pkg2/icu/include -I/usr/pkgs/xml/include"
 export CXXFLAGS=$CFLAGS
 
 ./configure   \

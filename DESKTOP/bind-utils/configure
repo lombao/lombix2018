@@ -1,7 +1,7 @@
 export LDFLAGS="-L/usr/pkgs/icu/lib"
 export CFLAGS="-I/usr/pkgs/icu/include"
-./configure 				\
-	--prefix=$PREFIX		\
-	--with-python=$PYTHON3		\
+./configure 					\
+	--prefix=$PREFIX			\
+	--with-python=$PYTHON3			\
 	--with-openssl=/usr/pkgs/openssl	\
-	--with-libxml2=/usr/pkgs/libxml	
+	--with-libxml2=/usr/pkgs/xml	
