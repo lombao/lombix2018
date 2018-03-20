@@ -1,0 +1,6 @@
+export LDFLAGS="-L/usr/pkgs/ghostscript/lib"
+export CFLAGS="-I/usr/pkgs/ghostscript/include"
+export CPPFLAGS=$CFLAGS
+export CXXFLAGS=$CFLAGS
+./configure --prefix=$PREFIX 		\
+	    --disable-static		

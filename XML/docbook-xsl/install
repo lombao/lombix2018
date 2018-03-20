@@ -1,0 +1,35 @@
+install -v -m755 -d $PREFIX/share/xml/docbook/xsl-stylesheets-1.79.2 || exit 1
+
+cp -v -R VERSION assembly common eclipse epub epub3 extensions fo        \
+         highlighting html htmlhelp images javahelp lib manpages params  \
+         profiling roundtrip slides template tests tools webhelp website \
+         xhtml xhtml-1_1 xhtml5                                          \
+    $PREFIX/share/xml/docbook/xsl-stylesheets-1.79.2 || exit 1
+
+ln -s VERSION $PREFIX/share/xml/docbook/xsl-stylesheets-1.79.2/VERSION.xsl || exit 1
+
+
+if [ ! -d $PREFIX/etc/xml ]; then install -v -m755 -d $PREFIX/etc/xml; fi || exit 1
+if [ ! -f $PREFIX/etc/xml/catalog ]; then
+    xmlcatalog --noout --create $PREFIX/etc/xml/catalog
+fi &&
+
+xmlcatalog --noout --add "rewriteSystem" \
+           "http://docbook.sourceforge.net/release/xsl/1.79.2" \
+           "/usr/share/xml/docbook/xsl-stylesheets-1.79.2" \
+    $PREFIX/etc/xml/catalog &&
+
+xmlcatalog --noout --add "rewriteURI" \
+           "http://docbook.sourceforge.net/release/xsl/1.79.2" \
+           "/usr/share/xml/docbook/xsl-stylesheets-1.79.2" \
+    $PREFIX/etc/xml/catalog &&
+
+xmlcatalog --noout --add "rewriteSystem" \
+           "http://docbook.sourceforge.net/release/xsl/current" \
+           "/usr/share/xml/docbook/xsl-stylesheets-1.79.2" \
+    $PREFIX/etc/xml/catalog &&
+
+xmlcatalog --noout --add "rewriteURI" \
+           "http://docbook.sourceforge.net/release/xsl/current" \
+           "/usr/share/xml/docbook/xsl-stylesheets-1.79.2" \
+    $PREFIX/etc/xml/catalog

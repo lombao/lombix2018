@@ -1,0 +1,2 @@
+cd libvpx-build
+make

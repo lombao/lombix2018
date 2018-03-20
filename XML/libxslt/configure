@@ -1,0 +1,9 @@
+export LDFLAGS="-L/usr/pkgs/python3/lib -L/usr/pkgs/icu/lib"
+export CFLAGS="-I/usr/pkgs/icu/include"
+
+
+sed -i s/3000/5000/ libxslt/transform.c doc/xsltproc.{1,xml} || exit 1
+
+./configure --prefix=$PREFIX 		\
+	    --sysconfdir=$PREFIX/etc	\
+            --disable-static 		

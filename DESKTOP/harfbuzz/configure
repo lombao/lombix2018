@@ -1,0 +1,25 @@
+
+export LDFLAGS="-L/usr/pkgs/X11/lib		\
+		-L/usr/pkgs/icu/lib		\
+		-L/usr/pkgs/graphite/lib	\
+		-L/usr/pkgs/cairo/lib		\
+		-L/usr/pkgs/glib/lib"
+
+export CFLAGS="-I/usr/pkgs/X11/include		\
+		-I/usr/pkgs/icu/include		\
+		-I/usr/pkgs/graphite/include	\
+		-I/usr/pkgs/cairo/include	\
+		-I/usr/pkgs/glib/include"
+
+
+export CXXFLAGS=$CFLAGS
+export CPPFLAGS=$CFLAGS
+
+./configure --prefix=$PREFIX           		\
+	    --build=$LMBX_BUILD			\
+	    --with-graphite2			\
+            --with-freetype			\
+            --with-icu		   		\
+	    --with-cairo			\
+            --with-gobject        
+

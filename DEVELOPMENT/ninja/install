@@ -1,0 +1,5 @@
+mkdir -pv $PREFIX/bin
+mkdir -pv $PREFIX/share/bash-completion/completions/ninja
+
+install -vm755 ninja $PREFIX/bin
+install -vDm644 misc/bash-completion $PREFIX/share/bash-completion/completions/ninja
