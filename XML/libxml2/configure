@@ -6,7 +6,9 @@ export CFLAGS="-I/usr/pkgs/icu/include"
 export PYTHON=$PYTHON3
 #export PYTHON=$PYTHON2
 
-sed -i '/_PyVerify_fd/,+1d' python/types.c
+sed -i '/_PyVerify_fd/,+1d' python/types.c || exit 1
+sed -i 's@file:///etc/xml@file:///usr/pkgs/xml/etc/xml@' *.c || exit 1
+
 
 ./configure --prefix=$PREFIX 			\
             --disable-static 			\
