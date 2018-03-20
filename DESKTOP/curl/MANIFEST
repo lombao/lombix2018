@@ -2,7 +2,7 @@
 # URL: The place where the source code has been downloaded.
 # If you remove the package the installation tool will try to 
 # download it again from this place.
-URL=https://curl.haxx.se/download/curl-7.55.1.tar.xz
+URL=https://curl.haxx.se/download/curl-7.58.0.tar.xz
 
 ##
 # PREFIX: Where the package is going to be installed. 

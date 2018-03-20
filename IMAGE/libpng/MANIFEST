@@ -2,7 +2,7 @@
 # URL: The place where the source code has been downloaded.
 # If you remove the package the installation tool will try to 
 # download it again from this place.
-URL=http://downloads.sourceforge.net/libpng/libpng-1.6.31.tar.xz
+URL=http://downloads.sourceforge.net/libpng/libpng-1.6.34.tar.xz
 
 ##
 # PREFIX: Where the package is going to be installed. 

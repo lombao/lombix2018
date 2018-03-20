@@ -1,4 +1,6 @@
 ./configure --prefix=$PREFIX 		\
+	    --build=$LMBX_BUILD		\
             --disable-static 		\
+	    --enable-xlib-xcb		\
             --enable-tee     	
 	

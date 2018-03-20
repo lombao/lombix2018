@@ -2,7 +2,7 @@
 # URL: The place where the source code has been downloaded.
 # If you remove the package the installation tool will try to 
 # download it again from this place.
-URL=https://static.rust-lang.org/dist/rustc-1.19.0-src.tar.gz
+URL=https://static.rust-lang.org/dist/rustc-1.22.1-src.tar.gz
 
 ##
 # PREFIX: Where the package is going to be installed. 

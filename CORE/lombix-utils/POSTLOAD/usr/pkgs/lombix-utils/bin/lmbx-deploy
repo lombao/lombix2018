@@ -43,6 +43,6 @@ find /usr -type f -name "DEADJOE" -exec rm {} \;
 rm -fr /var/cache/lmbx/*
 rm -fr /var/spool/fcron/*
 
-rm /usr/etc/sysconfig/ifconfig.*
+rm -f /usr/etc/sysconfig/ifconfig.*
 
 touch /firstboot

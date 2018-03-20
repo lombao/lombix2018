@@ -31,13 +31,12 @@ export CFLAGS="-I/usr/pkgs/alsa/include 	\
 
 export CXXFLAGS=$CFLAGS
 
-make -f client.mk install INSTALL_SDK= 		|| exit 1
-echo "THE MAKE INSTALL CLIENT HAS BEEN COMPLETED"
+./mach install
+
+
 chown -R root:root $PREFIX/lib/firefox-* 	|| exit 1
-
 mkdir -pv  $PREFIX/lib/mozilla/plugins
-ln -sfv ../../mozilla/plugins $PREFIX/lib/firefox-55.0.3/browser
-
+ln -sfv ../../mozilla/plugins $PREFIX/lib/firefox-58.0.2/browser
 
 
 mkdir -pv $PREFIX/share/applications
@@ -59,7 +58,7 @@ EOF
 
 
 mkdir -pv $PREFIX/share/pixmaps
-ln -sfv $PREFIX/lib/firefox-55.0.3/browser/icons/mozicon128.png \
+ln -sfv $PREFIX/lib/firefox-58.0.2/browser/icons/mozicon128.png \
         $PREFIX/share/pixmaps/firefox.png
 
 

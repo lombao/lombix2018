@@ -32,6 +32,5 @@ export CFLAGS="-I/usr/pkgs/alsa/include 	\
 export CXXFLAGS=$CFLAGS
 
 
-make -f client.mk || exit 1
-echo "THE MAKE:::: The make -f client.mk is completed"
 
+./mach build

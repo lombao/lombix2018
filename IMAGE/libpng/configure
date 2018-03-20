@@ -1,5 +1,7 @@
 
-LIBS=-lpthread ./configure --prefix=$PREFIX 	\
-            --disable-static 			
+LIBS=-lpthread ./configure 		\
+		--prefix=$PREFIX 	\
+		--build=$LMBX_BUILD	\
+            	--disable-static 			
 
 

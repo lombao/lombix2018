@@ -8,4 +8,4 @@ for lib in ncurses form panel menu ; do
 done
 
 
-ln -svf ncursesw $PREFIX/include/ncurses
+ln -svf ncursesw $PREFIX/include/ncurses/

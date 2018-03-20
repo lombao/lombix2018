@@ -6,7 +6,7 @@
 # this were compiled with the "classic" /lib/ld-XXX , therefore we have to
 # create the link from /lib64 to /usr/pkgs/glibc/lib
 ln -fsv /usr/pkgs/glibc/lib /lib64
-ln -fsv /usr/pkgs/gcc/bin/$LMBX_BUILD-gcc-ar /usr/pkgs/gcc/bin/ar
+ln -fsv gcc-ar /usr/pkgs/gcc/bin/ar
 
 #
 # Also, the SSL_CERT_FILE must be configured
@@ -15,7 +15,6 @@ ln -fsv /usr/pkgs/gcc/bin/$LMBX_BUILD-gcc-ar /usr/pkgs/gcc/bin/ar
 # This variable is configured in the standard profile for Lombix
 # However I leave a note there in case I forget
 
-env | grep SSL
 
 cat <<EOF > config.toml
 # see src/bootstrap/config.toml.example for more possible options
@@ -33,7 +32,11 @@ echo "prefix = \"$PREFIX\"" >> config.toml
 
 cat <<EOF >> config.toml
 docdir = "share/doc/rustc-1.19.0"
+
+[rust]
 channel = "stable"
+rpath = false
+
 EOF
 
 
@@ -44,4 +47,4 @@ EOF
 
 # We remove these entries that we created to allow the rustc compilation
 rm /lib64
-rm /usr/pkgs/gcc/bin/$LMBX_BUILD-gcc-ar
+rm /usr/pkgs/gcc/bin/ar

@@ -1,7 +1,10 @@
+unset CPP
+
+
+sed -i 's/ memfd_create/ qemu_memfd_create/' util/memfd.c || exit 1
 
 mkdir -vp build
 cd build
-unset CPP
 
 export LDFLAGS="-L/usr/pkgs/libjpeg/lib -L/usr/pkgs/libusb/lib 		\
 	-L/usr/pkgs/ncurses/lib -L/usr/pkgs/alsa/lib 			\
@@ -16,6 +19,10 @@ export CFLAGS="-I/usr/pkgs/libjpeg/include -I/usr/pkgs/libusb/include 	\
 	-I/usr/pkgs/gnupg -I/usr/pkgs/glibc/include			\
 	-I/usr/pkgs/gnutls/include -I/usr/pkgs/nettle/include		\
 	-I/usr/pkgs/libtasn1/include"
+
+
+export STRIP=/usr/pkgs/binutils/bin/strip
+
 
 ../configure --prefix=$PREFIX 			\
              --python=$PYTHON2 			\

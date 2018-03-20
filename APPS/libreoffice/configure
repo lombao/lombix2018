@@ -2,27 +2,37 @@ export LO_PREFIX=$PREFIX
 
 sed -e "/distro-install-file-lists/d" -i Makefile.in || exit 1
 
-export LDFLAGS="-L/usr/pkgs/gnupg/lib 	\
-	-L/usr/pkgs/boost/lib 		\
-	-L/usr/pkgs/cups/lib 		\
-	-L/usr/pkgs/libjpeg/lib 	\
-	-L/usr/pkgs/openssl/lib 	\
-	-L/usr/pkgs/openldap/lib 	\
-	-L/usr/pkgs/nss/lib 		\
+export LDFLAGS="-L/usr/pkgs/gnupg/lib 		\
+	-L/usr/pkgs/gnupg/lib			\
+	-L/usr/pkgs/harfbuzz/lib		\
+	-L/usr/pkgs/boost/lib 			\
+	-L/usr/pkgs/cups/lib 			\
+	-L/usr/pkgs/libjpeg/lib 		\
+	-L/usr/pkgs/openssl/lib 		\
+	-L/usr/pkgs/servers/openldap/lib 	\
+	-L/usr/pkgs/nss/lib 			\
 	-L/usr/pkgs/icu/lib"
 
 export CFLAGS="-I/usr/pkgs/gnupg/include 	\
+	-I/usr/pkgs/gnupg/include		\
+	-I/usr/pkgs/gnupg/include/gpgme++	\
 	-I/usr/pkgs/boost/include		\
+	-I/usr/pkgs/harfbuzz/include		\
 	-I/usr/pkgs/cups/include 		\
 	-I/usr/pkgs/libjpeg/include 		\
 	-I/usr/pkgs/openssl/include 		\
-	-I/usr/pkgs/openldap/include 		\
+	-I/usr/pkgs/servers/openldap/include 	\
 	-I/usr/pkgs/nss/include 		\
 	-I/usr/pkgs/nss/include/nss 		\
 	-I/usr/pkgs/icu/include"
 
 export CXXFLAGS=$CFLAGS
 export CPPFLAGS=$CFLAGS
+
+
+export GPGMEPP_CFLAGS="-I/usr/pkgs/gnupg/include/gpgme++"
+export CC="gcc -B/usr/pkgs/gcc/include/c++/7.2.0"
+export CXX="g++ -B/usr/pkgs/gcc/include/c++/7.2.0"
 
 unset PREFIX
 ./autogen.sh --prefix=$LO_PREFIX         	\
@@ -50,7 +60,6 @@ unset PREFIX
              --with-system-boost	 	\
              --with-system-icu           	\
              --with-system-jpeg          	\
-             --with-system-graphite	 	\
              --with-system-lcms2         	\
              --with-system-libpng        	\
 	     --with-system-libatomic_ops 	\

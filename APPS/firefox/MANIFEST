@@ -2,7 +2,7 @@
 # URL: The place where the source code has been downloaded.
 # If you remove the package the installation tool will try to 
 # download it again from this place.
-URL=https://ftp.mozilla.org/pub/mozilla.org/firefox/releases/55.0.3/source/firefox-55.0.3.source.tar.xz
+URL=https://ftp.mozilla.org/pub/mozilla.org/firefox/releases/58.0.2/source/firefox-58.0.2.source.tar.xz
 
 ##
 # PREFIX: Where the package is going to be installed. 

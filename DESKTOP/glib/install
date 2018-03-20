@@ -1,2 +1,5 @@
-make install 
+cd build-glib
+ninja install
+
+chmod -v 755 $PREFIX/bin/*
 

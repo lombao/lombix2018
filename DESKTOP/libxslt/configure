@@ -1,7 +1,0 @@
-export LDFLAGS="-L/usr/pkgs/python3/lib -L/usr/pkgs/icu/lib"
-export CFLAGS="-I/usr/pkgs/icu/include"
-
-sed -i '/#include <xlocale.h>/d' libxslt/xsltlocale.h || exit 1
-
-./configure --prefix=$PREFIX 		\
-            --disable-static 		

@@ -1,13 +1,12 @@
 
 
-./configure   					\
+mkdir build-glib
+cd    build-glib
+
+meson   					\
             --prefix=$PREFIX      		\
-	    --build=$LMBX_BUILD			\
-            --libdir=$PREFIX/lib  		\
-            --sbindir=$PREFIX/bin 		\
-            --sysconfdir=$PREFIX/etc 		\
-            --with-python=$PYTHON3	 	\
-            --disable-static     		\
-            --disable-selinux    		\
-            --with-pcre=system  
+	    -Dwith-pcre=system			\
+	    -Dwith-docs=no			\
+	    ..
+
 

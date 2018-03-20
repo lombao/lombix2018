@@ -2,7 +2,7 @@
 # URL: The place where the source code has been downloaded.
 # If you remove the package the installation tool will try to 
 # download it again from this place.
-URL=http://sqlite.org/2017/sqlite-autoconf-3200000.tar.gz
+URL=http://sqlite.org/2018/sqlite-autoconf-3220000.tar.gz
 
 ##
 # PREFIX: Where the package is going to be installed. 

@@ -13,6 +13,8 @@ export CXXFLAGS=$CFLAGS
 ./configure --prefix=$PREFIX		\
 	--build=$LMBX_BUILD		\
 	--sysconfdir=$PREFIX/etc	\
+	--localstatedir=/var		\
+	--mandir=$PREFIX/share/man	\
 	--with-apxs2			\
 	--with-libxml-dir=/usr/pkgs/libxml2	\
 	--with-openssl=/usr/pkgs/openssl	\
@@ -31,7 +33,8 @@ export CXXFLAGS=$CFLAGS
 	--with-png-dir=/usr/pkgs/libpng		\
 	--with-freetype-dir=/usr/pkgs/X11	\
 	--with-icu-dir=/usr/pkgs/icu		\
-	--with-pgsql=/opt/postgres		\
+	--with-xpm-dir=/usr/pkgs/X11		\
+	--with-pgsql=/usr/pkgs/servers/postgres	\
 	--with-pear				\
 	--enable-exif				\
 	--enable-mbstring			\

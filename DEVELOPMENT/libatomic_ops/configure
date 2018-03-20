@@ -1,4 +1,5 @@
 ./configure --prefix=$PREFIX 		\
+	--build=$LMBX_BUILD		\
 	--enable-shared			\
 	--disable-static
 

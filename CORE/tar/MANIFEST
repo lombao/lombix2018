@@ -2,7 +2,7 @@
 # URL: The place where the source code has been downloaded.
 # If you remove the package the installation tool will try to 
 # download it again from this place.
-URL=http://ftp.gnu.org/gnu/tar/tar-1.29.tar.xz
+URL=http://ftp.gnu.org/gnu/tar/tar-1.30.tar.xz
 
 ##
 # PREFIX: Where the package is going to be installed. 
