@@ -32,7 +32,6 @@ export STRIP=/usr/pkgs/binutils/bin/strip
              --audio-drv-list=alsa        	\
              --with-sdlabi=2.0            	\
 	     --with-gtkabi=3.0            	\
-	     --disable-strip			\
              --extra-cflags="$CFLAGS"     	\
              --extra-ldflags="$LDFLAGS"   	\
              --mandir=$PREFIX/share/man    

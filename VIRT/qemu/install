@@ -1,5 +1,5 @@
 cd build
-make install
+make STRIP=/usr/pkgs/binutils/bin/strip install
 
 
 chgrp kvm 	$PREFIX/libexec/qemu-bridge-helper
