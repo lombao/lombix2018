@@ -1,4 +1,7 @@
 
+export CFLAGS="-I/usr/pkgs/cups/include"
+export LDFLAGS="-L/usr/pkgs/cups/lib"
+
 
 ./configure --prefix=$PREFIX         	\
 	    --build=$LMBX_BUILD		\
