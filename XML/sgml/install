@@ -1,0 +1,15 @@
+export PATH=$PATH:$PREFIX/bin
+
+make docdir=$PREFIX/share/doc  install
+
+rm -fr $PREFIX/share/sgml
+ln -sv $DATAROOTDIR/sgml $PREFIX/share/sgml
+
+$PREFIX/bin/install-catalog --add $PREFIX/etc/sgml/sgml-ent.cat \
+	$PREFIX/share/sgml/sgml-iso-entities-8879.1986/catalog || exit 1
+
+$PREFIX/bin/install-catalog --add $PREFIX/etc/sgml/sgml-docbook.cat \
+	$PREFIX/etc/sgml/sgml-ent.cat
+
+
+
