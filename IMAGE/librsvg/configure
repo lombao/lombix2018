@@ -1,4 +1,3 @@
-sed -i 's/ --nogtkinit//' doc/Makefile.in || exit 1
 
 export LDFLAGS="-L/usr/pkgs/icu/lib"
 export CFLAGS="-I/usr/pkgs/icu/include"

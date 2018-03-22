@@ -1,3 +1,2 @@
-sed -i 's# libcrypto.a##;s# libssl.a##;/INSTALL_LIBS/s#libcrypto.a##' Makefile
 
 make MANDIR=$PREFIX/share/man MANSUFFIX=ssl install

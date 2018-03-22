@@ -3,6 +3,8 @@ export CFLAGS="-I/usr/pkgs/X11/include -I/usr/pkgs/cups/include"
 export CXXFLAGS=$CFLAGS
 export PYTHON=$PYTHON2
 
+
+
 ./configure --prefix=$PREFIX           		\
 	    --build=$LMBX_BUILD			\
             --sysconfdir=$PREFIX/etc   		\

@@ -1,12 +1,14 @@
-export CFLAGS="-I/usr/pkgs/libtiff/include -I/usr/pkgs/curl/include -I/usr/pkgs/cairo/include -I/usr/pkgs/libjpeg/include -I/usr/pkgs/libpng/include -I/usr/pkgs/lcms2/include -I/usr/pkgs/nss/include/nss"
-export LDFLAGS="-L/usr/pkgs/libtiff/lib -L/usr/pkgs/curl/lib -L/usr/pkgs/cairo/lib -L/usr/pkgs/libjpeg/lib -L/usr/pkgs/libpng/lib -L/usr/pkgs/lcms2/lib -L/usr/pkgs/nss/lib"
+mkdir build
+cd    build
 
-export CXXFLAGS=$CFLAGS
-./configure 	--prefix=$PREFIX 			\
-		--build=$LMBX_BUILD			\
-		--disable-static			\
-		--enable-build-type=release		\
-		--enable-cmyk				\
-		--enable-xpdf-headers			\
-		--enable-cms=lcms2
+# Note, the CMAKE_LD_FLAGS seems not working, in the doc says
+# you can use both , the CMAKE_LD_FLAGS or the classical LDFLAGS
+export LDFLAGS="-L/usr/pkgs/openjpeg/lib -L/usr/pkgs/glib/lib -L/usr/pkgs/pango/lib -L/usr/pkgs/cairo/lib -L/usr/pkgs/gdkpixbuf/lib -L/usr/pkgs/atk/lib -L/usr/pkgs/gtk3/lib"
 
+cmake -DCMAKE_BUILD_TYPE=Release	\
+	-DCMAKE_INSTALL_PREFIX=$PREFIX	\
+	-DCMAKE_CXX_FLAGS="-I/usr/pkgs/nss/include/nss -I/usr/pkgs/nspr/include/nspr -I/usr/pkgs/openjpeg/include"	\
+	-DCMAKE_LD_FLAGS=$LDFLAGS	\
+	-DTESTDATADIR=$PWD/testfiles	\
+	-DENABLE_XPDF_HEADERS=ON	\
+	..

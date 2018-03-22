@@ -2,7 +2,7 @@
 # URL: The place where the source code has been downloaded.
 # If you remove the package the installation tool will try to 
 # download it again from this place.
-URL=http://dbus.freedesktop.org/releases/dbus-glib/dbus-glib-0.108.tar.gz
+URL=http://dbus.freedesktop.org/releases/dbus-glib/dbus-glib-0.110.tar.gz
 
 ##
 # PREFIX: Where the package is going to be installed. 

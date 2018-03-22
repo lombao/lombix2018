@@ -2,7 +2,7 @@
 # URL: The place where the source code has been downloaded.
 # If you remove the package the installation tool will try to 
 # download it again from this place.
-URL=ftp://ftp.gnome.org/pub/gnome/sources/librsvg/2.40/librsvg-2.40.18.tar.xz
+URL=ftp://ftp.gnome.org/pub/gnome/sources/librsvg/2.42/librsvg-2.42.2.tar.xz
 
 ##
 # PREFIX: Where the package is going to be installed. 

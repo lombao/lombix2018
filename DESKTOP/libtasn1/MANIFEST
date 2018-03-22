@@ -2,7 +2,7 @@
 # URL: The place where the source code has been downloaded.
 # If you remove the package the installation tool will try to 
 # download it again from this place.
-URL=http://ftp.gnu.org/gnu/libtasn1/libtasn1-4.12.tar.gz
+URL=http://ftp.gnu.org/gnu/libtasn1/libtasn1-4.13.tar.gz
 
 ##
 # PREFIX: Where the package is going to be installed. 

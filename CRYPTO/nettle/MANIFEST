@@ -2,7 +2,7 @@
 # URL: The place where the source code has been downloaded.
 # If you remove the package the installation tool will try to 
 # download it again from this place.
-URL=ftp://ftp.gnu.org/gnu/nettle/nettle-3.3.tar.gz
+URL=ftp://ftp.gnu.org/gnu/nettle/nettle-3.4.tar.gz
 
 ##
 # PREFIX: Where the package is going to be installed. 
