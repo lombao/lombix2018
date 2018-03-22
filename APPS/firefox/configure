@@ -43,6 +43,10 @@ ac_add_options --disable-install-strip
 #ac_add_options --with-system-graphite2
 #ac_add_options --with-system-harfbuzz
 
+
+# I suspec this causes an error with llvm ( csstdef or similar missing )
+ac_add_options --disable-stylo
+
 # The BLFS editors recommend not changing anything below this line:
 ac_add_options --prefix=/usr/pkgs/firefox
 
