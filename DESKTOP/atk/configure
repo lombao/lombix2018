@@ -1,1 +1,5 @@
-./configure --prefix=$PREFIX 		
+
+./configure --prefix=$PREFIX 		\
+	    --build=$LMBX_BUILD		\
+	    --enable-introspection=no
+

@@ -1,9 +1,21 @@
-export LDFLAGS="-L/usr/pkgs/libjpeg/lib"
-export CPPFLAGS="-I/usr/pkgs/libjpeg/include"
+export LDFLAGS="-L/usr/pkgs/libjpeg/lib 	\
+	-L/usr/pkgs/libpng/lib 			\
+	-L/usr/pkgs/libtiff/lib 		\
+	-L/usr/pkgs/jasper/lib"
+
+export CFLAGS="-I/usr/pkgs/libjpeg/include 	\
+	-I/usr/pkgs/libpng/include 		\
+	-I/usr/pkgs/libtiff/include 		\
+	-I/usr/pkgs/jasper/include"
+
+export CPPFLAGS=$CFLAGS
+export CXXFLAGS=$CFLAGS
 
 ./configure --prefix=$PREFIX 		\
+	    --build=$LMBX_BUILD		\
             --enable-debug=no		\
             --with-x11 			\
+	    --with-libjasper		\
 	    --disable-glibtest		\
             --disable-gtk-doc
 
