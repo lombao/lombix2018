@@ -1,5 +1,6 @@
 export LO_PREFIX=$PREFIX
 
+
 sed -e "/distro-install-file-lists/d" -i Makefile.in || exit 1
 
 export LDFLAGS="-L/usr/pkgs/gnupg/lib 		\
@@ -31,8 +32,6 @@ export CPPFLAGS=$CFLAGS
 
 
 export GPGMEPP_CFLAGS="-I/usr/pkgs/gnupg/include/gpgme++"
-export CC="gcc -B/usr/pkgs/gcc/include/c++/7.2.0"
-export CXX="g++ -B/usr/pkgs/gcc/include/c++/7.2.0"
 
 unset PREFIX
 ./autogen.sh --prefix=$LO_PREFIX         	\

@@ -2,7 +2,7 @@
 # URL: The place where the source code has been downloaded.
 # If you remove the package the installation tool will try to 
 # download it again from this place.
-URL=http://roy.marples.name/downloads/dhcpcd/dhcpcd-6.11.5.tar.xz
+URL=http://roy.marples.name/downloads/dhcpcd/dhcpcd-7.0.1.tar.xz
 
 ##
 # PREFIX: Where the package is going to be installed. 
@@ -14,7 +14,7 @@ PREFIX=/usr/pkgs/dhcpcd
 # the source code into the credits area. The installer will automatically
 # try to copy a wide range of files but if you want any particular file to 
 # added , just write it here
-CREDITS="README"
+CREDITS=""
 
 ##
 # STRIP: Afer the installation the installer will try to execute a

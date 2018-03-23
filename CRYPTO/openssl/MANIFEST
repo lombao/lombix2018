@@ -2,7 +2,7 @@
 # URL: The place where the source code has been downloaded.
 # If you remove the package the installation tool will try to 
 # download it again from this place.
-URL=https://openssl.org/source/openssl-1.0.2n.tar.gz
+URL=https://openssl.org/source/openssl-1.1.0g.tar.gz
 
 ##
 # PREFIX: Where the package is going to be installed. 
@@ -14,7 +14,7 @@ PREFIX=/usr/pkgs/openssl
 # the source code into the credits area. The installer will automatically
 # try to copy a wide range of files but if you want any particular file to 
 # added , just write it here
-CREDITS="ACKNOWLEDGMENTS CONTRIBUTING README FAQ"
+CREDITS="ACKNOWLEDGEMENTS CONTRIBUTING README FAQ"
 
 
 ##

@@ -5,12 +5,11 @@ cd    build
 CC=gcc
 CXX=g++
 
-cmake	-DCMAKE_INSTALL_PREFIX=$PREFIX	\
-	-DLLVM_ENABLE_FFI=ON		\
-	-DCMAKE_BUILD_TYPE=Release	\
-	-DLLVM_BUILD_LLVM_DYLIB=ON	\
-	-DLLVM_TARGETS_TO_BUILD="host;AMDGPU;ARM" \
-	-Wno-dev			\
+cmake	-DCMAKE_INSTALL_PREFIX=$PREFIX			\
+	-DCMAKE_BUILD_TYPE=Release			\
+	-DGCC_INSTALL_PREFIX=/usr/pkgs/gcc		\
+	-DLLVM_TARGETS_TO_BUILD="host;AMDGPU;ARM" 	\
+	-Wno-dev					\
 	..
 
 

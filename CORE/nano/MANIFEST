@@ -2,7 +2,7 @@
 # URL: The place where the source code has been downloaded.
 # If you remove the package the installation tool will try to 
 # download it again from this place.
-URL=https://www.nano-editor.org/dist/v2.8/nano-2.8.7.tar.xz
+URL=https://www.nano-editor.org/dist/v2.9/nano-2.9.3.tar.xz
 
 ##
 # PREFIX: Where the package is going to be installed. 

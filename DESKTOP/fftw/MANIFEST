@@ -2,7 +2,7 @@
 # URL: The place where the source code has been downloaded.
 # If you remove the package the installation tool will try to 
 # download it again from this place.
-URL=ftp://ftp.fftw.org/pub/fftw/fftw-3.3.6-pl2.tar.gz
+URL=ftp://ftp.fftw.org/pub/fftw/fftw-3.3.7.tar.gz
 
 ##
 # PREFIX: Where the package is going to be installed. 

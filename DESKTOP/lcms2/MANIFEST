@@ -2,7 +2,7 @@
 # URL: The place where the source code has been downloaded.
 # If you remove the package the installation tool will try to 
 # download it again from this place.
-URL=http://downloads.sourceforge.net/lcms/lcms2-2.8.tar.gz
+URL=http://downloads.sourceforge.net/lcms/lcms2-2.9.tar.gz
 
 ##
 # PREFIX: Where the package is going to be installed. 
