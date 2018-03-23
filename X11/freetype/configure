@@ -1,7 +1,0 @@
-
-
-
-./configure --prefix=$PREFIX           	\
-            --disable-static        	
-
-

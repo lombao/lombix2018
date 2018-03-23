@@ -1,8 +1,0 @@
-
-
-
-./configure --prefix=$PREFIX           	\
-            --with-freetype            	\
-            --with-icu                 	\
-            --with-gobject        
-
