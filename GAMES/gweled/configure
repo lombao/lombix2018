@@ -1,7 +1,0 @@
-export LDFLAGS="-L/usr/pkgs/libmikmod/lib -L/usr/pkg/alsa/lib"
-export CFLAGS="-I/usr/pkgs/libmikmod/include -I/usr/pkg/alsa/include"
-./configure --prefix=$PREFIX 		\
-            --bindir=$PREFIX/bin 	\
-	    --localstatedir=/var	
-
-
