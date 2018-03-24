@@ -1,4 +1,4 @@
-install -v -d -m755 $PERFIX/share/xml/docbook/xml-dtd-4.5 || exit 1
+install -v -d -m755 $PREFIX/share/xml/docbook/xml-dtd-4.5 || exit 1
 install -v -d -m755 $PREFIX/etc/xml 			 || exit 1
 chown -R root:root . 					 || exit 1
 cp -v -af docbook.cat *.dtd ent/ *.mod $PREFIX/share/xml/docbook/xml-dtd-4.5

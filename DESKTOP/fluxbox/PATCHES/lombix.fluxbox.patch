@@ -1,6 +1,6 @@
 diff -Naur fluxbox-1.3.7.orig/configure fluxbox-1.3.7/configure
 --- fluxbox-1.3.7.orig/configure	2015-02-08 10:44:53.821187099 +0000
-+++ fluxbox-1.3.7/configure	2018-02-26 19:03:50.550000000 +0000
++++ fluxbox-1.3.7/configure	2018-03-24 12:17:27.864735047 +0000
 @@ -1535,13 +1535,13 @@
    --without-libiconv-prefix     don't search for libiconv in includedir and libdir
    --with-menu=path        location menu file (PREFIX/share/fluxbox/menu)
@@ -100,7 +100,7 @@ diff -Naur fluxbox-1.3.7.orig/configure fluxbox-1.3.7/configure
  
 diff -Naur fluxbox-1.3.7.orig/configure.ac fluxbox-1.3.7/configure.ac
 --- fluxbox-1.3.7.orig/configure.ac	2015-02-08 10:44:45.333187008 +0000
-+++ fluxbox-1.3.7/configure.ac	2018-02-26 19:03:50.554000000 +0000
++++ fluxbox-1.3.7/configure.ac	2018-03-24 12:17:27.868735047 +0000
 @@ -487,63 +487,63 @@
  
  dnl Various resource paths
@@ -184,8 +184,8 @@ diff -Naur fluxbox-1.3.7.orig/configure.ac fluxbox-1.3.7/configure.ac
  
 diff -Naur fluxbox-1.3.7.orig/data/init.in fluxbox-1.3.7/data/init.in
 --- fluxbox-1.3.7.orig/data/init.in	2015-02-08 10:44:45.333187008 +0000
-+++ fluxbox-1.3.7/data/init.in	2018-02-26 19:03:50.569000000 +0000
-@@ -1,7 +1,7 @@
++++ fluxbox-1.3.7/data/init.in	2018-03-24 12:35:11.623813781 +0000
+@@ -1,7 +1,17 @@
  ! If you're looking for settings to configure, they won't be saved here until
  ! you change something in the fluxbox configuration menu.
  
@@ -195,9 +195,19 @@ diff -Naur fluxbox-1.3.7.orig/data/init.in fluxbox-1.3.7/data/init.in
 +session.keyFile: ~/.config/@pkgprefix@fluxbox@pkgsuffix@/keys
  session.styleFile: @default_style@
  session.configVersion:	13
++
++session.screen0.window.focus.alpha:	222
++session.screen0.window.unfocus.alpha:	184
++session.screen0.menu.alpha:		188
++session.forcePseudoTransparency:	true
++! If you're looking for settings to configure, they won't be saved here until
++! you change something in the fluxbox configuration menu.
++
++session.screen0.opaqueMove:	false
++
 diff -Naur fluxbox-1.3.7.orig/data/Makemodule.am fluxbox-1.3.7/data/Makemodule.am
 --- fluxbox-1.3.7.orig/data/Makemodule.am	2015-02-08 10:44:45.333187008 +0000
-+++ fluxbox-1.3.7/data/Makemodule.am	2018-02-26 19:03:50.572000000 +0000
++++ fluxbox-1.3.7/data/Makemodule.am	2018-03-24 12:17:27.876735048 +0000
 @@ -53,7 +53,7 @@
  data/menu:
  	env MENUFILENAME=$@ \
@@ -209,7 +219,7 @@ diff -Naur fluxbox-1.3.7.orig/data/Makemodule.am fluxbox-1.3.7/data/Makemodule.a
  		sh util/fluxbox-generate_menu
 diff -Naur fluxbox-1.3.7.orig/Makefile.in fluxbox-1.3.7/Makefile.in
 --- fluxbox-1.3.7.orig/Makefile.in	2015-02-08 10:44:52.545187086 +0000
-+++ fluxbox-1.3.7/Makefile.in	2018-02-26 19:03:50.599000000 +0000
++++ fluxbox-1.3.7/Makefile.in	2018-03-24 12:17:27.881735048 +0000
 @@ -95,7 +95,7 @@
    test $$has_opt = yes
  am__make_dryrun = (target_option=n; $(am__make_running_with_option))
@@ -221,7 +231,7 @@ diff -Naur fluxbox-1.3.7.orig/Makefile.in fluxbox-1.3.7/Makefile.in
  pkglibexecdir = $(libexecdir)/@PACKAGE@
 diff -Naur fluxbox-1.3.7.orig/src/cli_options.cc fluxbox-1.3.7/src/cli_options.cc
 --- fluxbox-1.3.7.orig/src/cli_options.cc	2015-02-08 10:44:45.377187009 +0000
-+++ fluxbox-1.3.7/src/cli_options.cc	2018-02-26 19:03:50.607000000 +0000
++++ fluxbox-1.3.7/src/cli_options.cc	2018-03-24 12:17:27.884735049 +0000
 @@ -48,7 +48,7 @@
          session_display.assign(env);
      }
@@ -233,7 +243,7 @@ diff -Naur fluxbox-1.3.7.orig/src/cli_options.cc fluxbox-1.3.7/src/cli_options.c
      if (!rc_path.empty()) {
 diff -Naur fluxbox-1.3.7.orig/src/FbCommands.cc fluxbox-1.3.7/src/FbCommands.cc
 --- fluxbox-1.3.7.orig/src/FbCommands.cc	2015-02-08 10:44:45.353187009 +0000
-+++ fluxbox-1.3.7/src/FbCommands.cc	2018-02-26 19:03:50.609000000 +0000
++++ fluxbox-1.3.7/src/FbCommands.cc	2018-03-24 12:17:27.888735049 +0000
 @@ -153,7 +153,7 @@
      // this process exits immediately, so we don't have to worry about memleaks
      const char *shell = getenv("SHELL");
@@ -245,7 +255,7 @@ diff -Naur fluxbox-1.3.7.orig/src/FbCommands.cc fluxbox-1.3.7/src/FbCommands.cc
      execl(shell, shell, "-c", m_cmd.c_str(), static_cast<void*>(NULL));
 diff -Naur fluxbox-1.3.7.orig/src/main.cc fluxbox-1.3.7/src/main.cc
 --- fluxbox-1.3.7.orig/src/main.cc	2015-02-08 10:44:45.377187009 +0000
-+++ fluxbox-1.3.7/src/main.cc	2018-02-26 19:03:50.613000000 +0000
++++ fluxbox-1.3.7/src/main.cc	2018-03-24 12:17:27.892735049 +0000
 @@ -270,7 +270,7 @@
          if (!restart_argument.empty()) {
              const char *shell = getenv("SHELL");
@@ -257,7 +267,7 @@ diff -Naur fluxbox-1.3.7.orig/src/main.cc fluxbox-1.3.7/src/main.cc
              perror(restart_argument.c_str());
 diff -Naur fluxbox-1.3.7.orig/util/fbrun/main.cc fluxbox-1.3.7/util/fbrun/main.cc
 --- fluxbox-1.3.7.orig/util/fbrun/main.cc	2015-02-08 10:44:45.377187009 +0000
-+++ fluxbox-1.3.7/util/fbrun/main.cc	2018-02-26 19:03:50.621000000 +0000
++++ fluxbox-1.3.7/util/fbrun/main.cc	2018-03-24 12:17:27.895735049 +0000
 @@ -64,7 +64,7 @@
          "   -fg [color name]            Foreground text color"<<endl<<
          "   -bg [color name]            Background color"<<endl<<
@@ -278,7 +288,7 @@ diff -Naur fluxbox-1.3.7.orig/util/fbrun/main.cc fluxbox-1.3.7/util/fbrun/main.c
          string arg = argv[i];
 diff -Naur fluxbox-1.3.7.orig/util/fbsetbg fluxbox-1.3.7/util/fbsetbg
 --- fluxbox-1.3.7.orig/util/fbsetbg	2015-02-08 10:44:45.377187009 +0000
-+++ fluxbox-1.3.7/util/fbsetbg	2018-02-27 19:23:26.100000000 +0000
++++ fluxbox-1.3.7/util/fbsetbg	2018-03-24 12:17:27.899735050 +0000
 @@ -1,8 +1,11 @@
 -#!/bin/sh
 +#!/usr/pkgs/bash/bin/bash
@@ -380,7 +390,7 @@ diff -Naur fluxbox-1.3.7.orig/util/fbsetbg fluxbox-1.3.7/util/fbsetbg
  esac
 diff -Naur fluxbox-1.3.7.orig/util/fluxbox-generate_menu.in fluxbox-1.3.7/util/fluxbox-generate_menu.in
 --- fluxbox-1.3.7.orig/util/fluxbox-generate_menu.in	2015-02-08 10:44:45.377187009 +0000
-+++ fluxbox-1.3.7/util/fluxbox-generate_menu.in	2018-02-27 20:35:00.437000000 +0000
++++ fluxbox-1.3.7/util/fluxbox-generate_menu.in	2018-03-24 12:47:36.602868920 +0000
 @@ -1,4 +1,4 @@
 -#!/bin/sh
 +#!/usr/pkgs/bash/bin/bash
@@ -769,7 +779,15 @@ diff -Naur fluxbox-1.3.7.orig/util/fluxbox-generate_menu.in fluxbox-1.3.7/util/f
  
  case "$DEFAULT_BROWSERNAME" in
      links|w3m|lynx)  append "[exec] (${DEFAULT_BROWSERNAME}) {${DEFAULT_TERM} -e ${DEFAULT_BROWSER} ${HOMEPAGE}}" ;;
-@@ -1641,7 +1557,7 @@
+@@ -1634,14 +1550,14 @@
+ 
+     append_submenu IRC
+         normal_find xchat xchat-2 ksirc vyqchat lostirc logui konversation kvirc skype
+-        cli_find irssi epic4 weechat ninja
++        cli_find irssi epic4 weechat 
+         find_it BitchX        append "[exec]   (BitchX) {${DEFAULT_TERM} -e BitchX -N}" || \
+         find_it bitchx        append "[exec]   (BitchX) {${DEFAULT_TERM} -e bitchx -N}"
+         find_it ircii         append "[exec]   (ircii) {${DEFAULT_TERM} -e ircii -s}"
      append_menu_end
  
      append_submenu P2P
@@ -778,7 +796,7 @@ diff -Naur fluxbox-1.3.7.orig/util/fluxbox-generate_menu.in fluxbox-1.3.7/util/f
              valknut dcgui-qt dc_qt quickdc asami azureus
          cli_find TekNap giFTcurs
      append_menu_end
-@@ -1682,14 +1598,14 @@
+@@ -1682,13 +1598,12 @@
  
  append_submenu "${FILEUTILSMENU}"
      find_it     konqueror append "[exec] (konqueror) {kfmclient openProfile filemanagement}"
@@ -788,14 +806,52 @@ diff -Naur fluxbox-1.3.7.orig/util/fluxbox-generate_menu.in fluxbox-1.3.7/util/f
      cli_find mc
  append_menu_end
  
- append_submenu "${MULTIMEDIAMENU}"
-        append_submenu "${GRAPHICMENU}"
--               normal_find gimp gimp2 gimp-2.2 inkscape sodipodi xv gqview showimg xpaint kpaint kiconedit \
-+               normal_find inkscape gimp gimp2 gimp-2.2 inkscape sodipodi xv gqview showimg xpaint kpaint kiconedit \
+-append_submenu "${MULTIMEDIAMENU}"
+-       append_submenu "${GRAPHICMENU}"
++append_submenu "${GRAPHICMENU}"
+                normal_find gimp gimp2 gimp-2.2 inkscape sodipodi xv gqview showimg xpaint kpaint kiconedit \
                     ee xzgv xscreensaver-demo xlock gphoto tuxpaint krita skencil
                 find_it xnview           append "[exec] (xnview browser) {xnview -browser}"
-                find_it blender          append "[exec] (blender) {blender -w}"
-@@ -1724,9 +1640,10 @@
+@@ -1696,37 +1611,32 @@
+                find_it gears            append "[exec] (Mesa gears) {gears}"
+                find_it morph3d          append "[exec] (Mesa morph) {morph3d}"
+                find_it reflect          append "[exec] (Mesa reflect) {reflect}"
+-       append_menu_end
++append_menu_end
++
++
++append_submenu "${MULTIMEDIAMENU}"
++    normal_find xmms noatun alsaplayer gqmpeg aumix xmixer gnome-alsamixer gmix kmix kscd grecord kmidi xplaycd soundtracker grip easytag audacity \
++                zinf rhythmbox kaboodle beep-media-player amarok tagtool audacious bmpx normal_find xine gxine aviplay gtv gmplayer xmovie xcdroast xgdb \
++                xawtv fxtv ogle goggles vlc
++    cli_find cdcd cplay alsamixer orpheus mp3blaster
++    find_it dvdrip append "[exec] (dvdrip) {nohup dvdrip}"
++append_menu_end
+ 
+-       append_submenu "${MUSICMENU}"
+-               normal_find xmms noatun alsaplayer gqmpeg aumix xmixer gnome-alsamixer gmix kmix kscd \
+-                   grecord kmidi xplaycd soundtracker grip easytag audacity \
+-                   zinf rhythmbox kaboodle beep-media-player amarok tagtool \
+-                   audacious bmpx
+-               cli_find cdcd cplay alsamixer orpheus mp3blaster
+-       append_menu_end
+-
+-
+-       append_submenu "${VIDEOMENU}"
+-           normal_find xine gxine aviplay gtv gmplayer xmovie xcdroast xgdb \
+-               realplay xawtv fxtv ogle goggles vlc
+-           find_it dvdrip append "[exec] (dvdrip) {nohup dvdrip}"
+-       append_menu_end
+ 
+-       append_submenu "${XUTILSMENU}"
++append_submenu "${XUTILSMENU}"
+            normal_find xfontsel xman xload xbiff editres viewres xclock \
+                xmag wmagnify gkrellm gkrellm2 vmware portagemaster agave 
+            find_it xrdb append "[exec] (Reload .Xdefaults) {xrdb -load \$HOME/.Xdefaults}"
+-       append_menu_end
+ append_menu_end
+ 
+ 
  append_submenu "${OFFICEMENU}"
      normal_find xclock xcalc kcalc grisbi qbankmanager evolution
      find_it gcalc           append "[exec] (gcalc) {gcalc}" || \
@@ -808,7 +864,7 @@ diff -Naur fluxbox-1.3.7.orig/util/fluxbox-generate_menu.in fluxbox-1.3.7/util/f
      # older <=1.1.3 apparently have stuff like swriter, not sowriter
      for ext in s so oo xoo; do
          find_it ${ext}ffice2 && (
-@@ -1756,14 +1673,14 @@
+@@ -1756,19 +1666,19 @@
          )
      done
  
@@ -825,7 +881,14 @@ diff -Naur fluxbox-1.3.7.orig/util/fluxbox-generate_menu.in fluxbox-1.3.7/util/f
          gnotski iagno knights eboard xboard scid freecell pysol \
          gtali tuxracer xpenguins xsnow xeyes smclone \
          openmortal quake2 quake3 skoosh same-gnome enigma xbill \
-@@ -1783,56 +1700,26 @@
+-        icebreaker scorched3d sol dosbox black-box freeciv \
+-        freeciv-server frozen-bubble liquidwar qt-nethack \
++        icebreaker scorched3d sol dosbox black-box freeciv-gtk3 \
++        frozen-bubble liquidwar qt-nethack \
+         nethack-gnome pathological scummvm xqf \
+         wesnoth canfeild ace_canfeild golf merlin chickens \
+         supertux tuxdash  neverball cube_client blackjack \
+@@ -1783,56 +1693,26 @@
  append_menu_end
  
  append_submenu "${SYSTEMTOOLSMENU}"
@@ -893,7 +956,7 @@ diff -Naur fluxbox-1.3.7.orig/util/fluxbox-generate_menu.in fluxbox-1.3.7/util/f
  
      # Backgroundmenu
      addbackground() {
-@@ -1840,7 +1727,6 @@
+@@ -1840,7 +1720,6 @@
                  append "[exec] (${picturename%.???}) {@pkgprefix@fbsetbg@pkgsuffix@ -a \"$1\" }"
      }
  
@@ -901,7 +964,7 @@ diff -Naur fluxbox-1.3.7.orig/util/fluxbox-generate_menu.in fluxbox-1.3.7/util/f
          IFS=: # set delimetor for find
          NUMBER_OF_BACKGROUNDS=`find $BACKGROUND_DIRS -follow -type f 2> /dev/null|wc -l`
          if [ "$NUMBER_OF_BACKGROUNDS" -gt 0 ]; then
-@@ -1870,35 +1756,38 @@
+@@ -1870,35 +1749,38 @@
              echo "Warning: You wanted a background-menu but I couldn't find any backgrounds in:
      $BACKGROUND_DIRS" >&2
          fi
@@ -923,8 +986,6 @@ diff -Naur fluxbox-1.3.7.orig/util/fluxbox-generate_menu.in fluxbox-1.3.7/util/f
 -    append_menu_end
 +  
 +append_menu_end
-+
-+
  
 -    append_submenu "${WINDOWMANAGERS}"
 -    #hard to properly maintain since there are so many exceptions to the rule.
@@ -937,6 +998,8 @@ diff -Naur fluxbox-1.3.7.orig/util/fluxbox-generate_menu.in fluxbox-1.3.7/util/f
  
 -        find_it startwindowmaker append "[restart] (windowmaker) {startwindowmaker}" ||\
 -            find_it wmaker append "[restart] (windowmaker) {wmaker}"
++
++
 +# We'll only use this once
 +ETCAPPLNK=/etc/X11/applnk
 +PARSING_DESKTOP="true"
@@ -966,7 +1029,7 @@ diff -Naur fluxbox-1.3.7.orig/util/fluxbox-generate_menu.in fluxbox-1.3.7/util/f
      append "[commanddialog] (${FLUXBOXCOMMAND})"
 diff -Naur fluxbox-1.3.7.orig/util/fluxbox-update_configs.cc fluxbox-1.3.7/util/fluxbox-update_configs.cc
 --- fluxbox-1.3.7.orig/util/fluxbox-update_configs.cc	2015-02-08 10:44:45.381187009 +0000
-+++ fluxbox-1.3.7/util/fluxbox-update_configs.cc	2018-02-26 19:03:50.639000000 +0000
++++ fluxbox-1.3.7/util/fluxbox-update_configs.cc	2018-03-24 12:17:27.906735050 +0000
 @@ -99,7 +99,7 @@
  void update_move_groups_entries_to_apps_file(FbTk::ResourceManager& rm,
          const FbTk::FbString& keyfilename, const FbTk::FbString& appsfilename) {
@@ -999,7 +1062,7 @@ diff -Naur fluxbox-1.3.7.orig/util/fluxbox-update_configs.cc fluxbox-1.3.7/util/
      if (!resource_manager.load(rc_filename.c_str())) {
 diff -Naur fluxbox-1.3.7.orig/util/startfluxbox.in fluxbox-1.3.7/util/startfluxbox.in
 --- fluxbox-1.3.7.orig/util/startfluxbox.in	2015-02-08 10:44:45.381187009 +0000
-+++ fluxbox-1.3.7/util/startfluxbox.in	2018-02-26 19:03:50.644000000 +0000
++++ fluxbox-1.3.7/util/startfluxbox.in	2018-03-24 12:17:27.910735051 +0000
 @@ -1,7 +1,7 @@
 -#!/bin/sh
 +#!/usr/pkgs/bash/bin/bash
