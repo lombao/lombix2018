@@ -2,7 +2,7 @@
 # URL: The place where the source code has been downloaded.
 # If you remove the package the installation tool will try to 
 # download it again from this place.
-URL=https://get.videolan.org/libdvdnav/5.0.3/libdvdnav-5.0.3.tar.bz2
+URL=https://get.videolan.org/libdvdnav/6.0.0/libdvdnav-6.0.0.tar.bz2
 
 ##
 # PREFIX: Where the package is going to be installed. 
