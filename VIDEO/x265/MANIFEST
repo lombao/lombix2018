@@ -2,7 +2,7 @@
 # URL: The place where the source code has been downloaded.
 # If you remove the package the installation tool will try to 
 # download it again from this place.
-URL=https://bitbucket.org/multicoreware/x265/downloads/x265_2.5.tar.gz
+URL=https://bitbucket.org/multicoreware/x265/downloads/x265_2.6.tar.gz
 
 ##
 # PREFIX: Where the package is going to be installed. 
