@@ -2,7 +2,7 @@
 # URL: The place where the source code has been downloaded.
 # If you remove the package the installation tool will try to 
 # download it again from this place.
-URL=ftp://ftp.alsa-project.org/pub/utils/alsa-utils-1.1.4.tar.bz2
+URL=ftp://ftp.alsa-project.org/pub/utils/alsa-utils-1.1.5.tar.bz2
 
 ##
 # PREFIX: Where the package is going to be installed. 

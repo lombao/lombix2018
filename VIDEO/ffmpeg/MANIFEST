@@ -2,7 +2,7 @@
 # URL: The place where the source code has been downloaded.
 # If you remove the package the installation tool will try to 
 # download it again from this place.
-URL=http://ffmpeg.org/releases/ffmpeg-3.3.3.tar.xz
+URL=http://ffmpeg.org/releases/ffmpeg-3.4.2.tar.xz
 
 ##
 # PREFIX: Where the package is going to be installed. 
