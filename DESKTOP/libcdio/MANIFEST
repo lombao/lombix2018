@@ -2,7 +2,7 @@
 # URL: The place where the source code has been downloaded.
 # If you remove the package the installation tool will try to 
 # download it again from this place.
-URL=https://ftp.gnu.org/gnu/libcdio/libcdio-0.94.tar.gz
+URL=https://ftp.gnu.org/gnu/libcdio/libcdio-2.0.0.tar.gz
 
 ##
 # PREFIX: Where the package is going to be installed. 
