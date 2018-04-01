@@ -9,7 +9,7 @@ export CXXFLAGS=$CFLAGS
 	    --build=$LMBX_BUILD			\
 	    --with-zlib=/usr/pkgs/zlib		\
 	    --with-ssl-dir=/usr/pkgs/openssl	\
-	    --with-default-path="/usr/pkgs/openssh/bin:/usr/bin"	\
+	    --with-default-path="$PREFIX/bin:/usr/bin"	\
             --sysconfdir=$PREFIX/etc 		\
             --with-md5-passwords     		\
             --with-pie               		\
