@@ -1,0 +1,10 @@
+export LDFLAGS="-L/usr/pkgs/alsa/lib"
+export CFLAGS="-I/usr/pkgs/alsa/include"
+
+./configure --prefix=$PREFIX 	\
+        --enable-alsa		\
+	--disable-static 	\
+	--enable-sdl		\
+	--enable-sdl2		\
+	--with-sdl-prefix=/usr/pkgs/sdl
+
