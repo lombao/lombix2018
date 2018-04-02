@@ -2,7 +2,7 @@
 # URL: The place where the source code has been downloaded.
 # If you remove the package the installation tool will try to 
 # download it again from this place.
-URL=https://poppler.freedesktop.org/poppler-0.62.0.tar.xz
+URL=https://poppler.freedesktop.org/poppler-0.63.0.tar.xz
 
 ##
 # PREFIX: Where the package is going to be installed. 
