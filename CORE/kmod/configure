@@ -2,6 +2,10 @@ sed -i 's@/lib/modules@/usr/boot/modules@' libkmod/libkmod.c || exit 1
 sed -i 's@/lib/modules@/usr/boot/modules@' man/*.{8,5}  || exit 1
 sed -i 's@/lib/modules@/usr/boot/modules@' tools/*.c || exit 1
 
+# NOTE About python modules. The nice thing of this package is that 
+# automatically build the python modules for both python2 and python3 without
+# need of rerun it
+
 ./configure --prefix=$PREFIX 			\
 	    --build=$LMBX_BUILD			\
             --bindir=$PREFIX/bin          	\

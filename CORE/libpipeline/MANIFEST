@@ -2,7 +2,7 @@
 # URL: The place where the source code has been downloaded.
 # If you remove the package the installation tool will try to 
 # download it again from this place.
-URL=http://download.savannah.gnu.org/releases/libpipeline/libpipeline-1.4.2.tar.gz
+URL=http://download.savannah.gnu.org/releases/libpipeline/libpipeline-1.5.0.tar.gz
 
 ##
 # PREFIX: Where the package is going to be installed. 
