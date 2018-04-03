@@ -9,7 +9,7 @@
 	    --enable-Xnest				\
             --enable-suid-wrapper   			\
             --disable-systemd-logind 			\
-            --with-default-font-path=$FONTS_PATH 	\
+            --with-default-font-path=$FONTS_SHARE_PATH 	\
             --with-xkb-path=$PREFIX/share/xkb 		\
             --with-xkb-output=$PREFIX/share/xkb/compiled 
 
