@@ -1,6 +1,6 @@
 diff -Naur fluxbox-1.3.7.orig/configure fluxbox-1.3.7/configure
 --- fluxbox-1.3.7.orig/configure	2015-02-08 10:44:53.821187099 +0000
-+++ fluxbox-1.3.7/configure	2018-03-24 12:17:27.864735047 +0000
++++ fluxbox-1.3.7/configure	2018-04-03 19:36:22.289000000 +0000
 @@ -1535,13 +1535,13 @@
    --without-libiconv-prefix     don't search for libiconv in includedir and libdir
    --with-menu=path        location menu file (PREFIX/share/fluxbox/menu)
@@ -100,7 +100,7 @@ diff -Naur fluxbox-1.3.7.orig/configure fluxbox-1.3.7/configure
  
 diff -Naur fluxbox-1.3.7.orig/configure.ac fluxbox-1.3.7/configure.ac
 --- fluxbox-1.3.7.orig/configure.ac	2015-02-08 10:44:45.333187008 +0000
-+++ fluxbox-1.3.7/configure.ac	2018-03-24 12:17:27.868735047 +0000
++++ fluxbox-1.3.7/configure.ac	2018-04-03 19:36:22.291000000 +0000
 @@ -487,63 +487,63 @@
  
  dnl Various resource paths
@@ -184,7 +184,7 @@ diff -Naur fluxbox-1.3.7.orig/configure.ac fluxbox-1.3.7/configure.ac
  
 diff -Naur fluxbox-1.3.7.orig/data/init.in fluxbox-1.3.7/data/init.in
 --- fluxbox-1.3.7.orig/data/init.in	2015-02-08 10:44:45.333187008 +0000
-+++ fluxbox-1.3.7/data/init.in	2018-03-24 12:35:11.623813781 +0000
++++ fluxbox-1.3.7/data/init.in	2018-04-03 19:36:22.292000000 +0000
 @@ -1,7 +1,17 @@
  ! If you're looking for settings to configure, they won't be saved here until
  ! you change something in the fluxbox configuration menu.
@@ -207,7 +207,7 @@ diff -Naur fluxbox-1.3.7.orig/data/init.in fluxbox-1.3.7/data/init.in
 +
 diff -Naur fluxbox-1.3.7.orig/data/Makemodule.am fluxbox-1.3.7/data/Makemodule.am
 --- fluxbox-1.3.7.orig/data/Makemodule.am	2015-02-08 10:44:45.333187008 +0000
-+++ fluxbox-1.3.7/data/Makemodule.am	2018-03-24 12:17:27.876735048 +0000
++++ fluxbox-1.3.7/data/Makemodule.am	2018-04-03 19:36:22.294000000 +0000
 @@ -53,7 +53,7 @@
  data/menu:
  	env MENUFILENAME=$@ \
@@ -219,7 +219,7 @@ diff -Naur fluxbox-1.3.7.orig/data/Makemodule.am fluxbox-1.3.7/data/Makemodule.a
  		sh util/fluxbox-generate_menu
 diff -Naur fluxbox-1.3.7.orig/Makefile.in fluxbox-1.3.7/Makefile.in
 --- fluxbox-1.3.7.orig/Makefile.in	2015-02-08 10:44:52.545187086 +0000
-+++ fluxbox-1.3.7/Makefile.in	2018-03-24 12:17:27.881735048 +0000
++++ fluxbox-1.3.7/Makefile.in	2018-04-03 19:36:22.305000000 +0000
 @@ -95,7 +95,7 @@
    test $$has_opt = yes
  am__make_dryrun = (target_option=n; $(am__make_running_with_option))
@@ -231,7 +231,7 @@ diff -Naur fluxbox-1.3.7.orig/Makefile.in fluxbox-1.3.7/Makefile.in
  pkglibexecdir = $(libexecdir)/@PACKAGE@
 diff -Naur fluxbox-1.3.7.orig/src/cli_options.cc fluxbox-1.3.7/src/cli_options.cc
 --- fluxbox-1.3.7.orig/src/cli_options.cc	2015-02-08 10:44:45.377187009 +0000
-+++ fluxbox-1.3.7/src/cli_options.cc	2018-03-24 12:17:27.884735049 +0000
++++ fluxbox-1.3.7/src/cli_options.cc	2018-04-03 19:36:22.307000000 +0000
 @@ -48,7 +48,7 @@
          session_display.assign(env);
      }
@@ -243,7 +243,7 @@ diff -Naur fluxbox-1.3.7.orig/src/cli_options.cc fluxbox-1.3.7/src/cli_options.c
      if (!rc_path.empty()) {
 diff -Naur fluxbox-1.3.7.orig/src/FbCommands.cc fluxbox-1.3.7/src/FbCommands.cc
 --- fluxbox-1.3.7.orig/src/FbCommands.cc	2015-02-08 10:44:45.353187009 +0000
-+++ fluxbox-1.3.7/src/FbCommands.cc	2018-03-24 12:17:27.888735049 +0000
++++ fluxbox-1.3.7/src/FbCommands.cc	2018-04-03 19:36:22.309000000 +0000
 @@ -153,7 +153,7 @@
      // this process exits immediately, so we don't have to worry about memleaks
      const char *shell = getenv("SHELL");
@@ -255,7 +255,7 @@ diff -Naur fluxbox-1.3.7.orig/src/FbCommands.cc fluxbox-1.3.7/src/FbCommands.cc
      execl(shell, shell, "-c", m_cmd.c_str(), static_cast<void*>(NULL));
 diff -Naur fluxbox-1.3.7.orig/src/main.cc fluxbox-1.3.7/src/main.cc
 --- fluxbox-1.3.7.orig/src/main.cc	2015-02-08 10:44:45.377187009 +0000
-+++ fluxbox-1.3.7/src/main.cc	2018-03-24 12:17:27.892735049 +0000
++++ fluxbox-1.3.7/src/main.cc	2018-04-03 19:36:22.311000000 +0000
 @@ -270,7 +270,7 @@
          if (!restart_argument.empty()) {
              const char *shell = getenv("SHELL");
@@ -267,7 +267,7 @@ diff -Naur fluxbox-1.3.7.orig/src/main.cc fluxbox-1.3.7/src/main.cc
              perror(restart_argument.c_str());
 diff -Naur fluxbox-1.3.7.orig/util/fbrun/main.cc fluxbox-1.3.7/util/fbrun/main.cc
 --- fluxbox-1.3.7.orig/util/fbrun/main.cc	2015-02-08 10:44:45.377187009 +0000
-+++ fluxbox-1.3.7/util/fbrun/main.cc	2018-03-24 12:17:27.895735049 +0000
++++ fluxbox-1.3.7/util/fbrun/main.cc	2018-04-03 19:36:22.313000000 +0000
 @@ -64,7 +64,7 @@
          "   -fg [color name]            Foreground text color"<<endl<<
          "   -bg [color name]            Background color"<<endl<<
@@ -288,7 +288,7 @@ diff -Naur fluxbox-1.3.7.orig/util/fbrun/main.cc fluxbox-1.3.7/util/fbrun/main.c
          string arg = argv[i];
 diff -Naur fluxbox-1.3.7.orig/util/fbsetbg fluxbox-1.3.7/util/fbsetbg
 --- fluxbox-1.3.7.orig/util/fbsetbg	2015-02-08 10:44:45.377187009 +0000
-+++ fluxbox-1.3.7/util/fbsetbg	2018-03-24 12:17:27.899735050 +0000
++++ fluxbox-1.3.7/util/fbsetbg	2018-04-03 19:36:22.315000000 +0000
 @@ -1,8 +1,11 @@
 -#!/bin/sh
 +#!/usr/pkgs/bash/bin/bash
@@ -390,7 +390,7 @@ diff -Naur fluxbox-1.3.7.orig/util/fbsetbg fluxbox-1.3.7/util/fbsetbg
  esac
 diff -Naur fluxbox-1.3.7.orig/util/fluxbox-generate_menu.in fluxbox-1.3.7/util/fluxbox-generate_menu.in
 --- fluxbox-1.3.7.orig/util/fluxbox-generate_menu.in	2015-02-08 10:44:45.377187009 +0000
-+++ fluxbox-1.3.7/util/fluxbox-generate_menu.in	2018-03-24 12:47:36.602868920 +0000
++++ fluxbox-1.3.7/util/fluxbox-generate_menu.in	2018-04-03 19:40:31.785000000 +0000
 @@ -1,4 +1,4 @@
 -#!/bin/sh
 +#!/usr/pkgs/bash/bin/bash
@@ -821,8 +821,8 @@ diff -Naur fluxbox-1.3.7.orig/util/fluxbox-generate_menu.in fluxbox-1.3.7/util/f
 +
 +
 +append_submenu "${MULTIMEDIAMENU}"
-+    normal_find xmms noatun alsaplayer gqmpeg aumix xmixer gnome-alsamixer gmix kmix kscd grecord kmidi xplaycd soundtracker grip easytag audacity \
-+                zinf rhythmbox kaboodle beep-media-player amarok tagtool audacious bmpx normal_find xine gxine aviplay gtv gmplayer xmovie xcdroast xgdb \
++    normal_find xmms noatun alsaplayer gqmpeg aumix xmixer gmix grecord kmidi xplaycd soundtracker grip easytag audacity \
++                zinf rhythmbox kaboodle beep-media-player tagtool audacious bmpx xine gxine aviplay gtv gmplayer xmovie xcdroast xgdb \
 +                xawtv fxtv ogle goggles vlc
 +    cli_find cdcd cplay alsamixer orpheus mp3blaster
 +    find_it dvdrip append "[exec] (dvdrip) {nohup dvdrip}"
@@ -1029,7 +1029,7 @@ diff -Naur fluxbox-1.3.7.orig/util/fluxbox-generate_menu.in fluxbox-1.3.7/util/f
      append "[commanddialog] (${FLUXBOXCOMMAND})"
 diff -Naur fluxbox-1.3.7.orig/util/fluxbox-update_configs.cc fluxbox-1.3.7/util/fluxbox-update_configs.cc
 --- fluxbox-1.3.7.orig/util/fluxbox-update_configs.cc	2015-02-08 10:44:45.381187009 +0000
-+++ fluxbox-1.3.7/util/fluxbox-update_configs.cc	2018-03-24 12:17:27.906735050 +0000
++++ fluxbox-1.3.7/util/fluxbox-update_configs.cc	2018-04-03 19:36:22.322000000 +0000
 @@ -99,7 +99,7 @@
  void update_move_groups_entries_to_apps_file(FbTk::ResourceManager& rm,
          const FbTk::FbString& keyfilename, const FbTk::FbString& appsfilename) {
@@ -1062,7 +1062,7 @@ diff -Naur fluxbox-1.3.7.orig/util/fluxbox-update_configs.cc fluxbox-1.3.7/util/
      if (!resource_manager.load(rc_filename.c_str())) {
 diff -Naur fluxbox-1.3.7.orig/util/startfluxbox.in fluxbox-1.3.7/util/startfluxbox.in
 --- fluxbox-1.3.7.orig/util/startfluxbox.in	2015-02-08 10:44:45.381187009 +0000
-+++ fluxbox-1.3.7/util/startfluxbox.in	2018-03-24 12:17:27.910735051 +0000
++++ fluxbox-1.3.7/util/startfluxbox.in	2018-04-03 19:36:22.332000000 +0000
 @@ -1,7 +1,7 @@
 -#!/bin/sh
 +#!/usr/pkgs/bash/bin/bash
