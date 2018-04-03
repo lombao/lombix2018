@@ -40,7 +40,7 @@ case "${1}" in
             continue
          fi
 
-         /usr/pkgs/lombix-base/bin/ifup ${interface}
+         /usr/pkgs/lombix-utils/bin/ifup ${interface}
       done
       ;;
 
@@ -63,7 +63,7 @@ case "${1}" in
             continue
          fi
 
-         /usr/pkgs/lombix-base/bin/ifdown ${interface}
+         /usr/pkgs/lombix-utils/bin/ifdown ${interface}
       done
       ;;
 
