@@ -1,0 +1,17 @@
+diff -Naur firefox-58.0.2.orig/browser/app/profile/firefox.js firefox-58.0.2/browser/app/profile/firefox.js
+--- firefox-58.0.2.orig/browser/app/profile/firefox.js	2018-01-17 12:14:57.000000000 +0000
++++ firefox-58.0.2/browser/app/profile/firefox.js	2018-04-06 21:54:54.783542960 +0000
+@@ -1103,10 +1103,10 @@
+ //
+ // This setting may not be required anymore once we decide to permanently
+ // enable the content sandbox.
+-pref("security.sandbox.content.level", 3);
++pref("security.sandbox.content.level", 2);
+ pref("security.sandbox.content.write_path_whitelist", "");
+-pref("security.sandbox.content.read_path_whitelist", "");
+-pref("security.sandbox.content.syscall_whitelist", "");
++pref("security.sandbox.content.read_path_whitelist", "/dev/snd");
++pref("security.sandbox.content.syscall_whitelist", "16");
+ #endif
+ 
+ #if defined(XP_MACOSX) || defined(XP_WIN)
