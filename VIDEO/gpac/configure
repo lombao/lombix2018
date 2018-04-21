@@ -1,0 +1,11 @@
+export LDFLAGS="-L/usr/pkgs/faad2/lib -L/usr/pkgs/xvid/lib -L/usr/pkgs/openjpeg/lib -L/usr/pkgs/liba52/lib -L/usr/pkgs/libmad/lib -L/usr/pkgs/libogg/lib"
+export CFLAGS="-I/usr/pkgs/faad2/include -I/usr/pkgs/xvid/include -I/usr/pkgs/openjpeg/include -I/usr/pkgs/liba52/include -I/usr/pkgs/libmad/include -I/usr/pkgs/libogg/include"
+
+
+./configure --prefix=$PREFIX 		\
+	--build=$LMBX_BUILD		\
+	--X11-path=/usr/pkgs/X11	\
+	--extra-cflags=$CFLAGS		\
+	--extra-ldflags=$LDFLAGS
+
+

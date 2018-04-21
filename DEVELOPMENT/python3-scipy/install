@@ -1,0 +1,2 @@
+cd $(ls -A)
+python3 setup.py install

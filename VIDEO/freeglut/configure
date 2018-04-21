@@ -1,0 +1,9 @@
+mkdir build            || exit 1
+cd    build            || exit 1
+
+
+cmake -DCMAKE_INSTALL_PREFIX=$PREFIX		\
+	-DCMAKE_BUILD_TYPE=Release		\
+	-DFREEGLUT_BUILD_DEMOS=OFF		\
+	-DFREEGLUT_BUILD_STATIC_LIBS=OFF	\
+	.. 
