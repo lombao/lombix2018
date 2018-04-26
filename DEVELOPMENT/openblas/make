@@ -1,1 +1,19 @@
-make
+# If we compile within a QEMU we should force PRESCOTT
+# because the cpu detection in the openBLAS does not 
+# correctly figure out the standard default QEMU CPU
+
+# Obviously, if this is recompiled in a more powerful
+# CPU then it should be used a different target or simply
+# let the openBLAS to detect the CPU
+
+
+
+grep -c "QEMU Virtual CPU" /proc/cpuinfo > /dev/null
+
+if [ "$?" == "0" ]
+then
+ make TARGET=PRESCOTT
+else
+ make
+fi
+
