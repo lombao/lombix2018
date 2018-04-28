@@ -14,7 +14,7 @@ PREFIX=/usr/pkgs/python3
 # the source code into the credits area. The installer will automatically
 # try to copy a wide range of files but if you want any particular file to 
 # added , just write it here
-CREDITS="COPYING COPYING-LGPL-2.1 COPYING-MPL-1.1"
+CREDITS="LICENSE.txt THANKS.txt"
 
 
 ##
