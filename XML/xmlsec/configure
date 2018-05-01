@@ -1,0 +1,12 @@
+./configure --prefix=$PREFIX 		\
+		--build=$LMBX_BUILD	\
+		--enable-pkgconfig	\
+		--with-libxml=/usr/pkgs/xml	\
+		--with-libxslt=/usr/pkgs/xml	\
+		--with-nss=/usr/pkgs/nss	\
+		--with-nspr=/usr/pkgs/nspr	\
+		--with-gcrypt=/usr/pkgs/gnupg	\
+		--with-gnutls=/usr/pkgs/gnutls		
+
+
+

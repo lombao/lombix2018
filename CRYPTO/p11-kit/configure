@@ -1,0 +1,7 @@
+./configure --prefix=$PREFIX 			\
+	--build=$LMBX_BUILD			\
+	--sysconfdir=$PREFIX/etc		\
+	--with-trust-paths=$PREFIX/etc/pki/anchors
+
+
+
