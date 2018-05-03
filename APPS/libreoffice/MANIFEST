@@ -2,7 +2,7 @@
 # URL: The place where the source code has been downloaded.
 # If you remove the package the installation tool will try to 
 # download it again from this place.
-URL=http://download.documentfoundation.org/libreoffice/src/6.0.1/libreoffice-6.0.1.1.tar.xz
+URL=http://download.documentfoundation.org/libreoffice/src/6.0.3/libreoffice-6.0.3.2.tar.xz
 
 ##
 # PREFIX: Where the package is going to be installed. 

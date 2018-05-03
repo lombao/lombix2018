@@ -1,10 +1,18 @@
+#
+# NOTE: I cannot use system-clucene because the installation in lomibx does not use
+# the contribs-libs ( it is missing ) 
+
+
 export LO_PREFIX=$PREFIX
+
+
 
 
 sed -e "/distro-install-file-lists/d" -i Makefile.in || exit 1
 
 export LDFLAGS="-L/usr/pkgs/gnupg/lib 		\
-	-L/usr/pkgs/gnupg/lib			\
+        -L/usr/pkgs/xml/lib			\
+        -L/usr/pkgs/gnutls/lib			\
 	-L/usr/pkgs/harfbuzz/lib		\
 	-L/usr/pkgs/boost/lib 			\
 	-L/usr/pkgs/cups/lib 			\
@@ -12,11 +20,13 @@ export LDFLAGS="-L/usr/pkgs/gnupg/lib 		\
 	-L/usr/pkgs/openssl/lib 		\
 	-L/usr/pkgs/servers/openldap/lib 	\
 	-L/usr/pkgs/nss/lib 			\
+        -L/usr/pkgs/clucene/lib			\
 	-L/usr/pkgs/icu/lib"
 
 export CFLAGS="-I/usr/pkgs/gnupg/include 	\
-	-I/usr/pkgs/gnupg/include		\
 	-I/usr/pkgs/gnupg/include/gpgme++	\
+	-I/usr/pkgs/gnutls/include		\
+	-I/usr/pkgs/xml/include			\
 	-I/usr/pkgs/boost/include		\
 	-I/usr/pkgs/harfbuzz/include		\
 	-I/usr/pkgs/cups/include 		\
@@ -25,13 +35,14 @@ export CFLAGS="-I/usr/pkgs/gnupg/include 	\
 	-I/usr/pkgs/servers/openldap/include 	\
 	-I/usr/pkgs/nss/include 		\
 	-I/usr/pkgs/nss/include/nss 		\
+	-I/usr/pkgs/clucene/include		\
 	-I/usr/pkgs/icu/include"
 
 export CXXFLAGS=$CFLAGS
 export CPPFLAGS=$CFLAGS
 
 
-export GPGMEPP_CFLAGS="-I/usr/pkgs/gnupg/include/gpgme++"
+#export GPGMEPP_CFLAGS="-I/usr/pkgs/gnupg/include/gpgme++"
 
 unset PREFIX
 ./autogen.sh --prefix=$LO_PREFIX         	\
@@ -51,6 +62,9 @@ unset PREFIX
              --x-includes=/usr/pkgs/X11/incldue \
 	     --x-libraries=/usr/pkgs/X11/lib    \
 	     --with-boost=/usr/pkgs/boost	\
+             --with-libgcrypt-prefix=/usr/pkgs/gnupg \
+             --with-system-apr			\
+	     --with-system-gpgmepp		\
              --with-system-cairo         	\
  	     --with-system-openldap	 	\
              --with-system-curl          	\
@@ -63,6 +77,7 @@ unset PREFIX
              --with-system-libpng        	\
 	     --with-system-libatomic_ops 	\
              --with-system-libxml        	\
+	     --with-system-xmlsec		\
              --with-system-neon          	\
              --with-system-nss           	\
              --with-system-openssl       	\
