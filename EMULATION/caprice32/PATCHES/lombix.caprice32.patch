@@ -1,0 +1,87 @@
+diff -Naur caprice32-20180504.orig/cap32.cfg caprice32-20180504/cap32.cfg
+--- caprice32-20180504.orig/cap32.cfg	2018-03-05 10:04:31.000000000 +0000
++++ caprice32-20180504/cap32.cfg	2018-05-04 17:18:47.122541381 +0000
+@@ -50,7 +50,7 @@
+ joystick_vkeyboard_button=10
+ # resources_path
+ #   path to resources (menu images...)
+-resources_path=/usr/local/share/caprice32/resources
++resources_path=/usr/pkgs/emulation/caprice32/share/resources
+ # boot_time
+ #   Estimated time in video frames the CPC takes to boot.
+ #   Caprice will emulate this number of frames before starting to send a provided autocmd.
+@@ -149,10 +149,10 @@
+ 
+ [file]
+ max_track_size=5990
+-cart_path=./cart/
+-snap_path=./snap/
+-dsk_path=./disk/
+-tape_path=./tape/
++cart_path=./config/caprice32/cart/
++snap_path=./config/caprice32/snap/
++dsk_path=./config/caprice32/disk/
++tape_path=./config/caprice32/tape/
+ fmt02=
+ fmt03=
+ fmt04=
+@@ -161,13 +161,13 @@
+ fmt07=
+ # printer_file
+ #   Path to output printer stream
+-printer_file=./printer.dat
++printer_file=./config/caprice32/printer.dat
+ # sdump_dir
+ #   Directory where screenshots will be found
+-sdump_dir=./screenshots
++sdump_dir=./config/caprice32/screenshots
+ 
+ [rom]
+-rom_path=/usr/local/share/caprice32/rom
++rom_path=/usr/pkgs/emulation/caprice32/share/rom
+ slot00=
+ slot01=
+ slot02=
+diff -Naur caprice32-20180504.orig/makefile caprice32-20180504/makefile
+--- caprice32-20180504.orig/makefile	2018-03-05 10:04:31.000000000 +0000
++++ caprice32-20180504/makefile	2018-05-04 17:22:25.838534919 +0000
+@@ -50,7 +50,7 @@
+ LIBS += $(MINGW_PATH)/bin/$(CAPSIPFDLL)
+ endif
+ else
+-prefix = /usr/local
++prefix = /usr/pkgs/caprice32
+ TARGET = cap32
+ TEST_TARGET = test_runner
+ IPATHS = -Isrc/ -Isrc/gui/includes `freetype-config --cflags` `sdl-config --cflags` `pkg-config --cflags libpng`
+@@ -203,11 +203,11 @@
+ 	ln -s caprice32-$(VERSION).tar.bz2 $(ARCHIVE)/caprice32_$(VERSION).orig.tar.bz2 || true
+ 
+ install: $(TARGET)
++	mkdir -p $(DESTDIR)$(prefix)/share
+ 	install -D $(TARGET) $(DESTDIR)$(prefix)/bin/$(TARGET)
+ 	install -D $(GROFF_DOC) $(DESTDIR)$(prefix)/share/man/man6/cap32.6
+-	install -D -m664 cap32.cfg $(DESTDIR)/etc/cap32.cfg
+-	mkdir -p $(DESTDIR)$(prefix)/share/caprice32
+-	cp -r resources rom $(DESTDIR)$(prefix)/share/caprice32
++	install -D -m664 cap32.cfg $(DESTDIR)$(prefix)/etc/cap32.cfg
++	cp -r resources rom $(DESTDIR)$(prefix)/share
+ endif
+ 
+ ####################################
+diff -Naur caprice32-20180504.orig/src/cap32.cpp caprice32-20180504/src/cap32.cpp
+--- caprice32-20180504.orig/src/cap32.cpp	2018-03-05 10:04:31.000000000 +0000
++++ caprice32-20180504/src/cap32.cpp	2018-05-04 17:18:47.123541381 +0000
+@@ -1574,10 +1574,10 @@
+      configFilename = std::string(chAppPath) + "/cap32.cfg";
+      // If not found, look for .cap32.cfg in the home of current user
+      if (access(configFilename.c_str(), F_OK) != 0) {
+-        configFilename = std::string(getenv("HOME")) + "/.cap32.cfg";
++        configFilename = std::string(getenv("HOME")) + "/.config/caprice32/cap32.cfg";
+         // If still not found, look for cap32.cfg in /etc
+         if (!forWrite && access(configFilename.c_str(), F_OK) != 0) {
+-           configFilename = "/etc/cap32.cfg";
++           configFilename = "/usr/pkgs/emulation/caprice32/etc/cap32.cfg";
+         }
+      }
+   }

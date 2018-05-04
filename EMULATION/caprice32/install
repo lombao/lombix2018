@@ -1,0 +1,11 @@
+make install
+
+#cd caprice32-master
+#mkdir -pv $PREFIX/bin
+#cp cap32 $PREFIX/bin
+#chmod 755 $PREFIX/bin/cap32
+#mkdir -pv $PREFIX/etc
+#cp cap32.cfg $PREFIX/etc
+#mkdir -pv $PREFIX/share
+#cp -Rp rom $PREFIX/share
+

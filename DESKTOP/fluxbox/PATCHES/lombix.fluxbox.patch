@@ -1,6 +1,6 @@
 diff -Naur fluxbox-1.3.7.orig/configure fluxbox-1.3.7/configure
 --- fluxbox-1.3.7.orig/configure	2015-02-08 10:44:53.821187099 +0000
-+++ fluxbox-1.3.7/configure	2018-05-03 17:36:32.232535332 +0000
++++ fluxbox-1.3.7/configure	2018-05-04 17:43:01.609498406 +0000
 @@ -1535,13 +1535,13 @@
    --without-libiconv-prefix     don't search for libiconv in includedir and libdir
    --with-menu=path        location menu file (PREFIX/share/fluxbox/menu)
@@ -100,7 +100,7 @@ diff -Naur fluxbox-1.3.7.orig/configure fluxbox-1.3.7/configure
  
 diff -Naur fluxbox-1.3.7.orig/configure.ac fluxbox-1.3.7/configure.ac
 --- fluxbox-1.3.7.orig/configure.ac	2015-02-08 10:44:45.333187008 +0000
-+++ fluxbox-1.3.7/configure.ac	2018-05-03 17:36:32.239535332 +0000
++++ fluxbox-1.3.7/configure.ac	2018-05-04 17:43:01.609498406 +0000
 @@ -487,63 +487,63 @@
  
  dnl Various resource paths
@@ -184,7 +184,7 @@ diff -Naur fluxbox-1.3.7.orig/configure.ac fluxbox-1.3.7/configure.ac
  
 diff -Naur fluxbox-1.3.7.orig/data/init.in fluxbox-1.3.7/data/init.in
 --- fluxbox-1.3.7.orig/data/init.in	2015-02-08 10:44:45.333187008 +0000
-+++ fluxbox-1.3.7/data/init.in	2018-05-03 17:36:32.241535332 +0000
++++ fluxbox-1.3.7/data/init.in	2018-05-04 17:43:01.610498406 +0000
 @@ -1,7 +1,17 @@
  ! If you're looking for settings to configure, they won't be saved here until
  ! you change something in the fluxbox configuration menu.
@@ -207,7 +207,7 @@ diff -Naur fluxbox-1.3.7.orig/data/init.in fluxbox-1.3.7/data/init.in
 +
 diff -Naur fluxbox-1.3.7.orig/data/Makemodule.am fluxbox-1.3.7/data/Makemodule.am
 --- fluxbox-1.3.7.orig/data/Makemodule.am	2015-02-08 10:44:45.333187008 +0000
-+++ fluxbox-1.3.7/data/Makemodule.am	2018-05-03 17:36:32.245535332 +0000
++++ fluxbox-1.3.7/data/Makemodule.am	2018-05-04 17:43:01.610498406 +0000
 @@ -53,7 +53,7 @@
  data/menu:
  	env MENUFILENAME=$@ \
@@ -219,7 +219,7 @@ diff -Naur fluxbox-1.3.7.orig/data/Makemodule.am fluxbox-1.3.7/data/Makemodule.a
  		sh util/fluxbox-generate_menu
 diff -Naur fluxbox-1.3.7.orig/Makefile.in fluxbox-1.3.7/Makefile.in
 --- fluxbox-1.3.7.orig/Makefile.in	2015-02-08 10:44:52.545187086 +0000
-+++ fluxbox-1.3.7/Makefile.in	2018-05-03 17:36:32.253535332 +0000
++++ fluxbox-1.3.7/Makefile.in	2018-05-04 17:43:01.612498406 +0000
 @@ -95,7 +95,7 @@
    test $$has_opt = yes
  am__make_dryrun = (target_option=n; $(am__make_running_with_option))
@@ -231,7 +231,7 @@ diff -Naur fluxbox-1.3.7.orig/Makefile.in fluxbox-1.3.7/Makefile.in
  pkglibexecdir = $(libexecdir)/@PACKAGE@
 diff -Naur fluxbox-1.3.7.orig/src/cli_options.cc fluxbox-1.3.7/src/cli_options.cc
 --- fluxbox-1.3.7.orig/src/cli_options.cc	2015-02-08 10:44:45.377187009 +0000
-+++ fluxbox-1.3.7/src/cli_options.cc	2018-05-03 17:36:32.261535332 +0000
++++ fluxbox-1.3.7/src/cli_options.cc	2018-05-04 17:43:01.612498406 +0000
 @@ -48,7 +48,7 @@
          session_display.assign(env);
      }
@@ -243,7 +243,7 @@ diff -Naur fluxbox-1.3.7.orig/src/cli_options.cc fluxbox-1.3.7/src/cli_options.c
      if (!rc_path.empty()) {
 diff -Naur fluxbox-1.3.7.orig/src/FbCommands.cc fluxbox-1.3.7/src/FbCommands.cc
 --- fluxbox-1.3.7.orig/src/FbCommands.cc	2015-02-08 10:44:45.353187009 +0000
-+++ fluxbox-1.3.7/src/FbCommands.cc	2018-05-03 17:36:32.263535332 +0000
++++ fluxbox-1.3.7/src/FbCommands.cc	2018-05-04 17:43:01.613498406 +0000
 @@ -153,7 +153,7 @@
      // this process exits immediately, so we don't have to worry about memleaks
      const char *shell = getenv("SHELL");
@@ -255,7 +255,7 @@ diff -Naur fluxbox-1.3.7.orig/src/FbCommands.cc fluxbox-1.3.7/src/FbCommands.cc
      execl(shell, shell, "-c", m_cmd.c_str(), static_cast<void*>(NULL));
 diff -Naur fluxbox-1.3.7.orig/src/main.cc fluxbox-1.3.7/src/main.cc
 --- fluxbox-1.3.7.orig/src/main.cc	2015-02-08 10:44:45.377187009 +0000
-+++ fluxbox-1.3.7/src/main.cc	2018-05-03 17:36:32.266535332 +0000
++++ fluxbox-1.3.7/src/main.cc	2018-05-04 17:43:01.613498406 +0000
 @@ -270,7 +270,7 @@
          if (!restart_argument.empty()) {
              const char *shell = getenv("SHELL");
@@ -267,7 +267,7 @@ diff -Naur fluxbox-1.3.7.orig/src/main.cc fluxbox-1.3.7/src/main.cc
              perror(restart_argument.c_str());
 diff -Naur fluxbox-1.3.7.orig/util/fbrun/main.cc fluxbox-1.3.7/util/fbrun/main.cc
 --- fluxbox-1.3.7.orig/util/fbrun/main.cc	2015-02-08 10:44:45.377187009 +0000
-+++ fluxbox-1.3.7/util/fbrun/main.cc	2018-05-03 17:36:32.270535332 +0000
++++ fluxbox-1.3.7/util/fbrun/main.cc	2018-05-04 17:43:01.613498406 +0000
 @@ -64,7 +64,7 @@
          "   -fg [color name]            Foreground text color"<<endl<<
          "   -bg [color name]            Background color"<<endl<<
@@ -288,7 +288,7 @@ diff -Naur fluxbox-1.3.7.orig/util/fbrun/main.cc fluxbox-1.3.7/util/fbrun/main.c
          string arg = argv[i];
 diff -Naur fluxbox-1.3.7.orig/util/fbsetbg fluxbox-1.3.7/util/fbsetbg
 --- fluxbox-1.3.7.orig/util/fbsetbg	2015-02-08 10:44:45.377187009 +0000
-+++ fluxbox-1.3.7/util/fbsetbg	2018-05-03 17:36:32.274535332 +0000
++++ fluxbox-1.3.7/util/fbsetbg	2018-05-04 17:43:01.614498406 +0000
 @@ -1,8 +1,11 @@
 -#!/bin/sh
 +#!/usr/pkgs/bash/bin/bash
@@ -390,7 +390,7 @@ diff -Naur fluxbox-1.3.7.orig/util/fbsetbg fluxbox-1.3.7/util/fbsetbg
  esac
 diff -Naur fluxbox-1.3.7.orig/util/fluxbox-generate_menu.in fluxbox-1.3.7/util/fluxbox-generate_menu.in
 --- fluxbox-1.3.7.orig/util/fluxbox-generate_menu.in	2015-02-08 10:44:45.377187009 +0000
-+++ fluxbox-1.3.7/util/fluxbox-generate_menu.in	2018-05-03 17:44:38.965535332 +0000
++++ fluxbox-1.3.7/util/fluxbox-generate_menu.in	2018-05-04 19:08:56.123346107 +0000
 @@ -1,4 +1,4 @@
 -#!/bin/sh
 +#!/usr/pkgs/bash/bin/bash
@@ -461,9 +461,11 @@ diff -Naur fluxbox-1.3.7.orig/util/fluxbox-generate_menu.in fluxbox-1.3.7/util/f
  
  # Check for Imlib2-support
  if @pkgprefix@fluxbox@pkgsuffix@@EXEEXT@ -info 2> /dev/null | grep -q "^IMLIB"; then
-@@ -586,9 +583,7 @@
+@@ -585,10 +582,9 @@
+ FBSETTINGSMENU='Fluxbox menu'
  FILEUTILSMENU='File utils'
  FLUXBOXCOMMAND='Fluxbox Command'
++EMULATION='Emulation'
  GAMESMENU='Games'
 -GNOMEMENUTEXT='Gnome-menus'
  GRAPHICMENU='Graphics'
@@ -471,7 +473,7 @@ diff -Naur fluxbox-1.3.7.orig/util/fluxbox-generate_menu.in fluxbox-1.3.7/util/f
  LOCKSCREEN='Lock screen'
  MISCMENU='Misc'
  MULTIMEDIAMENU='Multimedia'
-@@ -636,9 +631,7 @@
+@@ -636,9 +632,7 @@
          FILEUTILSMENU='æÁÊÌÏ×ÙÅ ÕÔÉÌÉÔÙ'
          FLUXBOXCOMMAND='÷ÙÐÏÌÎÉÔØ ËÏÍÁÎÄÕ'
          GAMESMENU='éÇÒÙ'
@@ -481,7 +483,7 @@ diff -Naur fluxbox-1.3.7.orig/util/fluxbox-generate_menu.in fluxbox-1.3.7/util/f
          LOCKSCREEN='úÁÂÌÏËÉÒÏ×ÁÔØ ÜËÒÁÎ'
          MISCMENU='ðÒÏÞÅÅ'
          MUSICMENU='ú×ÕË'
-@@ -677,9 +670,7 @@
+@@ -677,9 +671,7 @@
          FILEUTILSMENU='Souborové utility'
          FLUXBOXCOMMAND='Pøíkaz Fluxboxu'
          GAMESMENU='Hry'
@@ -491,7 +493,7 @@ diff -Naur fluxbox-1.3.7.orig/util/fluxbox-generate_menu.in fluxbox-1.3.7/util/f
          LOCKSCREEN='Zamknout obrazovku'
          MISCMENU='Rùzné'
          MULTIMEDIAMENU='Multimédia'
-@@ -720,9 +711,7 @@
+@@ -720,9 +712,7 @@
          FILEUTILSMENU='Datei-Utilities'
          FLUXBOXCOMMAND='Fluxbox Befehl'
          GAMESMENU='Spiele'
@@ -501,7 +503,7 @@ diff -Naur fluxbox-1.3.7.orig/util/fluxbox-generate_menu.in fluxbox-1.3.7/util/f
          LOCKSCREEN='Bildschirmsperre'
          MISCMENU='Sonstiges'
          MUSICMENU='Musik'
-@@ -763,9 +752,7 @@
+@@ -763,9 +753,7 @@
          FILEUTILSMENU='Filverktyg'
          FLUXBOXCOMMAND='Fluxbox kommando'
          GAMESMENU='Spel'
@@ -511,7 +513,7 @@ diff -Naur fluxbox-1.3.7.orig/util/fluxbox-generate_menu.in fluxbox-1.3.7/util/f
          LOCKSCREEN='Lås skärm'
          MISCMENU='Blandat'
          MULTIMEDIAMENU='Multimedia'
-@@ -803,9 +790,7 @@
+@@ -803,9 +791,7 @@
          FILEUTILSMENU='Verkenners'
          FLUXBOXCOMMAND='Fluxbox Commando'
          GAMESMENU='Spelletjes'
@@ -521,7 +523,7 @@ diff -Naur fluxbox-1.3.7.orig/util/fluxbox-generate_menu.in fluxbox-1.3.7/util/f
          LOCKSCREEN='Scherm op slot'
          MISCMENU='Onregelmatig'
          MUSICMENU='Muziek'
-@@ -843,9 +828,7 @@
+@@ -843,9 +829,7 @@
          FILEUTILSMENU='Tiedostotyökalut'
          FLUXBOXCOMMAND='Fluxbox komentorivi'
          GAMESMENU='Pelit'
@@ -531,7 +533,7 @@ diff -Naur fluxbox-1.3.7.orig/util/fluxbox-generate_menu.in fluxbox-1.3.7/util/f
          LOCKSCREEN='Lukitse näyttö'
          MISCMENU='Sekalaista'
          MUSICMENU='Musiikki'
-@@ -886,9 +869,7 @@
+@@ -886,9 +870,7 @@
          FILEUTILSMENU='¥Õ¥¡¥¤¥ëÁàºî'
          FLUXBOXCOMMAND='Fluxbox¥³¥Þ¥ó¥É'
          GAMESMENU='¥²¡¼¥à'
@@ -541,7 +543,7 @@ diff -Naur fluxbox-1.3.7.orig/util/fluxbox-generate_menu.in fluxbox-1.3.7/util/f
          LOCKSCREEN='¥¹¥¯¥ê¡¼¥ó¥í¥Ã¥¯'
          MISCMENU='¤¤¤í¤¤¤í'
          MUSICMENU='²»³Ú'
-@@ -930,9 +911,7 @@
+@@ -930,9 +912,7 @@
          FILEUTILSMENU='Outils fichiers'
          FLUXBOXCOMMAND='Commande Fluxbox'
          GAMESMENU='Jeux'
@@ -551,7 +553,7 @@ diff -Naur fluxbox-1.3.7.orig/util/fluxbox-generate_menu.in fluxbox-1.3.7/util/f
          LOCKSCREEN="Verrouiller l'écran"
          MISCMENU='Divers'
          MULTIMEDIAMENU='Multimédia'
-@@ -971,9 +950,7 @@
+@@ -971,9 +951,7 @@
          FILEUTILSMENU='Utilità'
          FLUXBOXCOMMAND='Comando Fluxbox'
          GAMESMENU='Giochi'
@@ -561,7 +563,7 @@ diff -Naur fluxbox-1.3.7.orig/util/fluxbox-generate_menu.in fluxbox-1.3.7/util/f
          LOCKSCREEN='Blocca lo schermo'
          MISCMENU='Varie'
          MUSICMENU='Musica'
-@@ -1014,9 +991,7 @@
+@@ -1014,9 +992,7 @@
          FILEUTILSMENU='Utilitare de fisier'
          FLUXBOXCOMMAND='Comanda Fluxbox'
          GAMESMENU='Jocuri'
@@ -571,7 +573,7 @@ diff -Naur fluxbox-1.3.7.orig/util/fluxbox-generate_menu.in fluxbox-1.3.7/util/f
          LOCKSCREEN='Incuie ecranul'
          MISCMENU='Diverse'
          MULTIMEDIAMENU='Multimedia'
-@@ -1056,9 +1031,7 @@
+@@ -1056,9 +1032,7 @@
          FILEUTILSMENU='Utilidades'
          FLUXBOXCOMMAND='Comandos de Fluxbox'
          GAMESMENU='Juegos'
@@ -581,7 +583,7 @@ diff -Naur fluxbox-1.3.7.orig/util/fluxbox-generate_menu.in fluxbox-1.3.7/util/f
          LOCKSCREEN='Bloquear Pantalla'
          MISCMENU='Varios'
          MULTIMEDIAMENU='Multimedia'
-@@ -1102,9 +1075,7 @@
+@@ -1102,9 +1076,7 @@
          FILEUTILSMENU='Narzêdzia do plików'
          FLUXBOXCOMMAND='Polecenia Fluxbox'
          GAMESMENU='Gry'
@@ -591,7 +593,7 @@ diff -Naur fluxbox-1.3.7.orig/util/fluxbox-generate_menu.in fluxbox-1.3.7/util/f
          LOCKSCREEN='Zablokuj ekran'
          MISCMENU='Ró¿ne'
          MULTIMEDIAMENU='Multimedia'
-@@ -1144,9 +1115,7 @@
+@@ -1144,9 +1116,7 @@
          FILEUTILSMENU='Utilitários de Ficheiros'
          FLUXBOXCOMMAND='Comando Fluxbox'
          GAMESMENU='Jogos'
@@ -601,7 +603,7 @@ diff -Naur fluxbox-1.3.7.orig/util/fluxbox-generate_menu.in fluxbox-1.3.7/util/f
          LOCKSCREEN='Trancar Ecrã'
          MISCMENU='Misc.'
          MULTIMEDIAMENU='Multimédia'
-@@ -1188,9 +1157,7 @@
+@@ -1188,9 +1158,7 @@
          FILEUTILSMENU='FilverktÃ¸y'
          FLUXBOXCOMMAND='FluxBox-kommando'
          GAMESMENU='Spill'
@@ -611,7 +613,7 @@ diff -Naur fluxbox-1.3.7.orig/util/fluxbox-generate_menu.in fluxbox-1.3.7/util/f
          LOCKSCREEN='LÃ¥s skjermen'
          MISCMENU='Diverse'
          MULTIMEDIAMENU='Multimedia'
-@@ -1220,10 +1187,10 @@
+@@ -1220,10 +1188,10 @@
  esac
  
  # Set Defaults
@@ -625,7 +627,7 @@ diff -Naur fluxbox-1.3.7.orig/util/fluxbox-generate_menu.in fluxbox-1.3.7/util/f
  USERMENU="${USERMENU:=${USERFLUXDIR}/usermenu}"
  MENUCONFIG="${MENUCONFIG:=${USERFLUXDIR}/menuconfig}"
  DOSUDO="no"
-@@ -1255,10 +1222,10 @@
+@@ -1255,10 +1223,10 @@
  # MENUTITLE=\`@pkgprefix@fluxbox@pkgsuffix@@EXEEXT@ -version|cut -d " " -f-2\`
  
  # standard url for console-browsers
@@ -638,7 +640,7 @@ diff -Naur fluxbox-1.3.7.orig/util/fluxbox-generate_menu.in fluxbox-1.3.7/util/f
  
  # Put the launcher you would like to use here
  # LAUNCHER=@pkgprefix@fbrun@pkgsuffix@@EXEEXT@
-@@ -1271,16 +1238,8 @@
+@@ -1271,16 +1239,8 @@
  # These are prefixes; So if fluxbox is installed in @PREFIX@/bin/fluxbox
  # your prefix is: @PREFIX@
  
@@ -656,7 +658,7 @@ diff -Naur fluxbox-1.3.7.orig/util/fluxbox-generate_menu.in fluxbox-1.3.7/util/f
  
  
  # --- Boolean variables.
-@@ -1290,12 +1249,6 @@
+@@ -1290,12 +1250,6 @@
  # Include all backgrounds in your backgrounds-directory
  # BACKGROUNDMENUITEM=yes
  
@@ -669,7 +671,7 @@ diff -Naur fluxbox-1.3.7.orig/util/fluxbox-generate_menu.in fluxbox-1.3.7/util/f
  # Enable sudo commands
  # DOSUDO=yes
  
-@@ -1323,8 +1276,6 @@
+@@ -1323,8 +1277,6 @@
  while [ $# -gt 0 ]; do
      case "$1" in
          -B) BACKGROUNDMENUITEM=yes; shift;;
@@ -678,7 +680,7 @@ diff -Naur fluxbox-1.3.7.orig/util/fluxbox-generate_menu.in fluxbox-1.3.7/util/f
          -in) NO_ICON=yes; shift;;
          -is) OTHER_ICONPATHS="
                  /usr/share/icons
-@@ -1333,16 +1284,6 @@
+@@ -1333,16 +1285,6 @@
                  /usr/local/share/icons
                  /usr/local/share/icons/mini
                  /usr/local/share/pixmaps
@@ -695,7 +697,7 @@ diff -Naur fluxbox-1.3.7.orig/util/fluxbox-generate_menu.in fluxbox-1.3.7/util/f
              "
              shift;;
          -ds) OTHER_DESKTOP_PATHS="
-@@ -1369,8 +1310,6 @@
+@@ -1369,8 +1311,6 @@
          -b) MY_BROWSER=${2}; testoption ex $1 $2; shift 2;;
          -o) MENUFILENAME=${2}; shift 2; CHECKINIT=NO ;;
          -p) PREFIX=${2}; testoption di $1 $2; shift 2;;
@@ -704,7 +706,7 @@ diff -Naur fluxbox-1.3.7.orig/util/fluxbox-generate_menu.in fluxbox-1.3.7/util/f
          -m) MENUTITLE=${2}; testoption sk $1 $2; shift 2;;
          -w) HOMEPAGE=${2}; testoption sk $1 $2; shift 2;;
          -u) USERMENU=${2}; testoption fl $1 $2; shift 2;;
-@@ -1425,20 +1364,6 @@
+@@ -1425,20 +1365,6 @@
  fi
  
  
@@ -725,7 +727,7 @@ diff -Naur fluxbox-1.3.7.orig/util/fluxbox-generate_menu.in fluxbox-1.3.7/util/f
  
  if [ -z "${INSTALL}" ] && [ -z "${NO_ICON}" ]; then
      # [ -z "$dnlamVERBOSE" ] && dnlamVERBOSE=": echo"   # for debugging
-@@ -1446,16 +1371,6 @@
+@@ -1446,16 +1372,6 @@
      [ -r "$FB_ICONDIR" ] || mkdir "$FB_ICONDIR"
      ICONMAPPING="$USERFLUXDIR/iconmapping"
  
@@ -742,7 +744,7 @@ diff -Naur fluxbox-1.3.7.orig/util/fluxbox-generate_menu.in fluxbox-1.3.7/util/f
      checkDirs(){
          #echo checkDirs: $* >&2
          local CHECKED_DIRS=""
-@@ -1485,7 +1400,7 @@
+@@ -1485,7 +1401,7 @@
  
  # directory for the backgrounds
  if [ -z "$BACKGROUND_DIRS" ]; then
@@ -751,7 +753,7 @@ diff -Naur fluxbox-1.3.7.orig/util/fluxbox-generate_menu.in fluxbox-1.3.7/util/f
  fi
  
  # find the default terminal
-@@ -1561,7 +1476,7 @@
+@@ -1561,7 +1477,7 @@
  # If you read this it means you want to edit this file manually, so here
  # are some useful tips:
  #
@@ -760,7 +762,7 @@ diff -Naur fluxbox-1.3.7.orig/util/fluxbox-generate_menu.in fluxbox-1.3.7/util/f
  #
  # - If you miss apps please let me know and I will add them for the next
  #   release.
-@@ -1570,8 +1485,8 @@
+@@ -1570,8 +1486,8 @@
  #   makes things much more readable.
  #
  # - To prevent any other app from overwriting your menu
@@ -771,7 +773,7 @@ diff -Naur fluxbox-1.3.7.orig/util/fluxbox-generate_menu.in fluxbox-1.3.7/util/f
  
  EOF
  
-@@ -1582,6 +1497,7 @@
+@@ -1582,6 +1498,7 @@
  fi
  
  append "[exec] (${DEFAULT_TERMNAME}) {${DEFAULT_TERM}}"
@@ -779,7 +781,7 @@ diff -Naur fluxbox-1.3.7.orig/util/fluxbox-generate_menu.in fluxbox-1.3.7/util/f
  
  case "$DEFAULT_BROWSERNAME" in
      links|w3m|lynx)  append "[exec] (${DEFAULT_BROWSERNAME}) {${DEFAULT_TERM} -e ${DEFAULT_BROWSER} ${HOMEPAGE}}" ;;
-@@ -1634,14 +1550,14 @@
+@@ -1634,14 +1551,14 @@
  
      append_submenu IRC
          normal_find xchat xchat-2 ksirc vyqchat lostirc logui konversation kvirc skype
@@ -796,7 +798,7 @@ diff -Naur fluxbox-1.3.7.orig/util/fluxbox-generate_menu.in fluxbox-1.3.7/util/f
              valknut dcgui-qt dc_qt quickdc asami azureus
          cli_find TekNap giFTcurs
      append_menu_end
-@@ -1682,13 +1598,12 @@
+@@ -1682,13 +1599,12 @@
  
  append_submenu "${FILEUTILSMENU}"
      find_it     konqueror append "[exec] (konqueror) {kfmclient openProfile filemanagement}"
@@ -812,11 +814,20 @@ diff -Naur fluxbox-1.3.7.orig/util/fluxbox-generate_menu.in fluxbox-1.3.7/util/f
                 normal_find gimp gimp2 gimp-2.2 inkscape sodipodi xv gqview showimg xpaint kpaint kiconedit \
                     ee xzgv xscreensaver-demo xlock gphoto tuxpaint krita skencil
                 find_it xnview           append "[exec] (xnview browser) {xnview -browser}"
-@@ -1696,79 +1611,56 @@
+@@ -1696,79 +1612,64 @@
                 find_it gears            append "[exec] (Mesa gears) {gears}"
                 find_it morph3d          append "[exec] (Mesa morph) {morph3d}"
                 find_it reflect          append "[exec] (Mesa reflect) {reflect}"
 -       append_menu_end
++append_menu_end
++
++
++append_submenu "${MULTIMEDIAMENU}"
++    normal_find xmms noatun alsaplayer gqmpeg aumix xmixer gmix grecord kmidi xplaycd soundtracker grip easytag audacity \
++                zinf rhythmbox kaboodle beep-media-player tagtool audacious bmpx xine gxine aviplay gtv gmplayer xmovie xcdroast xgdb \
++                xawtv fxtv ogle goggles vlc
++    cli_find cdcd cplay alsamixer orpheus mp3blaster
++    find_it dvdrip append "[exec] (dvdrip) {nohup dvdrip}"
 +append_menu_end
  
 -       append_submenu "${MUSICMENU}"
@@ -835,15 +846,6 @@ diff -Naur fluxbox-1.3.7.orig/util/fluxbox-generate_menu.in fluxbox-1.3.7/util/f
 -       append_menu_end
  
 -       append_submenu "${XUTILSMENU}"
-+append_submenu "${MULTIMEDIAMENU}"
-+    normal_find xmms noatun alsaplayer gqmpeg aumix xmixer gmix grecord kmidi xplaycd soundtracker grip easytag audacity \
-+                zinf rhythmbox kaboodle beep-media-player tagtool audacious bmpx xine gxine aviplay gtv gmplayer xmovie xcdroast xgdb \
-+                xawtv fxtv ogle goggles vlc
-+    cli_find cdcd cplay alsamixer orpheus mp3blaster
-+    find_it dvdrip append "[exec] (dvdrip) {nohup dvdrip}"
-+append_menu_end
-+
-+
 +append_submenu "${XUTILSMENU}"
             normal_find xfontsel xman xload xbiff editres viewres xclock \
                 xmag wmagnify gkrellm gkrellm2 vmware portagemaster agave 
@@ -906,6 +908,14 @@ diff -Naur fluxbox-1.3.7.orig/util/fluxbox-generate_menu.in fluxbox-1.3.7/util/f
      normal_find gnumeric
  append_menu_end
  
++
++append_submenu "${EMULATION}"
++	find_it cap32 append "[exec] (AMSTRAD CPC) {cap32}"
++	find_it fuse  append "[exec] (SPECTRUM)    {fuse}"
++	find_it dosbox append "[exec] (DOS) {dosbox}"
++append_menu_end
++
++
  append_submenu "${GAMESMENU}"
      normal_find bzflag gnibbles gnobots2 tuxpuck gataxx glines \
 -        gnect mahjongg gnomine gnome-stones gnometris gnotravex \
@@ -915,12 +925,12 @@ diff -Naur fluxbox-1.3.7.orig/util/fluxbox-generate_menu.in fluxbox-1.3.7/util/f
          openmortal quake2 quake3 skoosh same-gnome enigma xbill \
 -        icebreaker scorched3d sol dosbox black-box freeciv \
 -        freeciv-server frozen-bubble liquidwar qt-nethack \
-+        icebreaker scorched3d sol dosbox black-box freeciv-gtk3 \
++        icebreaker scorched3d sol black-box freeciv-gtk3 \
 +        frozen-bubble liquidwar qt-nethack \
          nethack-gnome pathological scummvm xqf \
          wesnoth canfeild ace_canfeild golf merlin chickens \
          supertux tuxdash  neverball cube_client blackjack \
-@@ -1783,56 +1675,26 @@
+@@ -1783,56 +1684,26 @@
  append_menu_end
  
  append_submenu "${SYSTEMTOOLSMENU}"
@@ -988,7 +998,7 @@ diff -Naur fluxbox-1.3.7.orig/util/fluxbox-generate_menu.in fluxbox-1.3.7/util/f
  
      # Backgroundmenu
      addbackground() {
-@@ -1840,7 +1702,6 @@
+@@ -1840,7 +1711,6 @@
                  append "[exec] (${picturename%.???}) {@pkgprefix@fbsetbg@pkgsuffix@ -a \"$1\" }"
      }
  
@@ -996,7 +1006,7 @@ diff -Naur fluxbox-1.3.7.orig/util/fluxbox-generate_menu.in fluxbox-1.3.7/util/f
          IFS=: # set delimetor for find
          NUMBER_OF_BACKGROUNDS=`find $BACKGROUND_DIRS -follow -type f 2> /dev/null|wc -l`
          if [ "$NUMBER_OF_BACKGROUNDS" -gt 0 ]; then
-@@ -1870,35 +1731,38 @@
+@@ -1870,35 +1740,38 @@
              echo "Warning: You wanted a background-menu but I couldn't find any backgrounds in:
      $BACKGROUND_DIRS" >&2
          fi
@@ -1061,7 +1071,7 @@ diff -Naur fluxbox-1.3.7.orig/util/fluxbox-generate_menu.in fluxbox-1.3.7/util/f
      append "[commanddialog] (${FLUXBOXCOMMAND})"
 diff -Naur fluxbox-1.3.7.orig/util/fluxbox-update_configs.cc fluxbox-1.3.7/util/fluxbox-update_configs.cc
 --- fluxbox-1.3.7.orig/util/fluxbox-update_configs.cc	2015-02-08 10:44:45.381187009 +0000
-+++ fluxbox-1.3.7/util/fluxbox-update_configs.cc	2018-05-03 17:36:32.288535332 +0000
++++ fluxbox-1.3.7/util/fluxbox-update_configs.cc	2018-05-04 17:43:01.615498406 +0000
 @@ -99,7 +99,7 @@
  void update_move_groups_entries_to_apps_file(FbTk::ResourceManager& rm,
          const FbTk::FbString& keyfilename, const FbTk::FbString& appsfilename) {
@@ -1094,7 +1104,7 @@ diff -Naur fluxbox-1.3.7.orig/util/fluxbox-update_configs.cc fluxbox-1.3.7/util/
      if (!resource_manager.load(rc_filename.c_str())) {
 diff -Naur fluxbox-1.3.7.orig/util/startfluxbox.in fluxbox-1.3.7/util/startfluxbox.in
 --- fluxbox-1.3.7.orig/util/startfluxbox.in	2015-02-08 10:44:45.381187009 +0000
-+++ fluxbox-1.3.7/util/startfluxbox.in	2018-05-03 17:36:32.293535332 +0000
++++ fluxbox-1.3.7/util/startfluxbox.in	2018-05-04 17:43:01.615498406 +0000
 @@ -1,7 +1,7 @@
 -#!/bin/sh
 +#!/usr/pkgs/bash/bin/bash

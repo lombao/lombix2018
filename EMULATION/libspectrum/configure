@@ -1,0 +1,15 @@
+
+export LDFLAGS="-L/usr/pkgs/libpng/lib 	\
+	-L/usr/pkgs/alsa/lib 		\
+	-L/usr/pkgs/sdl/lib"
+
+export CFLAGS="-I/usr/pkgs/libpng/include 	\
+	-I/usr/pkgs/alsa/include 		\
+	-I/usr/pkgs/sdl/include"
+
+export CXXFLAGS=$CFLAGS
+export CPPFLAGS=$CFLAGS
+
+./configure --prefix=$PREFIX 		
+
+

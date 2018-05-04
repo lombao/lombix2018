@@ -2,12 +2,12 @@
 # URL: The place where the source code has been downloaded.
 # If you remove the package the installation tool will try to 
 # download it again from this place.
-URL=https://sourceforge.net/projects/dosbox/files/dosbox/0.74/dosbox-0.74.tar.gz
+URL=https://sourceforge.net/projects/fuse-emulator/files/libspectrum/1.4.2/libspectrum-1.4.2.tar.gz
 
 ##
 # PREFIX: Where the package is going to be installed. 
 # If you are familiar with autotools you know what prefix usually means
-PREFIX=/usr/pkgs/dosbox
+PREFIX=/usr/pkgs/emulation/libspectrum
 
 ##
 # CREDITS: Files that specifically you want to be copied over from 
