@@ -1,2 +1,4 @@
 make install
 
+
+sed -i "s@mozilla-@@g" $PREFIX/lib/pkgconfig/*.pc
