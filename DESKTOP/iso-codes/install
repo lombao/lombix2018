@@ -1,5 +1,3 @@
-rm -fr /usr/share/xml/iso-codes
-rm -fr $PREFIX/share/locale
-
+sed -i '/^LN_S/s/s/sfvn/' */Makefile
 make install
 
