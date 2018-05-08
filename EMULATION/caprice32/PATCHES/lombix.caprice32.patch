@@ -50,7 +50,7 @@ diff -Naur caprice32-20180504.orig/makefile caprice32-20180504/makefile
  endif
  else
 -prefix = /usr/local
-+prefix = /usr/pkgs/caprice32
++prefix = /usr/pkgs/emulation/caprice32
  TARGET = cap32
  TEST_TARGET = test_runner
  IPATHS = -Isrc/ -Isrc/gui/includes `freetype-config --cflags` `sdl-config --cflags` `pkg-config --cflags libpng`
