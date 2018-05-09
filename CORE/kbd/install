@@ -1,2 +1,6 @@
 make install
 
+# Now, let's create the gb map as a link to uk
+ln -svf uk.map.gz $PREFIX/share/keymaps/i386/qwerty/gb.map.gz
+
+

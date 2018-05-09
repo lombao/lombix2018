@@ -184,17 +184,25 @@ fi
 ###
 msg="The Keyboard Layout:
 Please, select which keyboard you have. Probably it is the same
-as the country you are in.
+as the country you are in. This option will affect the files
+  /usr/etc/sysconfig/console
+  /usr/pkgs/X11/etc/app-defaults/xinitrc.d/default-keyboard-layout.sh
+
 "
-OPTIONS=(uk "United Kingdom" es "Spain" us "United States" it "Italy" fi "Finland" gr "Greece" lt "Lithuania" pl "Poland")
+OPTIONS=(uk "United Kingdom" es "Spain" us "United States" it "Italy" fi "Finland" gr "Greece" \
+	lt "Lithuania" pl "Poland" pt "Portugal" de "Germany" fr "France" dk "Denmark" no "Norway" )
 CHOICE=$(/usr/pkgs/dialog/bin/dialog --clear \
 	--title "Keyboard" 	\
 	--menu "$msg"		\
-	20 70 10 "${OPTIONS[@]}" 2>&1 >/dev/tty)
+	25 80 20 "${OPTIONS[@]}" 2>&1 >/dev/tty)
+
 if [ $? == 0 ]; then	
 	/usr/pkgs/kbd/bin/loadkeys $CHOICE
 	echo "UNICODE=\"1\"" > /usr/etc/sysconfig/console
-	echo "KEYMAP=$CHOICE" >> /usr/etc/sysconfig/console
+	echo "KEYMAP=$CHOICE" >> /usr/etc/sysconfig/console	
+	echo "setxkbmap $CHOICE " > /usr/pkgs/X11/etc/app-defaults/xinitrc.d/default-keyboard-layout.sh
+	# Maybe in the future to add here the LOCALE , the current default is en_GB UTF8 defined in i18n.sh profile.d
+	
 	dialog --title "Keyboard Layout" --msgbox "SUCCESS:: Keyboard layout has been set to $CHOICE !!! " 5 60
 fi
 
@@ -227,7 +235,7 @@ Now you can start using Lombix. Enjoy!!!
 SOME DETAILS YOU SHOULD KNOW
 * You should expect failures/bugs/wrong things. This is an unfinished job.
   I would appreciate if you let me know of these problems: 
-  http::/lombix.org
+  http://lombix.org
   
 * The network has been configured to use dhcpcd, the net device will be
   detected and configured ( to use dhcp ) automatically. If you want to 
